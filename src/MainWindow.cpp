@@ -806,7 +806,7 @@ namespace divi
         settings.getCompetition().setVisibility(Helpers::visibility(Visibility::PRIVATE));
         settings.getCompetition().setDate(QDate::currentDate());
 
-        settings.getDivisions().clear();
+        division_table_model.clear();
 
         populate();
         return;

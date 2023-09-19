@@ -135,6 +135,7 @@ namespace divi
             case EditorMode::CreateNew:
             {
                 id_input.setValue(division_table_model->getAvailableID());
+                division.setID(id_input.value());
                 divi_path_input.clear();
                 name_input.clear();
                 break;

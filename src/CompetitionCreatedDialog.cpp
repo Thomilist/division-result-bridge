@@ -20,9 +20,9 @@ namespace divi
         buttons.button(QDialogButtonBox::Ok)->setText("Use Now");
         buttons.button(QDialogButtonBox::Cancel)->setText("Close");
 
-        connect(&buttons, QDialogButtonBox::accepted, [this]{emit this->useCompetitionNow(this->new_competition);});
-        connect(&buttons, QDialogButtonBox::accepted, this, &QDialog::accept);
-        connect(&buttons, QDialogButtonBox::rejected, this, &QDialog::reject);
+        connect(&buttons, &QDialogButtonBox::accepted, [this]{emit this->useCompetitionNow(this->new_competition);});
+        connect(&buttons, &QDialogButtonBox::accepted, this, &QDialog::accept);
+        connect(&buttons, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
         int row = 0;
 
