@@ -172,6 +172,11 @@ namespace divi
                     competition.setDate(value.toString());
                 }
 
+                if (const QJsonValue value = competition_json[Competition::getVisibilityAlias()]; value.isString())
+                {
+                    competition.setVisibility(value.toString());
+                }
+
                 if (const QJsonValue value = competition_json[Competition::getLiveresultsIDAlias()]; value.isDouble())
                 {
                     competition.setLiveresultsID(value.toInt());

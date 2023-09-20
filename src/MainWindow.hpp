@@ -166,10 +166,6 @@ namespace divi
             QLabel competition_visibility_label{"Visibility:"};
             QComboBox competition_visibility_input;
 
-            QGridLayout liveresults_layout;
-            QLabel liveresults_label;
-            QSpinBox liveresults_input;
-
             // Configuration
             QGroupBox config_group{"Local Configuration"};
             QGridLayout config_layout;
@@ -231,6 +227,10 @@ namespace divi
             QLabel webserver_inspect_label{"Inspect competition on server:"};
             QPushButton webserver_ping_button{"Test"};
             QPushButton webserver_view_button{"View In Browser"};
+
+            QGridLayout liveresults_layout;
+            QLabel liveresults_label;
+            QSpinBox liveresults_input;
 
             // Run
             QGroupBox run_group{"Run"};

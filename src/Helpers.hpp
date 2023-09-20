@@ -81,6 +81,9 @@ namespace divi
 
             // Password (in)security disclaimer
             static const QString passwordDisclaimer();
+
+            // Vertical padding
+            static int verticalPadding();
     };
 }
 

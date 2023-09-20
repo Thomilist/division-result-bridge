@@ -233,4 +233,9 @@ namespace divi
             % "Its only purpose is to prevent accidental access."
             % "</i>";
     }
+    
+    int Helpers::verticalPadding()
+    {
+        return 5;
+    }
 }

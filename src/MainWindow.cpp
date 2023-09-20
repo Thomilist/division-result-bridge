@@ -33,7 +33,7 @@ namespace divi
     {
         setWindowIcon(QIcon{":/icon/icon.ico"});
         setMinimumWidth(1100);
-        setMinimumHeight(810);
+        //setMinimumHeight(810);
         
         import_config_dialog.setFileMode(QFileDialog::ExistingFile);
         import_config_dialog.setNameFilter("Config (*.json)");
@@ -313,7 +313,6 @@ namespace divi
         all_inputs.push_back(&organiser_input);
         all_inputs.push_back(&competition_date_input);
         all_inputs.push_back(&competition_visibility_input);
-        all_inputs.push_back(&liveresults_input);
         
         competition_id_input.setMinimum(0);
         competition_id_input.setMaximum(std::numeric_limits<int>::max());
@@ -339,37 +338,33 @@ namespace divi
             Helpers::visibility(Visibility::HIDDEN),
             Helpers::visibility(Visibility::PRIVATE)
         });
-
-        liveresults_label.setTextFormat(Qt::RichText);
-        liveresults_label.setTextInteractionFlags(Qt::TextBrowserInteraction);
-        liveresults_label.setOpenExternalLinks(true);
-        updateLiveresultsText();
-        
-        liveresults_input.setMinimum(0);
-        liveresults_input.setMaximum(std::numeric_limits<int>::max());
         
         int row = 0;
 
         competition_id_layout.addWidget(&competition_id_label, 0, 0);
         competition_id_layout.addWidget(&competition_id_input, 1, 0);
         competition_layout.addLayout(&competition_id_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
+
+        competition_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         password_layout.addWidget(&password_label, 0, 0);
         password_layout.addWidget(&password_input, 1, 0);
         password_layout.addWidget(&password_text, 2, 0);
         competition_layout.addLayout(&password_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
+
+        competition_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         competition_name_layout.addWidget(&competition_name_label, 0, 0);
         competition_name_layout.addWidget(&competition_name_input, 1, 0);
         competition_layout.addLayout(&competition_name_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
+
+        competition_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         organiser_layout.addWidget(&organiser_label, 0, 0);
         organiser_layout.addWidget(&organiser_input, 1, 0);
         competition_layout.addLayout(&organiser_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
+
+        competition_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         competition_date_layout.addWidget(&competition_date_label, 0, 0);
         competition_date_layout.addWidget(&competition_date_input, 1, 0);
@@ -378,12 +373,6 @@ namespace divi
         competition_date_layout.addWidget(&competition_visibility_label, 0, 2);
         competition_date_layout.addWidget(&competition_visibility_input, 1, 2);
         competition_layout.addLayout(&competition_date_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
-
-        liveresults_layout.addWidget(&liveresults_label, 0, 0);
-        liveresults_layout.addWidget(&liveresults_input, 1, 0);
-        competition_layout.addLayout(&liveresults_layout, row++, 0);
-        competition_layout.setRowMinimumHeight(row++, 10);
 
         competition_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         //competition_layout.addWidget(&competition_spacer, row++, 0);
@@ -476,20 +465,21 @@ namespace divi
         working_dir_layout.addWidget(&working_dir_button, 1, 1);
         //working_dir_layout.addWidget(&working_dir_text, 2, 0);
         config_layout.addLayout(&working_dir_layout, row++, 0);
-        config_layout.setRowMinimumHeight(row++, 10);
+
+        config_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         divi_exe_path_layout.addWidget(&divi_exe_path_label, 0, 0);
         divi_exe_path_layout.addWidget(&divi_exe_path_input, 1, 0);
         divi_exe_path_layout.addWidget(&divi_exe_path_button, 1, 1);
         //divi_exe_path_layout.addWidget(&divi_exe_path_text, 2, 0);
         config_layout.addLayout(&divi_exe_path_layout, row++, 0);
-        config_layout.setRowMinimumHeight(row++, 10);
+
+        config_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         meos_address_layout.addWidget(&meos_address_label, 0, 0);
         meos_address_layout.addWidget(&meos_address_input, 1, 0);
         //meos_address_layout.addWidget(&meos_address_text, 2, 0);
         config_layout.addLayout(&meos_address_layout, row++, 0);
-        config_layout.setRowMinimumHeight(row++, 10);
 
         config_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         //config_layout.addWidget(&config_spacer, row++, 0);
@@ -513,7 +503,7 @@ namespace divi
         division_table.setEditTriggers(QAbstractItemView::NoEditTriggers);
         division_table.horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         division_table.verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-        division_table.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
+        //division_table.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
         division_table.setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
         division_table.setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
 
@@ -548,25 +538,41 @@ namespace divi
         all_inputs.push_back(&webserver_create_button);
         all_inputs.push_back(&webserver_update_meta_button);
         all_inputs.push_back(&webserver_ping_button);
+        all_inputs.push_back(&liveresults_input);
+
+        liveresults_label.setTextFormat(Qt::RichText);
+        liveresults_label.setTextInteractionFlags(Qt::TextBrowserInteraction);
+        liveresults_label.setOpenExternalLinks(true);
+        updateLiveresultsText();
+        
+        liveresults_input.setMinimum(0);
+        liveresults_input.setMaximum(std::numeric_limits<int>::max());
         
         int row = 0;
 
         webserver_address_layout.addWidget(&webserver_address_label, 0, 0);
         webserver_address_layout.addWidget(&webserver_address_input, 1, 0);
         webserver_layout.addLayout(&webserver_address_layout, row++, 0);
-        webserver_layout.setRowMinimumHeight(row++, 10);
+
+        webserver_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         webserver_manage_layout.addWidget(&webserver_manage_label, 0, 0);
         webserver_manage_layout.addWidget(&webserver_create_button, 1, 0);
         webserver_manage_layout.addWidget(&webserver_update_meta_button, 1, 1);
         webserver_layout.addLayout(&webserver_manage_layout, row++, 0);
-        webserver_layout.setRowMinimumHeight(row++, 10);
+
+        webserver_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
         
         webserver_inspect_layout.addWidget(&webserver_inspect_label, 0, 0);
         webserver_inspect_layout.addWidget(&webserver_view_button, 1, 0);
         webserver_inspect_layout.addWidget(&webserver_ping_button, 1, 1);
         webserver_layout.addLayout(&webserver_inspect_layout, row++, 0);
-        webserver_layout.setRowMinimumHeight(row++, 10);
+
+        webserver_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
+
+        liveresults_layout.addWidget(&liveresults_label, 0, 0);
+        liveresults_layout.addWidget(&liveresults_input, 1, 0);
+        webserver_layout.addLayout(&liveresults_layout, row++, 0);
 
         webserver_group.setLayout(&webserver_layout);
         webserver_group.setAlignment(Qt::AlignHCenter);
@@ -645,7 +651,6 @@ namespace divi
         competition_name_input.setText(settings.getCompetition().getName());
         organiser_input.setText(settings.getCompetition().getOrganiser());
         competition_visibility_input.setCurrentText(settings.getCompetition().getVisibility());
-        liveresults_input.setValue(settings.getCompetition().getLiveresultsID());
 
         if (settings.getCompetition().getDate().isEmpty())
         {
@@ -663,6 +668,9 @@ namespace divi
 
         // Web server
         webserver_address_input.setText(settings.getWebserverAddress());
+        liveresults_input.setValue(settings.getCompetition().getLiveresultsID());
+
+        // Run
         update_interval_input.setValue(settings.getUpdateInterval());
 
         return;
@@ -762,11 +770,6 @@ namespace divi
             this->settings.getCompetition().setVisibility(a_visibility);
             this->updateInterfaceState();
         });
-        connect(&liveresults_input, &QSpinBox::valueChanged, this, [this](int a_id)
-        {
-            this->settings.getCompetition().setLiveresultsID(a_id);
-            this->updateInterfaceState();
-        });
 
         // Inputs, configuration
         connect(&working_dir_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
@@ -784,11 +787,20 @@ namespace divi
             this->settings.setMeosAddress(a_text);
             this->updateInterfaceState();
         });
+
+        // Inputs, web server
         connect(&webserver_address_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
         {
             this->settings.setWebserverAddress(a_text);
             this->updateInterfaceState();
         });
+        connect(&liveresults_input, &QSpinBox::valueChanged, this, [this](int a_id)
+        {
+            this->settings.getCompetition().setLiveresultsID(a_id);
+            this->updateInterfaceState();
+        });
+
+        // Inputs, run
         connect(&update_interval_input, &QSpinBox::valueChanged, this, [this](int a_interval)
         {
             this->settings.setUpdateInterval(a_interval);

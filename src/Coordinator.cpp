@@ -64,7 +64,10 @@ namespace divi
         updateCache();
         results.clear();
         
-        meos.updateResults();
+        if (meos.updateResults())
+        {
+            return;
+        }
         
         for (const auto& division : settings_cache.getDivisions())
         {
