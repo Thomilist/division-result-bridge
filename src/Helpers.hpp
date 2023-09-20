@@ -60,6 +60,7 @@ namespace divi
             // Web server
             static const QString defaultWebServerAddress();
             static const QString addressEndingWithSlash(const QString& a_url);
+            static const QString webserverPathPrefix();
             static const QString apiPingEndpoint();
             static const QString apiCreateEndpoint();
             static const QString apiUpdateMetaEndpoint();

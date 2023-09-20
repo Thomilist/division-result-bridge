@@ -99,6 +99,7 @@ namespace divi
             const QString getCompetitionUrl();
             void clearCompetitionAndDivision();
             void loadCompetitionMetadata(const Competition& a_competition);
+            void updateLiveresultsText();
 
             bool running = false;
 
@@ -164,6 +165,10 @@ namespace divi
             QWidget competition_date_spacer;
             QLabel competition_visibility_label{"Visibility:"};
             QComboBox competition_visibility_input;
+
+            QGridLayout liveresults_layout;
+            QLabel liveresults_label;
+            QSpinBox liveresults_input;
 
             // Configuration
             QGroupBox config_group{"Local Configuration"};

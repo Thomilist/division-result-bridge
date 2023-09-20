@@ -48,6 +48,7 @@ namespace divi
         competition.setOrganiser(value(Competition::getOrganiserAlias(), "").toString());
         competition.setDate(value(Competition::getDateAlias(), "").toString());
         competition.setVisibility(value(Competition::getVisibilityAlias(), Helpers::visibility(Visibility::HIDDEN)).toString());
+        competition.setLiveresultsID(value(Competition::getLiveresultsIDAlias(), 0).toInt());
 
         endGroup();
 
@@ -92,6 +93,7 @@ namespace divi
         setValue(Competition::getOrganiserAlias(), competition.getOrganiser());
         setValue(Competition::getDateAlias(), competition.getDate());
         setValue(Competition::getVisibilityAlias(), competition.getVisibility());
+        setValue(Competition::getLiveresultsIDAlias(), competition.getLiveresultsID());
 
         endGroup();
 
@@ -168,6 +170,11 @@ namespace divi
                 if (const QJsonValue value = competition_json[Competition::getDateAlias()]; value.isString())
                 {
                     competition.setDate(value.toString());
+                }
+
+                if (const QJsonValue value = competition_json[Competition::getLiveresultsIDAlias()]; value.isDouble())
+                {
+                    competition.setLiveresultsID(value.toInt());
                 }
             }
 

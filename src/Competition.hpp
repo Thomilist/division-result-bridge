@@ -47,6 +47,10 @@ namespace divi
             void setVisibility(Visibility a_visibility);
             const QString& getVisibility() const;
             static const QString getVisibilityAlias();
+
+            void setLiveresultsID(int a_id);
+            int getLiveresultsID() const;
+            static const QString getLiveresultsIDAlias();
         
         private:
             // Competition ID
@@ -66,6 +70,9 @@ namespace divi
 
             // Visibility
             QString visibility;
+
+            // liveresultat.orientering.se competition ID
+            int liveresults_id = 0;
     };
 }
 

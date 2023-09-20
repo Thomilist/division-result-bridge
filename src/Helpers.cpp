@@ -130,7 +130,7 @@ namespace divi
     
     const QString Helpers::defaultWebServerAddress()
     {
-        return "http://localhost:5173/";
+        return "http://152.70.60.26/";
     }
     
     const QString Helpers::addressEndingWithSlash(const QString& a_url)
@@ -148,24 +148,29 @@ namespace divi
         return a_url % "/";
     }
     
+    const QString Helpers::webserverPathPrefix()
+    {
+        return "";
+    }
+    
     const QString Helpers::apiPingEndpoint()
     {
-        return "api/ping";
+        return webserverPathPrefix() % "api/ping";
     }
     
     const QString Helpers::apiCreateEndpoint()
     {
-        return "api/create";
+        return webserverPathPrefix() % "api/create";
     }
     
     const QString Helpers::apiUpdateMetaEndpoint()
     {
-        return "api/update/metadata";
+        return webserverPathPrefix() % "api/update/metadata";
     }
     
     const QString Helpers::apiUpdateResultsEndpoint()
     {
-        return "api/update/results";
+        return webserverPathPrefix() % "api/update/results";
     }
     
     const QString Helpers::userAgent()

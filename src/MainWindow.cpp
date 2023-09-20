@@ -33,6 +33,7 @@ namespace divi
     {
         setWindowIcon(QIcon{":/icon/icon.ico"});
         setMinimumWidth(1100);
+        setMinimumHeight(810);
         
         import_config_dialog.setFileMode(QFileDialog::ExistingFile);
         import_config_dialog.setNameFilter("Config (*.json)");
@@ -219,6 +220,8 @@ namespace divi
 
         division_table.resizeColumnsToContents();
         division_table.resizeRowsToContents();
+
+        updateLiveresultsText();
         
         return;
     }
@@ -310,6 +313,7 @@ namespace divi
         all_inputs.push_back(&organiser_input);
         all_inputs.push_back(&competition_date_input);
         all_inputs.push_back(&competition_visibility_input);
+        all_inputs.push_back(&liveresults_input);
         
         competition_id_input.setMinimum(0);
         competition_id_input.setMaximum(std::numeric_limits<int>::max());
@@ -335,6 +339,14 @@ namespace divi
             Helpers::visibility(Visibility::HIDDEN),
             Helpers::visibility(Visibility::PRIVATE)
         });
+
+        liveresults_label.setTextFormat(Qt::RichText);
+        liveresults_label.setTextInteractionFlags(Qt::TextBrowserInteraction);
+        liveresults_label.setOpenExternalLinks(true);
+        updateLiveresultsText();
+        
+        liveresults_input.setMinimum(0);
+        liveresults_input.setMaximum(std::numeric_limits<int>::max());
         
         int row = 0;
 
@@ -366,6 +378,11 @@ namespace divi
         competition_date_layout.addWidget(&competition_visibility_label, 0, 2);
         competition_date_layout.addWidget(&competition_visibility_input, 1, 2);
         competition_layout.addLayout(&competition_date_layout, row++, 0);
+        competition_layout.setRowMinimumHeight(row++, 10);
+
+        liveresults_layout.addWidget(&liveresults_label, 0, 0);
+        liveresults_layout.addWidget(&liveresults_input, 1, 0);
+        competition_layout.addLayout(&liveresults_layout, row++, 0);
         competition_layout.setRowMinimumHeight(row++, 10);
 
         competition_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
@@ -628,6 +645,7 @@ namespace divi
         competition_name_input.setText(settings.getCompetition().getName());
         organiser_input.setText(settings.getCompetition().getOrganiser());
         competition_visibility_input.setCurrentText(settings.getCompetition().getVisibility());
+        liveresults_input.setValue(settings.getCompetition().getLiveresultsID());
 
         if (settings.getCompetition().getDate().isEmpty())
         {
@@ -744,6 +762,11 @@ namespace divi
             this->settings.getCompetition().setVisibility(a_visibility);
             this->updateInterfaceState();
         });
+        connect(&liveresults_input, &QSpinBox::valueChanged, this, [this](int a_id)
+        {
+            this->settings.getCompetition().setLiveresultsID(a_id);
+            this->updateInterfaceState();
+        });
 
         // Inputs, configuration
         connect(&working_dir_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
@@ -805,6 +828,7 @@ namespace divi
         settings.getCompetition().setOrganiser("");
         settings.getCompetition().setVisibility(Helpers::visibility(Visibility::PRIVATE));
         settings.getCompetition().setDate(QDate::currentDate());
+        settings.getCompetition().setLiveresultsID(0);
 
         division_table_model.clear();
 
@@ -816,6 +840,38 @@ namespace divi
     {
         settings.getCompetition() = a_competition;
         populate();
+        return;
+    }
+    
+    void MainWindow::updateLiveresultsText()
+    {
+        QString liveresults_url;
+
+        if (settings.getCompetition().getLiveresultsID() > 0)
+        {
+            liveresults_url =
+                QString()
+                % "https://liveresultat.orientering.se/followfull.php?comp="
+                % QString::number(settings.getCompetition().getLiveresultsID())
+                % "&lang=en";
+        }
+        else
+        {
+            liveresults_url = "https://liveresultat.orientering.se/index.php?lang=en";
+        }
+        
+        liveresults_label.setText
+        (
+            QString()
+            % "Competition ID for "
+            % "<a href=\""
+            % liveresults_url
+            % "\">"
+            % "liveresultat.orientering.se"
+            % "</a>"
+            % " (optional):"
+        );
+
         return;
     }
 }

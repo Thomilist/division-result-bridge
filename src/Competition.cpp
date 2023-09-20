@@ -46,6 +46,11 @@ namespace divi
             competition.setVisibility(value.toString());
         }
 
+        if (const QJsonValue value = a_json[getLiveresultsIDAlias()]; value.isDouble())
+        {
+            competition.setLiveresultsID(value.toInt());
+        }
+
         return competition;
     }
     
@@ -59,6 +64,7 @@ namespace divi
         json[getOrganiserAlias()] = organiser;
         json[getDateAlias()] = date;
         json[getVisibilityAlias()] = visibility;
+        json[getLiveresultsIDAlias()] = liveresults_id;
 
         return json;
     }
@@ -169,5 +175,21 @@ namespace divi
     const QString Competition::getVisibilityAlias()
     {
         return "visibility";
+    }
+    
+    void Competition::setLiveresultsID(int a_id)
+    {
+        liveresults_id = a_id;
+        return;
+    }
+    
+    int Competition::getLiveresultsID() const
+    {
+        return liveresults_id;
+    }
+    
+    const QString Competition::getLiveresultsIDAlias()
+    {
+        return "liveresults_id";
     }
 }
