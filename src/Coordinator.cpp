@@ -41,7 +41,9 @@ namespace divi
 
         if (competition_jsondoc.isNull())
         {
-            emit log("Create", 0, "JSON parse error",
+            emit log(
+                MessageType::Error,
+                "Internal", 0, "JSON parse error",
                 "An error occured while parsing the JSON representation of the returned competition.");
             return;
         }
@@ -75,6 +77,7 @@ namespace divi
             if (!division.isFullyDefined())
             {
                 emit log(
+                    MessageType::Warning,
                     "Internal", 0, "Division Skipped",
                     QString()
                     % "Division ["
@@ -86,6 +89,7 @@ namespace divi
             if (calculateDivisionResults(division))
             {
                 emit log(
+                    MessageType::Error,
                     Helpers::divisionsmatchberegningExeName(), 0, "Results Calculation Error",
                     QString()
                     % "An error occured while calculating results for division ["
@@ -97,6 +101,7 @@ namespace divi
             if (loadResultFile(division))
             {
                 emit log(
+                    MessageType::Error, 
                     "Internal", 0, "Results Loading Error",
                     QString()
                     % "Unable to load result file for division ["
@@ -105,7 +110,9 @@ namespace divi
                 continue;
             }
 
-            emit log("Internal", 0, "Results Calculation Success",
+            emit log(
+                MessageType::Info,
+                "Internal", 0, "Results Calculation Success",
                 QString()
                 % "Results for division ["
                 % QString::number(division.getID())

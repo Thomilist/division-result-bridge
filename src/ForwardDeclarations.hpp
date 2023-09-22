@@ -24,6 +24,7 @@ namespace divi
     struct ResultPackage;
 
     enum class EditorMode;
+    enum class MessageType;
     enum class UpdateStatus;
     enum class Visibility;
 }

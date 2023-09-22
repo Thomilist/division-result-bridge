@@ -21,6 +21,7 @@ namespace divi
         
         signals:
             void log(
+                MessageType a_message_type, 
                 const QString& a_source,
                 long a_status_code = 0,
                 const QString& a_status_text = "",

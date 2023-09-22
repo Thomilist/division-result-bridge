@@ -8,9 +8,9 @@ namespace divi
     {
         connect(
             this,
-            QOverload<const QString&, long, const QString&, const QString&>::of(&Loggable::log),
+            QOverload<MessageType, const QString&, long, const QString&, const QString&>::of(&Loggable::log),
             a_log,
-            QOverload<const QString&, long, const QString&, const QString&>::of(&Logger::log));
+            QOverload<MessageType, const QString&, long, const QString&, const QString&>::of(&Logger::log));
         
         connect(
             this,

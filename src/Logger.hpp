@@ -15,6 +15,8 @@
 
 #include "Helpers.hpp"
 
+#include "MessageType.hpp"
+
 namespace divi
 {
     class Logger : public QPlainTextEdit
@@ -26,6 +28,7 @@ namespace divi
             ~Logger();
 
             void log(
+                MessageType a_message_type,
                 const QString& a_source,
                 long a_status_code = 0,
                 const QString& a_status_text = "",
@@ -34,6 +37,8 @@ namespace divi
         
         private:
             const QString excludeIfUnfit(const QString& a_body);
+            const QString colorHtmlText(const QString& a_message, MessageType a_message_type = MessageType::Info);
+            const QString getColor(MessageType a_message_type);
     };
 }
 

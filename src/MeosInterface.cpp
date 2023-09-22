@@ -69,7 +69,9 @@ namespace divi
 
         if (response.text.empty())
         {
-            emit log("Internal", 0, "Empty Response",
+            emit log(
+                MessageType::Error,
+                "Internal", 0, "Empty Response",
                 "MeOS successfully responded to the request, but no data was attached.");
             resetDifference();
             return 2;
@@ -80,7 +82,9 @@ namespace divi
 
         if (!parse_res)
         {
-            emit log("Internal", 0, "XML Parsing Error",
+            emit log(
+                MessageType::Error,
+                "Internal", 0, "XML Parsing Error",
                 "An error occured while parsing the difference XML.");
             resetDifference();
             return 3;
@@ -91,7 +95,9 @@ namespace divi
 
         if (next_difference != difference)
         {
-            emit log("Internal", 0, "Changes Found",
+            emit log(
+                MessageType::Info,
+                "Internal", 0, "Changes Found",
                 QString()
                 % "Difference tag: "
                 % QString::fromStdString(difference)
@@ -102,7 +108,9 @@ namespace divi
             return 0;
         }
 
-        emit log("Internal", 0, "Results Unchanged",
+        emit log(
+            MessageType::Info,
+            "Internal", 0, "Results Unchanged",
             "No changes detected since last fetch. Update skipped.");
 
         return 4;
@@ -133,7 +141,9 @@ namespace divi
 
         if (response.text.empty())
         {
-            emit log("Internal", 0, "Empty Response",
+            emit log(
+                MessageType::Error,
+                "Internal", 0, "Empty Response",
                 "MeOS successfully responded to the request, but no data was attached.");
             return 2;
         }
@@ -150,12 +160,16 @@ namespace divi
         if (results_xml_file.is_open())
         {
             results_xml_file << results_xml;
-            emit log("Internal", 0, "Write Complete",
+            emit log(
+                MessageType::Info,
+                "Internal", 0, "Write Complete",
                 "IOF XML results written successfully.");
             return 0;
         }
 
-        emit log("Internal", 0, "Write Error",
+        emit log(
+            MessageType::Error,
+            "Internal", 0, "Write Error",
             "Unable to write IOF XML results.");
         return 1;
     }

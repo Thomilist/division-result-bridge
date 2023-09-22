@@ -20,6 +20,8 @@
 #include "Logger.hpp"
 #include "Settings.hpp"
 
+#include "MessageType.hpp"
+
 namespace divi
 {
     class MeosInterface : public Loggable
