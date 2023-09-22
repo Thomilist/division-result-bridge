@@ -1,6 +1,7 @@
 #ifndef __COORDINATOR_H__
 #define __COORDINATOR_H__
 
+#include <unordered_map>
 #include <vector>
 
 #include <QByteArray>
@@ -59,6 +60,15 @@ namespace divi
             MeosInterface meos;
             WebserverInterface webserver;
             std::vector<ResultPackage> results;
+
+            std::unordered_map<QString, QString> substitutions{
+                {"<div class=\"matchgruppeHeader\">Klasse oversigt</div>", "<div class=\"matchgruppeHeader\">Klasseoversigt</div>"},
+                {"<table", "<div class=\"table-wrapper\"><table"},
+                {"/table>", "/table></div>"},
+                {">LøbsPoint<", ">Løbspoint<"},
+                {">MatchPoint<", ">Matchpoint<"},
+                {"<td>Ialt:</td>", "<td>I alt:</td>"}
+            };
     };
 }
 

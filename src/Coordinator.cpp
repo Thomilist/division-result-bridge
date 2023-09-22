@@ -165,6 +165,11 @@ namespace divi
 
                 if (include)
                 {
+                    for (const auto& item : substitutions)
+                    {
+                        line.replace(item.first, item.second);
+                    }
+                    
                     trimmed_results.append(line);
                 }
             }

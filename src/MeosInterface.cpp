@@ -61,11 +61,11 @@ namespace divi
         if (results_xml_file.is_open())
         {
             results_xml_file << results_xml;
-            emit log("File", 0, "Write Complete", "IOF XML results written successfully.");
+            emit log("Internal", 0, "Write Complete", "IOF XML results written successfully.");
             return 0;
         }
 
-        emit log("File", 0, "Write Error", "Unable to write IOF XML results.");
+        emit log("Internal", 0, "Write Error", "Unable to write IOF XML results.");
         return 1;
     }
     
