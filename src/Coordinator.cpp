@@ -41,7 +41,8 @@ namespace divi
 
         if (competition_jsondoc.isNull())
         {
-            emit log("Create", 0, "JSON parse error", "An error occured while parsing the JSON representation of the returned competition.");
+            emit log("Create", 0, "JSON parse error",
+                "An error occured while parsing the JSON representation of the returned competition.");
             return;
         }
 
@@ -63,7 +64,7 @@ namespace divi
     {
         updateCache();
         results.clear();
-        
+
         if (meos.updateResults())
         {
             return;
@@ -74,32 +75,41 @@ namespace divi
             if (!division.isFullyDefined())
             {
                 emit log(
-                    "Internal",
-                    0,
-                    "Division Skipped",
-                    QString() % "Division [" % QString::number(division.getID()) % "] is not fully defined.");
+                    "Internal", 0, "Division Skipped",
+                    QString()
+                    % "Division ["
+                    % QString::number(division.getID())
+                    % "] is not fully defined.");
                 continue;
             }
 
             if (calculateDivisionResults(division))
             {
                 emit log(
-                    Helpers::divisionsmatchberegningExeName(),
-                    0,
-                    "Results Calculation Error",
-                    QString() % "An error occured while calculating results for division [" % QString::number(division.getID()) % "].");
+                    Helpers::divisionsmatchberegningExeName(), 0, "Results Calculation Error",
+                    QString()
+                    % "An error occured while calculating results for division ["
+                    % QString::number(division.getID())
+                    % "].");
                 continue;
             }
 
             if (loadResultFile(division))
             {
                 emit log(
-                    "Internal",
-                    0,
-                    "Results Loading Error",
-                    QString() % "Unable to load result file for division [" % QString::number(division.getID()) % "].");
+                    "Internal", 0, "Results Loading Error",
+                    QString()
+                    % "Unable to load result file for division ["
+                    % QString::number(division.getID())
+                    % "].");
                 continue;
             }
+
+            emit log("Internal", 0, "Results Calculation Success",
+                QString()
+                % "Results for division ["
+                % QString::number(division.getID())
+                % "] calculated and loaded.");
         }
 
         emit log("Update Results", webserver.updateResults(results));

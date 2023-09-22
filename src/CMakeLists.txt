@@ -120,6 +120,7 @@ target_link_libraries(
     MeosInterface PRIVATE
     Qt::Widgets
     cpr::cpr
+    pugixml::pugixml
     Helpers
     Loggable
     Logger

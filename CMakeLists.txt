@@ -34,9 +34,9 @@ endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(nlohmann_json REQUIRED)
-
 set(CPR_USE_SYSTEM_CURL ON)
 find_package(cpr REQUIRED)
+find_package(pugixml REQUIRED)
 
 add_subdirectory(src)
 target_link_libraries(

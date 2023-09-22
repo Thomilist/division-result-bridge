@@ -11,6 +11,7 @@
 #include <QStringBuilder>
 
 #include <cpr/cpr.h>
+#include <pugixml.hpp>
 
 #include "ForwardDeclarations.hpp"
 
@@ -35,14 +36,18 @@ namespace divi
             int updateResults();
         
         private:
+            int checkForChanges();
             int fetchResults();
             int writeResults();
 
+            const std::string getChangesEndpoint();
+            void resetDifference();
             const std::string getResultsEndpoint();
             const std::string getOutputFile();
 
             Settings* settings;
             std::string results_xml;
+            std::string difference;
     };
 }
 
