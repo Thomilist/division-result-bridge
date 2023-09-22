@@ -7,9 +7,10 @@ namespace divi
         : version(a_version)
         , settings(this)
         , worker(this)
+        , log(new Logger(this))
         , coordinator(
             &settings,
-            &log)
+            log)
         , file_menu("File", this)
         , import_config_action("Import configuration")
         , export_config_action("Export configuration")
@@ -633,10 +634,10 @@ namespace divi
     
     void MainWindow::createLogGroup()
     {
-        log.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        log.setMinimumWidth(300);
+        log->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        log->setMinimumWidth(300);
 
-        log_layout.addWidget(&log, 0, 0);
+        log_layout.addWidget(log, 0, 0);
         log_group.setLayout(&log_layout);
         log_group.setAlignment(Qt::AlignHCenter);
 

@@ -7,6 +7,7 @@
 #include <QPlainTextEdit>
 #include <QString>
 #include <QStringBuilder>
+#include <QWidget>
 
 #include <cpr/cpr.h>
 
@@ -21,7 +22,7 @@ namespace divi
         Q_OBJECT
         
         public:
-            Logger();
+            Logger(QWidget* a_parent = nullptr);
             ~Logger();
 
             void log(

@@ -106,7 +106,7 @@ namespace divi
             Version* version;
             PersistentSettings settings;
             QThread worker;
-            Logger log;
+            Logger* log;
             Coordinator coordinator;
 
             QMenu file_menu;

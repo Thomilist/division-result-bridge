@@ -3,7 +3,8 @@
 
 namespace divi
 {
-    Logger::Logger()
+    Logger::Logger(QWidget* a_parent)
+        : QPlainTextEdit(a_parent)
     {
         setReadOnly(true);
         setMaximumBlockCount(1000);
