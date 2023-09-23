@@ -46,6 +46,7 @@ namespace divi
             void createCompetition(const QString& a_password);
             void updateMetadata();
             void updateResults();
+            void startFresh();
         
         signals:
             void competitionCreated(const Competition& a_competition);

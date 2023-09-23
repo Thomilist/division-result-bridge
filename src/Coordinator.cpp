@@ -124,6 +124,12 @@ namespace divi
         return;
     }
     
+    void Coordinator::startFresh()
+    {
+        meos.resetDifference();
+        return;
+    }
+    
     void Coordinator::updateCache()
     {
         settings_cache = *settings;

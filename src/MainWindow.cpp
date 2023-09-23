@@ -734,6 +734,7 @@ namespace divi
         connect(&start_button, &QPushButton::clicked, this, &MainWindow::start);
         connect(&stop_button, &QPushButton::clicked, this, &MainWindow::stop);
         connect(&run_once_button, &QPushButton::clicked, this, &MainWindow::runOnce);
+        connect(this, &MainWindow::runOnce, &coordinator, &Coordinator::startFresh);
         connect(this, &MainWindow::runOnce, &coordinator, &Coordinator::updateResults);
 
         // Run timer

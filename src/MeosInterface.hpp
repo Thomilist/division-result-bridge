@@ -36,6 +36,7 @@ namespace divi
             ~MeosInterface();
 
             int updateResults();
+            void resetDifference();
         
         private:
             int checkForChanges();
@@ -43,7 +44,6 @@ namespace divi
             int writeResults();
 
             const std::string getChangesEndpoint();
-            void resetDifference();
             const std::string getResultsEndpoint();
             const std::string getOutputFile();
 

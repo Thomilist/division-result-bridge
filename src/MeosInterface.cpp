@@ -41,6 +41,12 @@ namespace divi
         return 0;
     }
     
+    void MeosInterface::resetDifference()
+    {
+        difference = "zero";
+        return;
+    }
+    
     // Returns:
     // 0 on success (changes found)
     // 1 on HTTP != 200
@@ -181,12 +187,6 @@ namespace divi
             % "?difference="
             % QString::fromStdString(difference);
         return endpoint.toStdString();
-    }
-    
-    void MeosInterface::resetDifference()
-    {
-        difference = "zero";
-        return;
     }
     
     const std::string MeosInterface::getResultsEndpoint()
