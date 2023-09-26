@@ -1,6 +1,7 @@
 #ifndef __DIVISION_H__
 #define __DIVISION_H__
 
+#include <QFileInfo>
 #include <QJsonObject>
 #include <QString>
 
@@ -23,6 +24,7 @@ namespace divi
             QJsonObject toJson() const;
 
             bool isFullyDefined() const;
+            bool hasValidConfigPath() const;
 
             void setID(int a_id);
             int getID() const;

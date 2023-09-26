@@ -7,13 +7,15 @@ namespace divi
         : version(a_version)
         , settings(this)
         , worker(this)
-        , log(new Logger(this))
+        , log(new Logger(&settings, this))
+        , version_notifier(log, version, this)
         , coordinator(
             &settings,
             log)
         , file_menu("File", this)
         , import_config_action("Import configuration")
         , export_config_action("Export configuration")
+        , config_validator(log, &settings, this)
         , help_menu("Help", this)
         , view_help("View help", &help_menu)
         , view_about("About", &help_menu)
@@ -35,6 +37,7 @@ namespace divi
         setWindowIcon(QIcon{":/icon/icon.ico"});
         setMinimumWidth(1100);
         //setMinimumHeight(810);
+        setMouseTracking(true);
         
         import_config_dialog.setFileMode(QFileDialog::ExistingFile);
         import_config_dialog.setNameFilter("Config (*.json)");
@@ -78,6 +81,8 @@ namespace divi
 
         coordinator.moveToThread(&worker);
         worker.start();
+
+        config_validator.validate();
 
         updateInterfaceState();
         updateCountdown();
@@ -137,6 +142,7 @@ namespace divi
             populate();
             import_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
             export_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
+            config_validator.validate();
         }
         
         return;
@@ -637,9 +643,23 @@ namespace divi
         log->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         log->setMinimumWidth(300);
 
-        log_layout.addWidget(log, 0, 0);
+        save_logs_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+
+        int column = 0;
+
+        save_logs_layout.addWidget(&save_logs_label, 0, column++);
+        save_logs_layout.addWidget(&save_logs_spacer, 0, column++);
+        save_logs_layout.addWidget(&save_pretty_log_input, 0, column++);
+        save_logs_layout.addWidget(&save_raw_log_input, 0, column++);
+
+        int row = 0;
+
+        log_layout.addLayout(&save_logs_layout, row++, 0);
+        log_layout.addWidget(log, row++, 0);
         log_group.setLayout(&log_layout);
         log_group.setAlignment(Qt::AlignHCenter);
+
+        log_group.setMouseTracking(true);
 
         return;
     }
@@ -673,6 +693,10 @@ namespace divi
 
         // Run
         update_interval_input.setValue(settings.getUpdateInterval());
+
+        // Log
+        save_pretty_log_input.setChecked(settings.getPrettyLogging());
+        save_raw_log_input.setChecked(settings.getRawLogging());
 
         return;
     }
@@ -806,6 +830,18 @@ namespace divi
         connect(&update_interval_input, &QSpinBox::valueChanged, this, [this](int a_interval)
         {
             this->settings.setUpdateInterval(a_interval);
+            this->updateInterfaceState();
+        });
+
+        // Inputs, log
+        connect(&save_pretty_log_input, &QCheckBox::stateChanged, this, [this](bool a_state)
+        {
+            this->settings.setPrettyLogging(a_state);
+            this->updateInterfaceState();
+        });
+        connect(&save_raw_log_input, &QCheckBox::stateChanged, this, [this](bool a_state)
+        {
+            this->settings.setRawLogging(a_state);
             this->updateInterfaceState();
         });
 

@@ -6,14 +6,12 @@ namespace divi
     Version::Version(QString a_version_string)
     {
         setCurrentVersion(a_version_string);
-        curl_global_init(CURL_GLOBAL_ALL);
         current_version_digits = toDigits(a_version_string.toStdString());
         load();
     }
     
     Version::~Version()
     {
-        curl_global_cleanup();
         save();
     }
     

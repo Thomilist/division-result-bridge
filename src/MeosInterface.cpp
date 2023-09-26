@@ -65,7 +65,7 @@ namespace divi
             }
         );
 
-        emit log("MeOS", response);
+        emit log("MeOS / Check Results", response);
 
         if (response.status_code != 200)
         {
@@ -77,8 +77,8 @@ namespace divi
         {
             emit log(
                 MessageType::Error,
-                "Internal", 0, "Empty Response",
-                "MeOS successfully responded to the request, but no data was attached.");
+                "Internal / Check Results", 0, "Empty Response",
+                "MeOS successfully responded to the request, but no data was attached");
             resetDifference();
             return 2;
         }
@@ -90,8 +90,8 @@ namespace divi
         {
             emit log(
                 MessageType::Error,
-                "Internal", 0, "XML Parsing Error",
-                "An error occured while parsing the difference XML.");
+                "Internal / Check Results", 0, "XML Parsing Error",
+                "An error occured while parsing the difference XML");
             resetDifference();
             return 3;
         }
@@ -102,8 +102,8 @@ namespace divi
         if (next_difference != difference)
         {
             emit log(
-                MessageType::Info,
-                "Internal", 0, "Changes Found",
+                MessageType::Success,
+                "Internal / Check Results", 0, "Changes Found",
                 QString()
                 % "Difference tag: "
                 % QString::fromStdString(difference)
@@ -115,9 +115,9 @@ namespace divi
         }
 
         emit log(
-            MessageType::Info,
-            "Internal", 0, "Results Unchanged",
-            "No changes detected since last fetch. Update skipped.");
+            MessageType::Success,
+            "Internal / Check Results", 0, "Results Unchanged",
+            "No changes detected since last fetch. Update skipped");
 
         return 4;
     }
@@ -138,7 +138,7 @@ namespace divi
             }
         );
 
-        emit log("MeOS", response);
+        emit log("MeOS / Fetch Results", response);
 
         if (response.status_code != 200)
         {
@@ -149,8 +149,8 @@ namespace divi
         {
             emit log(
                 MessageType::Error,
-                "Internal", 0, "Empty Response",
-                "MeOS successfully responded to the request, but no data was attached.");
+                "Internal / Fetch Results", 0, "Empty Response",
+                "MeOS successfully responded to the request, but no data was attached");
             return 2;
         }
 
@@ -161,22 +161,24 @@ namespace divi
     // Returns true on success
     int MeosInterface::writeResults()
     {
-        std::ofstream results_xml_file{getOutputFile()};
+        QFile results_xml_file{getOutputFile()};
 
-        if (results_xml_file.is_open())
+        if (results_xml_file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
-            results_xml_file << results_xml;
+            QTextStream results_xml_output{&results_xml_file};
+            results_xml_output << QString::fromStdString(results_xml);
+
             emit log(
-                MessageType::Info,
-                "Internal", 0, "Write Complete",
-                "IOF XML results written successfully.");
+                MessageType::Success,
+                "Internal / Write Results", 0, "Write Complete",
+                "IOF XML results written successfully");
             return 0;
         }
 
         emit log(
             MessageType::Error,
-            "Internal", 0, "Write Error",
-            "Unable to write IOF XML results.");
+            "Internal / Write Results", 0, "Write Error",
+            "Unable to write IOF XML results");
         return 1;
     }
     
@@ -197,8 +199,8 @@ namespace divi
         return endpoint.toStdString();
     }
     
-    const std::string MeosInterface::getOutputFile()
+    const QString MeosInterface::getOutputFile()
     {
-        return settings->getXMLResultPath().toStdString();
+        return settings->getXMLResultPath();
     }
 }

@@ -3,11 +3,14 @@
 
 namespace divi
 {
-    Logger::Logger(QWidget* a_parent)
+    Logger::Logger(Settings* a_settings, QWidget* a_parent)
         : QPlainTextEdit(a_parent)
+        , settings(a_settings)
     {
         setReadOnly(true);
         setMaximumBlockCount(1000);
+        setTextInteractionFlags(Qt::TextBrowserInteraction);
+        setMouseTracking(true);
     }
     
     Logger::~Logger()
@@ -22,21 +25,47 @@ namespace divi
     {
         const QString datetime = QDateTime::currentDateTime().toString(Helpers::dateTimeFormat());
         const QString status
-            = "<b>"
-            % a_source % ":"
+            = a_source % ":"
             % (a_status_code == 0 ? QString() : (" " % QString::number(a_status_code)))
-            % (a_status_text.isEmpty() ? QString() : (" " % a_status_text))
-            % "</b>";
+            % (a_status_text.isEmpty() ? QString() : (" " % a_status_text));
 
-        appendPlainText("\n" % datetime);
-        appendHtml("\n" % colorHtmlText(status, a_message_type));
-        appendPlainText(a_message);
+        const QStringList raw
+        {
+            datetime,
+            status,
+            a_message,
+            ""
+        };
+
+        const QStringList html
+        {
+            "<span style=\"color: #000000; font-weight: normal;\">" % datetime % "</span>",
+            colorStatusText(status, a_message_type),
+            "<span class=\"color: #000000; font-weight: normal;\">" % a_message % "</span>",
+            ""
+        };
+
+        for (const auto& line : html)
+        {
+            appendHtml(line);
+        }
+
+        if (settings->getPrettyLogging())
+        {
+            logToFile(settings->getHtmlLogPath(), PrintMode::HTML, html);
+        }
+        
+        if (settings->getRawLogging())
+        {
+            logToFile(settings->getRawLogPath(), PrintMode::Raw, raw);
+        }
+
         return;
     }
     
     void Logger::log(const QString& a_source, const cpr::Response& a_response)
     {
-        MessageType message_type = MessageType::Info;
+        MessageType message_type = MessageType::Success;
 
         if (a_response.status_code >= 400 || a_response.status_code < 100)
         {
@@ -69,6 +98,81 @@ namespace divi
         return;
     }
     
+    void Logger::mousePressEvent(QMouseEvent* a_event)
+    {
+        if (a_event->button() == Qt::LeftButton)
+        {
+            clicked_anchor = anchorAt(a_event->pos());
+        }
+        else
+        {
+            clicked_anchor.clear();
+        }
+
+        QPlainTextEdit::mousePressEvent(a_event);
+        return;
+    }
+    
+    void Logger::mouseReleaseEvent(QMouseEvent* a_event)
+    {
+        if (a_event->button() == Qt::LeftButton && !clicked_anchor.isEmpty())
+        {
+            QString released_anchor = anchorAt(a_event->pos());
+
+            if (clicked_anchor == released_anchor)
+            {
+                viewport()->setCursor(Qt::WaitCursor);
+                QDesktopServices::openUrl(clicked_anchor);
+                setCursorOnLink(mapFromGlobal(QCursor::pos()));
+            }
+        }
+
+        QPlainTextEdit::mouseReleaseEvent(a_event);
+        return;
+    }
+    
+    void Logger::mouseMoveEvent(QMouseEvent* a_event)
+    {
+        setCursorOnLink(a_event->pos());
+        QPlainTextEdit::mouseMoveEvent(a_event);
+        return;
+    }
+    
+    void Logger::setCursorOnLink(const QPoint& a_point)
+    {
+        if (!anchorAt(a_point).isEmpty())
+        {
+            viewport()->setCursor(Qt::PointingHandCursor);
+        }
+        else
+        {
+            viewport()->setCursor(Qt::IBeamCursor);
+        }
+
+        return;
+    }
+    
+    void Logger::logToFile(
+        const QString& a_log_path,
+        PrintMode a_log_print_mode,
+        const QStringList& a_message)
+    {
+        QFile log_file{a_log_path};
+
+        if (log_file.open(QIODevice::Append | QIODevice::Text))
+        {
+            const QString linebreak = (a_log_print_mode == PrintMode::HTML ? "<br>\n" : "\n");
+            QTextStream log_output{&log_file};
+
+            for (const auto& line : a_message)
+            {
+                log_output << line << linebreak;
+            }
+        }
+
+        return;
+    }
+    
     const QString Logger::excludeIfUnfit(const QString& a_body)
     {
         if (a_body.indexOf("<!DOCTYPE html>") == 0)
@@ -83,39 +187,44 @@ namespace divi
         return a_body;
     }
     
-    const QString Logger::colorHtmlText(const QString& a_message, MessageType a_message_type)
+    const QString Logger::colorStatusText(const QString& a_message, MessageType a_message_type)
     {
         return QString()
-            % "<span style=\"color: "
-            % getColor(a_message_type)
-            % ";\">"
+            % "<span style=\""
+            % getCssStyle(a_message_type)
+            % "\">"
             % a_message
             % "</span>";
     }
     
-    const QString Logger::getColor(MessageType a_message_type)
+    const QString Logger::getCssStyle(MessageType a_message_type)
     {
-        QString color_string = "#000000";
+        QString css_style = "color: #000000; font-weight: normal;";
 
         switch (a_message_type)
         {
             case MessageType::Info:
             {
-                color_string = "#006600";
+                css_style = "color: #0000ff; font-weight: bold;";
+                break;
+            }
+            case MessageType::Success:
+            {
+                css_style = "color: #006600; font-weight: bold;";
                 break;
             }
             case MessageType::Warning:
             {
-                color_string = "#996600";
+                css_style = "color: #ff6600; font-weight: bold;";
                 break;
             }
             case MessageType::Error:
             {
-                color_string = "#ff0000";
+                css_style = "color: #ff0000; font-weight: bold;";
                 break;
             }
         }
 
-        return color_string;
+        return css_style;
     }
 }

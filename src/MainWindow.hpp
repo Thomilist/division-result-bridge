@@ -6,6 +6,7 @@
 
 #include <QAbstractItemView>
 #include <QAction>
+#include <QCheckBox>
 #include <QComboBox>
 #include <QDate>
 #include <QDateTimeEdit>
@@ -45,6 +46,7 @@
 
 #include "AboutDialog.hpp"
 #include "CompetitionCreatedDialog.hpp"
+#include "ConfigValidator.hpp"
 #include "CreateCompetitionDialog.hpp"
 #include "Division.hpp"
 #include "DivisionEditor.hpp"
@@ -55,6 +57,8 @@
 #include "Coordinator.hpp"
 #include "PersistentSettings.hpp"
 #include "UpdateDialog.hpp"
+#include "Version.hpp"
+#include "VersionNotifier.hpp"
 
 #include "EditorMode.hpp"
 
@@ -107,11 +111,13 @@ namespace divi
             PersistentSettings settings;
             QThread worker;
             Logger* log;
+            VersionNotifier version_notifier;
             Coordinator coordinator;
 
             QMenu file_menu;
             QAction import_config_action;
             QAction export_config_action;
+            ConfigValidator config_validator;
 
             QMenu help_menu;
             QAction view_help;
@@ -255,6 +261,11 @@ namespace divi
             // Log
             QGroupBox log_group{"Log"};
             QGridLayout log_layout;
+            QGridLayout save_logs_layout;
+            QLabel save_logs_label{"Save logs:"};
+            QWidget save_logs_spacer;
+            QCheckBox save_pretty_log_input{"Pretty (HTML)"};
+            QCheckBox save_raw_log_input{"Raw (plain text)"};
     };
 }
 

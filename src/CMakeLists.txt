@@ -23,6 +23,23 @@ target_link_libraries(
     Helpers
 )
 
+add_library(CompetitionCreatedDialog CompetitionCreatedDialog.cpp)
+target_link_libraries(
+    CompetitionCreatedDialog PRIVATE
+    Qt::Widgets
+    Competition
+)
+
+add_library(ConfigValidator ConfigValidator.cpp)
+target_link_libraries(
+    ConfigValidator PRIVATE
+    Qt::Widgets
+    Helpers
+    Loggable
+    Logger
+    Settings
+)
+
 add_library(Coordinator Coordinator.cpp)
 target_link_libraries(
     Coordinator PRIVATE
@@ -37,13 +54,6 @@ target_link_libraries(
     ResultPackage
     Settings
     WebserverInterface
-)
-
-add_library(CompetitionCreatedDialog CompetitionCreatedDialog.cpp)
-target_link_libraries(
-    CompetitionCreatedDialog PRIVATE
-    Qt::Widgets
-    Competition
 )
 
 add_library(CreateCompetitionDialog CreateCompetitionDialog.cpp)
@@ -102,6 +112,7 @@ target_link_libraries(
     Qt::Widgets
     AboutDialog
     CompetitionCreatedDialog
+    ConfigValidator
     CreateCompetitionDialog
     Division
     DivisionEditor
@@ -113,6 +124,7 @@ target_link_libraries(
     PersistentSettings
     UpdateDialog
     Version
+    VersionNotifier
 )
 
 add_library(MeosInterface MeosInterface.cpp)
@@ -166,6 +178,16 @@ target_link_libraries(
     Helpers
 )
 
+add_library(VersionNotifier VersionNotifier.cpp)
+target_link_libraries(
+    VersionNotifier PRIVATE
+    Qt::Widgets
+    Helpers
+    Loggable
+    Logger
+    Version
+)
+
 add_library(WebserverInterface WebserverInterface.cpp)
 target_link_libraries(
     WebserverInterface PRIVATE
@@ -174,6 +196,8 @@ target_link_libraries(
     Competition
     Division
     Helpers
+    Loggable
+    Logger
     ResultPackage
     Settings
 )

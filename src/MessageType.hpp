@@ -6,8 +6,10 @@ namespace divi
     enum class MessageType
     {
         Info,
+        Success,
         Warning,
         Error
     };
 }
+
 #endif // __MESSAGETYPE_H__

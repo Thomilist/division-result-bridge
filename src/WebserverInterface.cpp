@@ -3,8 +3,11 @@
 
 namespace divi
 {
-    WebserverInterface::WebserverInterface(Settings* a_settings, QObject* a_parent)
-        : QObject(a_parent)
+    WebserverInterface::WebserverInterface(
+        Logger* a_log,
+        Settings* a_settings,
+        QObject* a_parent)
+        : Loggable(a_log, a_parent)
         , settings(a_settings)
     { }
     
@@ -28,7 +31,7 @@ namespace divi
     
     cpr::Response WebserverInterface::ping()
     {
-        return cpr::Get
+        auto response = cpr::Get
         (
             cpr::Url{QString(Helpers::addressEndingWithSlash(settings->getWebserverAddress()) % Helpers::apiPingEndpoint()).toStdString()},
             cpr::Header
@@ -38,11 +41,14 @@ namespace divi
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
             }
         );
+
+        emit log("Web Server / Test", response);
+        return response;
     }
     
     cpr::Response WebserverInterface::create(const QString& a_password)
     {
-        return cpr::Post
+        auto response = cpr::Post
         (
             cpr::Url{QString(Helpers::addressEndingWithSlash(settings->getWebserverAddress()) % Helpers::apiCreateEndpoint()).toStdString()},
             cpr::Header
@@ -52,6 +58,9 @@ namespace divi
                 Helpers::apiPasswordHeaderField(a_password)
             }
         );
+
+        emit log("Web Server / Create New", response);
+        return response;
     }
     
     cpr::Response WebserverInterface::updateMetadata()
@@ -60,7 +69,7 @@ namespace divi
         json[getMetadataAlias()] = getMetadataAsBase64String();
         json[getResultsAlias()] = QString();
         
-        return cpr::Put
+        auto response = cpr::Put
         (
             cpr::Url{QString(Helpers::addressEndingWithSlash(settings->getWebserverAddress()) % Helpers::apiUpdateMetaEndpoint()).toStdString()},
             cpr::Body{QJsonDocument{json}.toJson().toStdString()},
@@ -72,6 +81,9 @@ namespace divi
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
             }
         );
+
+        emit log("Web Server / Update Metadata", response);
+        return response;
     }
     
     cpr::Response WebserverInterface::updateResults(std::vector<ResultPackage>& a_results)
@@ -91,7 +103,7 @@ namespace divi
 
         json[getResultsAlias()] = results_json;
 
-        return cpr::Put
+        auto response = cpr::Put
         (
             cpr::Url{QString(Helpers::addressEndingWithSlash(settings->getWebserverAddress()) % Helpers::apiUpdateResultsEndpoint()).toStdString()},
             cpr::Body{QJsonDocument{json}.toJson().toStdString()},
@@ -103,6 +115,9 @@ namespace divi
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
             }
         );
+        
+        emit log("Web Server / Update Results", response);
+        return response;
     }
     
     const QString WebserverInterface::getMetadataAsBase64String() const

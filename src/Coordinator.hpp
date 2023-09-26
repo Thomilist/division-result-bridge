@@ -5,7 +5,9 @@
 #include <vector>
 
 #include <QByteArray>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QIODevice>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -53,14 +55,17 @@ namespace divi
 
         private:
             void updateCache();
+            void prepareWorkingDir();
             int calculateDivisionResults(const Division& a_division);
             int loadResultFile(const Division& a_division);
+            bool diviExeExists();
 
             Settings* settings;
             Settings settings_cache;
             MeosInterface meos;
             WebserverInterface webserver;
             std::vector<ResultPackage> results;
+            QProcess divi_process;
 
             std::unordered_map<QString, QString> substitutions{
                 {"<div class=\"matchgruppeHeader\">Klasse oversigt</div>", "<div class=\"matchgruppeHeader\">Klasseoversigt</div>"},

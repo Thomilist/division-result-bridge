@@ -3,8 +3,7 @@
 
 namespace divi
 {
-    Loggable::Loggable(Logger* a_log, QObject* a_parent)
-        : QObject(a_parent)
+    void Loggable::setLogger(Logger* a_log)
     {
         connect(
             this,
@@ -17,5 +16,13 @@ namespace divi
             QOverload<const QString&, const cpr::Response&>::of(&Loggable::log),
             a_log,
             QOverload<const QString&, const cpr::Response&>::of(&Logger::log));
+        
+        return;
+    }
+
+    Loggable::Loggable(Logger* a_log, QObject* a_parent)
+        : QObject(a_parent)
+    {
+        setLogger(a_log);
     }
 }

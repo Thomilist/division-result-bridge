@@ -57,6 +57,38 @@ namespace divi
         return "divisions";
     }
     
+    void Settings::setPrettyLogging(bool a_state)
+    {
+        save_pretty_log = a_state;
+        return;
+    }
+    
+    bool Settings::getPrettyLogging() const
+    {
+        return save_pretty_log;
+    }
+    
+    const QString Settings::getPrettyLoggingAlias()
+    {
+        return "save_pretty_log";
+    }
+    
+    void Settings::setRawLogging(bool a_state)
+    {
+        save_raw_log = a_state;
+        return;
+    }
+    
+    bool Settings::getRawLogging() const
+    {
+        return save_raw_log;
+    }
+    
+    const QString Settings::getRawLoggingAlias()
+    {
+        return "save_raw_log";
+    }
+    
     void Settings::setExternalConfigPath(const QString& a_path)
     {
         external_config_path = a_path;
@@ -91,12 +123,22 @@ namespace divi
     
     const QString Settings::getXMLResultPath()
     {
-        return getWorkingDir() % "\\results.xml";
+        return getWorkingDir() % "/results.xml";
     }
     
     const QString Settings::getDivisionResultPath()
     {
-        return getWorkingDir() % "\\results.html";
+        return getWorkingDir() % "/results.html";
+    }
+    
+    const QString Settings::getRawLogPath()
+    {
+        return getWorkingDir() % "/log.txt";
+    }
+    
+    const QString Settings::getHtmlLogPath()
+    {
+        return getWorkingDir() % "/log.html";
     }
     
     void Settings::setDiviExePath(const QString& a_path)

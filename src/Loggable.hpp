@@ -18,6 +18,8 @@ namespace divi
         
         public:
             virtual ~Loggable() = default;
+
+            void setLogger(Logger* a_log);
         
         signals:
             void log(

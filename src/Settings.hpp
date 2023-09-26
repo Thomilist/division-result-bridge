@@ -40,6 +40,8 @@ namespace divi
             static const QString getWorkingDirAlias();
             const QString getXMLResultPath();
             const QString getDivisionResultPath();
+            const QString getRawLogPath();
+            const QString getHtmlLogPath();
 
             void setDiviExePath(const QString& a_path);
             const QString& getDiviExePath() const;
@@ -59,6 +61,14 @@ namespace divi
 
             std::vector<Division>& getDivisions();
             static const QString getDivisionsAlias();
+
+            void setPrettyLogging(bool a_state);
+            bool getPrettyLogging() const;
+            static const QString getPrettyLoggingAlias();
+
+            void setRawLogging(bool a_state);
+            bool getRawLogging() const;
+            static const QString getRawLoggingAlias();
         
         protected:
             QMainWindow* main_window;
@@ -86,6 +96,10 @@ namespace divi
 
             // Divisions
             std::vector<Division> divisions;
+
+            // Save logs
+            bool save_pretty_log = true;
+            bool save_raw_log = false;
     };
 }
 

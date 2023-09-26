@@ -1,14 +1,14 @@
 #ifndef __MEOSINTERFACE_H__
 #define __MEOSINTERFACE_H__
 
-#include <iostream>
-
-#include <fstream>
 #include <string>
 
+#include <QFile>
+#include <QIODevice>
 #include <QObject>
 #include <QString>
 #include <QStringBuilder>
+#include <QTextStream>
 
 #include <cpr/cpr.h>
 #include <pugixml.hpp>
@@ -45,7 +45,7 @@ namespace divi
 
             const std::string getChangesEndpoint();
             const std::string getResultsEndpoint();
-            const std::string getOutputFile();
+            const QString getOutputFile();
 
             Settings* settings;
             std::string results_xml;

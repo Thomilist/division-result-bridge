@@ -59,6 +59,8 @@ namespace divi
         meos_address = value(getMeosAddressAlias(), Helpers::defaultMeosInfoServerAddress()).toString();
         webserver_address = value(getWebserverAddressAlias(), Helpers::defaultWebServerAddress()).toString();
         update_interval = value(getUpdateIntervalAlias(), 30).toInt();
+        save_pretty_log = value(getPrettyLoggingAlias(), true).toBool();
+        save_raw_log = value(getRawLoggingAlias(), false).toBool();
 
         // Divisions
         int size = beginReadArray(getDivisionsAlias());
@@ -104,6 +106,8 @@ namespace divi
         setValue(getMeosAddressAlias(), meos_address);
         setValue(getWebserverAddressAlias(), webserver_address);
         setValue(getUpdateIntervalAlias(), update_interval);
+        setValue(getPrettyLoggingAlias(), save_pretty_log);
+        setValue(getRawLoggingAlias(), save_raw_log);
 
         // Divisions
         beginWriteArray(getDivisionsAlias());

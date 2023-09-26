@@ -10,7 +10,7 @@ namespace divi
         : Loggable(a_log, a_parent)
         , settings(a_settings)
         , meos(&settings_cache, a_log)
-        , webserver(&settings_cache)
+        , webserver(a_log, &settings_cache)
     { }
     
     Coordinator::~Coordinator()
@@ -19,7 +19,7 @@ namespace divi
     void Coordinator::pingWebserver()
     {
         updateCache();
-        emit log("Test", webserver.ping());
+        webserver.ping();
         return;
     }
     
@@ -28,7 +28,6 @@ namespace divi
         updateCache();
         
         auto response = webserver.create(a_password);
-        emit log("Create New", response);
 
         if (response.status_code != 201)
         {
@@ -43,8 +42,8 @@ namespace divi
         {
             emit log(
                 MessageType::Error,
-                "Internal", 0, "JSON parse error",
-                "An error occured while parsing the JSON representation of the returned competition.");
+                "Internal / Create New", 0, "JSON parse error",
+                "An error occured while parsing the JSON representation of the returned competition");
             return;
         }
 
@@ -58,16 +57,22 @@ namespace divi
     void Coordinator::updateMetadata()
     {
         updateCache();
-        emit log("Update Metadata", webserver.updateMetadata());
+        webserver.updateMetadata();
         return;
     }
     
     void Coordinator::updateResults()
     {
         updateCache();
+        prepareWorkingDir();
         results.clear();
 
         if (meos.updateResults())
+        {
+            return;
+        }
+
+        if (!diviExeExists())
         {
             return;
         }
@@ -78,11 +83,28 @@ namespace divi
             {
                 emit log(
                     MessageType::Warning,
-                    "Internal", 0, "Division Skipped",
+                    "Internal / Update Results", 0, "Division Skipped",
                     QString()
                     % "Division ["
                     % QString::number(division.getID())
-                    % "] is not fully defined.");
+                    % "] is not fully defined");
+                continue;
+            }
+            
+            if (!division.hasValidConfigPath())
+            {
+                emit log(
+                    MessageType::Warning,
+                    "Internal / Update Results", 0, "Division Skipped",
+                    QString()
+                    % "Division ["
+                    % QString::number(division.getID())
+                    % "] not valid: "
+                    % "\""
+                    % division.getDivisionConfigPath()
+                    % "\""
+                    % " not found");
+                
                 continue;
             }
 
@@ -90,11 +112,11 @@ namespace divi
             {
                 emit log(
                     MessageType::Error,
-                    Helpers::divisionsmatchberegningExeName(), 0, "Results Calculation Error",
+                    Helpers::divisionsmatchberegningExeName() % " / Update Results", 0, "Results Calculation Error",
                     QString()
                     % "An error occured while calculating results for division ["
                     % QString::number(division.getID())
-                    % "].");
+                    % "]");
                 continue;
             }
 
@@ -102,24 +124,41 @@ namespace divi
             {
                 emit log(
                     MessageType::Error, 
-                    "Internal", 0, "Results Loading Error",
+                    "Internal / Update Results", 0, "Results Loading Error",
                     QString()
                     % "Unable to load result file for division ["
                     % QString::number(division.getID())
-                    % "].");
+                    % "]");
                 continue;
             }
 
             emit log(
-                MessageType::Info,
-                "Internal", 0, "Results Calculation Success",
+                MessageType::Success,
+                "Internal / Update Results", 0, "Results Calculation Success",
                 QString()
                 % "Results for division ["
                 % QString::number(division.getID())
-                % "] calculated and loaded.");
+                % "] calculated and loaded");
         }
 
-        emit log("Update Results", webserver.updateResults(results));
+        if (results.empty())
+        {
+            emit log(
+                MessageType::Error,
+                "Internal / Update Results", 0, "Results Calculation Error",
+                "No results to upload"
+            );
+
+            meos.resetDifference();
+            return;
+        }
+
+        auto response = webserver.updateResults(results);
+
+        if (response.status_code != 200)
+        {
+            meos.resetDifference();
+        }
 
         return;
     }
@@ -136,9 +175,21 @@ namespace divi
         return;
     }
     
+    void Coordinator::prepareWorkingDir()
+    {
+        QDir working_dir{settings_cache.getWorkingDir()};
+
+        if (!working_dir.exists())
+        {
+            working_dir.mkpath(".");
+        }
+
+        return;
+    }
+    
     int Coordinator::calculateDivisionResults(const Division& a_division)
     {
-        return QProcess::execute
+        divi_process.start
         (
             // Divisionsmatch.exe executable
             settings_cache.getDiviExePath(),
@@ -157,6 +208,16 @@ namespace divi
             << "-f"
             << "WWW"
         );
+
+        divi_process.waitForFinished();
+        
+        if (divi_process.exitCode())
+        {
+            emit log(MessageType::Error, Helpers::divisionsmatchberegningExeName() % " / Update Results", divi_process.exitCode(), "Process Output",
+                QString::fromUtf8(divi_process.readAllStandardError()));
+        }
+        
+        return divi_process.exitCode();
     }
     
     int Coordinator::loadResultFile(const Division& a_division)
@@ -202,5 +263,28 @@ namespace divi
         }
 
         return 1;
+    }
+    
+    bool Coordinator::diviExeExists()
+    {
+        QFileInfo divi_exe_info{settings->getDiviExePath()};
+        bool exists = divi_exe_info.exists();
+
+        if (!exists)
+        {
+            emit log(
+                MessageType::Error,
+                "Internal / Update Results", 0, "Invalid Path",
+                QString()
+                % "\""
+                % settings->getDiviExePath()
+                % "\""
+                % " not found"
+            );
+
+            meos.resetDifference();
+        }
+
+        return exists;
     }
 }

@@ -7,7 +7,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QObject>
 
 #include <cpr/cpr.h>
 
@@ -16,17 +15,22 @@
 #include "Competition.hpp"
 #include "Division.hpp"
 #include "Helpers.hpp"
+#include "Loggable.hpp"
+#include "Logger.hpp"
 #include "ResultPackage.hpp"
 #include "Settings.hpp"
 
 namespace divi
 {
-    class WebserverInterface : public QObject
+    class WebserverInterface : public Loggable
     {
         Q_OBJECT
         
         public:
-            WebserverInterface(Settings* a_settings, QObject* a_parent = nullptr);
+            WebserverInterface(
+                Logger* a_log,
+                Settings* a_settings,
+                QObject* a_parent = nullptr);
             ~WebserverInterface();
 
             static const QString getMetadataAlias();

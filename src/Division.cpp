@@ -58,6 +58,12 @@ namespace divi
         return (id > 0) && !name.isEmpty() && !division_config_path.isEmpty();
     }
     
+    bool Division::hasValidConfigPath() const
+    {
+        QFileInfo divi_file{division_config_path};
+        return divi_file.exists();
+    }
+    
     void Division::setID(int a_id)
     {
         id = a_id;
