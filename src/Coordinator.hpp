@@ -52,8 +52,10 @@ namespace divi
         
         signals:
             void competitionCreated(const Competition& a_competition);
+            void activelyProcessing(bool a_state);
 
         private:
+            void runUpdatePipeline();
             void updateCache();
             void prepareWorkingDir();
             int calculateDivisionResults(const Division& a_division);

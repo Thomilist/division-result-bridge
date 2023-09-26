@@ -97,7 +97,7 @@ namespace divi
     
     void MainWindow::start()
     {
-        if (running)
+        if (running || actively_processing)
         {
             return;
         }
@@ -130,6 +130,13 @@ namespace divi
         updateInterfaceState();
         updateCountdown();
 
+        return;
+    }
+    
+    void MainWindow::setActivelyProcessing(bool a_state)
+    {
+        actively_processing = a_state;
+        updateInterfaceState();
         return;
     }
     
@@ -212,12 +219,13 @@ namespace divi
         edit_division_button.setEnabled(!divisions_empty && division_selected);
         delete_division_button.setEnabled(!divisions_empty && division_selected);
 
-        webserver_update_meta_button.setEnabled(webserver_defined && !running);
-        webserver_ping_button.setEnabled(webserver_defined && !running);
+        webserver_create_button.setEnabled(webserver_defined && !running && !actively_processing);
+        webserver_update_meta_button.setEnabled(webserver_defined && !running && !actively_processing);
+        webserver_ping_button.setEnabled(webserver_defined && !running && !actively_processing);
         webserver_view_button.setEnabled(webserver_defined);
         
-        start_button.setEnabled(competition_complete && config_complete && !running);
-        run_once_button.setEnabled(competition_complete && config_complete && !running);
+        start_button.setEnabled(competition_complete && config_complete && !running && !actively_processing);
+        run_once_button.setEnabled(competition_complete && config_complete && !running && !actively_processing);
         stop_button.setEnabled(running);
 
         if (running)
@@ -300,6 +308,32 @@ namespace divi
     {
         clearCompetitionAndDivision();
         loadCompetitionMetadata(a_competition);
+        return;
+    }
+    
+    void MainWindow::closeEvent(QCloseEvent* a_event)
+    {
+        if (running || actively_processing)
+        {
+            QMessageBox::StandardButton response = QMessageBox::Yes;
+
+            response = QMessageBox::warning
+            (
+                this,
+                "Close while running?",
+                "Are you sure you wish to exit the program? Result updates are still running.",
+                QMessageBox::Yes | QMessageBox::No,
+                QMessageBox::No
+            );
+
+            if (response == QMessageBox::No)
+            {
+                a_event->ignore();
+                return;
+            }
+        }
+
+        QMainWindow::closeEvent(a_event);
         return;
     }
     
@@ -764,6 +798,9 @@ namespace divi
         // Run timer
         connect(&run_timer, &QTimer::timeout, &coordinator, &Coordinator::updateResults);
         connect(&countdown_timer, &QTimer::timeout, this, &MainWindow::updateCountdown);
+
+        // Coordinator activity
+        connect(&coordinator, &Coordinator::activelyProcessing, this, &MainWindow::setActivelyProcessing);
 
         // Inputs, competition
         connect(&competition_id_input, &QSpinBox::valueChanged, this, [this](int a_id)

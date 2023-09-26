@@ -7,6 +7,7 @@
 #include <QAbstractItemView>
 #include <QAction>
 #include <QCheckBox>
+#include <QCloseEvent>
 #include <QComboBox>
 #include <QDate>
 #include <QDateTimeEdit>
@@ -78,6 +79,7 @@ namespace divi
         private slots:
             void start();
             void stop();
+            void setActivelyProcessing(bool a_state);
             void importConfig();
             void exportConfig();
             void browseWorkingDir();
@@ -89,6 +91,8 @@ namespace divi
             void loadNewCompetition(const Competition& a_competition);
         
         private:
+            void closeEvent(QCloseEvent* a_event) override;
+
             void createHeader();
             void createCompetitionGroup();
             void createConfigGroup();
@@ -106,6 +110,7 @@ namespace divi
             void updateLiveresultsText();
 
             bool running = false;
+            bool actively_processing = false;
 
             Version* version;
             PersistentSettings settings;

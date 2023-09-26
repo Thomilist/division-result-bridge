@@ -63,10 +63,26 @@ namespace divi
     
     void Coordinator::updateResults()
     {
+        emit activelyProcessing(true);
+        
         updateCache();
         prepareWorkingDir();
         results.clear();
 
+        runUpdatePipeline();
+
+        emit activelyProcessing(false);
+        return;
+    }
+    
+    void Coordinator::startFresh()
+    {
+        meos.resetDifference();
+        return;
+    }
+    
+    void Coordinator::runUpdatePipeline()
+    {
         if (meos.updateResults())
         {
             return;
@@ -160,12 +176,6 @@ namespace divi
             meos.resetDifference();
         }
 
-        return;
-    }
-    
-    void Coordinator::startFresh()
-    {
-        meos.resetDifference();
         return;
     }
     
