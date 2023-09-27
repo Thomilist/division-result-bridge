@@ -39,7 +39,7 @@ namespace divi
             const QString& getWorkingDir() const;
             static const QString getWorkingDirAlias();
             const QString getXMLResultPath();
-            const QString getDivisionResultPath();
+            const QString getDivisionResultPath(int a_division_id = 0);
             const QString getRawLogPath();
             const QString getHtmlLogPath();
 

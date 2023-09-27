@@ -98,20 +98,20 @@ namespace divi
             if (!division.isFullyDefined())
             {
                 emit log(
-                    MessageType::Warning,
-                    "Internal / Update Results", 0, "Division Skipped",
+                    MessageType::Error,
+                    "Internal / Update Results", 0, "Misconfigured Division",
                     QString()
                     % "Division ["
                     % QString::number(division.getID())
                     % "] is not fully defined");
-                continue;
+                return;
             }
             
             if (!division.hasValidConfigPath())
             {
                 emit log(
-                    MessageType::Warning,
-                    "Internal / Update Results", 0, "Division Skipped",
+                    MessageType::Error,
+                    "Internal / Update Results", 0, "Misconfigured Division",
                     QString()
                     % "Division ["
                     % QString::number(division.getID())
@@ -121,7 +121,7 @@ namespace divi
                     % "\""
                     % " not found");
                 
-                continue;
+                return;
             }
 
             if (calculateDivisionResults(division))
@@ -133,7 +133,7 @@ namespace divi
                     % "An error occured while calculating results for division ["
                     % QString::number(division.getID())
                     % "]");
-                continue;
+                return;
             }
 
             if (loadResultFile(division))
@@ -145,7 +145,7 @@ namespace divi
                     % "Unable to load result file for division ["
                     % QString::number(division.getID())
                     % "]");
-                continue;
+                return;
             }
 
             emit log(
@@ -213,7 +213,7 @@ namespace divi
             << settings_cache.getXMLResultPath()
             // HTML export file
             << "-e"
-            << settings_cache.getDivisionResultPath()
+            << settings_cache.getDivisionResultPath(a_division.getID())
             // Output format
             << "-f"
             << "WWW"
@@ -232,7 +232,7 @@ namespace divi
     
     int Coordinator::loadResultFile(const Division& a_division)
     {
-        QFile result_file{settings_cache.getDivisionResultPath()};
+        QFile result_file{settings_cache.getDivisionResultPath(a_division.getID())};
 
         if (result_file.open(QIODevice::ReadOnly))
         {

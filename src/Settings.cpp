@@ -126,8 +126,13 @@ namespace divi
         return getWorkingDir() % "/results.xml";
     }
     
-    const QString Settings::getDivisionResultPath()
+    const QString Settings::getDivisionResultPath(int a_division_id)
     {
+        if (a_division_id > 0)
+        {
+            return getWorkingDir() % "/results" % QString::number(a_division_id) % ".html";
+        }
+        
         return getWorkingDir() % "/results.html";
     }
     
