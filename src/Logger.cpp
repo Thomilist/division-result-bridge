@@ -50,14 +50,17 @@ namespace divi
             appendHtml(line);
         }
 
-        if (settings->getPrettyLogging())
+        if (!settings->getWorkingDir().isEmpty())
         {
-            logToFile(settings->getHtmlLogPath(), PrintMode::HTML, html);
-        }
-        
-        if (settings->getRawLogging())
-        {
-            logToFile(settings->getRawLogPath(), PrintMode::Raw, raw);
+            if (settings->getPrettyLogging())
+            {
+                logToFile(settings->getHtmlLogPath(), PrintMode::HTML, html);
+            }
+            
+            if (settings->getRawLogging())
+            {
+                logToFile(settings->getRawLogPath(), PrintMode::Raw, raw);
+            }
         }
 
         return;

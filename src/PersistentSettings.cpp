@@ -3,8 +3,9 @@
 
 namespace divi
 {
-    PersistentSettings::PersistentSettings(QMainWindow* a_main_window)
+    PersistentSettings::PersistentSettings(QMainWindow* a_main_window, Logger* a_log)
         : QSettings(a_main_window)
+        , Loggable(a_log, this)
         , Settings(a_main_window)
     {
         loadFromRegistry();
@@ -13,6 +14,21 @@ namespace divi
     PersistentSettings::~PersistentSettings()
     {
         saveToRegistry();
+    }
+    
+    const QString PersistentSettings::getConfigMetadataAlias()
+    {
+        return "meta";
+    }
+    
+    const QString PersistentSettings::getConfigSourceAlias()
+    {
+        return "source";
+    }
+    
+    const QString PersistentSettings::getConfigVersionAlias()
+    {
+        return "version";
     }
     
     void PersistentSettings::importConfig(const QString& a_path)
@@ -52,9 +68,12 @@ namespace divi
 
         endGroup();
 
+        auto temp_locations = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
+        const QString default_working_dir = temp_locations.isEmpty() ? "" : temp_locations.front();
+
         // General settings
         external_config_path = value(getExternalConfigPathAlias(), "").toString();
-        working_dir = value(getWorkingDirAlias(), "").toString();
+        working_dir = value(getWorkingDirAlias(), default_working_dir).toString();
         divi_exe_path = value(getDiviExePathAlias(), "").toString();
         meos_address = value(getMeosAddressAlias(), Helpers::defaultMeosInfoServerAddress()).toString();
         webserver_address = value(getWebserverAddressAlias(), Helpers::defaultWebServerAddress()).toString();
@@ -147,6 +166,11 @@ namespace divi
 
             QJsonObject json = json_doc.object();
 
+            if (!isLoadedConfigValid(json))
+            {
+                return;
+            }
+
             if (const QJsonValue value = json[getCompetitionAlias()]; value.isObject())
             {
                 QJsonObject competition_json = value.toObject();
@@ -238,8 +262,13 @@ namespace divi
         }
 
         QJsonObject json;
+        QJsonObject meta_json;
         QJsonArray divisions_json;
         QJsonObject competition_json = competition.toJson();
+
+        meta_json[getConfigSourceAlias()] = Helpers::projectName();
+        meta_json[getConfigVersionAlias()] = Helpers::projectVersion();
+        json[getConfigMetadataAlias()] = meta_json;
         
         for (const Division& division : divisions)
         {
@@ -264,5 +293,85 @@ namespace divi
         }
 
         return;
+    }
+    
+    bool PersistentSettings::isLoadedConfigValid(const QJsonObject& a_config_json)
+    {
+        QString source;
+        QString version_tag;
+        
+        if (const QJsonValue value = a_config_json[getConfigMetadataAlias()]; value.isObject())
+        {
+            QJsonObject metadata_json = value.toObject();
+
+            if (const QJsonValue value = metadata_json[getConfigSourceAlias()]; value.isString())
+            {
+                source = value.toString();
+            }
+
+            if (const QJsonValue value = metadata_json[getConfigVersionAlias()]; value.isString())
+            {
+                version_tag = value.toString();
+            }
+        }
+
+        if (source.isEmpty())
+        {
+            log(MessageType::Error, "Internal / Import Config", 0, "Invalid Config",
+                QString()
+                % getConfigMetadataAlias()
+                % "."
+                % getConfigSourceAlias()
+                % " is undefined");
+            
+            return false;
+        }
+
+        if (source != Helpers::projectName())
+        {
+            log(MessageType::Error, "Internal / Import Config", 0, "Invalid Config",
+                QString()
+                % getConfigMetadataAlias()
+                % "."
+                % getConfigSourceAlias()
+                % " is \""
+                % source
+                % "\" (expected \""
+                % Helpers::projectName()
+                % "\")");
+            
+            return false;
+        }
+
+        auto version_comparison = Version::compare(Helpers::projectVersion(), version_tag);
+
+        if (version_comparison == VersionComparison::Undefined)
+        {
+            log(MessageType::Warning, "Internal / Import Config", 0, "Undefined Config Version",
+                QString()
+                % getConfigMetadataAlias()
+                % "."
+                % getConfigVersionAlias()
+                % " is undefined");
+        }
+        else if (std::ranges::contains(std::vector{
+            VersionComparison::OlderMajor,
+            VersionComparison::OlderMinor,
+            VersionComparison::OlderPatch}
+            , version_comparison))
+        {
+            log(MessageType::Warning, "Internal / Import Config", 0, "Old Config Version",
+                QString()
+                % "The imported config file is from version "
+                % version_tag
+                % ", but the current version is "
+                % Helpers::projectVersion()
+                % ". "
+                % (version_comparison == VersionComparison::OlderMajor
+                    ? "There may be breaking changes between the versions, so proceed with care"
+                    : "This should be okay, but check the imported values to be sure"));
+        }
+
+        return true;
     }
 }

@@ -28,7 +28,7 @@ namespace divi
             return;
         }
 
-        emit log(MessageType::Info, "Internal / Check Version", 0, "Update Available",
+        log(MessageType::Info, "Internal / Check Version", 0, "Update Available",
             QString()
             % "Version "
             % version->getUpstreamVersion()

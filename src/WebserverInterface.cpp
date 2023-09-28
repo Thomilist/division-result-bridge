@@ -42,7 +42,7 @@ namespace divi
             }
         );
 
-        emit log("Web Server / Test", response);
+        log("Web Server / Test", response);
         return response;
     }
     
@@ -59,7 +59,7 @@ namespace divi
             }
         );
 
-        emit log("Web Server / Create New", response);
+        log("Web Server / Create New", response);
         return response;
     }
     
@@ -82,7 +82,7 @@ namespace divi
             }
         );
 
-        emit log("Web Server / Update Metadata", response);
+        log("Web Server / Update Metadata", response);
         return response;
     }
     
@@ -116,7 +116,7 @@ namespace divi
             }
         );
         
-        emit log("Web Server / Update Results", response);
+        log("Web Server / Update Results", response);
         return response;
     }
     

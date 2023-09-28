@@ -96,6 +96,7 @@ target_link_libraries(
     Qt::Widgets
     cpr::cpr
     Logger
+    LoggerProxy
 )
 
 add_library(Logger Logger.cpp)
@@ -104,6 +105,14 @@ target_link_libraries(
     Qt::Widgets
     cpr::cpr
     Helpers
+)
+
+add_library(LoggerProxy LoggerProxy.cpp)
+target_link_libraries(
+    LoggerProxy PRIVATE
+    Qt::Widgets
+    cpr::cpr
+    Logger
 )
 
 add_library(MainWindow MainWindow.cpp)

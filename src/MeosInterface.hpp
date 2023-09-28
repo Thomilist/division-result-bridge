@@ -26,8 +26,6 @@ namespace divi
 {
     class MeosInterface : public Loggable
     {
-        Q_OBJECT
-
         public:
             MeosInterface(
                 Settings* a_settings,

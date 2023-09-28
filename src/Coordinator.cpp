@@ -7,7 +7,8 @@ namespace divi
         Settings* a_settings,
         Logger* a_log,
         QObject* a_parent)
-        : Loggable(a_log, a_parent)
+        : QObject(a_parent)
+        , Loggable(a_log, a_parent)
         , settings(a_settings)
         , meos(&settings_cache, a_log)
         , webserver(a_log, &settings_cache)
@@ -40,7 +41,7 @@ namespace divi
 
         if (competition_jsondoc.isNull())
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Create New", 0, "JSON parse error",
                 "An error occured while parsing the JSON representation of the returned competition");
@@ -97,7 +98,7 @@ namespace divi
         {
             if (!division.isFullyDefined())
             {
-                emit log(
+                log(
                     MessageType::Error,
                     "Internal / Update Results", 0, "Misconfigured Division",
                     QString()
@@ -109,7 +110,7 @@ namespace divi
             
             if (!division.hasValidConfigPath())
             {
-                emit log(
+                log(
                     MessageType::Error,
                     "Internal / Update Results", 0, "Misconfigured Division",
                     QString()
@@ -126,7 +127,7 @@ namespace divi
 
             if (calculateDivisionResults(division))
             {
-                emit log(
+                log(
                     MessageType::Error,
                     Helpers::divisionsmatchberegningExeName() % " / Update Results", 0, "Results Calculation Error",
                     QString()
@@ -138,7 +139,7 @@ namespace divi
 
             if (loadResultFile(division))
             {
-                emit log(
+                log(
                     MessageType::Error, 
                     "Internal / Update Results", 0, "Results Loading Error",
                     QString()
@@ -148,7 +149,7 @@ namespace divi
                 return;
             }
 
-            emit log(
+            log(
                 MessageType::Success,
                 "Internal / Update Results", 0, "Results Calculation Success",
                 QString()
@@ -159,7 +160,7 @@ namespace divi
 
         if (results.empty())
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Update Results", 0, "Results Calculation Error",
                 "No results to upload"
@@ -223,7 +224,7 @@ namespace divi
         
         if (divi_process.exitCode())
         {
-            emit log(MessageType::Error, Helpers::divisionsmatchberegningExeName() % " / Update Results", divi_process.exitCode(), "Process Output",
+            log(MessageType::Error, Helpers::divisionsmatchberegningExeName() % " / Update Results", divi_process.exitCode(), "Process Output",
                 QString::fromUtf8(divi_process.readAllStandardError()));
         }
         
@@ -282,7 +283,7 @@ namespace divi
 
         if (!exists)
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Update Results", 0, "Invalid Path",
                 QString()

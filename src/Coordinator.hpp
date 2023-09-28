@@ -32,7 +32,7 @@
 
 namespace divi
 {
-    class Coordinator : public Loggable
+    class Coordinator : public QObject, public Loggable
     {
         Q_OBJECT
         

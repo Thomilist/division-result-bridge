@@ -11,8 +11,9 @@ namespace divi
         setWindowTitle("New Competition Created");
 
         metadata_display.setReadOnly(true);
-        metadata_display.setFixedHeight(46);
+        metadata_display.setFixedHeight(50);
         metadata_display.setMinimumWidth(300);
+        metadata_display.setAcceptRichText(true);
 
         success_text.setWordWrap(true);
         use_now_text.setWordWrap(true);
@@ -42,8 +43,24 @@ namespace divi
         new_competition = a_competition;
 
         QString metadata_text = QString()
-            % "Competition ID:  " % QString::number(new_competition.getID()) % "\n"
-            % "Password:        " % new_competition.getPassword();
+            %   "<table>"
+            %       "<tr>"
+            %           "<td style=\"padding-right: 10px;\">"
+            %               "Competition ID:"
+            %           "</td>"
+            %           "<td>"
+            %               QString::number(new_competition.getID())
+            %           "</td>"
+            %       "</tr>"
+            %       "<tr>"
+            %           "<td style=\"padding-right: 10px;\">"
+            %               "Password:"
+            %           "</td>"
+            %           "<td>"
+            %               new_competition.getPassword()
+            %           "</td>"
+            %       "</tr>"
+            %   "</table>";
         
         metadata_display.setText(metadata_text);
 

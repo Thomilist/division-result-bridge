@@ -33,7 +33,7 @@ namespace divi
         {
             if (!division.hasValidConfigPath())
             {
-                emit log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+                log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
                     QString()
                     % "The path \""
                     % division.getDivisionConfigPath()
@@ -55,11 +55,19 @@ namespace divi
 
         if (!working_dir.exists())
         {
-            emit log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
                 QString()
                 % "The path \""
                 % settings->getWorkingDir()
                 % "\" was not found (used as working directory)");
+            
+            valid = false;
+        }
+        else if (settings->getWorkingDir().isEmpty())
+        {
+            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+                QString()
+                % "The working directory path is empty");
             
             valid = false;
         }
@@ -74,13 +82,13 @@ namespace divi
 
         if (!divi_exe_path.exists())
         {
-            emit log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
                 QString()
-                % "The path \""
-                % settings->getDiviExePath()
-                % "\" was not found (path to \""
+                % "\""
                 % Helpers::divisionsmatchberegningExeName()
-                % "\")");
+                % "\" was not found on the path \""
+                % settings->getDiviExePath()
+                % "\"");
             
             valid = false;
         }

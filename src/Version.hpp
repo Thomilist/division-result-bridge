@@ -1,9 +1,8 @@
 #ifndef __VERSION_H__
 #define __VERSION_H__
 
-#include <iostream>
-
 #include <optional>
+#include <ranges>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -19,6 +18,7 @@
 
 #include "Helpers.hpp"
 #include "UpdateStatus.hpp"
+#include "VersionComparison.hpp"
 
 namespace divi
 {
@@ -27,6 +27,9 @@ namespace divi
         public:
             Version(QString a_version_string);
             ~Version();
+
+            static VersionComparison compare(const QString& a_baseline, const QString& a_other);
+            static VersionComparison compare(const std::string& a_baseline, const std::string& a_other);
 
             QString getCurrentVersion();
             void setCurrentVersion(QString a_version);
@@ -39,7 +42,7 @@ namespace divi
             void save();
             std::string fetchJSONFromGithub();
             std::optional<std::string> readVersionFromJSON(std::string a_json_string);
-            std::vector<int> toDigits(std::string a_version);
+            static std::vector<int> toDigits(std::string a_version);
             bool isNewerThanCurrent(std::string a_version);
 
             QString current_version;

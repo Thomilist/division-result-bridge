@@ -13,7 +13,9 @@ namespace divi
     class DivisionEditor;
     class DivisionTableModel;
     class Helpers;
+    class Loggable;
     class Logger;
+    class LoggerProxy;
     class MainWindow;
     class MeosInterface;
     class PersistentSettings;
@@ -29,6 +31,7 @@ namespace divi
     enum class MessageType;
     enum class PrintMode;
     enum class UpdateStatus;
+    enum class VersionComparison;
     enum class Visibility;
 }
 

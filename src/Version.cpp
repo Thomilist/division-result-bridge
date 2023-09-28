@@ -15,6 +15,50 @@ namespace divi
         save();
     }
     
+    VersionComparison Version::compare(const QString& a_baseline, const QString& a_other)
+    {
+        return compare(a_baseline.toStdString(), a_other.toStdString());
+    }
+    
+    VersionComparison Version::compare(const std::string& a_baseline, const std::string& a_other)
+    {
+        auto baseline_digits = toDigits(a_baseline);
+        auto other_digits = toDigits(a_other);
+
+        if (baseline_digits.size() != 3 || baseline_digits.size() != other_digits.size())
+        {
+            return VersionComparison::Undefined;
+        }
+
+        const std::vector<VersionComparison> newer_version{
+            VersionComparison::NewerMajor,
+            VersionComparison::NewerMinor,
+            VersionComparison::NewerPatch
+        };
+
+        const std::vector<VersionComparison> older_version{
+            VersionComparison::OlderMajor,
+            VersionComparison::OlderMinor,
+            VersionComparison::OlderPatch
+        };
+
+        auto items = std::views::zip(baseline_digits, other_digits, newer_version, older_version);
+
+        for (const auto& [baseline_digit, other_digit, newer, older] : items)
+        {
+            if (other_digit > baseline_digit)
+            {
+                return newer;
+            }
+            else if (other_digit < baseline_digit)
+            {
+                return older;
+            }
+        }
+
+        return VersionComparison::Equal;
+    }
+    
     QString Version::getCurrentVersion()
     {
         return current_version;

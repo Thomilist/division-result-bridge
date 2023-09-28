@@ -20,8 +20,6 @@ namespace divi
 {
     class ConfigValidator : public Loggable
     {
-        Q_OBJECT
-
         public:
             ConfigValidator(
                 Logger* a_log,

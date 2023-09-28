@@ -24,8 +24,6 @@ namespace divi
 {
     class WebserverInterface : public Loggable
     {
-        Q_OBJECT
-        
         public:
             WebserverInterface(
                 Logger* a_log,

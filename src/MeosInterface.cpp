@@ -65,7 +65,7 @@ namespace divi
             }
         );
 
-        emit log("MeOS / Check Results", response);
+        log("MeOS / Check Results", response);
 
         if (response.status_code != 200)
         {
@@ -75,7 +75,7 @@ namespace divi
 
         if (response.text.empty())
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Check Results", 0, "Empty Response",
                 "MeOS successfully responded to the request, but no data was attached");
@@ -88,7 +88,7 @@ namespace divi
 
         if (!parse_res)
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Check Results", 0, "XML Parsing Error",
                 "An error occured while parsing the difference XML");
@@ -101,7 +101,7 @@ namespace divi
 
         if (next_difference != difference)
         {
-            emit log(
+            log(
                 MessageType::Success,
                 "Internal / Check Results", 0, "Changes Found",
                 QString()
@@ -114,7 +114,7 @@ namespace divi
             return 0;
         }
 
-        emit log(
+        log(
             MessageType::Success,
             "Internal / Check Results", 0, "Results Unchanged",
             "No changes detected since last fetch. Update skipped");
@@ -138,7 +138,7 @@ namespace divi
             }
         );
 
-        emit log("MeOS / Fetch Results", response);
+        log("MeOS / Fetch Results", response);
 
         if (response.status_code != 200)
         {
@@ -147,7 +147,7 @@ namespace divi
 
         if (response.text.empty())
         {
-            emit log(
+            log(
                 MessageType::Error,
                 "Internal / Fetch Results", 0, "Empty Response",
                 "MeOS successfully responded to the request, but no data was attached");
@@ -168,14 +168,14 @@ namespace divi
             QTextStream results_xml_output{&results_xml_file};
             results_xml_output << QString::fromStdString(results_xml);
 
-            emit log(
+            log(
                 MessageType::Success,
                 "Internal / Write Results", 0, "Write Complete",
                 "IOF XML results written successfully");
             return 0;
         }
 
-        emit log(
+        log(
             MessageType::Error,
             "Internal / Write Results", 0, "Write Error",
             "Unable to write IOF XML results");

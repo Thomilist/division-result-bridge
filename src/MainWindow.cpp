@@ -38,6 +38,8 @@ namespace divi
         setMinimumWidth(1100);
         //setMinimumHeight(810);
         setMouseTracking(true);
+
+        settings.setLogger(log);
         
         import_config_dialog.setFileMode(QFileDialog::ExistingFile);
         import_config_dialog.setNameFilter("Config (*.json)");
