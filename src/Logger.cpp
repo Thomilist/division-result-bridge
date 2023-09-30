@@ -186,6 +186,10 @@ namespace divi
         {
             return "[XML body excluded from log]";
         }
+        else if (a_body.indexOf("<") == 0)
+        {
+            return "[Body excluded from log]";
+        }
 
         return a_body;
     }

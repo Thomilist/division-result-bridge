@@ -13,6 +13,8 @@
 
 #include "Visibility.hpp"
 
+#include "../build/Secrets.hpp"
+
 namespace divi
 {
     class Helpers final
@@ -28,6 +30,9 @@ namespace divi
             // Author
             static const QString authorName();
             static const QString authorUsername();
+            static const QString authorEmail();
+            static const QString authorClub();
+            static const QString authorClubDomain();
         
             // Date and time formats
             static const QString dateFormat();
@@ -65,6 +70,8 @@ namespace divi
             static const QString apiCreateEndpoint();
             static const QString apiUpdateMetaEndpoint();
             static const QString apiUpdateResultsEndpoint();
+            static const QString apiDeleteResultsEndpoint();
+            static const QString apiAnalyticsEndpoint(int a_competition_id);
 
             // HTTP
             static const QString userAgent();

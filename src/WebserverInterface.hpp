@@ -39,6 +39,8 @@ namespace divi
             cpr::Response create(const QString& a_password);
             cpr::Response updateMetadata();
             cpr::Response updateResults(std::vector<ResultPackage>& a_results);
+            cpr::Response deleteResults();
+            cpr::Response fetchAnalytics();
         
         private:
             const QString getMetadataAsBase64String() const;

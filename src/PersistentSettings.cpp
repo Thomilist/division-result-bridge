@@ -63,7 +63,7 @@ namespace divi
         competition.setName(value(Competition::getNameAlias(), "").toString());
         competition.setOrganiser(value(Competition::getOrganiserAlias(), "").toString());
         competition.setDate(value(Competition::getDateAlias(), "").toString());
-        competition.setVisibility(value(Competition::getVisibilityAlias(), Helpers::visibility(Visibility::HIDDEN)).toString());
+        competition.setVisibility(value(Competition::getVisibilityAlias(), Helpers::visibility(Visibility::PRIVATE)).toString());
         competition.setLiveresultsID(value(Competition::getLiveresultsIDAlias(), 0).toInt());
 
         endGroup();
@@ -77,7 +77,7 @@ namespace divi
         divi_exe_path = value(getDiviExePathAlias(), "").toString();
         meos_address = value(getMeosAddressAlias(), Helpers::defaultMeosInfoServerAddress()).toString();
         webserver_address = value(getWebserverAddressAlias(), Helpers::defaultWebServerAddress()).toString();
-        update_interval = value(getUpdateIntervalAlias(), 30).toInt();
+        update_interval = value(getUpdateIntervalAlias(), 60).toInt();
         save_pretty_log = value(getPrettyLoggingAlias(), true).toBool();
         save_raw_log = value(getRawLoggingAlias(), false).toBool();
 

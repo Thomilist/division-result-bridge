@@ -1,11 +1,15 @@
 #ifndef __CONFIGVALIDATOR_H__
 #define __CONFIGVALIDATOR_H__
 
+#include <unordered_map>
+#include <set>
+
 #include <QDir>
 #include <QFileInfo>
 #include <QObject>
 #include <QString>
 #include <QStringBuilder>
+#include <QStringList>
 
 #include "ForwardDeclarations.hpp"
 

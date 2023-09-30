@@ -54,6 +54,7 @@
 #include "DivisionTableModel.hpp"
 #include "Helpers.hpp"
 #include "Logger.hpp"
+#include "Loggable.hpp"
 #include "MeosInterface.hpp"
 #include "Coordinator.hpp"
 #include "PersistentSettings.hpp"
@@ -62,10 +63,11 @@
 #include "VersionNotifier.hpp"
 
 #include "EditorMode.hpp"
+#include "MessageType.hpp"
 
 namespace divi
 {
-    class MainWindow : public QMainWindow
+    class MainWindow : public QMainWindow, public Loggable
     {
         Q_OBJECT
         
@@ -74,11 +76,13 @@ namespace divi
             ~MainWindow();
         
         signals:
-            void runOnce();
+            void updateResults(bool a_fresh_start);
+            void deleteResults();
 
         private slots:
             void start();
             void stop();
+            void updateResultsIfAvailable(bool a_fresh_start = false);
             void setActivelyProcessing(bool a_state);
             void importConfig();
             void exportConfig();
@@ -89,6 +93,8 @@ namespace divi
             void deleteSelectedDivision();
             void updateCountdown();
             void loadNewCompetition(const Competition& a_competition);
+            void applyMetadataFromMeos(const Competition& a_competition);
+            void deleteResultsPrompt();
         
         private:
             void closeEvent(QCloseEvent* a_event) override;
@@ -103,11 +109,12 @@ namespace divi
             void populate();
             void initaliseMenus();
             void initialiseConnections();
-            void disableAllInputs(bool a_disable);
+            void disableRestrictedItems(bool a_disable);
             const QString getCompetitionUrl();
             void clearCompetitionAndDivision();
             void loadCompetitionMetadata(const Competition& a_competition);
             void updateLiveresultsText();
+            void setToolTips();
 
             bool running = false;
             bool actively_processing = false;
@@ -115,11 +122,13 @@ namespace divi
             Version* version;
             PersistentSettings settings;
             QThread worker;
-            Logger* log;
+            Logger* logger;
             VersionNotifier version_notifier;
             Coordinator coordinator;
 
             QMenu file_menu;
+            QAction create_new_competition_action;
+            QAction import_metadata_from_meos_action;
             QAction import_config_action;
             QAction export_config_action;
             ConfigValidator config_validator;
@@ -144,7 +153,8 @@ namespace divi
             QFileDialog import_config_dialog;
             QFileDialog export_config_dialog;
 
-            std::vector<QWidget*> all_inputs;
+            std::vector<QWidget*> restricted_inputs;
+            std::vector<QAction*> restricted_actions;
 
             // Competition
             QGroupBox competition_group{"Competition"};
@@ -186,20 +196,18 @@ namespace divi
             QLabel working_dir_label{"Working directory:"};
             QLineEdit working_dir_input;
             QPushButton working_dir_button{"..."};
-            QLabel working_dir_text;
             QFileDialog working_dir_dialog;
 
             QGridLayout divi_exe_path_layout;
             QLabel divi_exe_path_label;
             QLineEdit divi_exe_path_input;
             QPushButton divi_exe_path_button{"..."};
-            QLabel divi_exe_path_text;
             QFileDialog divi_exe_path_dialog;
 
             QGridLayout meos_address_layout;
             QLabel meos_address_label{"MeOS information server address:"};
             QLineEdit meos_address_input;
-            QLabel meos_address_text;
+            QPushButton meos_address_test_button{"Test"};
 
             // Divisions
             QGroupBox divisions_group{"Divisions"};
@@ -226,25 +234,26 @@ namespace divi
             QGridLayout webserver_address_layout;
             QLabel webserver_address_label{"Web server address:"};
             QLineEdit webserver_address_input;
+            QPushButton webserver_ping_button{"Test"};
 
             QGridLayout webserver_manage_layout;
             QLabel webserver_manage_label{"Manage competition on server:"};
-            QPushButton webserver_create_button{"Create New"};
+            QPushButton webserver_delete_results_button{"Delete Results"};
             CreateCompetitionDialog create_competition_dialog;
             CompetitionCreatedDialog competition_created_dialog;
             QPushButton webserver_update_meta_button{"Update Metadata"};
 
             QGridLayout webserver_inspect_layout;
             QLabel webserver_inspect_label{"Inspect competition on server:"};
-            QPushButton webserver_ping_button{"Test"};
             QPushButton webserver_view_button{"View In Browser"};
+            QPushButton webserver_analytics_button{"Fetch Analytics"};
 
             QGridLayout liveresults_layout;
             QLabel liveresults_label;
             QSpinBox liveresults_input;
 
             // Run
-            QGroupBox run_group{"Run"};
+            QGroupBox run_group{"Update Results"};
             QGridLayout run_layout;
             QWidget run_spacer;
             QTimer run_timer;

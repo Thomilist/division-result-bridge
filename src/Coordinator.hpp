@@ -47,12 +47,16 @@ namespace divi
             void pingWebserver();
             void createCompetition(const QString& a_password);
             void updateMetadata();
-            void updateResults();
-            void startFresh();
+            void updateResults(bool a_fresh_start);
+            void deleteResults();
+            void fetchAnalytics();
+            void pingMeos();
+            void fetchMetadataFromMeos();
         
         signals:
             void competitionCreated(const Competition& a_competition);
             void activelyProcessing(bool a_state);
+            void metadataFetched(const Competition& a_competition);
 
         private:
             void runUpdatePipeline();

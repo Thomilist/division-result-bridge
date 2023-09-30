@@ -62,9 +62,12 @@ namespace divi
         return;
     }
     
-    void Coordinator::updateResults()
+    void Coordinator::updateResults(bool a_fresh_start)
     {
-        emit activelyProcessing(true);
+        if (a_fresh_start)
+        {
+            meos.resetDifference();
+        }
         
         updateCache();
         prepareWorkingDir();
@@ -76,9 +79,37 @@ namespace divi
         return;
     }
     
-    void Coordinator::startFresh()
+    void Coordinator::deleteResults()
     {
-        meos.resetDifference();
+        updateCache();
+        webserver.deleteResults();
+        return;
+    }
+    
+    void Coordinator::fetchAnalytics()
+    {
+        updateCache();
+        webserver.fetchAnalytics();
+        return;
+    }
+    
+    void Coordinator::pingMeos()
+    {
+        updateCache();
+        meos.ping();
+        return;
+    }
+    
+    void Coordinator::fetchMetadataFromMeos()
+    {
+        updateCache();
+        auto competition = meos.fetchMetadata();
+
+        if (competition.has_value())
+        {
+            emit metadataFetched(competition.value());
+        }
+
         return;
     }
     

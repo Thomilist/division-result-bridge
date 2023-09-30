@@ -57,7 +57,9 @@ namespace divi
 
             QLabel author_key;
             QLabel author_name_value;
+            QLabel author_email_value;
             QLabel author_username_value;
+            QLabel author_club_value;
     };
 }
 

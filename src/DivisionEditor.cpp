@@ -13,6 +13,7 @@ namespace divi
         setWindowTitle("Division Editor");
         createDialog();
         createOverwriteWarningDialog();
+        setToolTips();
         initialiseConnections();
     }
     
@@ -234,6 +235,20 @@ namespace divi
         connect(&id_input, &QSpinBox::valueChanged, this, [this](int a_value){this->getDivision().setID(a_value);});
         connect(&name_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setName(a_text);});
         connect(&divi_path_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setDivisionConfigPath(a_text);});
+
+        return;
+    }
+    
+    void DivisionEditor::setToolTips()
+    {
+        id_input.setToolTip(
+            "Used for sorting, but not shown to end users. Any number will do. Gaps are allowed, but duplicates are not");
+        name_input.setToolTip(
+            "The name of the division, which is used as its label in the division selector on the website");
+        divi_path_input.setToolTip(
+            "Specify the location of the division configuration file produced by Divisionsmatchberegning");
+        divi_path_button.setToolTip(
+            "Find in file browser...");
 
         return;
     }

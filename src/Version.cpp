@@ -171,7 +171,11 @@ namespace divi
 
         for (size_t index = 0; index < version_digits.size(); ++index)
         {
-            if (version_digits[index] > current_version_digits[index])
+            if (version_digits[index] < current_version_digits[index])
+            {
+                return false;
+            }
+            else if (version_digits[index] > current_version_digits[index])
             {
                 return true;
             }

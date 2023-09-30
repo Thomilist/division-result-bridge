@@ -27,6 +27,21 @@ namespace divi
     {
         return gitHubUsername();
     }
+    
+    const QString Helpers::authorEmail()
+    {
+        return MY_EMAIL;
+    }
+    
+    const QString Helpers::authorClub()
+    {
+        return "Horsens OK";
+    }
+    
+    const QString Helpers::authorClubDomain()
+    {
+        return "https://horsensok.dk/";
+    }
 
     const QString Helpers::dateFormat()
     {
@@ -171,6 +186,16 @@ namespace divi
     const QString Helpers::apiUpdateResultsEndpoint()
     {
         return webserverPathPrefix() % "api/update/results";
+    }
+    
+    const QString Helpers::apiDeleteResultsEndpoint()
+    {
+        return webserverPathPrefix() % "api/delete/results";
+    }
+    
+    const QString Helpers::apiAnalyticsEndpoint(int a_competition_id)
+    {
+        return webserverPathPrefix() % "api/fetch/analytics/" % QString::number(a_competition_id);
     }
     
     const QString Helpers::userAgent()

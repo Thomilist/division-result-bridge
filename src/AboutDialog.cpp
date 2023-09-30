@@ -36,7 +36,9 @@ namespace divi
 
         grid_layout.addWidget(&author_key, layout_row, key_column, Qt::AlignLeft);
         grid_layout.addWidget(&author_name_value, layout_row++, value_column, Qt::AlignRight);
+        grid_layout.addWidget(&author_email_value, layout_row++, value_column, Qt::AlignRight);
         grid_layout.addWidget(&author_username_value, layout_row++, value_column, Qt::AlignRight);
+        grid_layout.addWidget(&author_club_value, layout_row++, value_column, Qt::AlignRight);
 
         grid_layout.addWidget(&buttons, layout_row, 0, 1, 5, Qt::AlignCenter);
         grid_layout.addWidget(&icon, 0, icon_column, layout_row, 1, Qt::AlignCenter);
@@ -119,6 +121,19 @@ namespace divi
 
         author_name_value.setText(Helpers::authorName());
 
+        author_email_value.setTextFormat(Qt::RichText);
+        author_email_value.setTextInteractionFlags(Qt::TextBrowserInteraction);
+        author_email_value.setOpenExternalLinks(true);
+        author_email_value.setText
+        (
+            QString()
+            % "<a style=\"color:#1d99f3\" href=\"mailto:"
+            % Helpers::authorEmail()
+            % "\">"
+            % Helpers::authorEmail()
+            % "</a>"
+        );
+
         author_username_value.setTextFormat(Qt::RichText);
         author_username_value.setTextInteractionFlags(Qt::TextBrowserInteraction);
         author_username_value.setOpenExternalLinks(true);
@@ -130,6 +145,19 @@ namespace divi
             % "\">"
             % "@"
             % Helpers::gitHubUsername()
+            % "</a>"
+        );
+
+        author_club_value.setTextFormat(Qt::RichText);
+        author_club_value.setTextInteractionFlags(Qt::TextBrowserInteraction);
+        author_club_value.setOpenExternalLinks(true);
+        author_club_value.setText
+        (
+            QString()
+            % "<a style=\"color:#1d99f3\" href=\""
+            % Helpers::authorClubDomain()
+            % "\">"
+            % Helpers::authorClub()
             % "</a>"
         );
 

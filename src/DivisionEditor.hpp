@@ -52,6 +52,7 @@ namespace divi
             void createDialog();
             void createOverwriteWarningDialog();
             void initialiseConnections();
+            void setToolTips();
 
             QGridLayout layout;
             QGridLayout button_layout;

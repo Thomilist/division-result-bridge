@@ -120,6 +120,40 @@ namespace divi
         return response;
     }
     
+    cpr::Response WebserverInterface::deleteResults()
+    {
+        auto response = cpr::Delete
+        (
+            cpr::Url{QString(Helpers::addressEndingWithSlash(settings->getWebserverAddress()) % Helpers::apiDeleteResultsEndpoint()).toStdString()},
+            cpr::Header
+            {
+                Helpers::userAgentHeaderField(),
+                Helpers::apiCompetitionIdHeaderField(settings->getCompetition().getID()),
+                Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
+            }
+        );
+        
+        log("Web Server / Delete Results", response);
+        return response;
+    }
+    
+    cpr::Response WebserverInterface::fetchAnalytics()
+    {
+        auto response = cpr::Get
+        (
+            cpr::Url{QString(
+                Helpers::addressEndingWithSlash(settings->getWebserverAddress())
+                % Helpers::apiAnalyticsEndpoint(settings->getCompetition().getID())).toStdString()},
+            cpr::Header
+            {
+                Helpers::userAgentHeaderField()
+            }
+        );
+
+        log("Web Server / Fetch Analytics", response);
+        return response;
+    }
+    
     const QString WebserverInterface::getMetadataAsBase64String() const
     {
         QJsonDocument metadata_json_doc{settings->getMetadataAsJson()};

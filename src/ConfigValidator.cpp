@@ -28,12 +28,13 @@ namespace divi
     bool ConfigValidator::divisionPathsValid()
     {
         bool valid = true;
+        std::unordered_map<QString, std::set<int>> config_uses;
 
         for (const auto& division : settings->getDivisions())
         {
             if (!division.hasValidConfigPath())
             {
-                log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+                log(MessageType::Warning, "Internal / Load Config", 0, "Invalid Path",
                     QString()
                     % "The path \""
                     % division.getDivisionConfigPath()
@@ -42,6 +43,42 @@ namespace divi
                     % "])");
                 
                 valid = false;
+            }
+
+            // Track which IDs a path is used with
+            if (const QString path = division.getDivisionConfigPath(); !path.isEmpty())
+            {
+                if (config_uses.contains(path))
+                {
+                    config_uses.at(path).insert(division.getID());
+                }
+                else
+                {
+                    config_uses.insert({path, {division.getID()}});
+                }
+            }
+        }
+
+        // Warn when a path is used for multiple IDs
+        for (const auto& config_use : config_uses)
+        {
+            if (config_use.second.size() > 1)
+            {
+                QStringList division_ids;
+
+                for (const auto& id : config_use.second)
+                {
+                    division_ids.push_back("[" % QString::number(id) % "]");
+                }
+
+                log(MessageType::Warning, "Internal / Load Config", 0, "Duplicate Division Config Use",
+                    QString()
+                    % "The division configuration at path \""
+                    % config_use.first
+                    % "\" is used in "
+                    % QString::number(config_use.second.size())
+                    % " divisions, these being IDs "
+                    % division_ids.join(", "));
             }
         }
 
@@ -55,7 +92,7 @@ namespace divi
 
         if (!working_dir.exists())
         {
-            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+            log(MessageType::Warning, "Internal / Load Config", 0, "Invalid Path",
                 QString()
                 % "The path \""
                 % settings->getWorkingDir()
@@ -65,7 +102,7 @@ namespace divi
         }
         else if (settings->getWorkingDir().isEmpty())
         {
-            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+            log(MessageType::Warning, "Internal / Load Config", 0, "Invalid Path",
                 QString()
                 % "The working directory path is empty");
             
@@ -82,7 +119,7 @@ namespace divi
 
         if (!divi_exe_path.exists())
         {
-            log(MessageType::Warning, "Internal / Import Config", 0, "Invalid Path",
+            log(MessageType::Warning, "Internal / Load Config", 0, "Invalid Path",
                 QString()
                 % "\""
                 % Helpers::divisionsmatchberegningExeName()

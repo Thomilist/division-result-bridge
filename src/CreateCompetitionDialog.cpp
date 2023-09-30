@@ -36,6 +36,8 @@ namespace divi
         password_regex.setPattern(Helpers::passwordRegex());
         password_validator.setRegularExpression(password_regex);
         password_input.setValidator(&password_validator);
+        password_input.setToolTip(
+            "Not secure. Seriously, don't reuse a password from another service. Act as if the whole world can see it, because, well, it can");
 
         password_text.setTextFormat(Qt::RichText);
         password_text.setWordWrap(true);

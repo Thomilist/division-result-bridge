@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27.4)
-project(division-result-bridge VERSION 0.2.0)
+project(division-result-bridge VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -37,6 +37,14 @@ find_package(nlohmann_json REQUIRED)
 set(CPR_USE_SYSTEM_CURL ON)
 find_package(cpr REQUIRED)
 find_package(pugixml REQUIRED)
+
+if(DEFINED ENV{MY_EMAIL})
+    set(MY_EMAIL $ENV{MY_EMAIL})
+else()
+    set(MY_EMAIL email@example.com)
+endif()
+
+configure_file(Secrets.hpp.in Secrets.hpp)
 
 add_subdirectory(src)
 target_link_libraries(

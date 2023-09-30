@@ -128,6 +128,7 @@ target_link_libraries(
     DivisionTableModel
     Helpers
     Logger
+    Loggable
     MeosInterface
     Coordinator
     PersistentSettings
@@ -142,6 +143,7 @@ target_link_libraries(
     Qt::Widgets
     cpr::cpr
     pugixml::pugixml
+    Competition
     Helpers
     Loggable
     Logger
