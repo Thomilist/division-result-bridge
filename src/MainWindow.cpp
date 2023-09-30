@@ -219,6 +219,7 @@ namespace divi
             && !organiser_input.text().isEmpty()
             && !competition_date_input.text().isEmpty()
             && !competition_name_input.text().isEmpty()
+            && !competition_timezone_input.currentText().isEmpty()
             && !competition_visibility_input.currentText().isEmpty();
         
         bool config_complete
@@ -418,6 +419,7 @@ namespace divi
         restricted_inputs.push_back(&competition_name_input);
         restricted_inputs.push_back(&organiser_input);
         restricted_inputs.push_back(&competition_date_input);
+        restricted_inputs.push_back(&competition_timezone_input);
         restricted_inputs.push_back(&competition_visibility_input);
         
         competition_id_input.setMinimum(0);
@@ -436,7 +438,28 @@ namespace divi
 
         competition_date_input.setDisplayFormat(Helpers::dateFormat());
         competition_date_input.setCalendarPopup(true);
-        competition_date_input.setMaximumWidth(competition_date_label.sizeHint().width());
+
+        QStringList timezone_names;
+
+        for (const auto& iana_id : QTimeZone::availableTimeZoneIds())
+        {
+            timezone_names.append(iana_id);
+            /*
+            auto timezone = QTimeZone(iana_id);
+            
+            if (const QLocale::Territory territory = timezone.territory(); territory == QLocale::AnyTerritory)
+            {
+                timezone_names.append(timezone.displayName(QTimeZone::GenericTime));
+            }
+            else
+            {
+                timezone_names.append(QLocale::territoryToString(territory));
+            }
+            */
+        }
+
+        timezone_names.sort();
+        competition_timezone_input.addItems(timezone_names);
 
         competition_visibility_input.addItems
         ({
@@ -474,11 +497,18 @@ namespace divi
 
         competition_date_layout.addWidget(&competition_date_label, 0, 0);
         competition_date_layout.addWidget(&competition_date_input, 1, 0);
-        //competition_date_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
         competition_date_layout.addWidget(&competition_date_spacer, 1, 1);
-        competition_date_layout.addWidget(&competition_visibility_label, 0, 2);
-        competition_date_layout.addWidget(&competition_visibility_input, 1, 2);
+        competition_date_layout.addWidget(&competition_timezone_label, 0, 2);
+        competition_date_layout.addWidget(&competition_timezone_input, 1, 2);
         competition_layout.addLayout(&competition_date_layout, row++, 0);
+        
+        competition_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
+
+        competition_visibility_layout.addWidget(&competition_visibility_label, 0, 0);
+        competition_visibility_layout.addWidget(&competition_visibility_input, 1, 0);
+        competition_visibility_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+        competition_visibility_layout.addWidget(&competition_visibility_spacer, 1, 1);
+        competition_layout.addLayout(&competition_visibility_layout, row++, 0);
 
         competition_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         //competition_layout.addWidget(&competition_spacer, row++, 0);
@@ -720,15 +750,25 @@ namespace divi
         password_input.setText(settings.getCompetition().getPassword());
         competition_name_input.setText(settings.getCompetition().getName());
         organiser_input.setText(settings.getCompetition().getOrganiser());
+        competition_timezone_input.setCurrentText(settings.getCompetition().getTimeZone());
         competition_visibility_input.setCurrentText(settings.getCompetition().getVisibility());
 
-        if (settings.getCompetition().getDate().isEmpty())
+        if (const QString date = settings.getCompetition().getDate(); date.isEmpty())
         {
             competition_date_input.setDate(QDate::currentDate());
         }
         else
         {
-            competition_date_input.setDate(QDate::fromString(settings.getCompetition().getDate(), Qt::ISODate));
+            competition_date_input.setDate(QDate::fromString(date, Qt::ISODate));
+        }
+
+        if (const QString time_zone = settings.getCompetition().getTimeZone(); time_zone.isEmpty())
+        {
+            competition_timezone_input.setCurrentText(QTimeZone::systemTimeZoneId());
+        }
+        else
+        {
+            competition_timezone_input.setCurrentText(time_zone);
         }
 
         // Configuration
@@ -856,6 +896,11 @@ namespace divi
             this->settings.getCompetition().setDate(a_date);
             this->updateInterfaceState();
         });
+        connect(&competition_timezone_input, &QComboBox::currentTextChanged, this, [this](const QString& a_time_zone)
+        {
+            this->settings.getCompetition().setTimeZone(a_time_zone);
+            this->updateInterfaceState();
+        });
         connect(&competition_visibility_input, &QComboBox::currentTextChanged, this, [this](const QString& a_visibility)
         {
             this->settings.getCompetition().setVisibility(a_visibility);
@@ -948,6 +993,7 @@ namespace divi
         settings.getCompetition().setOrganiser("");
         settings.getCompetition().setVisibility(Helpers::visibility(Visibility::PRIVATE));
         settings.getCompetition().setDate(QDate::currentDate());
+        settings.getCompetition().setTimeZone(QTimeZone::systemTimeZoneId());
         settings.getCompetition().setLiveresultsID(0);
 
         division_table_model.clear();
@@ -1030,6 +1076,8 @@ namespace divi
             "The name of the organiser of the competition");
         competition_date_input.setToolTip(
             "The date when the competition takes place");
+        competition_timezone_input.setToolTip(
+            "The time zone at the location of the competition");
         competition_visibility_input.setToolTip(
             "The competition's visibility level on the website");
 

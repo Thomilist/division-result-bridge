@@ -3,6 +3,7 @@
 
 #include <array>
 #include <limits>
+#include <set>
 
 #include <QAbstractItemView>
 #include <QAction>
@@ -23,6 +24,7 @@
 #include <QKeySequence>
 #include <QLabel>
 #include <QLineEdit>
+#include <QLocale>
 #include <QMainWindow>
 #include <QMenu>
 #include <QMenuBar>
@@ -40,6 +42,7 @@
 #include <QTextEdit>
 #include <QThread>
 #include <QTimer>
+#include <QTimeZone>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -184,8 +187,13 @@ namespace divi
             QLabel competition_date_label{"Date (YYYY-MM-DD):"};
             QDateTimeEdit competition_date_input;
             QWidget competition_date_spacer;
+            QLabel competition_timezone_label{"Time zone:"};
+            QComboBox competition_timezone_input;
+
+            QGridLayout competition_visibility_layout;
             QLabel competition_visibility_label{"Visibility:"};
             QComboBox competition_visibility_input;
+            QWidget competition_visibility_spacer;
 
             // Configuration
             QGroupBox config_group{"Local Configuration"};

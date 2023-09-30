@@ -1,9 +1,12 @@
 #ifndef __COMPETITION_H__
 #define __COMPETITION_H__
 
+#include <QDate>
+#include <QDateTime>
 #include <QJsonObject>
 #include <QString>
-#include <QDate>
+#include <QTime>
+#include <QTimeZone>
 
 #include "ForwardDeclarations.hpp"
 
@@ -43,6 +46,14 @@ namespace divi
             const QString& getDate() const;
             static const QString getDateAlias();
 
+            void setTimeZone(const QString& a_time_zone);
+            const QString& getTimeZone() const;
+            static const QString getTimeZoneAlias();
+
+            void updateDateTime();
+            const QString& getDateTime() const;
+            static const QString getDateTimeAlias();
+
             void setVisibility(const QString& a_visibility);
             void setVisibility(Visibility a_visibility);
             const QString& getVisibility() const;
@@ -56,7 +67,7 @@ namespace divi
             // Competition ID
             int id = 0;
 
-            // Password (in plain text; minimal security; just to avoid accidental access)
+            // Password (in plain text; no security; just to avoid accidental access)
             QString password = "";
 
             // Name
@@ -67,6 +78,12 @@ namespace divi
 
             // Date
             QString date;
+
+            // Time zone
+            QString time_zone;
+
+            // Full ISO8601 date-time string
+            QString date_time_string;
 
             // Visibility
             QString visibility;

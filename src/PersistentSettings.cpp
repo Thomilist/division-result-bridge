@@ -62,7 +62,8 @@ namespace divi
         competition.setPassword(value(Competition::getPasswordAlias(), "").toString());
         competition.setName(value(Competition::getNameAlias(), "").toString());
         competition.setOrganiser(value(Competition::getOrganiserAlias(), "").toString());
-        competition.setDate(value(Competition::getDateAlias(), "").toString());
+        competition.setDate(value(Competition::getDateAlias(), QDate::currentDate().toString(Helpers::dateFormat())).toString());
+        competition.setTimeZone(value(Competition::getTimeZoneAlias(), QTimeZone::systemTimeZoneId()).toString());
         competition.setVisibility(value(Competition::getVisibilityAlias(), Helpers::visibility(Visibility::PRIVATE)).toString());
         competition.setLiveresultsID(value(Competition::getLiveresultsIDAlias(), 0).toInt());
 
@@ -113,6 +114,7 @@ namespace divi
         setValue(Competition::getNameAlias(), competition.getName());
         setValue(Competition::getOrganiserAlias(), competition.getOrganiser());
         setValue(Competition::getDateAlias(), competition.getDate());
+        setValue(Competition::getTimeZoneAlias(), competition.getTimeZone());
         setValue(Competition::getVisibilityAlias(), competition.getVisibility());
         setValue(Competition::getLiveresultsIDAlias(), competition.getLiveresultsID());
 
@@ -174,41 +176,7 @@ namespace divi
             if (const QJsonValue value = json[getCompetitionAlias()]; value.isObject())
             {
                 QJsonObject competition_json = value.toObject();
-
-                if (const QJsonValue value = competition_json[Competition::getIDAlias()]; value.isDouble())
-                {
-                    competition.setID(value.toInt());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getPasswordAlias()]; value.isString())
-                {
-                    competition.setPassword(value.toString());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getNameAlias()]; value.isString())
-                {
-                    competition.setName(value.toString());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getOrganiserAlias()]; value.isString())
-                {
-                    competition.setOrganiser(value.toString());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getDateAlias()]; value.isString())
-                {
-                    competition.setDate(value.toString());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getVisibilityAlias()]; value.isString())
-                {
-                    competition.setVisibility(value.toString());
-                }
-
-                if (const QJsonValue value = competition_json[Competition::getLiveresultsIDAlias()]; value.isDouble())
-                {
-                    competition.setLiveresultsID(value.toInt());
-                }
+                competition = Competition::fromJson(competition_json);
             }
 
             if (const QJsonValue value = json[getWorkingDirAlias()]; value.isString())

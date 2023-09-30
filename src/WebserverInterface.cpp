@@ -159,5 +159,4 @@ namespace divi
         QJsonDocument metadata_json_doc{settings->getMetadataAsJson()};
         return QString(metadata_json_doc.toJson().toBase64());
     }
-
 }

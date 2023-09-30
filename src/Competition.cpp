@@ -6,6 +6,7 @@ namespace divi
     Competition::Competition()
     {
         setDate(QDate::currentDate());
+        setTimeZone(QTimeZone::systemTimeZoneId());
         setVisibility(Visibility::PRIVATE);
     }
     
@@ -41,6 +42,11 @@ namespace divi
             competition.setDate(value.toString());
         }
 
+        if (const QJsonValue value = a_json[getTimeZoneAlias()]; value.isString())
+        {
+            competition.setTimeZone(value.toString());
+        }
+
         if (const QJsonValue value = a_json[getVisibilityAlias()]; value.isString())
         {
             competition.setVisibility(value.toString());
@@ -63,6 +69,8 @@ namespace divi
         json[getNameAlias()] = name;
         json[getOrganiserAlias()] = organiser;
         json[getDateAlias()] = date;
+        json[getTimeZoneAlias()] = time_zone;
+        json[getDateTimeAlias()] = date_time_string;
         json[getVisibilityAlias()] = visibility;
         json[getLiveresultsIDAlias()] = liveresults_id;
 
@@ -136,12 +144,14 @@ namespace divi
     void Competition::setDate(const QString& a_date)
     {
         date = a_date;
+        updateDateTime();
         return;
     }
     
     void Competition::setDate(const QDate& a_date)
     {
         date = a_date.toString(Helpers::dateFormat());
+        updateDateTime();
         return;
     }
     
@@ -153,6 +163,45 @@ namespace divi
     const QString Competition::getDateAlias()
     {
         return "competition_date";
+    }
+    
+    void Competition::setTimeZone(const QString& a_time_zone)
+    {
+        time_zone = a_time_zone;
+        updateDateTime();
+        return;
+    }
+    
+    const QString& Competition::getTimeZone() const
+    {
+        return time_zone;
+    }
+    
+    const QString Competition::getTimeZoneAlias()
+    {
+        return "time_zone_iana";
+    }
+    
+    void Competition::updateDateTime()
+    {
+        if (date.isEmpty() || time_zone.isEmpty())
+        {
+            return;
+        }
+        
+        auto datetime = QDateTime{QDate::fromString(date, Helpers::dateFormat()), QTime(), QTimeZone{time_zone.toUtf8()}};
+        date_time_string = datetime.toString(Qt::ISODateWithMs);
+        return;
+    }
+    
+    const QString& Competition::getDateTime() const
+    {
+        return date_time_string;
+    }
+    
+    const QString Competition::getDateTimeAlias()
+    {
+        return "date_time_string";
     }
     
     void Competition::setVisibility(const QString& a_visibility)

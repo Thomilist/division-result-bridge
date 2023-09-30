@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 #include <QString>
 #include <QTextStream>
+#include <QTimeZone>
 
 #include "ForwardDeclarations.hpp"
 
