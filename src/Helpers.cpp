@@ -200,7 +200,7 @@ namespace divi
     
     const QString Helpers::userAgent()
     {
-        return authorUsername() % "/" % projectName();
+        return projectName() % "@" % authorUsername() % "/" % projectVersion();
     }
     
     const std::pair<std::string, std::string> Helpers::userAgentHeaderField()
