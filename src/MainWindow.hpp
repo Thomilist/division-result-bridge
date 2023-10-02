@@ -195,8 +195,8 @@ namespace divi
             QComboBox competition_visibility_input;
             QWidget competition_visibility_spacer;
 
-            // Configuration
-            QGroupBox config_group{"Local Configuration"};
+            // Local configuration
+            QGroupBox config_group{"Local"};
             QGridLayout config_layout;
             QWidget config_spacer;
 
@@ -236,11 +236,11 @@ namespace divi
             QPushButton* delete_division_cancel_button;
 
             // Web Server
-            QGroupBox webserver_group{"Web Server"};
+            QGroupBox webserver_group{"Online"};
             QGridLayout webserver_layout;
 
             QGridLayout webserver_address_layout;
-            QLabel webserver_address_label{"Web server address:"};
+            QLabel webserver_address_label{"Division Result Server address:"};
             QLineEdit webserver_address_input;
             QPushButton webserver_ping_button{"Test"};
 

@@ -80,7 +80,7 @@ namespace divi
         webserver_address = value(getWebserverAddressAlias(), Helpers::defaultWebServerAddress()).toString();
         update_interval = value(getUpdateIntervalAlias(), 60).toInt();
         save_pretty_log = value(getPrettyLoggingAlias(), true).toBool();
-        save_raw_log = value(getRawLoggingAlias(), false).toBool();
+        save_raw_log = value(getRawLoggingAlias(), true).toBool();
 
         // Divisions
         int size = beginReadArray(getDivisionsAlias());
