@@ -37,6 +37,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 Helpers::apiCompetitionIdHeaderField(settings->getCompetition().getID()),
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
             }
@@ -54,6 +55,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 Helpers::jsonContentHeaderField(),
                 Helpers::apiPasswordHeaderField(a_password)
             }
@@ -76,6 +78,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 Helpers::jsonContentHeaderField(),
                 Helpers::apiCompetitionIdHeaderField(settings->getCompetition().getID()),
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
@@ -110,6 +113,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 Helpers::jsonContentHeaderField(),
                 Helpers::apiCompetitionIdHeaderField(settings->getCompetition().getID()),
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
@@ -128,6 +132,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 Helpers::apiCompetitionIdHeaderField(settings->getCompetition().getID()),
                 Helpers::apiPasswordHeaderField(settings->getCompetition().getPassword())
             }
@@ -146,7 +151,8 @@ namespace divi
                 % Helpers::apiAnalyticsEndpoint(settings->getCompetition().getID())).toStdString()},
             cpr::Header
             {
-                Helpers::userAgentHeaderField()
+                Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
             }
         );
 

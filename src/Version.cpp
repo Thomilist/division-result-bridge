@@ -132,6 +132,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 {"accept", "application/json"}
             }
         );

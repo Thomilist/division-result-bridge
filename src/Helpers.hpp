@@ -79,6 +79,7 @@ namespace divi
             static const std::pair<std::string, std::string> jsonContentHeaderField();
             static const std::pair<std::string, std::string> apiCompetitionIdHeaderField(int a_id);
             static const std::pair<std::string, std::string> apiPasswordHeaderField(const QString& a_password);
+            static const std::pair<std::string, std::string> versionHeaderField();
 
             // Visibility enum
             static const QString visibility(Visibility a_visibility);

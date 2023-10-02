@@ -86,6 +86,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 {"Accept", "application/xml"}
             }
         );
@@ -108,6 +109,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 {"Accept", "application/xml"}
             }
         );
@@ -274,6 +276,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 {"Accept", "application/xml"}
             }
         );
@@ -339,6 +342,7 @@ namespace divi
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
+                Helpers::versionHeaderField(),
                 {"Accept", "application/xml"}
             }
         );

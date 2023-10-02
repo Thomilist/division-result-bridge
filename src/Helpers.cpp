@@ -223,6 +223,11 @@ namespace divi
         return {"LDR-Password", a_password.toStdString()};
     }
     
+    const std::pair<std::string, std::string> Helpers::versionHeaderField()
+    {
+        return {"LDR-Version", projectVersion().toStdString()};
+    }
+    
     const QString Helpers::visibility(Visibility a_visibility)
     {
         switch (a_visibility)
