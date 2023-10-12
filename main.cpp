@@ -2,14 +2,18 @@
 #include <QCoreApplication>
 #include <QObject>
 
-#include "src/ForwardDeclarations.hpp"
+#include "src/utils/ForwardDeclarations.hpp"
 
-#include "src/Helpers.hpp"
+#include "src/utils/Helpers.hpp"
 #include "src/MainWindow.hpp"
-#include "src/Version.hpp"
+#include "src/version/Version.hpp"
+
+extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
 
 int main(int argc, char* argv[])
 {
+    ++qt_ntfs_permission_lookup;
+    
     QApplication application{argc, argv};
 
     divi::Version version{divi::Helpers::projectVersion()};
@@ -22,5 +26,7 @@ int main(int argc, char* argv[])
 
     QObject::connect(&application, &QApplication::lastWindowClosed, &application, &QApplication::quit);
 
-    return application.exec();
+    const int status = application.exec();
+    --qt_ntfs_permission_lookup;
+    return status;
 }

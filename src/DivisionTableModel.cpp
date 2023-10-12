@@ -33,7 +33,7 @@ namespace divi
     
     int DivisionTableModel::columnCount(const QModelIndex&) const 
     {
-        return 3;
+        return Column::_Count;
     }
     
     bool DivisionTableModel::insertRows(int a_row, int a_count, const QModelIndex& a_parent)
@@ -65,17 +65,21 @@ namespace divi
             {
                 switch (a_index.column())
                 {
-                    case 0:
+                    case Column::ID:
                     {
                         return settings->getDivisions().at(a_index.row()).getID();
                     }
-                    case 1:
+                    case Column::Name:
                     {
                         return settings->getDivisions().at(a_index.row()).getName();
                     }
-                    case 2:
+                    case Column::ConfigPath:
                     {
-                        return settings->getDivisions().at(a_index.row()).getDivisionConfigPath();
+                        return settings->getDivisions().at(a_index.row()).getConfigPath();
+                    }
+                    case Column::InfoServerAddress:
+                    {
+                        return settings->getDivisions().at(a_index.row()).getInfoServerAddress();
                     }
                 }
 
@@ -85,13 +89,13 @@ namespace divi
             {
                 switch (a_index.column())
                 {
-                    case 0:
+                    case Column::ID:
                     {
                         return Qt::AlignCenter;
                     }
                     default:
                     {
-                        return Qt::AlignLeft;
+                        return {Qt::AlignLeft | Qt::AlignVCenter};
                     }
                 }
 
@@ -122,17 +126,21 @@ namespace divi
                     {
                         switch (a_section)
                         {
-                            case 0:
+                            case Column::ID:
                             {
                                 return QString("ID");
                             }
-                            case 1:
+                            case Column::Name:
                             {
                                 return QString("Name");
                             }
-                            case 2:
+                            case Column::ConfigPath:
                             {
                                 return QString("Config Path");
+                            }
+                            case Column::InfoServerAddress:
+                            {
+                                return QString("Info Server Address");
                             }
                         }
 
@@ -142,13 +150,13 @@ namespace divi
                     {
                         switch (a_section)
                         {
-                            case 0:
+                            case Column::ID:
                             {
                                 return Qt::AlignCenter;
                             }
                             default:
                             {
-                                return Qt::AlignLeft;
+                                return {Qt::AlignLeft | Qt::AlignVCenter};
                             }
                         }
 

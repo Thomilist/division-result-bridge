@@ -1,7 +1,8 @@
 #ifndef __PERSISTENTSETTINGS_H__
 #define __PERSISTENTSETTINGS_H__
 
-#include <vector>
+#include <algorithm>
+#include <array>
 
 #include <QByteArray>
 #include <QDir>
@@ -19,15 +20,14 @@
 #include <QTextStream>
 #include <QTimeZone>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
 #include "Division.hpp"
-#include "Loggable.hpp"
-#include "Logger.hpp"
+#include "logging/Loggable.hpp"
 #include "Settings.hpp"
-#include "Version.hpp"
+#include "version/Version.hpp"
 
-#include "MessageType.hpp"
+#include "logging/MessageType.hpp"
 
 namespace divi
 {
@@ -36,15 +36,15 @@ namespace divi
         Q_OBJECT
         
         public:
-            PersistentSettings(QMainWindow* a_main_window, Logger* a_log = nullptr);
+            PersistentSettings(QMainWindow* a_main_window);
             ~PersistentSettings();
 
             static const QString getConfigMetadataAlias();
             static const QString getConfigSourceAlias();
             static const QString getConfigVersionAlias();
 
-            void importConfig(const QString& a_path);
-            void exportConfig(const QString& a_path);
+            int importConfig(const QString& a_path);
+            int exportConfig(const QString& a_path);
         
         signals:
             void clearDivisions();
@@ -54,9 +54,11 @@ namespace divi
             void loadFromRegistry();
             void saveToRegistry();
 
-            void loadFromConfig();
-            void saveToConfig();
+            int loadFromConfig();
+            int saveToConfig();
             bool isLoadedConfigValid(const QJsonObject& a_config_json);
+
+            QMainWindow* main_window;
     };
 }
 

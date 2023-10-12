@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.27.4)
-project(division-result-bridge VERSION 1.0.0)
+project(division-result-bridge VERSION 1.1.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -42,6 +42,12 @@ if(DEFINED ENV{MY_EMAIL})
     set(MY_EMAIL $ENV{MY_EMAIL})
 else()
     set(MY_EMAIL email@example.com)
+endif()
+
+if(DEFINED ENV{SERVER_ADDRESS})
+    set(SERVER_ADDRESS $ENV{SERVER_ADDRESS})
+else()
+    set(SERVER_ADDRESS http://www.example.com/)
 endif()
 
 configure_file(Secrets.hpp.in Secrets.hpp)

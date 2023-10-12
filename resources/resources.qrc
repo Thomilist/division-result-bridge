@@ -2,5 +2,9 @@
 <qresource>
     <file>icon/icon.ico</file>
     <file>icon/icon_x1024.png</file>
+    <file>icon/icons8-copy-96.png</file>
+    <file>icon/icons8-history-96.png</file>
+    <file>icon/icons8-sync-96.png</file>
+    <file>icon/icons8-warning-96.png</file>
 </qresource>
 </RCC>

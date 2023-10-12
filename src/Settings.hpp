@@ -6,27 +6,39 @@
 #include <QDate>
 #include <QJsonArray>
 #include <QJsonObject>
-#include <QMainWindow>
 #include <QObject>
+#include <QStandardPaths>
 #include <QString>
 #include <QStringBuilder>
+#include <QTimeZone>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
 #include "Competition.hpp"
 #include "Division.hpp"
+
+#include "ResultSource.hpp"
 
 namespace divi
 {
     class Settings
     {
         public:
-            Settings(QMainWindow* a_main_window = nullptr);
+            Settings();
             virtual ~Settings();
 
             const QJsonObject getMetadataAsJson() const;
 
             static const QString getWindowGeometryAlias();
+
+            void setFirstTime(bool a_state);
+            bool isFirstTime() const;
+            static const QString getFirstTimeAlias();
+
+            void setResultSource(const QString& a_result_source);
+            void setResultSource(ResultSource a_result_source);
+            ResultSource getResultSource() const;
+            static const QString getResultSourceAlias();
 
             Competition& getCompetition();
             static const QString getCompetitionAlias();
@@ -38,7 +50,7 @@ namespace divi
             void setWorkingDir(const QString& a_dir);
             const QString& getWorkingDir() const;
             static const QString getWorkingDirAlias();
-            const QString getXMLResultPath();
+            const QString getDynamicXmlResultPath();
             const QString getDivisionResultPath(int a_division_id = 0);
             const QString getRawLogPath();
             const QString getHtmlLogPath();
@@ -46,6 +58,10 @@ namespace divi
             void setDiviExePath(const QString& a_path);
             const QString& getDiviExePath() const;
             static const QString getDiviExePathAlias();
+
+            void setXmlResultPath(const QString& a_path);
+            const QString& getXmlResultPath() const;
+            static const QString getXmlResultPathAlias();
 
             void setMeosAddress(const QString& a_address);
             const QString& getMeosAddress() const;
@@ -71,7 +87,11 @@ namespace divi
             static const QString getRawLoggingAlias();
         
         protected:
-            QMainWindow* main_window;
+            // Is this the first launch on this machine?
+            bool first_time = true;
+
+            // Result source
+            ResultSource result_source = ResultSource::_Undefined;
 
             // Competition
             Competition competition;
@@ -83,7 +103,10 @@ namespace divi
             QString working_dir;
 
             // Divisionsmatch.exe path
-            QString divi_exe_path;
+            QString divi_exe_path = "";
+
+            // XML result path
+            QString xml_result_path = "";
 
             // MeOS information server IP address
             QString meos_address;
@@ -92,14 +115,14 @@ namespace divi
             QString webserver_address;
 
             // Update interval in seconds
-            int update_interval = 30;
+            int update_interval = 60;
 
             // Divisions
             std::vector<Division> divisions;
 
             // Save logs
             bool save_pretty_log = true;
-            bool save_raw_log = false;
+            bool save_raw_log = true;
     };
 }
 

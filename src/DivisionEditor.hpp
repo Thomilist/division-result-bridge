@@ -18,12 +18,15 @@
 #include <QStringBuilder>
 #include <QWidget>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
 #include "Division.hpp"
 #include "DivisionTableModel.hpp"
+#include "utils/Helpers.hpp"
+#include "Settings.hpp"
 
 #include "EditorMode.hpp"
+#include "ResultSource.hpp"
 
 namespace divi
 {
@@ -32,7 +35,10 @@ namespace divi
         Q_OBJECT
         
         public:
-            DivisionEditor(DivisionTableModel* a_division_table_model, QWidget* a_parent = nullptr);
+            DivisionEditor(
+                Settings* a_settings,
+                DivisionTableModel* a_division_table_model,
+                QWidget* a_parent = nullptr);
             ~DivisionEditor();
 
             Division& getDivision();
@@ -53,7 +59,9 @@ namespace divi
             void createOverwriteWarningDialog();
             void initialiseConnections();
             void setToolTips();
+            void updateLayout();
 
+            Settings* settings;
             QGridLayout layout;
             QGridLayout button_layout;
             QDialogButtonBox buttons;
@@ -80,11 +88,17 @@ namespace divi
             QLabel name_label{"Name:"};
             QLineEdit name_input;
 
+            QWidget divi_path_container;
             QGridLayout divi_path_layout;
             QLabel divi_path_label{"Path to division config file (.divi):"};
             QLineEdit divi_path_input;
             QPushButton divi_path_button{"..."};
             QFileDialog divi_path_dialog;
+
+            QWidget divi_address_container;
+            QGridLayout divi_address_layout;
+            QLabel divi_address_label{"Information server address:"};
+            QLineEdit divi_address_input;
     };
 }
 

@@ -1,11 +1,12 @@
 #ifndef __ABOUTDIALOG_H__
 #define __ABOUTDIALOG_H__
 
-#include <QDebug>
+#include <array>
 
 #include <QDateTime>
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QFrame>
 #include <QGridLayout>
 #include <QLabel>
 #include <QLocale>
@@ -14,10 +15,14 @@
 #include <QStringBuilder>
 #include <QWidget>
 
-#include "ForwardDeclarations.hpp"
+#include <cpr/cpr.h>
+#include <nlohmann/json.hpp>
+#include <pugixml.hpp>
 
-#include "Helpers.hpp"
-#include "Version.hpp"
+#include "utils/ForwardDeclarations.hpp"
+
+#include "utils/Helpers.hpp"
+#include "version/Version.hpp"
 
 namespace divi
 {
@@ -30,7 +35,7 @@ namespace divi
             ~AboutDialog();
 
         public slots:
-            void open();
+            void open() override;
         
         private:
             void setText();
@@ -38,11 +43,16 @@ namespace divi
             void setBuildDateTimeText();
             void setLicenseText();
             void setAuthorText();
-            QString getBuildDateTime();
+            void setExternalResourcesText();
+            void setBuiltWithText();
+            const QString getBuildDateTime();
+            const QString getPuxiXmlVersionString();
+            const QString getNlohmannJsonVersionString();
 
             Version* version;
             QGridLayout grid_layout;
             QDialogButtonBox buttons;
+            std::array<QFrame, 3> divider_lines;
 
             QLabel icon;
 
@@ -60,6 +70,20 @@ namespace divi
             QLabel author_email_value;
             QLabel author_username_value;
             QLabel author_club_value;
+
+            QLabel external_resources_key;
+            QLabel divisionsmatch_value;
+            QLabel meos_value;
+            QLabel iof_xml_value;
+            QLabel liveresults_value;
+
+            QLabel built_with_key;
+            QLabel qt_version_value;
+            QLabel libcpr_version_value;
+            QLabel libcurl_version_value;
+            QLabel pugixml_version_value;
+            QLabel nlohmann_json_version_value;
+            QLabel icons_value;
     };
 }
 

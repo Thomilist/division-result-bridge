@@ -5,6 +5,7 @@ namespace divi
 {
     enum class Visibility
     {
+        _Undefined,
         PUBLIC,
         HIDDEN,
         PRIVATE

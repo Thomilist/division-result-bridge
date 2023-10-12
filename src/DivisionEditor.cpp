@@ -3,8 +3,12 @@
 
 namespace divi
 {
-    DivisionEditor::DivisionEditor(DivisionTableModel* a_division_table_model, QWidget* a_parent)
+    DivisionEditor::DivisionEditor(
+        Settings* a_settings,
+        DivisionTableModel* a_division_table_model,
+        QWidget* a_parent)
         : QDialog(a_parent, QDialog().windowFlags() & ~Qt::WindowContextHelpButtonHint)
+        , settings(a_settings)
         , buttons(QDialogButtonBox::Save | QDialogButtonBox::Discard)
         , division_table_model(a_division_table_model)
         , overwrite_warning(this)
@@ -137,19 +141,22 @@ namespace divi
             {
                 id_input.setValue(division_table_model->getAvailableID());
                 division.setID(id_input.value());
-                divi_path_input.clear();
                 name_input.clear();
+                divi_path_input.clear();
+                divi_address_input.clear();
                 break;
             }
             case EditorMode::EditExisting:
             {
                 id_input.setValue(division.getID());
-                divi_path_input.setText(division.getDivisionConfigPath());
                 name_input.setText(division.getName());
+                divi_path_input.setText(division.getConfigPath());
+                divi_address_input.setText(division.getInfoServerAddress());
                 break;
             }
         }
 
+        updateLayout();
         return;
     }
     
@@ -194,11 +201,18 @@ namespace divi
         layout.addLayout(&name_layout, row++, 0);
         layout.setRowMinimumHeight(row++, 10);
 
+        divi_path_layout.setContentsMargins(0, 0, 0, 10);
         divi_path_layout.addWidget(&divi_path_label, 0, 0);
         divi_path_layout.addWidget(&divi_path_input, 1, 0);
         divi_path_layout.addWidget(&divi_path_button, 1, 1);
-        layout.addLayout(&divi_path_layout, row++, 0);
-        layout.setRowMinimumHeight(row++, 10);
+        divi_path_container.setLayout(&divi_path_layout);
+        layout.addWidget(&divi_path_container, row++, 0);
+
+        divi_address_layout.setContentsMargins(0, 0, 0, 10);
+        divi_address_layout.addWidget(&divi_address_label, 0, 0);
+        divi_address_layout.addWidget(&divi_address_input, 1, 0);
+        divi_address_container.setLayout(&divi_address_layout);
+        layout.addWidget(&divi_address_container, row++, 0);
 
         left_button_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
         right_button_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Maximum);
@@ -234,7 +248,8 @@ namespace divi
         // Inputs
         connect(&id_input, &QSpinBox::valueChanged, this, [this](int a_value){this->getDivision().setID(a_value);});
         connect(&name_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setName(a_text);});
-        connect(&divi_path_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setDivisionConfigPath(a_text);});
+        connect(&divi_path_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setConfigPath(a_text);});
+        connect(&divi_address_input, &QLineEdit::textChanged, this, [this](const QString& a_text){this->getDivision().setInfoServerAddress(a_text);});
 
         return;
     }
@@ -246,9 +261,39 @@ namespace divi
         name_input.setToolTip(
             "The name of the division, which is used as its label in the division selector on the website");
         divi_path_input.setToolTip(
-            "Specify the location of the division configuration file produced by Divisionsmatchberegning");
+            "Specify the location of the division configuration file produced by " % Helpers::diviNameLong());
         divi_path_button.setToolTip(
             "Find in file browser...");
+        divi_path_input.setToolTip(
+            "Specify the address of the " % Helpers::diviNameLong() % " information server");
+
+        return;
+    }
+    
+    void DivisionEditor::updateLayout()
+    {
+        switch (settings->getResultSource())
+        {
+            case ResultSource::MeosDivi:
+            case ResultSource::XmlDivi:
+            {
+                divi_path_container.setVisible(true);
+                divi_address_container.setVisible(false);
+                break;
+            }
+            case ResultSource::Divi:
+            {
+                divi_path_container.setVisible(false);
+                divi_address_container.setVisible(true);
+                break;
+            }
+            default:
+            {
+                divi_path_container.setVisible(false);
+                divi_address_container.setVisible(false);
+                break;
+            }
+        }
 
         return;
     }

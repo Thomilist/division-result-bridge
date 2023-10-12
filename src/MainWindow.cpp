@@ -4,18 +4,35 @@
 namespace divi
 {
     MainWindow::MainWindow(Version* a_version)
-        : version(a_version)
+        : Loggable(Helpers::loggableMain())
+        , version(a_version)
+        , main_logger(new Logger(
+            LoggerMode::Widget,
+            Helpers::loggerMain(),
+            &settings,
+            this))
+        , file_logger(new Logger(
+            LoggerMode::File,
+            Helpers::loggerFile(),
+            &settings,
+            this))
         , settings(this)
         , worker(this)
-        , logger(new Logger(&settings, this))
-        , version_notifier(logger, version, this)
-        , coordinator(&settings, logger)
-        , file_menu("Competition", this)
+        , version_notifier(version)
+        , competition_menu("Competition", this)
         , create_new_competition_action("Create new competition")
+        , create_new_competition_wizard(&settings, this)
         , import_metadata_from_meos_action("Import metadata from MeOS")
         , import_config_action("Import configuration")
         , export_config_action("Export configuration")
-        , config_validator(logger, &settings, this)
+        , validate_config_action("Validate configuration")
+        , config_validator(&settings)
+        , compatibility_menu("Compatibility", this)
+        , result_source_menu("Result Source", &compatibility_menu)
+        , result_source_action_group(&result_source_menu)
+        , meos_divi_source_action("MeOS + Divisionsmatchberegning")
+        , divi_source_action("Divisionsmatchberegning")
+        , xml_divi_source_action("IOF XML file + Divisionsmatchberegning")
         , help_menu("Help", this)
         , view_help("View help", &help_menu)
         , view_about("About", &help_menu)
@@ -26,21 +43,18 @@ namespace divi
         , report_issue("Report issue", &help_menu)
         , import_config_dialog(this, "Import configuration")
         , export_config_dialog(this, "Export configuration")
-        , divi_exe_path_dialog(this, "Find " % Helpers::divisionsmatchberegningExeName())
+        , divi_exe_path_dialog(this, "Find " % Helpers::diviExeName())
+        , xml_results_path_dialog(this, "Select IOF XML 3.0 results file")
         , division_table_model(&settings, this)
-        , division_editor(&division_table_model, this)
-        , create_competition_dialog(this)
-        , competition_created_dialog(this)
+        , division_editor(&settings, &division_table_model, this)
         , run_timer(this)
         , countdown_timer(this)
+        , xml_results_debouncer(std::bind_front(&MainWindow::xmlResultFileChanged, this), 1000, this)
     {
         setWindowIcon(QIcon{":/icon/icon.ico"});
         setMinimumWidth(1100);
         //setMinimumHeight(810);
         setMouseTracking(true);
-
-        setLogger(logger);
-        settings.setLogger(logger);
         
         import_config_dialog.setFileMode(QFileDialog::ExistingFile);
         import_config_dialog.setNameFilter("Config (*.json)");
@@ -52,15 +66,11 @@ namespace divi
         
         createHeader();
         createCompetitionGroup();
-        createConfigGroup();
+        createResultSourceGroup();
         createDivisionsGroup();
         createWebserverGroup();
         createRunGroup();
         createLogGroup();
-
-        populate();
-        initaliseMenus();
-        initialiseConnections();
 
         spacer.setSizePolicy(QSizePolicy::Minimum, QSizePolicy::MinimumExpanding);
         
@@ -69,7 +79,7 @@ namespace divi
         ui_columns[0].addWidget(&competition_group);
         ui_columns[0].addWidget(&divisions_group);
         ui_columns[1].addWidget(&webserver_group);
-        ui_columns[1].addWidget(&config_group);
+        ui_columns[1].addWidget(&result_source_group);
         ui_columns[1].addWidget(&spacer);
         ui_columns[1].addWidget(&run_group);
         ui_columns[2].addWidget(&log_group);
@@ -82,12 +92,19 @@ namespace divi
         setCentralWidget(&central_widget);
         central_widget.setLayout(&grid_layout);
 
+        populate();
+        initaliseMenus();
+        initialiseConnections();
+        setToolTips();
+
         coordinator.moveToThread(&worker);
         worker.start();
 
-        config_validator.validate();
+        if (!settings.isFirstTime())
+        {
+            config_validator.validate();
+        }
 
-        setToolTips();
         updateInterfaceState();
         updateCountdown();
         show();
@@ -99,6 +116,13 @@ namespace divi
         worker.wait();
     }
     
+    void MainWindow::selectResultSource(ResultSource a_result_source)
+    {
+        settings.setResultSource(a_result_source);
+        updateLayout();
+        return;    
+    }
+    
     void MainWindow::start()
     {
         if (running || actively_processing)
@@ -108,13 +132,43 @@ namespace divi
 
         running = true;
         updateInterfaceState();
-
-        updateResultsIfAvailable(true);
-
-        countdown_timer.start(200);
-        run_timer.start(settings.getUpdateInterval() * 1000);
         
-        updateCountdown();
+        switch (updateResultsIfAvailable(true))
+        {
+            case 1:
+            {
+                stop();
+                return;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
+        switch (settings.getResultSource())
+        {
+            case ResultSource::MeosDivi:
+            case ResultSource::Divi:
+            {
+                startTimer();
+                break;
+            }
+            case ResultSource::XmlDivi:
+            {
+                if (startFileWatcher(settings.getDynamicXmlResultPath()) != 0)
+                {
+                    stop();
+                    return;
+                }
+
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
 
         return;
     }
@@ -128,6 +182,7 @@ namespace divi
 
         countdown_timer.stop();
         run_timer.stop();
+        file_watcher.removePaths(file_watcher.files());
         
         running = false;
         disableRestrictedItems(false);
@@ -137,18 +192,72 @@ namespace divi
         return;
     }
     
-    void MainWindow::updateResultsIfAvailable(bool a_fresh_start)
+    void MainWindow::xmlResultFileChanged(const QString& a_file_path)
     {
+        // File may have been deleted, sometimes as part of the change
+        // See also: https://doc.qt.io/qt-6/qfilesystemwatcher.html#fileChanged
+        if (!file_watcher.files().contains(a_file_path))
+        {
+            QFileInfo file{a_file_path};
+
+            if (!file.exists())
+            {
+                log(MessageType::Error, "Internal / Update Results", 0, "File Not Found",
+                    QString()
+                    % "The IOF XML results file at path \""
+                    % a_file_path
+                    % "\" was not found. Further updates aborted");
+                
+                stop();
+                return;
+            }
+
+            if (startFileWatcher(a_file_path) != 0)
+            {
+                stop();
+                return;
+            }
+        }
+
+        updateResultsIfAvailable(false);
+        return;
+    }
+    
+    // Returns:
+    // 0 on success
+    // 1 on invalid result source
+    // 2 on cancelled update due to existing update
+    int MainWindow::updateResultsIfAvailable(bool a_fresh_start)
+    {
+        switch (settings.getResultSource())
+        {
+            case ResultSource::MeosDivi:
+            case ResultSource::Divi:
+            case ResultSource::XmlDivi:
+            {
+                break;
+            }
+            default:
+            {
+                log(MessageType::Error, "Internal / Update Results", 0, "Invalid Result Source",
+                    QString()
+                    % "The result source is set to \""
+                    % Helpers::resultSource(settings.getResultSource())
+                    % "\", which is not valid. Further updates aborted");
+                return 1;
+            }
+        }
+
         if (actively_processing)
         {
             log(MessageType::Warning, "Internal / Update Results", 0, "New Update Cancelled",
                 "An update cannot be started while another one is running");
-            return;
+            return 2;
         }
 
         setActivelyProcessing(true);
         emit updateResults(a_fresh_start);
-        return;
+        return 0;
     }
     
     void MainWindow::setActivelyProcessing(bool a_state)
@@ -205,6 +314,18 @@ namespace divi
             QString file = divi_exe_path_dialog.selectedFiles().front();
             divi_exe_path_input.setText(file);
             divi_exe_path_dialog.setDirectory(QFileInfo{file}.absoluteDir());
+        }
+
+        return;
+    }
+    
+    void MainWindow::browseXmlResult()
+    {
+        if (xml_results_path_dialog.exec())
+        {
+            QString file = xml_results_path_dialog.selectedFiles().front();
+            xml_results_input.setText(file);
+            xml_results_path_dialog.setDirectory(QFileInfo{file}.absoluteDir());
         }
 
         return;
@@ -328,10 +449,13 @@ namespace divi
         return;
     }
     
-    void MainWindow::loadNewCompetition(const Competition& a_competition)
+    void MainWindow::loadNewCompetition(Settings& a_new_settings)
     {
         clearCompetitionAndDivision();
-        loadCompetitionMetadata(a_competition);
+        settings.getCompetition() = a_new_settings.getCompetition();
+        settings.setWebserverAddress(a_new_settings.getWebserverAddress());
+        populate();
+        
         return;
     }
     
@@ -431,10 +555,7 @@ namespace divi
 
         password_text.setTextFormat(Qt::RichText);
         password_text.setWordWrap(true);
-        password_text.setText
-        (
-            Helpers::passwordDisclaimer()
-        );
+        password_text.setText("<i>" % Helpers::passwordDisclaimer() % "</i>");
 
         competition_date_input.setDisplayFormat(Helpers::dateFormat());
         competition_date_input.setCalendarPopup(true);
@@ -444,18 +565,6 @@ namespace divi
         for (const auto& iana_id : QTimeZone::availableTimeZoneIds())
         {
             timezone_names.append(iana_id);
-            /*
-            auto timezone = QTimeZone(iana_id);
-            
-            if (const QLocale::Territory territory = timezone.territory(); territory == QLocale::AnyTerritory)
-            {
-                timezone_names.append(timezone.displayName(QTimeZone::GenericTime));
-            }
-            else
-            {
-                timezone_names.append(QLocale::territoryToString(territory));
-            }
-            */
         }
 
         timezone_names.sort();
@@ -509,9 +618,6 @@ namespace divi
         competition_visibility_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
         competition_visibility_layout.addWidget(&competition_visibility_spacer, 1, 1);
         competition_layout.addLayout(&competition_visibility_layout, row++, 0);
-
-        competition_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        //competition_layout.addWidget(&competition_spacer, row++, 0);
         
         competition_group.setLayout(&competition_layout);
         competition_group.setAlignment(Qt::AlignHCenter);
@@ -519,19 +625,14 @@ namespace divi
         return;
     }
     
-    void MainWindow::createConfigGroup()
+    void MainWindow::createResultSourceGroup()
     {
-        restricted_inputs.push_back(&working_dir_input);
-        restricted_inputs.push_back(&working_dir_button);
         restricted_inputs.push_back(&divi_exe_path_input);
         restricted_inputs.push_back(&divi_exe_path_button);
         restricted_inputs.push_back(&meos_address_input);
         restricted_inputs.push_back(&meos_address_test_button);
-        
-        working_dir_input.setReadOnly(true);
-        working_dir_button.setMaximumWidth(25);
-
-        working_dir_dialog.setFileMode(QFileDialog::Directory);
+        restricted_inputs.push_back(&xml_results_input);
+        restricted_inputs.push_back(&xml_results_path_button);
         
         divi_exe_path_input.setReadOnly(true);
         divi_exe_path_button.setMaximumWidth(25);
@@ -543,35 +644,40 @@ namespace divi
         (
             QString()
             % "Path to "
-            % Helpers::divisionsmatchberegningExeName()
+            % Helpers::diviExeName()
             % ":"
         );
+
+        xml_results_input.setReadOnly(true);
+        xml_results_path_button.setMaximumWidth(25);
+
+        xml_results_path_dialog.setFileMode(QFileDialog::ExistingFile);
+        xml_results_path_dialog.setNameFilter("IOF XML 3.0 (*.xml)");
         
         int row = 0;
-
-        working_dir_layout.addWidget(&working_dir_label, 0, 0);
-        working_dir_layout.addWidget(&working_dir_input, 1, 0);
-        working_dir_layout.addWidget(&working_dir_button, 1, 1);
-        config_layout.addLayout(&working_dir_layout, row++, 0);
-
-        config_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         divi_exe_path_layout.addWidget(&divi_exe_path_label, 0, 0);
         divi_exe_path_layout.addWidget(&divi_exe_path_input, 1, 0);
         divi_exe_path_layout.addWidget(&divi_exe_path_button, 1, 1);
-        config_layout.addLayout(&divi_exe_path_layout, row++, 0);
-
-        config_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
+        result_source_layout.addLayout(&divi_exe_path_layout, row++, 0);
 
         meos_address_test_button.setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
-
+        meos_address_layout.setContentsMargins(0, 10, 0, 0);
         meos_address_layout.addWidget(&meos_address_label, 0, 0);
         meos_address_layout.addWidget(&meos_address_input, 1, 0);
         meos_address_layout.addWidget(&meos_address_test_button, 1, 1);
-        config_layout.addLayout(&meos_address_layout, row++, 0);
+        meos_address_container.setLayout(&meos_address_layout);
+        result_source_layout.addWidget(&meos_address_container, row++, 0);
 
-        config_group.setLayout(&config_layout);
-        config_group.setAlignment(Qt::AlignHCenter);
+        xml_results_layout.setContentsMargins(0, 10, 0, 0);
+        xml_results_layout.addWidget(&xml_results_label, 0, 0);
+        xml_results_layout.addWidget(&xml_results_input, 1, 0);
+        xml_results_layout.addWidget(&xml_results_path_button, 1, 1);
+        xml_results_container.setLayout(&xml_results_layout);
+        result_source_layout.addWidget(&xml_results_container, row++, 0);
+
+        result_source_group.setLayout(&result_source_layout);
+        result_source_group.setAlignment(Qt::AlignHCenter);
 
         return;
     }
@@ -673,7 +779,14 @@ namespace divi
     
     void MainWindow::createRunGroup()
     {
+        restricted_inputs.push_back(&working_dir_input);
+        restricted_inputs.push_back(&working_dir_button);
         restricted_inputs.push_back(&update_interval_input);
+        
+        working_dir_input.setReadOnly(true);
+        working_dir_button.setMaximumWidth(25);
+
+        working_dir_dialog.setFileMode(QFileDialog::Directory);
         
         update_interval_input.setMinimum(10);
         update_interval_input.setMaximum(3600);
@@ -689,7 +802,12 @@ namespace divi
 
         int row = 0;
 
-        int column = 0;
+        working_dir_layout.addWidget(&working_dir_label, 0, 0);
+        working_dir_layout.addWidget(&working_dir_input, 1, 0);
+        working_dir_layout.addWidget(&working_dir_button, 1, 1);
+        run_layout.addLayout(&working_dir_layout, row++, 0);
+
+        run_layout.setRowMinimumHeight(row++, Helpers::verticalPadding());
 
         update_interval_layout.addWidget(&update_interval_label, 0, 0);
         update_interval_layout.addWidget(&update_interval_input, 1, 0);
@@ -698,9 +816,15 @@ namespace divi
         countdown_layout.addWidget(&countdown_time, 0, 1);
         update_interval_layout.addLayout(&countdown_layout, 2, 0);
 
-        run_layout.addLayout(&update_interval_layout, row, column++);
+        update_interval_layout.setContentsMargins(0, 0, 0, 0);
+        update_interval_container.setLayout(&update_interval_layout);
 
-        run_layout.addWidget(&run_spacer, row, column++);
+        int column = 0;
+
+        run_control_layout.addWidget(&update_interval_container, row, column++);
+
+        run_control_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
+        run_control_layout.addWidget(&run_control_spacer, row, column++);
         
         int button_row = 0;
 
@@ -709,7 +833,9 @@ namespace divi
             run_buttons_layout.addWidget(button, button_row++, 0);
         }
 
-        run_layout.addLayout(&run_buttons_layout, row, column++);
+        run_control_layout.addLayout(&run_buttons_layout, row, column++);
+
+        run_layout.addLayout(&run_control_layout, row++, 0);
 
         run_group.setLayout(&run_layout);
         run_group.setAlignment(Qt::AlignHCenter);
@@ -719,8 +845,8 @@ namespace divi
     
     void MainWindow::createLogGroup()
     {
-        logger->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-        logger->setMinimumWidth(300);
+        main_logger->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        main_logger->setMinimumWidth(300);
 
         save_logs_spacer.setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
 
@@ -734,7 +860,7 @@ namespace divi
         int row = 0;
 
         log_layout.addLayout(&save_logs_layout, row++, 0);
-        log_layout.addWidget(logger, row++, 0);
+        log_layout.addWidget(main_logger, row++, 0);
         log_group.setLayout(&log_layout);
         log_group.setAlignment(Qt::AlignHCenter);
 
@@ -745,6 +871,21 @@ namespace divi
     
     void MainWindow::populate()
     {
+        // Compatibility menu
+        for (const auto& [action, result_source] :
+        {
+            std::pair{&meos_divi_source_action, ResultSource::MeosDivi},
+            std::pair{&divi_source_action, ResultSource::Divi},
+            std::pair{&xml_divi_source_action, ResultSource::XmlDivi}
+        })
+        {
+            if (settings.getResultSource() == result_source)
+            {
+                action->setChecked(true);
+                break;
+            }
+        }
+        
         // Competition
         competition_id_input.setValue(settings.getCompetition().getID());
         password_input.setText(settings.getCompetition().getPassword());
@@ -774,6 +915,7 @@ namespace divi
         // Configuration
         working_dir_input.setText(settings.getWorkingDir());
         divi_exe_path_input.setText(settings.getDiviExePath());
+        xml_results_input.setText(settings.getXmlResultPath());
         meos_address_input.setText(settings.getMeosAddress());
 
         // Web server
@@ -787,6 +929,7 @@ namespace divi
         save_pretty_log_input.setChecked(settings.getPrettyLogging());
         save_raw_log_input.setChecked(settings.getRawLogging());
 
+        updateLayout();
         return;
     }
     
@@ -796,14 +939,35 @@ namespace divi
         restricted_actions.push_back(&import_metadata_from_meos_action);
         restricted_actions.push_back(&import_config_action);
         restricted_actions.push_back(&export_config_action);
+        restricted_actions.push_back(&validate_config_action);
+        restricted_actions.push_back(&meos_divi_source_action);
+        restricted_actions.push_back(&divi_source_action);
+        restricted_actions.push_back(&xml_divi_source_action);
         
-        menuBar()->addMenu(&file_menu);
-        file_menu.addAction(&create_new_competition_action);
-        file_menu.addSeparator();
-        file_menu.addAction(&import_metadata_from_meos_action);
-        file_menu.addSeparator();
-        file_menu.addAction(&import_config_action);
-        file_menu.addAction(&export_config_action);
+        menuBar()->addMenu(&competition_menu);
+        competition_menu.addAction(&create_new_competition_action);
+        competition_menu.addSeparator();
+        competition_menu.addAction(&import_metadata_from_meos_action);
+        competition_menu.addSeparator();
+        competition_menu.addAction(&import_config_action);
+        competition_menu.addAction(&export_config_action);
+        competition_menu.addSeparator();
+        competition_menu.addAction(&validate_config_action);
+
+        menuBar()->addMenu(&compatibility_menu);
+        compatibility_menu.addMenu(&result_source_menu);
+
+        for (const auto action :
+        {
+            &meos_divi_source_action,
+            &divi_source_action,
+            &xml_divi_source_action
+        })
+        {
+            action->setCheckable(true);
+            result_source_action_group.addAction(action);
+            result_source_menu.addAction(action);
+        }
         
         menuBar()->addMenu(&help_menu);
         help_menu.addAction(&view_help);
@@ -817,12 +981,19 @@ namespace divi
     
     void MainWindow::initialiseConnections()
     {
-        // File menu
-        connect(&create_new_competition_action, &QAction::triggered, &create_competition_dialog, &CreateCompetitionDialog::open);
+        // Competition menu
+        connect(&create_new_competition_action, &QAction::triggered, &create_new_competition_wizard, &CompetitionCreationWizard::open);
+        connect(&import_metadata_from_meos_action, &QAction::triggered, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(&import_metadata_from_meos_action, &QAction::triggered, &coordinator, &Coordinator::fetchMetadataFromMeos);
         connect(&coordinator, &Coordinator::metadataFetched, this, &MainWindow::applyMetadataFromMeos);
         connect(&import_config_action, &QAction::triggered, this, &MainWindow::importConfig);
         connect(&export_config_action, &QAction::triggered, this, &MainWindow::exportConfig);
+        connect(&validate_config_action, &QAction::triggered, this, [this]{ this->config_validator.validate(); });
+
+        // Compatibility menu
+        connect(&meos_divi_source_action, &QAction::triggered, this, [this]{ this->selectResultSource(ResultSource::MeosDivi); });
+        connect(&divi_source_action, &QAction::triggered, this, [this]{ this->selectResultSource(ResultSource::Divi); });
+        connect(&xml_divi_source_action, &QAction::triggered, this, [this]{ this->selectResultSource(ResultSource::XmlDivi); });
 
         // Help menu
         connect(&view_help, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubWikiUrl(), QUrl::TolerantMode}); });
@@ -830,10 +1001,6 @@ namespace divi
         connect(&check_for_updates, &QAction::triggered, &update_dialog, &UpdateDialog::manualUpdateCheck);
         connect(&open_github, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubRepoUrl(), QUrl::TolerantMode}); });
         connect(&report_issue, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubIssuesUrl(), QUrl::TolerantMode}); });
-
-        // Path navigation buttons
-        connect(&working_dir_button, &QPushButton::clicked, this, &MainWindow::browseWorkingDir);
-        connect(&divi_exe_path_button, &QPushButton::clicked, this, &MainWindow::browseDiviExe);
 
         // Divisions
         connect(&division_table_model, &DivisionTableModel::dataChanged, this, &MainWindow::updateInterfaceState);
@@ -845,30 +1012,41 @@ namespace divi
         connect(&settings, &PersistentSettings::addDivision, &division_table_model, &DivisionTableModel::addOrOverwriteDivision);
 
         // Create competition
-        connect(&create_competition_dialog, &CreateCompetitionDialog::createCompetition, &coordinator, &Coordinator::createCompetition);
-        connect(&coordinator, &Coordinator::competitionCreated, &competition_created_dialog, &CompetitionCreatedDialog::open);
-        connect(&competition_created_dialog, &CompetitionCreatedDialog::useCompetitionNow, this, &MainWindow::loadNewCompetition);
+        connect(&create_new_competition_wizard, &CompetitionCreationWizard::requestNewCompetition, &coordinator, &Coordinator::createCompetition);
+        connect(&coordinator, &Coordinator::competitionCreated, &create_new_competition_wizard, &CompetitionCreationWizard::receiveNewCompetition);
+        connect(&create_new_competition_wizard, &CompetitionCreationWizard::useNewCompetition, this, &MainWindow::loadNewCompetition);
         
         // Web server
         connect(&webserver_delete_results_button, &QPushButton::clicked, this, &MainWindow::deleteResultsPrompt);
+        connect(this, &MainWindow::deleteResults, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(this, &MainWindow::deleteResults, &coordinator, &Coordinator::deleteResults);
+        connect(&webserver_update_meta_button, &QPushButton::clicked, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(&webserver_update_meta_button, &QPushButton::clicked, &coordinator, &Coordinator::updateMetadata);
 
         connect(&webserver_view_button, &QPushButton::clicked, this, [this]{ QDesktopServices::openUrl(QUrl{this->getCompetitionUrl(), QUrl::TolerantMode}); });
+        connect(&webserver_analytics_button, &QPushButton::clicked, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(&webserver_analytics_button, &QPushButton::clicked, &coordinator, &Coordinator::fetchAnalytics);
+        connect(&webserver_ping_button, &QPushButton::clicked, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(&webserver_ping_button, &QPushButton::clicked, &coordinator, &Coordinator::pingWebserver);
 
-        // Configuration
+        // Result Source
+        connect(&meos_address_test_button, &QPushButton::clicked, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(&meos_address_test_button, &QPushButton::clicked, &coordinator, &Coordinator::pingMeos);
 
         // Update results
         connect(&start_button, &QPushButton::clicked, this, &MainWindow::start);
         connect(&stop_button, &QPushButton::clicked, this, &MainWindow::stop);
         connect(&run_once_button, &QPushButton::clicked, this, [this]{ this->updateResultsIfAvailable(true); });
+        connect(&file_watcher, &QFileSystemWatcher::fileChanged, &xml_results_debouncer, &SignalDebouncer<QString>::input);
         connect(&run_timer, &QTimer::timeout, this, [this]{ this->updateResultsIfAvailable(false); });
         connect(&countdown_timer, &QTimer::timeout, this, &MainWindow::updateCountdown);
         connect(&coordinator, &Coordinator::activelyProcessing, this, &MainWindow::setActivelyProcessing);
+        connect(this, &MainWindow::updateResults, this, [this]{ this->coordinator.updateCache(this->settings); });
         connect(this, &MainWindow::updateResults, &coordinator, &Coordinator::updateResults);
+
+        // Logging
+        attachLogging(file_logger);
+        attachLogging(main_logger);
 
         // Inputs, competition
         connect(&competition_id_input, &QSpinBox::valueChanged, this, [this](int a_id)
@@ -907,15 +1085,17 @@ namespace divi
             this->updateInterfaceState();
         });
 
-        // Inputs, configuration
-        connect(&working_dir_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
-        {
-            this->settings.setWorkingDir(a_text);
-            this->updateInterfaceState();
-        });
+        // Inputs, Result Source
+        connect(&divi_exe_path_button, &QPushButton::clicked, this, &MainWindow::browseDiviExe);
         connect(&divi_exe_path_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
         {
             this->settings.setDiviExePath(a_text);
+            this->updateInterfaceState();
+        });
+        connect(&xml_results_path_button, &QPushButton::clicked, this, &MainWindow::browseXmlResult);
+        connect(&xml_results_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
+        {
+            this->settings.setXmlResultPath(a_text);
             this->updateInterfaceState();
         });
         connect(&meos_address_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
@@ -937,6 +1117,12 @@ namespace divi
         });
 
         // Inputs, run
+        connect(&working_dir_button, &QPushButton::clicked, this, &MainWindow::browseWorkingDir);
+        connect(&working_dir_input, &QLineEdit::textChanged, this, [this](const QString& a_text)
+        {
+            this->settings.setWorkingDir(a_text);
+            this->updateInterfaceState();
+        });
         connect(&update_interval_input, &QSpinBox::valueChanged, this, [this](int a_interval)
         {
             this->settings.setUpdateInterval(a_interval);
@@ -987,24 +1173,17 @@ namespace divi
     
     void MainWindow::clearCompetitionAndDivision()
     {
-        settings.getCompetition().setID(0);
-        settings.getCompetition().setPassword("");
-        settings.getCompetition().setName("");
-        settings.getCompetition().setOrganiser("");
-        settings.getCompetition().setVisibility(Helpers::visibility(Visibility::PRIVATE));
-        settings.getCompetition().setDate(QDate::currentDate());
-        settings.getCompetition().setTimeZone(QTimeZone::systemTimeZoneId());
-        settings.getCompetition().setLiveresultsID(0);
-
         division_table_model.clear();
+        
+        Settings default_settings;
 
-        populate();
-        return;
-    }
-    
-    void MainWindow::loadCompetitionMetadata(const Competition& a_competition)
-    {
-        settings.getCompetition() = a_competition;
+        settings.getCompetition() = default_settings.getCompetition();
+
+        settings.setWorkingDir(default_settings.getWorkingDir());
+        settings.setUpdateInterval(default_settings.getUpdateInterval());
+        settings.setMeosAddress(default_settings.getMeosAddress());
+        settings.setXmlResultPath(default_settings.getXmlResultPath());
+
         populate();
         return;
     }
@@ -1052,6 +1231,8 @@ namespace divi
             "Import a competition configuration from a file");
         export_config_action.setToolTip(
             "Export the current competition configuration to a file");
+        validate_config_action.setToolTip(
+            "Validate the current competition configuration");
 
         // Help menu
         view_help.setToolTip(
@@ -1105,7 +1286,7 @@ namespace divi
         liveresults_input.setToolTip(
             "This number is given to you when you create your competition on their site");
 
-        // Local configuration
+        // Result source
         working_dir_input.setToolTip(
             "Specify where temporary files and logs should be placed");
         working_dir_button.setToolTip(
@@ -1118,6 +1299,10 @@ namespace divi
             "The network address of MeOS's information server. Make sure the service is running");
         meos_address_test_button.setToolTip(
             "Check if MeOS's information server is reachable on the provided address");
+        xml_results_input.setToolTip(
+            "Point to the IOF XML 3.0 results file");
+        xml_results_path_button.setToolTip(
+            "Find with file browser...");
 
         // Update results
         update_interval_input.setToolTip(
@@ -1138,5 +1323,78 @@ namespace divi
             "Same content as seen in the log panel, but no formatting. For viewing in a plain text editor or terminal");
 
         return;
+    }
+    
+    void MainWindow::updateLayout()
+    {
+        switch (settings.getResultSource())
+        {
+            case ResultSource::MeosDivi:
+            {
+                division_table.setColumnHidden(DivisionTableModel::ConfigPath, false);
+                division_table.setColumnHidden(DivisionTableModel::InfoServerAddress, true);
+                meos_address_container.setVisible(true);
+                xml_results_container.setVisible(false);
+                update_interval_container.setVisible(true);
+                result_source_group.setVisible(true);
+                break;
+            }
+            case ResultSource::Divi:
+            {
+                division_table.setColumnHidden(DivisionTableModel::ConfigPath, true);
+                division_table.setColumnHidden(DivisionTableModel::InfoServerAddress, false);
+                meos_address_container.setVisible(false);
+                xml_results_container.setVisible(false);
+                update_interval_container.setVisible(true);
+                result_source_group.setVisible(false);
+                break;
+            }
+            case ResultSource::XmlDivi:
+            {
+                division_table.setColumnHidden(DivisionTableModel::ConfigPath, false);
+                division_table.setColumnHidden(DivisionTableModel::InfoServerAddress, true);
+                meos_address_container.setVisible(false);
+                xml_results_container.setVisible(true);
+                update_interval_container.setVisible(false);
+                result_source_group.setVisible(true);
+                break;
+            }
+            default:
+            {
+                division_table.setColumnHidden(DivisionTableModel::ConfigPath, true);
+                division_table.setColumnHidden(DivisionTableModel::InfoServerAddress, true);
+                meos_address_container.setVisible(false);
+                xml_results_container.setVisible(false);
+                update_interval_container.setVisible(false);
+                result_source_group.setVisible(false);
+                break;
+            }
+        }
+        
+        return;
+    }
+    
+    void MainWindow::startTimer()
+    {
+        countdown_timer.start(200);
+        run_timer.start(settings.getUpdateInterval() * 1000);
+        updateCountdown();
+        return;
+    }
+    
+    int MainWindow::startFileWatcher(const QString& a_file_path)
+    {
+        if (!file_watcher.addPath(a_file_path))
+        {
+            log(MessageType::Error, "Internal / Update Results", 0, "File Watching Error",
+                QString()
+                % "An error occured while trying to watch the file at path \""
+                % a_file_path
+                % "\". Further updates aborted");
+            
+            return 1;
+        }
+
+        return 0;
     }
 }

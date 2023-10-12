@@ -143,14 +143,30 @@ namespace divi
     
     void Competition::setDate(const QString& a_date)
     {
+        QDate date_check = QDate::fromString(a_date, Helpers::dateFormat());
+
+        if (!date_check.isValid())
+        {
+            date = QDate::currentDate().toString(Helpers::dateFormat());
+            return;
+        }
+        
         date = a_date;
         updateDateTime();
         return;
     }
     
-    void Competition::setDate(const QDate& a_date)
+    void Competition::setDate(QDate a_date)
     {
-        date = a_date.toString(Helpers::dateFormat());
+        if (a_date.isValid())
+        {
+            date = a_date.toString(Helpers::dateFormat());
+        }
+        else
+        {
+            date = QDate::currentDate().toString(Helpers::dateFormat());
+        }
+        
         updateDateTime();
         return;
     }
@@ -212,7 +228,11 @@ namespace divi
     
     void Competition::setVisibility(Visibility a_visibility)
     {
-        visibility = Helpers::visibility(a_visibility);
+        if (const QString new_visibility = Helpers::visibility(a_visibility); !new_visibility.isEmpty())
+        {
+            visibility = new_visibility;
+        }
+        
         return;
     }
     

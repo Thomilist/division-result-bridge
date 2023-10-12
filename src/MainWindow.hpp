@@ -1,12 +1,15 @@
 #ifndef __MAINWINDOW_H__
 #define __MAINWINDOW_H__
 
+#include <QDebug>
+
 #include <array>
 #include <limits>
 #include <set>
 
 #include <QAbstractItemView>
 #include <QAction>
+#include <QActionGroup>
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QComboBox>
@@ -15,6 +18,7 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QFileSystemWatcher>
 #include <QFont>
 #include <QGridLayout>
 #include <QGroupBox>
@@ -46,27 +50,28 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
 #include "AboutDialog.hpp"
-#include "CompetitionCreatedDialog.hpp"
+#include "comp-create-wizard/CompetitionCreationWizard.hpp"
 #include "ConfigValidator.hpp"
-#include "CreateCompetitionDialog.hpp"
 #include "Division.hpp"
 #include "DivisionEditor.hpp"
 #include "DivisionTableModel.hpp"
-#include "Helpers.hpp"
-#include "Logger.hpp"
-#include "Loggable.hpp"
-#include "MeosInterface.hpp"
-#include "Coordinator.hpp"
+#include "utils/Helpers.hpp"
+#include "logging/Loggable.hpp"
+#include "logging/Logger.hpp"
+#include "logging/LoggerProxy.hpp"
+#include "workers/Coordinator.hpp"
 #include "PersistentSettings.hpp"
-#include "UpdateDialog.hpp"
-#include "Version.hpp"
-#include "VersionNotifier.hpp"
+#include "version/UpdateDialog.hpp"
+#include "version/Version.hpp"
+#include "version/VersionNotifier.hpp"
+
+#include "utils/SignalDebouncer.hpp"
 
 #include "EditorMode.hpp"
-#include "MessageType.hpp"
+#include "logging/MessageType.hpp"
 
 namespace divi
 {
@@ -83,19 +88,22 @@ namespace divi
             void deleteResults();
 
         private slots:
+            void selectResultSource(ResultSource a_result_source);
             void start();
             void stop();
-            void updateResultsIfAvailable(bool a_fresh_start = false);
+            void xmlResultFileChanged(const QString& a_file_path);
+            int updateResultsIfAvailable(bool a_fresh_start = false);
             void setActivelyProcessing(bool a_state);
             void importConfig();
             void exportConfig();
             void browseWorkingDir();
             void browseDiviExe();
+            void browseXmlResult();
             void updateInterfaceState();
             void editSelectedDivision();
             void deleteSelectedDivision();
             void updateCountdown();
-            void loadNewCompetition(const Competition& a_competition);
+            void loadNewCompetition(Settings& a_new_settings);
             void applyMetadataFromMeos(const Competition& a_competition);
             void deleteResultsPrompt();
         
@@ -104,7 +112,7 @@ namespace divi
 
             void createHeader();
             void createCompetitionGroup();
-            void createConfigGroup();
+            void createResultSourceGroup();
             void createDivisionsGroup();
             void createWebserverGroup();
             void createRunGroup();
@@ -115,26 +123,40 @@ namespace divi
             void disableRestrictedItems(bool a_disable);
             const QString getCompetitionUrl();
             void clearCompetitionAndDivision();
-            void loadCompetitionMetadata(const Competition& a_competition);
             void updateLiveresultsText();
             void setToolTips();
+            void updateLayout();
+            void startTimer();
+            int startFileWatcher(const QString& a_file_path);
 
             bool running = false;
             bool actively_processing = false;
+            bool waiting = false;
 
             Version* version;
+            Logger* main_logger;
+            Logger* file_logger;
             PersistentSettings settings;
             QThread worker;
-            Logger* logger;
             VersionNotifier version_notifier;
             Coordinator coordinator;
+            QFileSystemWatcher file_watcher;
 
-            QMenu file_menu;
+            QMenu competition_menu;
             QAction create_new_competition_action;
+            CompetitionCreationWizard create_new_competition_wizard;
             QAction import_metadata_from_meos_action;
             QAction import_config_action;
             QAction export_config_action;
+            QAction validate_config_action;
             ConfigValidator config_validator;
+
+            QMenu compatibility_menu;
+            QMenu result_source_menu;
+            QActionGroup result_source_action_group;
+            QAction meos_divi_source_action;
+            QAction divi_source_action;
+            QAction xml_divi_source_action;
 
             QMenu help_menu;
             QAction view_help;
@@ -162,7 +184,6 @@ namespace divi
             // Competition
             QGroupBox competition_group{"Competition"};
             QGridLayout competition_layout;
-            QWidget competition_spacer;
 
             QGridLayout competition_id_layout;
             QLabel competition_id_label{"Competition ID:"};
@@ -195,16 +216,9 @@ namespace divi
             QComboBox competition_visibility_input;
             QWidget competition_visibility_spacer;
 
-            // Local configuration
-            QGroupBox config_group{"Local"};
-            QGridLayout config_layout;
-            QWidget config_spacer;
-
-            QGridLayout working_dir_layout;
-            QLabel working_dir_label{"Working directory:"};
-            QLineEdit working_dir_input;
-            QPushButton working_dir_button{"..."};
-            QFileDialog working_dir_dialog;
+            // Result source
+            QGroupBox result_source_group{"Result Source"};
+            QGridLayout result_source_layout;
 
             QGridLayout divi_exe_path_layout;
             QLabel divi_exe_path_label;
@@ -212,10 +226,18 @@ namespace divi
             QPushButton divi_exe_path_button{"..."};
             QFileDialog divi_exe_path_dialog;
 
+            QWidget meos_address_container;
             QGridLayout meos_address_layout;
             QLabel meos_address_label{"MeOS information server address:"};
             QLineEdit meos_address_input;
             QPushButton meos_address_test_button{"Test"};
+
+            QWidget xml_results_container;
+            QGridLayout xml_results_layout;
+            QLabel xml_results_label{"Path to IOF XML 3.0 result file:"};
+            QLineEdit xml_results_input;
+            QPushButton xml_results_path_button{"..."};
+            QFileDialog xml_results_path_dialog;
 
             // Divisions
             QGroupBox divisions_group{"Divisions"};
@@ -247,8 +269,6 @@ namespace divi
             QGridLayout webserver_manage_layout;
             QLabel webserver_manage_label{"Manage competition on server:"};
             QPushButton webserver_delete_results_button{"Delete Results"};
-            CreateCompetitionDialog create_competition_dialog;
-            CompetitionCreatedDialog competition_created_dialog;
             QPushButton webserver_update_meta_button{"Update Metadata"};
 
             QGridLayout webserver_inspect_layout;
@@ -263,10 +283,20 @@ namespace divi
             // Run
             QGroupBox run_group{"Update Results"};
             QGridLayout run_layout;
-            QWidget run_spacer;
             QTimer run_timer;
             QTimer countdown_timer;
+            SignalDebouncer<QString> xml_results_debouncer;
 
+            QGridLayout working_dir_layout;
+            QLabel working_dir_label{"Working directory:"};
+            QLineEdit working_dir_input;
+            QPushButton working_dir_button{"..."};
+            QFileDialog working_dir_dialog;
+
+            QGridLayout run_control_layout;
+            QWidget run_control_spacer;
+
+            QWidget update_interval_container;
             QGridLayout update_interval_layout;
             QLabel update_interval_label{"Update interval (seconds):"};
             QSpinBox update_interval_input;

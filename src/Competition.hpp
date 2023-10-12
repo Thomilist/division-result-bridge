@@ -8,9 +8,9 @@
 #include <QTime>
 #include <QTimeZone>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
-#include "Helpers.hpp"
+#include "utils/Helpers.hpp"
 
 #include "Visibility.hpp"
 
@@ -42,7 +42,7 @@ namespace divi
             static const QString getOrganiserAlias();
 
             void setDate(const QString& a_date);
-            void setDate(const QDate& a_date);
+            void setDate(QDate a_date);
             const QString& getDate() const;
             static const QString getDateAlias();
 

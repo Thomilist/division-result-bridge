@@ -3,16 +3,20 @@
 
 namespace divi
 {
-    PersistentSettings::PersistentSettings(QMainWindow* a_main_window, Logger* a_log)
+    PersistentSettings::PersistentSettings(QMainWindow* a_main_window)
         : QSettings(a_main_window)
-        , Loggable(a_log, this)
-        , Settings(a_main_window)
+        , Loggable("loggable:persistent_settings")
+        , main_window(a_main_window)
     {
+        attachLogging(Helpers::loggerFile());
+        attachLogging(Helpers::loggerMain());
+        
         loadFromRegistry();
     }
     
     PersistentSettings::~PersistentSettings()
     {
+        setFirstTime(false);
         saveToRegistry();
     }
     
@@ -31,22 +35,105 @@ namespace divi
         return "version";
     }
     
-    void PersistentSettings::importConfig(const QString& a_path)
+    // Returns:
+    // 0 on success
+    // 1 on error
+    int PersistentSettings::importConfig(const QString& a_path)
     {
         setExternalConfigPath(a_path);
-        loadFromConfig();
-        return;
+        int error = loadFromConfig();
+
+        switch (error)
+        {
+            case 0:
+            {
+                log(MessageType::Success, "Internal / Import Config", 0, "Import Successful",
+                    QString()
+                    % "Successfully imported configuration from \""
+                    % a_path
+                    % "\"");
+                break;
+            }
+            case 1:
+            {
+                log(MessageType::Error, "Internal / Import Config", 0, "Import Failed",
+                    "The import path was empty - how did that happen?");
+                break;
+            }
+            case 2:
+            {
+                log(MessageType::Error, "Internal / Import Config", 0, "Import Failed",
+                    QString()
+                    % "Unable to read configuration file at \""
+                    % a_path
+                    % "\"");
+                break;
+            }
+            case 3:
+            {
+                log(MessageType::Error, "Internal / Import Config", 0, "Import Failed",
+                    QString()
+                    % "An error occured while parsing JSON from configuration file at \""
+                    % a_path
+                    % "\"");
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
+        return error;
     }
     
-    void PersistentSettings::exportConfig(const QString& a_path)
+    // Returns:
+    // 0 on success
+    // 1 on error
+    int PersistentSettings::exportConfig(const QString& a_path)
     {
         setExternalConfigPath(a_path);
-        saveToConfig();
-        return;
+        int error = saveToConfig();
+
+        switch (error)
+        {
+            case 0:
+            {
+                log(MessageType::Success, "Internal / Export Config", 0, "Export Successful",
+                    QString()
+                    % "Successfully exported configuration to \""
+                    % a_path
+                    % "\"");
+                break;
+            }
+            case 1:
+            {
+                log(MessageType::Error, "Internal / Export Config", 0, "Export Failed",
+                    "The export path was empty - how did that happen?");
+                break;
+            }
+            case 2:
+            {
+                log(MessageType::Error, "Internal / Export Config", 0, "Export Failed",
+                    QString()
+                    % "Unable to write configuration file at \""
+                    % a_path
+                    % "\"");
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
+        return error;
     }
     
     void PersistentSettings::loadFromRegistry()
     {
+        Settings default_settings;
+        
         // Main window dimensions and position
         const QByteArray geometry = value(getWindowGeometryAlias(), QByteArray()).toByteArray();
 
@@ -58,41 +145,47 @@ namespace divi
         // Competition
         beginGroup(getCompetitionAlias());
 
-        competition.setID(value(Competition::getIDAlias(), 0).toInt());
-        competition.setPassword(value(Competition::getPasswordAlias(), "").toString());
-        competition.setName(value(Competition::getNameAlias(), "").toString());
-        competition.setOrganiser(value(Competition::getOrganiserAlias(), "").toString());
-        competition.setDate(value(Competition::getDateAlias(), QDate::currentDate().toString(Helpers::dateFormat())).toString());
-        competition.setTimeZone(value(Competition::getTimeZoneAlias(), QTimeZone::systemTimeZoneId()).toString());
-        competition.setVisibility(value(Competition::getVisibilityAlias(), Helpers::visibility(Visibility::PRIVATE)).toString());
-        competition.setLiveresultsID(value(Competition::getLiveresultsIDAlias(), 0).toInt());
+        const auto& default_competition = default_settings.getCompetition();
+        auto& competition_settings = getCompetition();
+
+        competition_settings.setID(value(Competition::getIDAlias(), default_competition.getID()).toInt());
+        competition_settings.setPassword(value(Competition::getPasswordAlias(), default_competition.getPassword()).toString());
+        competition_settings.setName(value(Competition::getNameAlias(), default_competition.getName()).toString());
+        competition_settings.setOrganiser(value(Competition::getOrganiserAlias(), default_competition.getOrganiser()).toString());
+        competition_settings.setDate(value(Competition::getDateAlias(), default_competition.getDate()).toString());
+        competition_settings.setTimeZone(value(Competition::getTimeZoneAlias(), default_competition.getTimeZone()).toString());
+        competition_settings.setVisibility(value(Competition::getVisibilityAlias(), default_competition.getVisibility()).toString());
+        competition_settings.setLiveresultsID(value(Competition::getLiveresultsIDAlias(), default_competition.getLiveresultsID()).toInt());
 
         endGroup();
 
-        auto temp_locations = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
-        const QString default_working_dir = temp_locations.isEmpty() ? "" : temp_locations.front();
-
         // General settings
-        external_config_path = value(getExternalConfigPathAlias(), "").toString();
-        working_dir = value(getWorkingDirAlias(), default_working_dir).toString();
-        divi_exe_path = value(getDiviExePathAlias(), "").toString();
-        meos_address = value(getMeosAddressAlias(), Helpers::defaultMeosInfoServerAddress()).toString();
-        webserver_address = value(getWebserverAddressAlias(), Helpers::defaultWebServerAddress()).toString();
-        update_interval = value(getUpdateIntervalAlias(), 60).toInt();
-        save_pretty_log = value(getPrettyLoggingAlias(), true).toBool();
-        save_raw_log = value(getRawLoggingAlias(), true).toBool();
+        setFirstTime(value(getFirstTimeAlias(), default_settings.isFirstTime()).toBool());
+        setResultSource(Helpers::resultSource(value(getResultSourceAlias(), Helpers::resultSource(default_settings.getResultSource())).toString()));
+        setExternalConfigPath(value(getExternalConfigPathAlias(), default_settings.getExternalConfigPath()).toString());
+        setWorkingDir(value(getWorkingDirAlias(), default_settings.getWorkingDir()).toString());
+        setDiviExePath(value(getDiviExePathAlias(), default_settings.getDiviExePath()).toString());
+        setXmlResultPath(value(getXmlResultPathAlias(), default_settings.getXmlResultPath()).toString());
+        setMeosAddress(value(getMeosAddressAlias(), default_settings.getMeosAddress()).toString());
+        setWebserverAddress(value(getWebserverAddressAlias(), default_settings.getWebserverAddress()).toString());
+        setUpdateInterval(value(getUpdateIntervalAlias(), default_settings.getUpdateInterval()).toInt());
+        setPrettyLogging(value(getPrettyLoggingAlias(), default_settings.getPrettyLogging()).toBool());
+        setRawLogging(value(getRawLoggingAlias(), default_settings.getRawLogging()).toBool());
 
         // Divisions
         int size = beginReadArray(getDivisionsAlias());
         divisions.clear();
 
+        Division default_division;
+
         for (int index = 0; index < size; ++index)
         {
             setArrayIndex(index);
             divisions.push_back(Division(
-                value(Division::getIDAlias()).toInt(),
-                value(Division::getDivisionConfigPathAlias()).toString(),
-                value(Division::getNameAlias()).toString()
+                value(Division::getIDAlias(), default_division.getID()).toInt(),
+                value(Division::getNameAlias(), default_division.getName()).toString(),
+                value(Division::getConfigPathAlias(), default_division.getConfigPath()).toString(),
+                value(Division::getInfoServerAddressAlias(), default_division.getInfoServerAddress()).toString()
             ));
         }
 
@@ -109,38 +202,44 @@ namespace divi
         // Competition
         beginGroup(getCompetitionAlias());
 
-        setValue(Competition::getIDAlias(), competition.getID());
-        setValue(Competition::getPasswordAlias(), competition.getPassword());
-        setValue(Competition::getNameAlias(), competition.getName());
-        setValue(Competition::getOrganiserAlias(), competition.getOrganiser());
-        setValue(Competition::getDateAlias(), competition.getDate());
-        setValue(Competition::getTimeZoneAlias(), competition.getTimeZone());
-        setValue(Competition::getVisibilityAlias(), competition.getVisibility());
-        setValue(Competition::getLiveresultsIDAlias(), competition.getLiveresultsID());
+        const auto& competition_settings = getCompetition();
+
+        setValue(Competition::getIDAlias(), competition_settings.getID());
+        setValue(Competition::getPasswordAlias(), competition_settings.getPassword());
+        setValue(Competition::getNameAlias(), competition_settings.getName());
+        setValue(Competition::getOrganiserAlias(), competition_settings.getOrganiser());
+        setValue(Competition::getDateAlias(), competition_settings.getDate());
+        setValue(Competition::getTimeZoneAlias(), competition_settings.getTimeZone());
+        setValue(Competition::getVisibilityAlias(), competition_settings.getVisibility());
+        setValue(Competition::getLiveresultsIDAlias(), competition_settings.getLiveresultsID());
 
         endGroup();
 
         // General settings
-        setValue(getExternalConfigPathAlias(), external_config_path);
-        setValue(getWorkingDirAlias(), working_dir);
-        setValue(getDiviExePathAlias(), divi_exe_path);
-        setValue(getMeosAddressAlias(), meos_address);
-        setValue(getWebserverAddressAlias(), webserver_address);
-        setValue(getUpdateIntervalAlias(), update_interval);
-        setValue(getPrettyLoggingAlias(), save_pretty_log);
-        setValue(getRawLoggingAlias(), save_raw_log);
+        setValue(getFirstTimeAlias(), isFirstTime());
+        setValue(getResultSourceAlias(), Helpers::resultSource(getResultSource()));
+        setValue(getExternalConfigPathAlias(), getExternalConfigPath());
+        setValue(getWorkingDirAlias(), getWorkingDir());
+        setValue(getDiviExePathAlias(), getDiviExePath());
+        setValue(getXmlResultPathAlias(), getXmlResultPath());
+        setValue(getMeosAddressAlias(), getMeosAddress());
+        setValue(getWebserverAddressAlias(), getWebserverAddress());
+        setValue(getUpdateIntervalAlias(), getUpdateInterval());
+        setValue(getPrettyLoggingAlias(), getPrettyLogging());
+        setValue(getRawLoggingAlias(), getRawLogging());
 
         // Divisions
         beginWriteArray(getDivisionsAlias());
 
         int index = 0;
 
-        for (const auto& division : divisions)
+        for (const auto& division : getDivisions())
         {
             setArrayIndex(index++);
             setValue(Division::getIDAlias(), division.getID());
-            setValue(Division::getDivisionConfigPathAlias(), division.getDivisionConfigPath());
             setValue(Division::getNameAlias(), division.getName());
+            setValue(Division::getConfigPathAlias(), division.getConfigPath());
+            setValue(Division::getInfoServerAddressAlias(), division.getInfoServerAddress());
         }
 
         endArray();
@@ -148,11 +247,17 @@ namespace divi
         return;
     }
     
-    void PersistentSettings::loadFromConfig()
+    // Returns:
+    // 0 on success
+    // 1 on empty path
+    // 2 on file IO error
+    // 3 on JSON error
+    // 4 on invalid metadata
+    int PersistentSettings::loadFromConfig()
     {
         if (external_config_path.isEmpty())
         {
-            return;
+            return 1;
         }
 
         QFile json_file{external_config_path};
@@ -163,14 +268,19 @@ namespace divi
 
             if (json_doc.isNull())
             {
-                return;
+                return 3;
             }
 
             QJsonObject json = json_doc.object();
 
             if (!isLoadedConfigValid(json))
             {
-                return;
+                return 4;
+            }
+
+            if (const QJsonValue value = json[getResultSourceAlias()]; value.isString())
+            {
+                setResultSource(value.toString());
             }
 
             if (const QJsonValue value = json[getCompetitionAlias()]; value.isObject())
@@ -181,27 +291,32 @@ namespace divi
 
             if (const QJsonValue value = json[getWorkingDirAlias()]; value.isString())
             {
-                working_dir = value.toString();
+                setWorkingDir(value.toString());
             }
 
             if (const QJsonValue value = json[getDiviExePathAlias()]; value.isString())
             {
-                divi_exe_path = value.toString();
+                setDiviExePath(value.toString());
+            }
+
+            if (const QJsonValue value = json[getXmlResultPath()]; value.isString())
+            {
+                setXmlResultPath(value.toString());
             }
 
             if (const QJsonValue value = json[getMeosAddressAlias()]; value.isString())
             {
-                meos_address = value.toString();
+                setMeosAddress(value.toString());
             }
 
             if (const QJsonValue value = json[getWebserverAddressAlias()]; value.isString())
             {
-                webserver_address = value.toString();
+                setWebserverAddress(value.toString());
             }
 
             if (const QJsonValue value = json[getUpdateIntervalAlias()]; value.isDouble())
             {
-                update_interval = value.toInt();
+                setUpdateInterval(value.toInt());
             }
 
             if (const QJsonValue value = json[getDivisionsAlias()]; value.isArray())
@@ -218,37 +333,47 @@ namespace divi
                 }
             }
         }
+        else
+        {
+            return 2;
+        }
 
-        return;
+        return 0;
     }
     
-    void PersistentSettings::saveToConfig()
+    // Returns:
+    // 0 on success
+    // 1 on empty path
+    // 2 on file IO error
+    int PersistentSettings::saveToConfig()
     {
         if (external_config_path.isEmpty())
         {
-            return;
+            return 1;
         }
 
         QJsonObject json;
         QJsonObject meta_json;
         QJsonArray divisions_json;
-        QJsonObject competition_json = competition.toJson();
+        QJsonObject competition_json = getCompetition().toJson();
 
         meta_json[getConfigSourceAlias()] = Helpers::projectName();
         meta_json[getConfigVersionAlias()] = Helpers::projectVersion();
         json[getConfigMetadataAlias()] = meta_json;
         
-        for (const Division& division : divisions)
+        for (const Division& division : getDivisions())
         {
             divisions_json.push_back(division.toJson());
         }
 
+        json[getResultSourceAlias()] = Helpers::resultSource(getResultSource());
         json[getCompetitionAlias()] = competition_json;
-        json[getWorkingDirAlias()] = working_dir;
-        json[getDiviExePathAlias()] = divi_exe_path;
-        json[getMeosAddressAlias()] = meos_address;
-        json[getWebserverAddressAlias()] = webserver_address;
-        json[getUpdateIntervalAlias()] = update_interval;
+        json[getWorkingDirAlias()] = getWorkingDir();
+        json[getDiviExePathAlias()] = getDiviExePath();
+        json[getXmlResultPathAlias()] = getXmlResultPath();
+        json[getMeosAddressAlias()] = getMeosAddress();
+        json[getWebserverAddressAlias()] = getWebserverAddress();
+        json[getUpdateIntervalAlias()] = getUpdateInterval();
         json[getDivisionsAlias()] = divisions_json;
 
         QJsonDocument json_doc{json};
@@ -259,8 +384,12 @@ namespace divi
             QTextStream json_output{&config_file};
             json_output << json_doc.toJson();
         }
+        else
+        {
+            return 2;
+        }
 
-        return;
+        return 0;
     }
     
     bool PersistentSettings::isLoadedConfigValid(const QJsonObject& a_config_json)
@@ -313,16 +442,16 @@ namespace divi
 
         auto version_comparison = Version::compare(Helpers::projectVersion(), version_tag);
 
-        if (version_comparison == VersionComparison::Undefined)
+        if (version_comparison == VersionComparison::_Undefined)
         {
-            log(MessageType::Warning, "Internal / Import Config", 0, "Undefined Config Version",
+            log(MessageType::Warning, "Internal / Import Config", 0, "_Undefined Config Version",
                 QString()
                 % getConfigMetadataAlias()
                 % "."
                 % getConfigVersionAlias()
                 % " is undefined");
         }
-        else if (std::ranges::contains(std::vector{
+        else if (std::ranges::contains(std::array{
             VersionComparison::OlderMajor,
             VersionComparison::OlderMinor,
             VersionComparison::OlderPatch}
@@ -336,7 +465,7 @@ namespace divi
                 % Helpers::projectVersion()
                 % ". "
                 % (version_comparison == VersionComparison::OlderMajor
-                    ? "There may be breaking changes between the versions, so proceed with care"
+                    ? "There may be breaking changes between these versions, so proceed with care"
                     : "This should be okay, but check the imported values to be sure"));
         }
 

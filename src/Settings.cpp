@@ -3,9 +3,17 @@
 
 namespace divi
 {
-    Settings::Settings(QMainWindow* a_main_window)
-        : main_window(a_main_window)
-    { }
+    Settings::Settings()
+    {
+        const auto desktop_locations = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation);
+        setExternalConfigPath((desktop_locations.isEmpty() ? "" : desktop_locations.front()));
+
+        const auto temp_locations = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
+        setWorkingDir((temp_locations.isEmpty() ? "" : temp_locations.front()));
+
+        setMeosAddress(Helpers::defaultMeosInfoServerAddress());
+        setWebserverAddress(Helpers::defaultWebServerAddress());
+    }
     
     Settings::~Settings()
     { }
@@ -35,6 +43,48 @@ namespace divi
     const QString Settings::getWindowGeometryAlias()
     {
         return "window_geometry";
+    }
+    
+    void Settings::setFirstTime(bool a_state)
+    {
+        first_time = a_state;
+        return;
+    }
+    
+    bool Settings::isFirstTime() const
+    {
+        return first_time;
+    }
+    
+    const QString Settings::getFirstTimeAlias()
+    {
+        return "first_time";
+    }
+    
+    void Settings::setResultSource(const QString& a_result_source)
+    {
+        if (const ResultSource new_source = Helpers::resultSource(a_result_source); new_source != ResultSource::_Undefined)
+        {
+            result_source = new_source;
+        }
+
+        return;
+    }
+    
+    void Settings::setResultSource(ResultSource a_result_source)
+    {
+        result_source = a_result_source;
+        return;
+    }
+    
+    ResultSource Settings::getResultSource() const
+    {
+        return result_source;
+    }
+    
+    const QString Settings::getResultSourceAlias()
+    {
+        return "result_source";
     }
     
     Competition& Settings::getCompetition()
@@ -121,8 +171,20 @@ namespace divi
         return "working_dir";
     }
     
-    const QString Settings::getXMLResultPath()
+    const QString Settings::getDynamicXmlResultPath()
     {
+        switch (result_source)
+        {
+            case ResultSource::XmlDivi:
+            {
+                return xml_result_path;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        
         return getWorkingDir() % "/results.xml";
     }
     
@@ -160,6 +222,22 @@ namespace divi
     const QString Settings::getDiviExePathAlias()
     {
         return "divi_exe_path";
+    }
+    
+    void Settings::setXmlResultPath(const QString& a_path)
+    {
+        xml_result_path = a_path;
+        return;
+    }
+    
+    const QString& Settings::getXmlResultPath() const
+    {
+        return xml_result_path;
+    }
+    
+    const QString Settings::getXmlResultPathAlias()
+    {
+        return "xml_result_path";
     }
     
     void Settings::setMeosAddress(const QString& a_address)

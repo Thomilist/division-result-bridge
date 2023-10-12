@@ -8,9 +8,11 @@
 #include <QAbstractTableModel>
 #include <QModelIndex>
 #include <QObject>
+#include <QString>
+#include <QStringBuilder>
 #include <QVariant>
 
-#include "ForwardDeclarations.hpp"
+#include "utils/ForwardDeclarations.hpp"
 
 #include "Division.hpp"
 #include "Settings.hpp"
@@ -22,6 +24,15 @@ namespace divi
         Q_OBJECT
         
         public:
+            enum Column : unsigned int
+            {
+                ID,
+                Name,
+                ConfigPath,
+                InfoServerAddress,
+                _Count
+            };
+
             DivisionTableModel(Settings* a_settings, QObject* a_parent = nullptr);
             ~DivisionTableModel();
 
