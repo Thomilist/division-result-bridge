@@ -23,9 +23,9 @@ namespace divi
         , create_new_competition_action("Create new competition")
         , create_new_competition_wizard(&settings, this)
         , import_metadata_from_meos_action("Import metadata from MeOS")
-        , import_config_action("Import configuration")
-        , export_config_action("Export configuration")
-        , validate_config_action("Validate configuration")
+        , import_config_action("Import")
+        , export_config_action("Export")
+        , validate_config_action("Validate")
         , config_validator(&settings)
         , compatibility_menu("Compatibility", this)
         , result_source_menu("Result Source", &compatibility_menu)
@@ -273,10 +273,15 @@ namespace divi
         if (import_config_dialog.exec())
         {
             QString file = import_config_dialog.selectedFiles().front();
-            settings.importConfig(file);
-            populate();
             import_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
             export_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
+
+            if (settings.importConfig(file))
+            {
+                return;
+            }
+            
+            populate();
             config_validator.validate();
         }
         
@@ -288,9 +293,9 @@ namespace divi
         if (export_config_dialog.exec())
         {
             QString file = export_config_dialog.selectedFiles().front();
-            settings.exportConfig(file);
             import_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
             export_config_dialog.setDirectory(QFileInfo{file}.absoluteDir());
+            settings.exportConfig(file);
         }
         
         return;
@@ -370,6 +375,7 @@ namespace divi
         webserver_view_button.setEnabled(webserver_defined);
         
         import_metadata_from_meos_action.setEnabled(meos_defined);
+        import_metadata_from_meos_action.setVisible(meos_defined);
 
         start_button.setEnabled(competition_complete && config_complete && !running && !actively_processing);
         run_once_button.setEnabled(competition_complete && config_complete && !running && !actively_processing);
@@ -1210,7 +1216,7 @@ namespace divi
         (
             QString()
             % "Competition ID for "
-            % "<a href=\""
+            % "<a style=\"color:#1d99f3\" href=\""
             % liveresults_url
             % "\">"
             % "liveresultat.orientering.se"

@@ -37,7 +37,10 @@ namespace divi
     
     // Returns:
     // 0 on success
-    // 1 on error
+    // 1 on empty path
+    // 2 on file IO error
+    // 3 on JSON error
+    // 4 on invalid metadata
     int PersistentSettings::importConfig(const QString& a_path)
     {
         setExternalConfigPath(a_path);
@@ -89,7 +92,8 @@ namespace divi
     
     // Returns:
     // 0 on success
-    // 1 on error
+    // 1 on empty path
+    // 2 on file IO error
     int PersistentSettings::exportConfig(const QString& a_path)
     {
         setExternalConfigPath(a_path);
