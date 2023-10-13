@@ -15,7 +15,7 @@ namespace divi
     
     const QString Helpers::projectVersion()
     {
-        return "1.1.0";
+        return PROJECT_VERSION;
     }
     
     const QString Helpers::authorName()

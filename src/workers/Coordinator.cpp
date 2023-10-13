@@ -75,6 +75,10 @@ namespace divi
     
     void Coordinator::updateResults(bool a_fresh_start)
     {
+        #ifdef Q_OS_WIN
+        QNtfsPermissionCheckGuard ntfs_permissions;
+        #endif
+        
         prepareWorkingDir();
 
         switch (settings_cache.getResultSource())

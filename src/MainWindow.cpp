@@ -120,6 +120,7 @@ namespace divi
     {
         settings.setResultSource(a_result_source);
         updateLayout();
+        updateInterfaceState();
         return;    
     }
     
@@ -354,7 +355,8 @@ namespace divi
             && !webserver_address_input.text().isEmpty();
         
         bool meos_defined
-            = !meos_address_input.text().isEmpty();
+            = !meos_address_input.text().isEmpty()
+            && settings.getResultSource() == ResultSource::MeosDivi;
         
         bool divisions_empty = settings.getDivisions().size() == 0;
         bool division_selected = !division_table.selectionModel()->selectedIndexes().isEmpty();
@@ -947,12 +949,11 @@ namespace divi
         menuBar()->addMenu(&competition_menu);
         competition_menu.addAction(&create_new_competition_action);
         competition_menu.addSeparator();
-        competition_menu.addAction(&import_metadata_from_meos_action);
-        competition_menu.addSeparator();
         competition_menu.addAction(&import_config_action);
         competition_menu.addAction(&export_config_action);
-        competition_menu.addSeparator();
         competition_menu.addAction(&validate_config_action);
+        competition_menu.addSeparator();
+        competition_menu.addAction(&import_metadata_from_meos_action);
 
         menuBar()->addMenu(&compatibility_menu);
         compatibility_menu.addMenu(&result_source_menu);

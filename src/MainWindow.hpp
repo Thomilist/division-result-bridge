@@ -1,8 +1,6 @@
 #ifndef __MAINWINDOW_H__
 #define __MAINWINDOW_H__
 
-#include <QDebug>
-
 #include <array>
 #include <limits>
 #include <set>

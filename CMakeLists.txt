@@ -50,7 +50,18 @@ else()
     set(SERVER_ADDRESS http://www.example.com/)
 endif()
 
-configure_file(Secrets.hpp.in Secrets.hpp)
+set(ORIGIN_YEAR "2023")
+string(TIMESTAMP CURRENT_YEAR "%Y")
+string(COMPARE EQUAL ${ORIGIN_YEAR} ${CURRENT_YEAR} YEARS_EQUAL)
+
+if (YEARS_EQUAL)
+    set(PROJECT_YEAR_RANGE ${ORIGIN_YEAR})
+else()
+    string(CONCAT PROJECT_YEAR_RANGE ${ORIGIN_YEAR} "-" ${CURRENT_YEAR})
+endif()
+
+configure_file(src/configure-files/Secrets.hpp.in Secrets.hpp)
+configure_file(src/configure-files/LICENSE ${CMAKE_SOURCE_DIR}/LICENSE)
 
 add_subdirectory(src)
 target_link_libraries(

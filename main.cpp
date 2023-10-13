@@ -8,16 +8,8 @@
 #include "src/MainWindow.hpp"
 #include "src/version/Version.hpp"
 
-#ifdef _WIN32
-extern Q_CORE_EXPORT int qt_ntfs_permission_lookup;
-#endif
-
 int main(int argc, char* argv[])
 {
-    #ifdef _WIN32
-    ++qt_ntfs_permission_lookup;
-    #endif
-    
     QApplication application{argc, argv};
 
     divi::Version version{divi::Helpers::projectVersion()};
@@ -30,11 +22,5 @@ int main(int argc, char* argv[])
 
     QObject::connect(&application, &QApplication::lastWindowClosed, &application, &QApplication::quit);
 
-    const int status = application.exec();
-
-    #ifdef _WIN32
-    --qt_ntfs_permission_lookup;
-    #endif
-    
-    return status;
+    return application.exec();
 }

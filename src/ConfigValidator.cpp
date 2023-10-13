@@ -23,6 +23,10 @@ namespace divi
     
     int ConfigValidator::validate()
     {
+        #ifdef Q_OS_WIN
+        QNtfsPermissionCheckGuard ntfs_permissions;
+        #endif
+        
         int issues = 0;
 
         // Compatibility
