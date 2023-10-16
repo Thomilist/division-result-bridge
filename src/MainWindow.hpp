@@ -126,6 +126,8 @@ namespace divi
             void updateLayout();
             void startTimer();
             int startFileWatcher(const QString& a_file_path);
+            void stopFileWatcher();
+            void pauseFileWatcher(bool a_pause);
 
             bool running = false;
             bool actively_processing = false;

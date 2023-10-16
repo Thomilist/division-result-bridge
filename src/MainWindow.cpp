@@ -157,12 +157,8 @@ namespace divi
             }
             case ResultSource::XmlDivi:
             {
-                if (startFileWatcher(settings.getDynamicXmlResultPath()) != 0)
-                {
-                    stop();
-                    return;
-                }
-
+                // File watcher is started under "setActivelyProcessing",
+                // as watching while processing yields extra (incorrect) triggers
                 break;
             }
             default:
@@ -183,7 +179,7 @@ namespace divi
 
         countdown_timer.stop();
         run_timer.stop();
-        file_watcher.removePaths(file_watcher.files());
+        stopFileWatcher();
         
         running = false;
         disableRestrictedItems(false);
@@ -215,7 +211,6 @@ namespace divi
 
             if (startFileWatcher(a_file_path) != 0)
             {
-                stop();
                 return;
             }
         }
@@ -264,6 +259,7 @@ namespace divi
     void MainWindow::setActivelyProcessing(bool a_state)
     {
         actively_processing = a_state;
+        pauseFileWatcher(actively_processing);
         updateInterfaceState();
         return;
     }
@@ -1398,10 +1394,62 @@ namespace divi
                 % "An error occured while trying to watch the file at path \""
                 % a_file_path
                 % "\". Further updates aborted");
+
+            if (running)
+            {
+                stop();
+            }
             
             return 1;
         }
 
         return 0;
+    }
+    
+    void MainWindow::stopFileWatcher()
+    {
+        file_watcher.removePaths(file_watcher.files());
+        return;
+    }
+    
+    void MainWindow::pauseFileWatcher(bool a_pause)
+    {
+        switch (settings.getResultSource())
+        {
+            case ResultSource::XmlDivi:
+            {
+                break;
+            }
+            default:
+            {
+                return;
+            }
+        }
+
+        if (!running)
+        {
+            return;
+        }
+
+        if (a_pause)
+        {
+            stopFileWatcher();
+        }
+        else
+        {
+            auto result_path = settings.getDynamicXmlResultPath();
+            
+            if (file_watcher.files().contains(result_path))
+            {
+                return;
+            }
+            
+            if (startFileWatcher(result_path) != 0)
+            {
+                return;
+            }
+        }
+
+        return;
     }
 }
