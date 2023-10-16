@@ -27,7 +27,7 @@ if %os_choice%==1 (
 
 set project_name=division-result-bridge
 set version_name=%project_name%-%version_tag%-%os%-%cpu_arch%
-set project_dir=D:\Programming\cpp\projects\%project_name%
+set project_dir=%~dp0\..
 set release_dir=%project_dir%\releases\%version_name%
 set dll_dir=C:\msys64\mingw64\bin
 set build_dir=%project_dir%\build
@@ -40,13 +40,13 @@ echo Creating new release titled %version_name%...
 echo Creating directory...
 mkdir %release_dir%
 
+echo Copying %project_name% executable...
+xcopy %build_dir%\%project_name%.exe %release_dir%
+
 echo Copying DLL files...
 for /f %%d in ('%ntldd% -R %build_dir%\%project_name%.exe ^| grep lib') do (
     xcopy %dll_dir%\%%d %release_dir%
 )
-
-echo Copying %project_name% executable...
-xcopy %build_dir%\%project_name%.exe %release_dir%
 
 echo Fetching Qt resources...
 %qtdeploy% %release_dir%\%project_name%.exe
