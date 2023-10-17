@@ -18,6 +18,6 @@ const config = {
 	}
 };
 
-config.paths = { base: process.argv.includes('dev') ? '' : process.env.BASE_PATH }
+config.paths = { base: process.argv.includes('dev') ? '' : '/division-result-bridge' }
 
 export default config;
