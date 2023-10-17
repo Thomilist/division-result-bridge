@@ -14,10 +14,11 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$styles: "src/styles"
+		},
+		paths: {
+			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
 		}
 	}
 };
-
-config.paths = { base: process.argv.includes('dev') ? '' : '/division-result-bridge' }
 
 export default config;
