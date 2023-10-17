@@ -1,0 +1,74 @@
+$light_background: white;
+$light_text: black;
+$light_navbar: blue;
+$light_navbar_text: rgb(255, 255, 255);
+$light_navbar_highlight: rgb(64, 64, 255);
+$light_navbar_border: none;
+
+$dark_background: rgb(63, 63, 63);
+$dark_text: white;
+$dark_navbar: darkblue;
+$dark_navbar_text: rgb(255, 255, 255);
+$dark_navbar_highlight: blue;
+$dark_navbar_border: none;
+
+$oled_background: black;
+$oled_text: white;
+$oled_navbar: black;
+$oled_navbar_text: rgb(255, 255, 255);
+$oled_navbar_highlight: darkblue;
+$oled_navbar_border: blue;
+
+:global(.themed.light) {
+    --col-background: #{$light_background};
+    --col-text: #{$light_text};
+    --col-navbar: #{$light_navbar};
+    --col-navbar-text: #{$light_navbar_text};
+    --col-navbar-highlight: #{$light_navbar_highlight};
+    --col-navbar-border: #{$light_navbar_border};
+}
+
+:global(.themed.dark) {
+    --col-background: #{$dark_background};
+    --col-text: #{$dark_text};
+    --col-navbar: #{$dark_navbar};
+    --col-navbar-text: #{$dark_navbar_text};
+    --col-navbar-highlight: #{$dark_navbar_highlight};
+    --col-navbar-border: #{$dark_navbar_border};
+}
+
+:global(.themed.oled) {
+    --col-background: #{$oled_background};
+    --col-text: #{$oled_text};
+    --col-navbar: #{$oled_navbar};
+    --col-navbar-text: #{$oled_navbar_text};
+    --col-navbar-highlight: #{$oled_navbar_highlight};
+    --col-navbar-border: #{$oled_navbar_border};
+}
+
+@media (prefers-color-scheme: light) {
+    :global(.themed.system) {
+        --col-background: #{$light_background};
+        --col-text: #{$light_text};
+        --col-navbar: #{$light_navbar};
+        --col-navbar-text: #{$light_navbar_text};
+        --col-navbar-highlight: #{$light_navbar_highlight};
+        --col-navbar-border: #{$light_navbar_border};
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :global(.themed.system) {
+        --col-background: #{$dark_background};
+        --col-text: #{$dark_text};
+        --col-navbar: #{$dark_navbar};
+        --col-navbar-text: #{$dark_navbar_text};
+        --col-navbar-highlight: #{$dark_navbar_highlight};
+        --col-navbar-border: #{$dark_navbar_border};
+    }
+}
+
+:global(.themed) {
+    background-color: var(--col-background, $dark_background);
+    color: var(--col-text, $dark_text);
+}

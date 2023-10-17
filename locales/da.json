@@ -1,0 +1,38 @@
+{
+    "meta":
+    {
+        "id": "da",
+        "name": "Dansk",
+        "flag": "🇩🇰"
+    },
+    "theme":
+    {
+        "system":
+        {
+            "name": "System"
+        },
+        "light":
+        {
+            "name": "Lys"
+        },
+        "dark":
+        {
+            "name": "Mørk"
+        },
+        "oled":
+        {
+            "name": "OLED"
+        }
+    },
+    "page":
+    {
+        "home":
+        {
+            "title": "Hjem"
+        },
+        "about":
+        {
+            "title": "Om"
+        }
+    }
+}

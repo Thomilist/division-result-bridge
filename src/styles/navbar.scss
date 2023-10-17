@@ -1,0 +1,42 @@
+nav {
+    background-color: var(--col-navbar);
+    outline: 1px solid var(--col-navbar-border);
+    display: grid;
+    grid-template-columns: auto max-content;
+    grid-template-rows: auto;
+    grid-template-areas: "links settings";
+    align-items: center;
+    justify-items: left;
+
+    ul {
+        list-style: none;
+        margin: 0;
+
+        li {
+            display: inline-block;
+            
+            :hover {
+                background-color: var(--col-navbar-highlight);
+            }
+        }
+    }
+}
+
+.nav-links {
+    grid-area: "links";
+
+    a {
+        display: block;
+        color: var(--col-navbar-text);
+        padding: 10px;
+    }
+}
+
+.nav-settings {
+    grid-area: "settings";
+}
+
+a {
+    text-decoration: none;
+    color: var(--col-text);
+}

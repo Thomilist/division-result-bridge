@@ -1,0 +1,38 @@
+{
+    "meta":
+    {
+        "id": "en",
+        "name": "English",
+        "flag": "🇬🇧"
+    },
+    "theme":
+    {
+        "system":
+        {
+            "name": "System"
+        },
+        "light":
+        {
+            "name": "Light"
+        },
+        "dark":
+        {
+            "name": "Dark"
+        },
+        "oled":
+        {
+            "name": "OLED"
+        }
+    },
+    "page":
+    {
+        "home":
+        {
+            "title": "Home"
+        },
+        "about":
+        {
+            "title": "About"
+        }
+    }
+}

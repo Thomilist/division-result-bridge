@@ -3,7 +3,5 @@
 </script>
 
 <h1>
-    {$t("page.home.title")}
+    {$t("page.about.title")}
 </h1>
-
-<p>Flag: {$t("meta.flag")}</p>
