@@ -2,6 +2,7 @@
     import { t } from 'svelte-intl-precompile';
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
+	import { base } from '$app/paths';
     
     const links =
     [
@@ -18,7 +19,7 @@
     <ul class="nav-links">
         {#each links as link}
             <li>
-                <a href={link.route}>{$t(link.name)}</a>
+                <a href="{base}{link.route}">{$t(link.name)}</a>
             </li>
         {/each}
     </ul>

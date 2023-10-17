@@ -16,7 +16,7 @@ const config = {
 			$styles: "src/styles"
 		},
 		paths: {
-			base: process.argv.includes('dev') ? '' : process.env.BASE_PATH
+			base: process.argv.includes('dev') ? '' : '/division-result-bridge'
 		}
 	}
 };
