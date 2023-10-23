@@ -5,7 +5,7 @@
     export let label: string = "";
 </script>
 
-<label for="languageselect">{label}</label>
+<label for="languageselect">{$t(`${label}`)}:</label>
 <select bind:value="{$locale}" id="languageselect">
     {#each $locales as loc}
         <option value={loc}>{locale_map.get(loc)}</option>

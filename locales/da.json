@@ -5,6 +5,18 @@
         "name": "Dansk",
         "flag": "🇩🇰"
     },
+    "options":
+    {
+        "name": "Indstillinger",
+        "theme":
+        {
+            "name": "Tema"
+        },
+        "language":
+        {
+            "name": "Sprog"
+        }
+    },
     "theme":
     {
         "system":

@@ -28,18 +28,18 @@
 
     <div class="nav-options-dropdown">
         <input type="checkbox" id="nav-options-dropbown-input"/>
-        <label for="nav-options-dropbown-input">Options</label>
+        <label for="nav-options-dropbown-input">{$t("options.name")}</label>
 
         <ul class="nav-options-list">
             <li>
                 <div class="nav-dropdown-item">
-                    <ThemeSwitch label="Theme:"/>
+                    <ThemeSwitch label="options.theme.name"/>
                 </div>
             </li>
     
             <li>
                 <div class="nav-dropdown-item">
-                    <LanguageSelect label="Language:"/>
+                    <LanguageSelect label="options.language.name"/>
                 </div>
             </li>
         </ul>

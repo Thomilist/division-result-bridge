@@ -5,6 +5,18 @@
         "name": "English",
         "flag": "🇬🇧"
     },
+    "options":
+    {
+        "name": "Options",
+        "theme":
+        {
+            "name": "Theme"
+        },
+        "language":
+        {
+            "name": "Language"
+        }
+    },
     "theme":
     {
         "system":
