@@ -44,7 +44,8 @@
         },
         "about":
         {
-            "title": "Om"
+            "title": "Om",
+            "icon-credit": "Ikoner fra <a href=\"https://icons8.com/\">Icons8</a> og <a href=\"https://www.iconbolt.com/\">Icon Bolt</a>."
         }
     }
 }

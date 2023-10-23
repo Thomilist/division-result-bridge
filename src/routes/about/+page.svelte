@@ -5,3 +5,7 @@
 <h1>
     {$t("page.about.title")}
 </h1>
+
+<p>
+    {@html $t("page.about.icon-credit")}
+</p>

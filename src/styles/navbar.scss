@@ -49,7 +49,9 @@
     }
 
     label {
-        display: block;
+        display: grid;
+        grid-template-columns: 20px auto;
+        gap: 5px;
         padding: 10px;
     }
 
@@ -71,7 +73,6 @@
             width: 1fr;
             display: grid;
             grid-template-columns: auto max-content;
-            grid-template-rows: auto;
             gap: 20px;
             margin: 0;
             padding: 10px;

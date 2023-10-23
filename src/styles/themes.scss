@@ -1,12 +1,14 @@
 $light_background: white;
 $light_text: black;
+$light_text_link: rgb(0, 0, 238);
 $light_navbar: blue;
 $light_navbar_text: rgb(255, 255, 255);
 $light_navbar_highlight: rgb(64, 64, 255);
 $light_navbar_border: none;
 
-$dark_background: rgb(63, 63, 63);
+$dark_background: rgb(49, 51, 56);
 $dark_text: white;
+$dark_text_link: rgb(0, 168, 252);
 $dark_navbar: darkblue;
 $dark_navbar_text: rgb(255, 255, 255);
 $dark_navbar_highlight: blue;
@@ -14,6 +16,7 @@ $dark_navbar_border: none;
 
 $oled_background: black;
 $oled_text: white;
+$oled_text_link: rgb(0, 168, 252);
 $oled_navbar: black;
 $oled_navbar_text: rgb(255, 255, 255);
 $oled_navbar_highlight: darkblue;
@@ -22,6 +25,7 @@ $oled_navbar_border: blue;
 :global(.themed.light) {
     --col-background: #{$light_background};
     --col-text: #{$light_text};
+    --col-text-link: #{$light_text_link};
     --col-navbar: #{$light_navbar};
     --col-navbar-text: #{$light_navbar_text};
     --col-navbar-highlight: #{$light_navbar_highlight};
@@ -31,6 +35,7 @@ $oled_navbar_border: blue;
 :global(.themed.dark) {
     --col-background: #{$dark_background};
     --col-text: #{$dark_text};
+    --col-text-link: #{$dark_text_link};
     --col-navbar: #{$dark_navbar};
     --col-navbar-text: #{$dark_navbar_text};
     --col-navbar-highlight: #{$dark_navbar_highlight};
@@ -40,6 +45,7 @@ $oled_navbar_border: blue;
 :global(.themed.oled) {
     --col-background: #{$oled_background};
     --col-text: #{$oled_text};
+    --col-text-link: #{$oled_text_link};
     --col-navbar: #{$oled_navbar};
     --col-navbar-text: #{$oled_navbar_text};
     --col-navbar-highlight: #{$oled_navbar_highlight};
@@ -50,6 +56,7 @@ $oled_navbar_border: blue;
     :global(.themed.system) {
         --col-background: #{$light_background};
         --col-text: #{$light_text};
+        --col-text-link: #{$light_text_link};
         --col-navbar: #{$light_navbar};
         --col-navbar-text: #{$light_navbar_text};
         --col-navbar-highlight: #{$light_navbar_highlight};
@@ -61,6 +68,7 @@ $oled_navbar_border: blue;
     :global(.themed.system) {
         --col-background: #{$dark_background};
         --col-text: #{$dark_text};
+        --col-text-link: #{$dark_text_link};
         --col-navbar: #{$dark_navbar};
         --col-navbar-text: #{$dark_navbar_text};
         --col-navbar-highlight: #{$dark_navbar_highlight};
@@ -71,4 +79,8 @@ $oled_navbar_border: blue;
 :global(.themed) {
     background-color: var(--col-background, $dark_background);
     color: var(--col-text, $dark_text);
+
+    :global(a) {
+        color: var(--col-text-link);
+    }
 }

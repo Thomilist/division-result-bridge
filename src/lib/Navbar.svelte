@@ -3,6 +3,7 @@
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
 	import { base } from '$app/paths';
+	import OptionsIcon from './icons/OptionsIcon.svelte';
     
     const links =
     [
@@ -28,18 +29,18 @@
 
     <div class="nav-options-dropdown">
         <input type="checkbox" id="nav-options-dropbown-input"/>
-        <label for="nav-options-dropbown-input" class="nav-hoverable">{$t("options.name")}</label>
+        <label for="nav-options-dropbown-input" class="nav-hoverable"><OptionsIcon/>{$t("options.name")}</label>
 
         <ul class="nav-options-list">
             <li>
                 <div class="nav-dropdown-item nav-hoverable">
-                    <ThemeSwitch label="options.theme.name"/>
+                    <LanguageSelect label="options.language.name"/>
                 </div>
             </li>
-    
+
             <li>
                 <div class="nav-dropdown-item nav-hoverable">
-                    <LanguageSelect label="options.language.name"/>
+                    <ThemeSwitch label="options.theme.name"/>
                 </div>
             </li>
         </ul>

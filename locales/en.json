@@ -44,7 +44,8 @@
         },
         "about":
         {
-            "title": "About"
+            "title": "About",
+            "icon-credit": "Icons by <a href=\"https://icons8.com/\">Icons8</a> and <a href=\"https://www.iconbolt.com/\">Icon Bolt</a>."
         }
     }
 }
