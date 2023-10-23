@@ -1,9 +1,12 @@
 <script lang="ts">
     import { t, locale, locales } from "svelte-intl-precompile";
 	import { locale_map } from "./locale-names";
+
+    export let label: string = "";
 </script>
 
-<select bind:value="{$locale}">
+<label for="languageselect">{label}</label>
+<select bind:value="{$locale}" id="languageselect">
     {#each $locales as loc}
         <option value={loc}>{locale_map.get(loc)}</option>
     {/each}

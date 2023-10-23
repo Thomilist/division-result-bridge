@@ -16,25 +16,32 @@
 </style>
 
 <nav>
-    <ul class="nav-links">
-        {#each links as link}
+    <div class="nav-links">
+        <ul>
+            {#each links as link}
+                <li>
+                    <a href="{base}{link.route}">{$t(link.name)}</a>
+                </li>
+            {/each}
+        </ul>
+    </div>
+
+    <div class="nav-options-dropdown">
+        <input type="checkbox" id="nav-options-dropbown-input"/>
+        <label for="nav-options-dropbown-input">Options</label>
+
+        <ul class="nav-options-list">
             <li>
-                <a href="{base}{link.route}">{$t(link.name)}</a>
+                <div class="nav-dropdown-item">
+                    <ThemeSwitch label="Theme:"/>
+                </div>
             </li>
-        {/each}
-    </ul>
-
-    <ul class="nav-settings">
-        <li>
-            <div>
-                <ThemeSwitch/>
-            </div>
-        </li>
-
-        <li>
-            <div>
-                <LanguageSelect/>
-            </div>
-        </li>
-    </ul>
+    
+            <li>
+                <div class="nav-dropdown-item">
+                    <LanguageSelect label="Language:"/>
+                </div>
+            </li>
+        </ul>
+    </div>
 </nav>
