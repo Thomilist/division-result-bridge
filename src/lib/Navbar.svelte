@@ -15,12 +15,12 @@
     @import "$styles/navbar.scss";
 </style>
 
-<nav>
+<nav class="navbar">
     <div class="nav-links">
         <ul>
             {#each links as link}
                 <li>
-                    <a href="{base}{link.route}">{$t(link.name)}</a>
+                    <a href="{base}{link.route}" class="nav-hoverable">{$t(link.name)}</a>
                 </li>
             {/each}
         </ul>
@@ -28,17 +28,17 @@
 
     <div class="nav-options-dropdown">
         <input type="checkbox" id="nav-options-dropbown-input"/>
-        <label for="nav-options-dropbown-input">{$t("options.name")}</label>
+        <label for="nav-options-dropbown-input" class="nav-hoverable">{$t("options.name")}</label>
 
         <ul class="nav-options-list">
             <li>
-                <div class="nav-dropdown-item">
+                <div class="nav-dropdown-item nav-hoverable">
                     <ThemeSwitch label="options.theme.name"/>
                 </div>
             </li>
     
             <li>
-                <div class="nav-dropdown-item">
+                <div class="nav-dropdown-item nav-hoverable">
                     <LanguageSelect label="options.language.name"/>
                 </div>
             </li>
