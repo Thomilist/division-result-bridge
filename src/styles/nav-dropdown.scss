@@ -1,0 +1,47 @@
+@use "resets";
+
+.nav-dropdown {
+    position: relative;
+    color: var(--col-navbar-text);
+    background-color: var(--col-navbar);
+
+    .nav-hoverable:hover {
+        background-color: var(--col-navbar-highlight);
+    }
+
+    button {
+        @include resets.button;
+
+        display: grid;
+        grid-template-columns: 20px auto;
+        gap: 5px;
+        padding: 10px;
+        color: inherit;
+    
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    
+    ul {
+        @include resets.list;
+    
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: inherit;
+    
+        li {
+            display: grid;
+            grid-template-columns: auto max-content;
+            gap: 20px;
+            margin: 0;
+            padding: 10px;
+            border: 1px solid var(--col-navbar-border);
+        }
+    
+        &.is-open {
+            display: block;
+        }
+    }
+}

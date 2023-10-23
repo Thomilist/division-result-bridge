@@ -4,11 +4,18 @@
 	import LanguageSelect from './LanguageSelect.svelte';
 	import { base } from '$app/paths';
 	import OptionsIcon from './icons/OptionsIcon.svelte';
+	import NavDropdown from './NavDropdown.svelte';
     
     const links =
     [
         {name: "page.home.title", route: "/"},
         {name: "page.about.title", route: "/about"},
+    ];
+
+    const options =
+    [
+        {component: LanguageSelect, label: "options.language.name"},
+        {component: ThemeSwitch, label: "options.theme.name"}
     ];
 </script>
 
@@ -27,22 +34,5 @@
         </ul>
     </div>
 
-    <div class="nav-options-dropdown">
-        <input type="checkbox" id="nav-options-dropbown-input"/>
-        <label for="nav-options-dropbown-input" class="nav-hoverable"><OptionsIcon/>{$t("options.name")}</label>
-
-        <ul class="nav-options-list">
-            <li>
-                <div class="nav-dropdown-item nav-hoverable">
-                    <LanguageSelect label="options.language.name"/>
-                </div>
-            </li>
-
-            <li>
-                <div class="nav-dropdown-item nav-hoverable">
-                    <ThemeSwitch label="options.theme.name"/>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <NavDropdown label="options.name" icon={OptionsIcon} items={options}/>
 </nav>

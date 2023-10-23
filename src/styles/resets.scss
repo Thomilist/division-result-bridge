@@ -1,0 +1,16 @@
+@mixin list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin button {
+    background-color: inherit;
+    border-width: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0;
+}

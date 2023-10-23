@@ -1,7 +1,9 @@
+@use "resets";
+
 .navbar {
     color: var(--col-navbar-text);
     background-color: var(--col-navbar);
-    outline: 1px solid var(--col-navbar-border);
+    border: 1px solid var(--col-navbar-border);
     display: grid;
     grid-template-columns: auto max-content;
     grid-template-rows: auto;
@@ -22,9 +24,7 @@
     grid-area: "links";
 
     ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
+        @include resets.list;
 
         li {
             display: inline-block;
@@ -36,50 +36,5 @@
         text-decoration: none;
         color: inherit;
         padding: 10px;
-    }
-}
-
-.nav-options-dropdown {
-    grid-area: "settings";
-    position: relative;
-    background-color: inherit;
-
-    input[type=checkbox] {
-        display: none;
-    }
-
-    label {
-        display: grid;
-        grid-template-columns: 20px auto;
-        gap: 5px;
-        padding: 10px;
-    }
-
-    label.nav-hoverable:hover {
-        cursor: pointer;
-    }
-
-    ul.nav-options-list {
-        display: none;
-        list-style-type: none;
-        background-color: inherit;
-        outline: 1px solid var(--col-navbar-border);
-        position: absolute;
-        padding: 0;
-        margin: 0;
-        right: 0;
-        
-        .nav-dropdown-item {
-            width: 1fr;
-            display: grid;
-            grid-template-columns: auto max-content;
-            gap: 20px;
-            margin: 0;
-            padding: 10px;
-        }
-    }
-
-    input[type=checkbox]:checked ~ ul.nav-options-list {
-        display: block;
     }
 }

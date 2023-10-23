@@ -11,7 +11,7 @@ $dark_text: white;
 $dark_text_link: rgb(0, 168, 252);
 $dark_navbar: darkblue;
 $dark_navbar_text: rgb(255, 255, 255);
-$dark_navbar_highlight: blue;
+$dark_navbar_highlight: rgb(31, 31, 255);
 $dark_navbar_border: none;
 
 $oled_background: black;
@@ -19,8 +19,8 @@ $oled_text: white;
 $oled_text_link: rgb(0, 168, 252);
 $oled_navbar: black;
 $oled_navbar_text: rgb(255, 255, 255);
-$oled_navbar_highlight: darkblue;
-$oled_navbar_border: blue;
+$oled_navbar_highlight: rgb(88, 88, 88);
+$oled_navbar_border: white;
 
 :global(.themed.light) {
     --col-background: #{$light_background};
@@ -81,6 +81,6 @@ $oled_navbar_border: blue;
     color: var(--col-text, $dark_text);
 
     :global(a) {
-        color: var(--col-text-link);
+        color: var(--col-text-link, $dark_text_link);
     }
 }

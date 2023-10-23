@@ -36,6 +36,7 @@
 	"type": "module",
 	"dependencies": {
 		"svelte-intl-precompile": "^0.12.3",
-		"svelte-persisted-store": "^0.7.0"
+		"svelte-persisted-store": "^0.7.0",
+		"svelte-use-click-outside": "^1.0.0"
 	}
 }

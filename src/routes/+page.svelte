@@ -6,4 +6,4 @@
     {$t("page.home.title")}
 </h1>
 
-<p>Flag: {$t("meta.flag")}</p>
+<p>Flag emoji: {$t("meta.flag")}</p>
