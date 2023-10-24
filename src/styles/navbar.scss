@@ -1,8 +1,8 @@
-@use "resets";
+@use "_resets";
 
 .navbar {
     color: var(--col-navbar-text);
-    background-color: var(--col-navbar);
+    background-color: var(--col-navbar-background);
     border: 1px solid var(--col-navbar-border);
     display: grid;
     grid-template-columns: auto max-content;

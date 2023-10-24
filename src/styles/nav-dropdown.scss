@@ -1,9 +1,9 @@
-@use "resets";
+@use "_resets";
 
 .nav-dropdown {
     position: relative;
     color: var(--col-navbar-text);
-    background-color: var(--col-navbar);
+    background-color: var(--col-navbar-background);
 
     .nav-hoverable:hover {
         background-color: var(--col-navbar-highlight);

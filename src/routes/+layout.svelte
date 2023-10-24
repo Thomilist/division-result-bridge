@@ -8,6 +8,7 @@
 
 <style lang="scss">
 	@import "$styles/themes.scss";
+	@import "$styles/base.scss";
 </style>
 
 <Navbar/>

@@ -1,86 +1,90 @@
-$light_background: white;
-$light_text: black;
-$light_text_link: rgb(0, 0, 238);
-$light_navbar: blue;
-$light_navbar_text: rgb(255, 255, 255);
-$light_navbar_highlight: rgb(64, 64, 255);
-$light_navbar_border: none;
+@use "sass:color";
+@use "_helpers" as *;
 
-$dark_background: rgb(49, 51, 56);
-$dark_text: white;
-$dark_text_link: rgb(0, 168, 252);
-$dark_navbar: darkblue;
-$dark_navbar_text: rgb(255, 255, 255);
-$dark_navbar_highlight: rgb(31, 31, 255);
-$dark_navbar_border: none;
+$themes:
+(
+    light:
+    (
+        main:
+        (
+            "background": white,
+            "text": black,
+            "link": rgb(0, 0, 238)
+        ),
+        navbar:
+        (
+            "background": blue,
+            "text": white,
+            "border": none
+        )
+    ),
+    dark:
+    (
+        main:
+        (
+            "background": rgb(49, 51, 56),
+            "text": white,
+            "link": rgb(0, 168, 252)
+        ),
+        navbar:
+        (
+            "background": darkblue,
+            "text": white,
+            "border": none
+        )
+    ),
+    oled:
+    (
+        main:
+        (
+            "background": black,
+            "text": white,
+            "link": rgb(0, 168, 252)
+        ),
+        navbar:
+        (
+            "background": black,
+            "text": white,
+            "border": white
+        )
+    )
+);
 
-$oled_background: black;
-$oled_text: white;
-$oled_text_link: rgb(0, 168, 252);
-$oled_navbar: black;
-$oled_navbar_text: rgb(255, 255, 255);
-$oled_navbar_highlight: rgb(88, 88, 88);
-$oled_navbar_border: white;
-
-:global(.themed.light) {
-    --col-background: #{$light_background};
-    --col-text: #{$light_text};
-    --col-text-link: #{$light_text_link};
-    --col-navbar: #{$light_navbar};
-    --col-navbar-text: #{$light_navbar_text};
-    --col-navbar-highlight: #{$light_navbar_highlight};
-    --col-navbar-border: #{$light_navbar_border};
+@each $key, $value in $themes
+{
+    $themes: map-deep-set($themes, "#{$key}" "navbar" "highlight", color.scale(map-deep-get($value, "navbar", "background"), $lightness: 20%));
 }
 
-:global(.themed.dark) {
-    --col-background: #{$dark_background};
-    --col-text: #{$dark_text};
-    --col-text-link: #{$dark_text_link};
-    --col-navbar: #{$dark_navbar};
-    --col-navbar-text: #{$dark_navbar_text};
-    --col-navbar-highlight: #{$dark_navbar_highlight};
-    --col-navbar-border: #{$dark_navbar_border};
-}
-
-:global(.themed.oled) {
-    --col-background: #{$oled_background};
-    --col-text: #{$oled_text};
-    --col-text-link: #{$oled_text_link};
-    --col-navbar: #{$oled_navbar};
-    --col-navbar-text: #{$oled_navbar_text};
-    --col-navbar-highlight: #{$oled_navbar_highlight};
-    --col-navbar-border: #{$oled_navbar_border};
-}
-
-@media (prefers-color-scheme: light) {
-    :global(.themed.system) {
-        --col-background: #{$light_background};
-        --col-text: #{$light_text};
-        --col-text-link: #{$light_text_link};
-        --col-navbar: #{$light_navbar};
-        --col-navbar-text: #{$light_navbar_text};
-        --col-navbar-highlight: #{$light_navbar_highlight};
-        --col-navbar-border: #{$light_navbar_border};
+@mixin create-theme($name, $theme)
+{
+    :global(.themed.#{$name})
+    {
+        --col-main-background: #{map-deep-get($themes, "#{$theme}", "main", "background")};
+        --col-main-text: #{map-deep-get($themes, "#{$theme}", "main", "text")};
+        --col-main-link: #{map-deep-get($themes, "#{$theme}", "main", "link")};
+        
+        --col-navbar-background: #{map-deep-get($themes, "#{$theme}", "navbar", "background")};
+        --col-navbar-text: #{map-deep-get($themes, "#{$theme}", "navbar", "text")};
+        --col-navbar-highlight: #{map-deep-get($themes, "#{$theme}", "navbar", "highlight")};
+        --col-navbar-border: #{map-deep-get($themes, "#{$theme}", "navbar", "border")};
     }
 }
 
-@media (prefers-color-scheme: dark) {
-    :global(.themed.system) {
-        --col-background: #{$dark_background};
-        --col-text: #{$dark_text};
-        --col-text-link: #{$dark_text_link};
-        --col-navbar: #{$dark_navbar};
-        --col-navbar-text: #{$dark_navbar_text};
-        --col-navbar-highlight: #{$dark_navbar_highlight};
-        --col-navbar-border: #{$dark_navbar_border};
+@mixin create-static-theme($theme)
+{
+    @include create-theme($theme, $theme);
+}
+
+@mixin create-system-theme($theme)
+{
+    @media (prefers-color-scheme: #{$theme})
+    {
+        @include create-theme("system", $theme);
     }
 }
 
-:global(.themed) {
-    background-color: var(--col-background, $dark_background);
-    color: var(--col-text, $dark_text);
-
-    :global(a) {
-        color: var(--col-text-link, $dark_text_link);
-    }
+@each $key, $value in $themes
+{
+    @include create-static-theme($key);
+    @include create-system-theme($key);
 }

@@ -1,0 +1,10 @@
+:global(.themed)
+{
+    background-color: var(--col-main-background);
+    color: var(--col-main-text);
+
+    :global(a)
+    {
+        color: var(--col-main-link);
+    }
+}
