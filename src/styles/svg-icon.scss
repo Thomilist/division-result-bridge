@@ -1,4 +1,4 @@
-svg {
-    fill: var(--col-navbar-text);
+:global(.nav-bar svg) {
+    fill: var(--col-nav-text);
     display: inline-block;
 }

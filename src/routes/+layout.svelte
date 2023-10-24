@@ -8,9 +8,14 @@
 
 <style lang="scss">
 	@import "$styles/themes.scss";
+	@import "$styles/fonts.scss";
 	@import "$styles/base.scss";
 </style>
 
 <Navbar/>
 
-<slot/>
+<main class="limited-width-container">
+	<div class="limited-width-content">
+		<slot/>
+	</div>
+</main>

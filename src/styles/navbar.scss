@@ -1,9 +1,12 @@
 @use "_resets";
 
-.navbar {
-    color: var(--col-navbar-text);
-    background-color: var(--col-navbar-background);
-    border: 1px solid var(--col-navbar-border);
+.nav-bar {
+    color: var(--col-nav-text);
+    background-color: var(--col-nav-background);
+    border: 1px solid var(--col-nav-border);
+}
+
+.nav-menu {
     display: grid;
     grid-template-columns: auto max-content;
     grid-template-rows: auto;
@@ -12,11 +15,11 @@
     justify-items: left;
 
     li {
-        color: var(--col-navbar-text);
+        color: var(--col-nav-text);
     }
 
     .nav-hoverable:hover {
-        background-color: var(--col-navbar-highlight);
+        background-color: var(--col-nav-highlight);
     }
 }
 

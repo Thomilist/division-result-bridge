@@ -7,4 +7,17 @@
     {
         color: var(--col-main-link);
     }
+
+    :global(.limited-width-container)
+    {
+        display: grid;
+        grid-template-columns: 1fr minmax(0, 1280px) 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: ". content .";
+
+        :global(.limited-width-content)
+        {
+            grid-area: content;
+        }
+    }
 }

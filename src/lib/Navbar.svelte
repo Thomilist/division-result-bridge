@@ -23,16 +23,18 @@
     @import "$styles/navbar.scss";
 </style>
 
-<nav class="navbar">
-    <div class="nav-links">
-        <ul>
-            {#each links as link}
-                <li>
-                    <a href="{base}{link.route}" class="nav-hoverable">{$t(link.name)}</a>
-                </li>
-            {/each}
-        </ul>
+<nav class="nav-bar limited-width-container">
+    <div class="nav-menu limited-width-content">
+        <div class="nav-links">
+            <ul>
+                {#each links as link}
+                    <li>
+                        <a href="{base}{link.route}" class="nav-hoverable">{$t(link.name)}</a>
+                    </li>
+                {/each}
+            </ul>
+        </div>
+    
+        <NavDropdown label="options.name" icon={OptionsIcon} items={options}/>
     </div>
-
-    <NavDropdown label="options.name" icon={OptionsIcon} items={options}/>
 </nav>
