@@ -29,7 +29,7 @@ footer
             justify-items: start;
             align-items: center;
 
-            a
+            :global(a)
             {
                 display: block;
                 text-decoration: none;

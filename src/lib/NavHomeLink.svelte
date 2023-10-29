@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from "$app/paths";
     import { t } from "svelte-intl-precompile";
 	export let props: NavHomeProps;
 </script>
@@ -7,7 +8,7 @@
     @import "$styles/nav-home-link.scss";
 </style>
 
-<a href={props.route} class="nav-hoverable">
+<a href={base}{props.route} class="nav-hoverable">
     <div class="home-link">
         {#if props.icon}
             <div class="icon">

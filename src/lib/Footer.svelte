@@ -1,6 +1,7 @@
 <script lang="ts">
     import { t } from "svelte-intl-precompile";
 	import Logo from "./icons/Logo.svelte";
+	import NavLink from "./NavLink.svelte";
 </script>
 
 <style lang="scss">
@@ -14,12 +15,8 @@
         </div>
 
         <div class="links">
-            <a href="/privacy">
-                {$t("page.privacy.title")}
-            </a>
-            <a href="/about">
-                {$t("page.about.title")}
-            </a>
+            <NavLink props={{label: "page.privacy.title", route: "/privacy"}}/>
+            <NavLink props={{label: "page.about.title", route: "/about"}}/>
         </div>
 
         <div class="copyright">
