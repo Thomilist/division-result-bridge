@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { theme } from "$lib/stores";
-	import Navbar from "$lib/Navbar.svelte";
+	import NavBar from "$lib/NavBar.svelte";
 	import { browser } from "$app/environment";
+	import Footer from "$lib/Footer.svelte";
 
 	$: if (browser) document.documentElement.className = `themed ${$theme}`;
 </script>
@@ -12,10 +13,14 @@
 	@import "$styles/base.scss";
 </style>
 
-<Navbar/>
+<div id="app">
+	<NavBar/>
 
-<main class="limited-width-container">
-	<div class="limited-width-content">
-		<slot/>
-	</div>
-</main>
+	<main class="limited-width-container">
+		<div class="limited-width-content">
+			<slot/>
+		</div>
+	</main>
+
+	<Footer/>
+</div>

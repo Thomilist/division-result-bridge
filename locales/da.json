@@ -5,6 +5,14 @@
         "name": "Dansk",
         "flag": "🇩🇰"
     },
+    "project":
+    {
+        "name": "Division Result Bridge"
+    },
+    "footer":
+    {
+        "open-source": "Division Result Bridge er fri og open source software udgivet under MIT licenset"
+    },
     "options":
     {
         "name": "Indstillinger",
@@ -41,6 +49,10 @@
         "home":
         {
             "title": "Hjem"
+        },
+        "privacy":
+        {
+            "title": "Privatliv"
         },
         "about":
         {

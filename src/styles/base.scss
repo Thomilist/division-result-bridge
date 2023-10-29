@@ -1,8 +1,44 @@
+:root
+{
+    --nav-padding: 20px;
+    --nav-dropdown-item-padding: 10px;
+}
+
+#app
+{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: min-content 1fr auto;
+    grid-template-areas: "nav-area" "main-area" "footer-area";
+
+    :global(nav)
+    {
+        grid-area: nav-area;
+    }
+
+    :global(main)
+    {
+        grid-area: main-area;
+    }
+
+    :global(footer)
+    {
+        grid-area: footer-area;
+    }
+}
+
 :global(.themed)
 {
     background-color: var(--col-main-background);
     color: var(--col-main-text);
 
+    :global(body)
+    {
+        margin: 0;
+        padding: 0;
+    }
+    
     :global(a)
     {
         color: var(--col-main-link);

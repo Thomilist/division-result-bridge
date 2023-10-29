@@ -3,7 +3,7 @@
     import { t } from "svelte-intl-precompile";
 	import ThemeIcon from "./icons/ThemeIcon.svelte";
 
-    export let label: string = "";
+    export let props: ThemeSwitchProps;
 
     const themes: Theme[] =
     [
@@ -18,7 +18,7 @@
     @import "$styles/label-with-icon.scss";
 </style>
 
-<label for="themeswitch" class="label-with-icon"><ThemeIcon/>{$t(`${label}`)}:</label>
+<label for="themeswitch" class="label-with-icon"><ThemeIcon/>{$t(`${props.label}`)}:</label>
 <select bind:value="{$theme}" id="themeswitch">
     {#each themes as theme_name}
         <option value={theme_name}>{$t(`theme.${theme_name}.name`)}</option>

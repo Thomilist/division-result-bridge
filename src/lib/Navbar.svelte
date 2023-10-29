@@ -1,40 +1,54 @@
 <script lang="ts">
-    import { t } from 'svelte-intl-precompile';
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
-	import { base } from '$app/paths';
 	import OptionsIcon from './icons/OptionsIcon.svelte';
 	import NavDropdown from './NavDropdown.svelte';
+	import NavLink from './NavLink.svelte';
+	import NavHomeLink from './NavHomeLink.svelte';
+	import Logo from './icons/Logo.svelte';
     
-    const links =
+    const home: NavHomeProps =
+    {
+        label: "project.name",
+        route: "/",
+        icon: {component: Logo, size: 16}
+    };
+
+    const items: NavItem[] =
     [
-        {name: "page.home.title", route: "/"},
-        {name: "page.about.title", route: "/about"},
+        {component: NavLink, props: {label: "page.home.title", route: "/"}},
+        {component: NavDropdown, props: {label: "page.privacy.title", align: "left", expand: "hover", items:
+        [
+            {component: NavLink, props: {label: "page.privacy.title", route: "/privacy"}}
+        ]}},
+        {component: NavLink, props: {label: "page.about.title", route: "/about"}}
     ];
 
-    const options =
+    const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: OptionsIcon, items:
     [
-        {component: LanguageSelect, label: "options.language.name"},
-        {component: ThemeSwitch, label: "options.theme.name"}
-    ];
+        {component: LanguageSelect, props: {label: "options.language.name"}},
+        {component: ThemeSwitch, props: {label: "options.theme.name"}}
+    ]};
 </script>
 
 <style lang="scss">
-    @import "$styles/navbar.scss";
+    @import "$styles/nav-bar.scss";
 </style>
 
 <nav class="nav-bar limited-width-container">
     <div class="nav-menu limited-width-content">
-        <div class="nav-links">
+        <NavHomeLink props={home}/>
+        
+        <div class="nav-items">
             <ul>
-                {#each links as link}
-                    <li>
-                        <a href="{base}{link.route}" class="nav-hoverable">{$t(link.name)}</a>
+                {#each items as item}
+                    <li class="nav-hoverable">
+                        <svelte:component this={item.component} props={item.props}/>
                     </li>
                 {/each}
             </ul>
         </div>
     
-        <NavDropdown label="options.name" icon={OptionsIcon} items={options}/>
+        <NavDropdown props={options}/>
     </div>
 </nav>

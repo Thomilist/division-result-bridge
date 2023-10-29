@@ -1,0 +1,55 @@
+footer
+{
+    background-color: var(--col-footer-background);
+    color: var(--col-footer-text);
+    border-top: 1px solid var(--col-footer-border);
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .footer-content
+    {
+        display: grid;
+        grid-template-areas:
+            "logo links"
+            "copyright open-source";
+        gap: 20px;
+        
+        .logo
+        {
+            grid-area: logo;
+        }
+
+        .links
+        {
+            grid-area: links;
+
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-rows: auto;
+            justify-items: start;
+            align-items: center;
+
+            a
+            {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+
+                &:hover
+                {
+                    text-decoration: underline;
+                }
+            }
+        }
+        
+        .copyright
+        {
+            grid-area: copyright;
+        }
+
+        .open-source
+        {
+            grid-area: open-source;
+        }
+    }
+}

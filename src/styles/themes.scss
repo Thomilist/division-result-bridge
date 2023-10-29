@@ -16,6 +16,11 @@ $themes:
             "background": blue,
             "text": white,
             "border": none
+        ),
+        footer:
+        (
+            "text": white,
+            "border": none
         )
     ),
     dark:
@@ -29,6 +34,11 @@ $themes:
         nav:
         (
             "background": darkblue,
+            "text": white,
+            "border": none
+        ),
+        footer:
+        (
             "text": white,
             "border": none
         )
@@ -46,6 +56,11 @@ $themes:
             "background": black,
             "text": white,
             "border": white
+        ),
+        footer:
+        (
+            "text": white,
+            "border": white
         )
     )
 );
@@ -53,6 +68,7 @@ $themes:
 @each $key, $value in $themes
 {
     $themes: map-deep-set($themes, "#{$key}" "nav" "highlight", color.scale(map-deep-get($value, "nav", "background"), $lightness: 40%));
+    $themes: map-deep-set($themes, "#{$key}" "footer" "background", color.scale(map-deep-get($value, "main", "background"), $lightness: -60%));
 }
 
 @mixin create-theme($name, $theme)
@@ -67,6 +83,10 @@ $themes:
         --col-nav-text: #{map-deep-get($themes, "#{$theme}", "nav", "text")};
         --col-nav-highlight: #{map-deep-get($themes, "#{$theme}", "nav", "highlight")};
         --col-nav-border: #{map-deep-get($themes, "#{$theme}", "nav", "border")};
+
+        --col-footer-background: #{map-deep-get($themes, "#{$theme}", "footer", "background")};
+        --col-footer-text: #{map-deep-get($themes, "#{$theme}", "footer", "text")};
+        --col-footer-border: #{map-deep-get($themes, "#{$theme}", "footer", "border")};
     }
 }
 

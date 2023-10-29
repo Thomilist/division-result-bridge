@@ -5,6 +5,14 @@
         "name": "English",
         "flag": "🇬🇧"
     },
+    "project":
+    {
+        "name": "Division Result Bridge"
+    },
+    "footer":
+    {
+        "open-source": "Division Result Bridge is free and open source software released under the MIT license"
+    },
     "options":
     {
         "name": "Options",
@@ -41,6 +49,10 @@
         "home":
         {
             "title": "Home"
+        },
+        "privacy":
+        {
+            "title": "Privacy"
         },
         "about":
         {

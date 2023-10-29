@@ -3,14 +3,14 @@
 	import { locale_map } from "./locale-names";
 	import TranslateIcon from "./icons/TranslateIcon.svelte";
 
-    export let label: string = "";
+    export let props: LanguageSelectProps;
 </script>
 
 <style lang="scss">
     @import "$styles/label-with-icon.scss";
 </style>
 
-<label for="languageselect" class="label-with-icon"><TranslateIcon/>{$t(`${label}`)}:</label>
+<label for="languageselect" class="label-with-icon"><TranslateIcon/>{$t(`${props.label}`)}:</label>
 <select bind:value="{$locale}" id="languageselect">
     {#each $locales as loc}
         <option value={loc}>{locale_map.get(loc)}</option>

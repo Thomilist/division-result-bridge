@@ -1,47 +1,72 @@
 @use "_resets";
 
-.nav-dropdown {
+.nav-dropdown
+{
     position: relative;
     color: var(--col-nav-text);
     background-color: var(--col-nav-background);
 
-    .nav-hoverable:hover {
-        background-color: var(--col-nav-highlight);
-    }
-
-    button {
+    button
+    {
         @include resets.button;
 
-        display: grid;
-        grid-template-columns: 20px auto;
-        gap: 5px;
-        padding: 10px;
+        padding: var(--nav-padding);
         color: inherit;
+
+        &.has-icon
+        {
+            display: grid;
+            grid-template-columns: 20px auto;
+            gap: 5px;
+        }
     
-        &:hover {
+        &:hover
+        {
             cursor: pointer;
         }
     }
     
-    ul {
+    ul
+    {
         @include resets.list;
     
         display: none;
         position: absolute;
-        right: 0;
         background-color: inherit;
+
+        &.align-right
+        {
+            right: 0;
+        }
+
+        &.align-left
+        {
+            left: 0;
+        }
     
-        li {
+        li
+        {
             display: grid;
             grid-template-columns: auto max-content;
             gap: 20px;
             margin: 0;
-            padding: 10px;
+            padding: var(--nav-dropdown-item-padding);
             border: 1px solid var(--col-nav-border);
+
+            :global(a)
+            {
+                padding: var(--nav-dropdown-item-padding);
+            }
         }
     
-        &.is-open {
+        &.is-open
+        {
             display: block;
         }
+    }
+
+    &.expand-on-hover:hover ul
+    {
+        display:block
     }
 }

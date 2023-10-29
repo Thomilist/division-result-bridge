@@ -2,21 +2,32 @@
     import { t } from "svelte-intl-precompile";
     import { clickOutside } from "svelte-use-click-outside";
 
-    export let label: string;
-    export let icon: any;
-    export let items: any;
+    export let props: NavDropdownProps;
 
     let open: boolean = false;
     $: open_class = open ? "is-open" : "";
 
+    const has_icon: boolean = props.icon;
+    const has_icon_class = has_icon ? "has-icon" : "";
+
     function toggleDropdown()
     {
+        if (props.expand !== "click")
+        {
+            return;
+        }
+        
         open = !open;
         return;
     }
 
     function onClickOutside()
     {
+        if (props.expand !== "click")
+        {
+            return;
+        }
+        
         open = false;
         return;
     }
@@ -26,19 +37,19 @@
     @import "$styles/nav-dropdown.scss";
 </style>
 
-<div use:clickOutside={onClickOutside} class="nav-dropdown">
-    <button class="nav-hoverable" on:click={toggleDropdown}>
-        {#if icon}
-            <svelte:component this={icon}/>
+<div use:clickOutside={onClickOutside} class="nav-dropdown expand-on-{props.expand}">
+    <button class="nav-hoverable {has_icon_class}" on:click={toggleDropdown}>
+        {#if has_icon}
+            <svelte:component this={props.icon}/>
         {/if}
 
-        {$t(`${label}`)}
+        {$t(`${props.label}`)}
     </button>
 
-    <ul class="nav-dropdown-list {open_class}">
-        {#each items as item}
+    <ul class="nav-dropdown-list {open_class} align-{props.align}">
+        {#each props.items as item}
             <li class="nav-hoverable">
-                <svelte:component this={item.component} label={item.label}/>
+                <svelte:component this={item.component} props={item.props}/>
             </li>
         {/each}
     </ul>
