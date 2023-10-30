@@ -48,7 +48,30 @@
     {
         "home":
         {
-            "title": "Home"
+            "title": "Division Result Bridge",
+            "subtitle": "Manage live, online results for orienteering division matches with ease",
+            "highlights":
+            {
+                "compatibility":
+                {
+                    "title": "Simple Requirements",
+                    "content": "If your division results are provided by <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, then you can use Division Result Bridge. Additional functionality, such as only uploading when results change or importing metadata during setup, is available depending on your configuration."
+                },
+                "setup":
+                {
+                    "title": "Prepare From Home",
+                    "content": "Configure and test your setup from the comfort of your home, minimising stress on event day. Store and transfer your competition settings with configuration files."
+                },
+                "foss":
+                {
+                    "title": "Free and open source",
+                    "content": "Division Result Bridge is free and open source software released under the MIT license. Its purpose is merely to improve the experience at orienteering division matches, both for participants and organisers. It is and always will be free to use; profit is not a goal."
+                }
+            }
+        },
+        "docs":
+        {
+            "title": "Documentation"
         },
         "privacy":
         {

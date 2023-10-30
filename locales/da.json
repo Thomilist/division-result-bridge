@@ -48,7 +48,30 @@
     {
         "home":
         {
-            "title": "Hjem"
+            "title": "Division Result Bridge",
+            "subtitle": "Håndtér live, online resultater til orienteringssportens divisionsmatcher med lethed",
+            "highlights":
+            {
+                "compatibility":
+                {
+                    "title": "Simple Krav",
+                    "content": "Hvis dine divisionsresultater beregnes med <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, så kan du bruge Division Result Bridge. Ekstra funktionalitet, såsom kun at uploade ved ændringer i resultaterne eller import at metadata under opsætning, er tilgængelige afhængig af din opsætning."
+                },
+                "setup":
+                {
+                    "title": "Forbered Hjemmefra",
+                    "content": "Konfigurér og test i ro og mag derhjemme, og minimér stress på konkurrencedagen. Opbevar og overfør konkurrenceopsætninger med konfigurationsfiler."
+                },
+                "foss":
+                {
+                    "title": "Fri og open source",
+                    "content": "Division Result Bridge er fri og open source software udgivet under MIT licenset. Dets formål er kun at forbedre oplevelsen til divisionsmatcher, både for deltagere og arrangører. Det er og vil altid være gratis; profit er ikke et mål."
+                }
+            }
+        },
+        "docs":
+        {
+            "title": "Dokumentation"
         },
         "privacy":
         {

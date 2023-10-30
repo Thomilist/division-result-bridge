@@ -16,12 +16,7 @@
 
     const items: NavItem[] =
     [
-        {component: NavLink, props: {label: "page.home.title", route: "/"}},
-        {component: NavDropdown, props: {label: "page.privacy.title", align: "left", expand: "hover", items:
-        [
-            {component: NavLink, props: {label: "page.privacy.title", route: "/privacy"}}
-        ]}},
-        {component: NavLink, props: {label: "page.about.title", route: "/about"}}
+        {component: NavLink, props: {label: "page.docs.title", route: "/docs"}}
     ];
 
     const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: OptionsIcon, items:

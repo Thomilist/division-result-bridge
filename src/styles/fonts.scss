@@ -1,3 +1,10 @@
-:global(*) {
+:global(*)
+{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+:global(h1, h2, h3, h4, h5, h6)
+{
+    font-family: Consolas, monospace;
+    text-transform: lowercase;
 }
