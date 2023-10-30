@@ -37,7 +37,7 @@ export const load: PageLoad = async ({ fetch }) =>
             end: intro_parts[3]
         },
         identifier: license_meta_raw[1],
-        copyright: license_meta_raw[2]
+        copyright: license_meta_raw[2].replace("(c)", "©")
     };
 
     return {
