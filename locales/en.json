@@ -77,6 +77,11 @@
         {
             "title": "Privacy"
         },
+        "license":
+        {
+            "title": "License",
+            "fallback": "<a href=\"https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE\" target=\"_blank\">Click here to view the license</a>."
+        },
         "about":
         {
             "title": "About",

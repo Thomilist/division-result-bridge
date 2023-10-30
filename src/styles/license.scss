@@ -1,0 +1,14 @@
+@use "_resets";
+
+.license-items
+{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto-fit, minmax(20px, 1fr));
+    gap: 20px;
+
+    ul
+    {
+        @include resets.list;
+    }
+}

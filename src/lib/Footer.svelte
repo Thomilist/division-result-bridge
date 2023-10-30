@@ -16,6 +16,7 @@
 
         <div class="links">
             <NavLink props={{label: "page.privacy.title", route: "/privacy"}}/>
+            <NavLink props={{label: "page.license.title", route: "/license"}}/>
             <NavLink props={{label: "page.about.title", route: "/about"}}/>
         </div>
 

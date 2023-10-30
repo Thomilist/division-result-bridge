@@ -77,6 +77,11 @@
         {
             "title": "Privatliv"
         },
+        "license":
+        {
+            "title": "Licens",
+            "fallback": "<a href=\"https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE\" target=\"_blank\">Klik her for at se licenset</a>."
+        },
         "about":
         {
             "title": "Om",

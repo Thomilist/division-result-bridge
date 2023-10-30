@@ -2,6 +2,7 @@
 {
     --nav-padding: 20px;
     --nav-dropdown-item-padding: 10px;
+    --main-margin: 50px;
 }
 
 #app
@@ -20,6 +21,8 @@
     :global(main)
     {
         grid-area: main-area;
+        margin-top: var(--main-margin);
+        margin-bottom: var(--main-margin);
     }
 
     :global(footer)

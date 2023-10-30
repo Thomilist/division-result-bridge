@@ -1,16 +1,15 @@
 .home-page
 {
-    --home-page-gap: 100px;
-
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: repeat(auto-fit, minmax(100px, max-content));
-    gap: var(--home-page-gap);
-    margin-top: var(--home-page-gap);
-    margin-bottom: var(--home-page-gap);
+    gap: var(--main-margin);
     
     .cover
     {
+        margin-top: var(--main-margin);
+        margin-bottom: var(--main-margin);
+        
         h1
         {
             font-size: 72px;
