@@ -94,7 +94,20 @@
         },
         "privacy":
         {
-            "title": "Privacy"
+            "title": "Privacy",
+            "intro": "Usually, this is where you'd be met with an endless page of legalese, describing the depth of personal information collected, how many vaguely-trustworthy third parties your secrets are shared with, what flavour of cookie is used to collect your data, and other stuff that nobody actually reads. However, Division Result Bridge is not a vehicle for profit, so selling user data to advertisers is wholly uninteresting.",
+            "tldr": "The short version, then, is that your personal data is, well, <i>yours</i>. Division Result Bridge does not collect personal data. Still, if you want the slightly longer version, whatever data <i>is</i> collected and stored in one way or another is described here, both for this website and for the application itself.",
+            "website":
+            {
+                "title": "Website",
+                "content": "This website only stores basic user preferences. These are settings for language and theme, which can be changed from the menu in the top right. The data is stored by your browser on your device using the <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API\" target=\"_blank\">Web Storage API</a> - no cookies required. It is not cleared automatically, but browsers usually provide the option to clear the \"browser cache\", \"locally stored data\" or something along those lines."
+            },
+            "application":
+            {
+                "title": "Application",
+                "settings": "All data displayed in Division Result Bridge is saved to disk when the application is closed to be loaded again on next startup. As detailed on <a href=\"https://doc.qt.io/qt-6/qsettings.html#details\" target=\"_blank\">Qt's documentation for QSettings</a>, the save mechanism varies across platforms, but on Windows, the registry is used. Additionally, a subset this data can be exported to a JSON file at the request of the user.",
+                "results": "Of course, the division results do include some personal information of the participants as collected for the competition, e.g. name, club and class. However, this is not <i>sensitive</i> information, and it is in line with expectations at orienteering events. Division Result Bridge does not actually interact with the results and participants themselves: it fetches complete HTML files from <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, strips styling, adds a little bit of markup for display on the web, and passes them on to the server."
+            }
         },
         "license":
         {

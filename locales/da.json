@@ -94,7 +94,20 @@
         },
         "privacy":
         {
-            "title": "Privatliv"
+            "title": "Privatliv",
+            "intro": "Her ville man typisk blive mødt af en væg af tæt, juridisk tekst, som beskriver mængden af indsamlet, personlig information, hvor mange tvivlsomme tredjeparter den deles med, hvilken smag af \"cookie\" dataindsamlingen benytter, og meget andet som ingen rent faktisk læser. Division Result Bridge er dog ikke motiveret af profit, så salg af brugerdata til reklameselskaber er ikke interessant her.",
+            "tldr": "Den korte historie er derfor, at Division Result Bridge ikke indsamler personlig data. Til de nysgerrige er den lidt længere historie, som dækker over anden indsamling og opbevaring af data for både denne hjemmeside og programmet, tilgængelig herunder.",
+            "website":
+            {
+                "title": "Hjemmesiden",
+                "content": "Hjemmesiden gemmer kun simple brugerpræferencer, nemlig indstillingerne for sprog og tema, som kan tilgås via menuen i øverste, højre hjørne. Dataet gemmes af din browser på din enhed ved hjælp af den moderne <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API\" target=\"_blank\">Web Storage API</a> fremfor at bruge \"cookies\". Den ryddes ikke automatisk, men browsere giver typisk mulighed for at rydde \"browserdata\", \"lokal data\" eller tilsvarende."
+            },
+            "application":
+            {
+                "title": "Programmet",
+                "settings": "Al data, som vises i Division Result Bridge, gemmes på computeren, når programmet lukkes. Det indlæses så igen, næste gang programmet starter. Som det beskrives på <a href=\"https://doc.qt.io/qt-6/qsettings.html#details\" target=\"_blank\">Qts dokumentation for QSettings</a>, afhænger lagringsmetoden af platformen - på Windows benyttes registreringsdatabasen. Et subset af dette data kan i øvrigt eksporteres til en JSON-fil, såfremt brugeren ønsker det.",
+                "results": "Selve divisionsresultaterne indeholder naturligvis noget personlig information om deltagerne, som indsamles i forbindelse med konkurrencen, herunder navn, klub og klasse. Disse karakteriseres dog ikke som <i>følsom</i> information, og indsamlingen af disse er i øvrigt ganske typisk for et orienteringsstævne. Division Result Bridge håndterer i øvrigt ikke de enkelte resultater og deltagere: Programmet henter hele HTML-filer fra <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, fjerner stildata, tilføjer en smule formattering til visning på hjemmesiden, og giver dem videre til serveren."
+            }
         },
         "license":
         {
