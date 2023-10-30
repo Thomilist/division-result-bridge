@@ -1,9 +1,16 @@
 <script lang="ts">
     import { t, locale, locales } from "svelte-intl-precompile";
-	import { locale_map } from "./locale-names";
+	import { localeFromStore, localeName } from "./locale-names";
 	import TranslateIcon from "./icons/TranslateIcon.svelte";
+	import { language } from "./stores";
 
     export let props: LanguageSelectProps;
+
+    const values = ["system", ...$locales];
+    
+    $: {
+        $locale = localeFromStore($language);
+    }
 </script>
 
 <style lang="scss">
@@ -11,8 +18,8 @@
 </style>
 
 <label for="languageselect" class="label-with-icon"><TranslateIcon/>{$t(`${props.label}`)}:</label>
-<select bind:value="{$locale}" id="languageselect">
-    {#each $locales as loc}
-        <option value={loc}>{locale_map.get(loc)}</option>
+<select bind:value="{$language}" id="languageselect">
+    {#each values as lang}
+        <option value={lang}>{$t(localeName(lang))}</option>
     {/each}
 </select>

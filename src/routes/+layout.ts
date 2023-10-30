@@ -1,13 +1,16 @@
 import { addMessages, init } from 'svelte-intl-precompile';
 import da from '$locales/da';
 import en from '$locales/en';
+import { default_locale, localeFromStore } from '$lib/locale-names';
+import { language } from '$lib/stores';
+import { get } from 'svelte/store';
 
 export const prerender = true;
 
-addMessages('da', da);
-addMessages('en', en);
+addMessages("da", da);
+addMessages("en", en);
 
 init({
-    initialLocale: 'en',
-    fallbackLocale: 'en'
+    initialLocale: localeFromStore(get(language)),
+    fallbackLocale: default_locale
 });

@@ -44,6 +44,25 @@
             "name": "OLED"
         }
     },
+    "language":
+    {
+        "undefined":
+        {
+            "name": "undefined"
+        },
+        "system":
+        {
+            "name": "System"
+        },
+        "da":
+        {
+            "name": "Dansk"
+        },
+        "en":
+        {
+            "name": "English"
+        }
+    },
     "page":
     {
         "home":
