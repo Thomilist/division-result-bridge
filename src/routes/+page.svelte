@@ -13,6 +13,12 @@
     @import "$styles/home.scss";
 </style>
 
+<svelte:head>
+    <title>
+        {$t("page.home.title")}
+    </title>
+</svelte:head>
+
 <div class="home-page">
     <div class="cover">
         <h1>

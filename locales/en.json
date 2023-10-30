@@ -11,7 +11,7 @@
     },
     "footer":
     {
-        "open-source": "Division Result Bridge is free and open source software released under the MIT license"
+        "open-source": "Division Result Bridge is free and open source software published under the MIT license"
     },
     "options":
     {
@@ -65,7 +65,7 @@
                 "foss":
                 {
                     "title": "Free and open source",
-                    "content": "Division Result Bridge is free and open source software released under the MIT license. Its purpose is merely to improve the experience at orienteering division matches, both for participants and organisers. It is and always will be free to use; profit is not a goal."
+                    "content": "Division Result Bridge is free and open source software published under the MIT license. Its purpose is merely to improve the experience at orienteering division matches, both for participants and organisers. It is and always will be free to use; profit is not a goal."
                 }
             }
         },
