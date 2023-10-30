@@ -1,6 +1,6 @@
 <script lang="ts">
     import { t, locale, locales } from "svelte-intl-precompile";
-	import { localeFromStore, localeName } from "./locale-names";
+	import { localeFromStore, localeName } from "./localeHandler";
 	import TranslateIcon from "./icons/TranslateIcon.svelte";
 	import { language } from "./stores";
 
