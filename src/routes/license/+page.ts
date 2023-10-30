@@ -32,9 +32,10 @@ export const load: PageLoad = async ({ fetch }) =>
     {
         intro:
         {
-            start: intro_parts[0] + intro_parts[1],
+            text: intro_parts[0],
+            open: intro_parts[1],
             link: intro_parts[2],
-            end: intro_parts[3]
+            close: intro_parts[3]
         },
         identifier: license_meta_raw[1],
         copyright: license_meta_raw[2].replace("(c)", "©")

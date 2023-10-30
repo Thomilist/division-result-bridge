@@ -38,11 +38,15 @@
     
         <ul>
             <li>
-                {license.license_meta.intro.start}
-                <a href="{license.license_meta.intro.link}" target="_blank">
-                    {license.license_meta.intro.link}
-                </a>
-                {license.license_meta.intro.end}
+                {license.license_meta.intro.text}
+                
+                <span class="no-break">
+                    {license.license_meta.intro.open}
+                    <a href="{license.license_meta.intro.link}" target="_blank">
+                        {license.license_meta.intro.link}
+                    </a>
+                    {license.license_meta.intro.close}
+                </span>
             </li>
             <li>
                 {license.license_meta.identifier}
