@@ -19,7 +19,7 @@
     </title>
 </svelte:head>
 
-<div class="home-page">
+<div class="home-page narrow-content">
     <div class="cover">
         <h1>
             {$t("page.home.title")}

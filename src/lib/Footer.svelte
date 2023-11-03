@@ -9,7 +9,7 @@
 </style>
 
 <footer class="limited-width-container">
-    <div class="limited-width-content footer-content">
+    <div class="limited-width-content footer-content narrow-content">
         <div class="logo">
             <Logo size={50}/>
         </div>

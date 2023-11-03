@@ -1,5 +1,7 @@
 :root
 {
+    --page-width-wide: 1600px;
+    --page-width-narrow: 1280px;
     --nav-padding: 20px;
     --nav-dropdown-item-padding: 10px;
     --main-margin: 50px;
@@ -62,13 +64,19 @@
     :global(.limited-width-container)
     {
         display: grid;
-        grid-template-columns: 1fr minmax(0, 1280px) 1fr;
+        grid-template-columns: 1fr minmax(0, var(--page-width-wide)) 1fr;
         grid-template-rows: auto;
         grid-template-areas: ". content .";
 
         :global(.limited-width-content)
         {
             grid-area: content;
+        }
+
+        :global(.narrow-content)
+        {
+            margin: auto;
+            width: var(--page-width-narrow);
         }
     }
 }

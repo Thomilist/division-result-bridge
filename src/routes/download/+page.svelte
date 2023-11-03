@@ -22,26 +22,28 @@
     </title>
 </svelte:head>
 
-{#if has_releases}
-    <div class="releases">
-        <LatestRelease release={latest_release} meta={latest_release_meta}/>
+<div class="narrow-content">
+    {#if has_releases}
+        <div class="releases">
+            <LatestRelease release={latest_release} meta={latest_release_meta}/>
 
-        <div class="all-releases">
-            <h1>
-                {$t("page.download.releases.title")}
-            </h1>
+            <div class="all-releases">
+                <h1>
+                    {$t("page.download.releases.title")}
+                </h1>
 
-            {#each all_releases as release, index}
-                <Release release={release} meta={all_releases_meta[index]}/>
-            {/each}
+                {#each all_releases as release, index}
+                    <Release release={release} meta={all_releases_meta[index]}/>
+                {/each}
+            </div>
         </div>
-    </div>
-{:else}
-    <h1>
-        {$t("page.download.empty.title")}
-    </h1>
+    {:else}
+        <h1>
+            {$t("page.download.empty.title")}
+        </h1>
 
-    <p>
-        {@html $t("page.download.empty.message")}
-    </p>
-{/if}
+        <p>
+            {@html $t("page.download.empty.message")}
+        </p>
+    {/if}
+</div>

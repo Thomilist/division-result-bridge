@@ -8,10 +8,12 @@
     </title>
 </svelte:head>
 
-<h1>
-    {$t("page.about.title")}
-</h1>
-
-<p>
-    {@html $t("page.about.icon-credit")}
-</p>
+<div class="narrow-content">
+    <h1>
+        {$t("page.about.title")}
+    </h1>
+    
+    <p>
+        {@html $t("page.about.icon-credit")}
+    </p>
+</div>
