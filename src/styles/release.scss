@@ -1,0 +1,98 @@
+.release
+{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto-fit, auto);
+    grid-template-areas:
+        "header"
+        "files"
+        "notes";
+    align-items: center;
+    gap: 20px;
+    border: 2px solid var(--col-main-primary);
+    border-radius: 20px;
+    padding: 20px;
+
+    .release-header
+    {
+        grid-area: header;
+        display: grid;
+        grid-template-columns: auto max-content;
+        grid-template-rows: auto;
+        grid-template-areas: "tag date";
+        align-items: center;
+
+        .release-tag
+        {
+            grid-area: tag;
+            margin: 0;
+        }
+
+        .release-date
+        {
+            grid-area: date;
+            color: var(--col-main-secondary);
+        }
+    }
+
+    .release-files
+    {
+        table
+        {
+            width: 100%;
+            border-collapse: collapse;
+            
+            .release-files-header
+            {
+                border-bottom: 1px solid var(--col-main-primary);
+            }
+
+            tr
+            {
+                th, td
+                {
+                    padding: 5px;
+                    text-align: center;
+                
+                    &:first-child
+                    {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
+        .release-files-empty
+        {
+            font-style: italic;
+        }
+    }
+    
+    .release-notes
+    {
+        grid-area: notes;
+
+        summary
+        {
+            font-weight: bold;
+            padding: 5px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--col-main-primary);
+        }
+    }
+
+    .release-link
+    {
+        display: block;
+        justify-self: end;
+        font-size: small;
+    }
+
+    :global(pre > code)
+    {
+        display: block;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--col-main-secondary);
+    }
+}

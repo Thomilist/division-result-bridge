@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { base } from "$app/paths";
     import { t } from "svelte-intl-precompile";
+	import type { NavHomeProps } from "./types";
 	export let props: NavHomeProps;
 </script>
 

@@ -1,0 +1,14 @@
+.releases
+{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+
+    .all-releases
+    {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: max-content repeat(auto-fit, minmax(100px, 1fr));
+        gap: var(--main-margin);
+    }
+}

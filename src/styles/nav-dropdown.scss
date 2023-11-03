@@ -3,7 +3,7 @@
 .nav-dropdown
 {
     position: relative;
-    color: var(--col-nav-text);
+    color: var(--col-nav-primary);
     background-color: var(--col-nav-background);
 
     button
@@ -17,6 +17,7 @@
         {
             display: grid;
             grid-template-columns: 20px auto;
+            align-items: center;
             gap: 5px;
         }
     

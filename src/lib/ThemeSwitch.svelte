@@ -1,7 +1,8 @@
 <script lang="ts">
     import { theme } from "$lib/stores";
     import { t } from "svelte-intl-precompile";
-	import ThemeIcon from "./icons/ThemeIcon.svelte";
+	import type { Theme, ThemeSwitchProps } from "./types";
+	import PaletteFill from "svelte-bootstrap-icons/lib/PaletteFill.svelte";
 
     export let props: ThemeSwitchProps;
 
@@ -18,7 +19,7 @@
     @import "$styles/label-with-icon.scss";
 </style>
 
-<label for="themeswitch" class="label-with-icon"><ThemeIcon/>{$t(`${props.label}`)}:</label>
+<label for="themeswitch" class="label-with-icon"><PaletteFill/>{$t(`${props.label}`)}:</label>
 <select bind:value="{$theme}" id="themeswitch">
     {#each themes as theme_name}
         <option value={theme_name}>{$t(`theme.${theme_name}.name`)}</option>

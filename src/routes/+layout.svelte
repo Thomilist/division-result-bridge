@@ -11,16 +11,21 @@
 	@import "$styles/themes.scss";
 	@import "$styles/fonts.scss";
 	@import "$styles/base.scss";
+	@import "$styles/hljs.scss";
 </style>
 
 <div id="app">
-	<NavBar/>
+	<div class="sticky-nav">
+		<NavBar/>
+	</div>
 
-	<main class="limited-width-container">
-		<div class="limited-width-content">
-			<slot/>
-		</div>
-	</main>
+	<div class="scrollable-area">
+		<main class="limited-width-container">
+			<div class="limited-width-content">
+				<slot/>
+			</div>
+		</main>
 
-	<Footer/>
+		<Footer/>
+	</div>
 </div>

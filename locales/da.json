@@ -88,6 +88,44 @@
                 }
             }
         },
+        "download":
+        {
+            "title": "Download",
+            "empty":
+            {
+                "title": "Noget Gik Galt",
+                "message": "Udgivelserne kunne ikke nås. Hvis de findes, vil de dog være tilgængelige på <a href=\"https://github.com/Thomilist/division-result-bridge/releases\" target=\"_blank\">Releases-siden på GitHub</a>."
+            },
+            "latest":
+            {
+                "header": "Klar til at efterlade printeren derhjemme?",
+                "button": "Hent Nyeste Version",
+                "details":
+                {
+                    "version": "Version {version} &middot; {platform} &middot; {arch}",
+                    "file": "{format} &middot; {size}"
+                }
+            },
+            "releases":
+            {
+                "title": "Alle Udgivelser",
+                "loading": "Indlæser data...",
+                "notes": "Bemærkninger",
+                "files":
+                {
+                    "empty": "Ingen filer vedhæftet denne udgivelse.",
+                    "labels":
+                    {
+                        "name": "Fil",
+                        "platform": "Platform",
+                        "arch": "CPU-arkitektur",
+                        "format": "Format",
+                        "size": "Størrelse"
+                    }
+                },
+                "github": "Åbn på GitHub"
+            }
+        },
         "docs":
         {
             "title": "Dokumentation"
@@ -117,7 +155,7 @@
         "about":
         {
             "title": "Om",
-            "icon-credit": "Ikoner fra <a href=\"https://icons8.com/\" target=\"_blank\">Icons8</a> og <a href=\"https://www.iconbolt.com/\" target=\"_blank\">Icon Bolt</a>."
+            "icon-credit": "Ikoner fra <a href=\"https://icons.getbootstrap.com/\" target=\"_blank\">Bootstrap Icons</a>."
         }
     }
 }

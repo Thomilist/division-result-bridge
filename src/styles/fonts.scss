@@ -8,3 +8,13 @@
     font-family: Consolas, monospace;
     text-transform: lowercase;
 }
+
+:global(pre > code)
+{
+    font-family: Consolas, monospace;
+
+    :global(*)
+    {
+        font-family: inherit;
+    }
+}

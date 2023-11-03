@@ -1,11 +1,12 @@
 <script lang="ts">
 	import ThemeSwitch from './ThemeSwitch.svelte';
 	import LanguageSelect from './LanguageSelect.svelte';
-	import OptionsIcon from './icons/OptionsIcon.svelte';
+	import GearFill from "svelte-bootstrap-icons/lib/GearFill.svelte";
 	import NavDropdown from './NavDropdown.svelte';
 	import NavLink from './NavLink.svelte';
 	import NavHomeLink from './NavHomeLink.svelte';
 	import Logo from './icons/Logo.svelte';
+	import type { NavDropdownProps, NavHomeProps, NavItem } from './types';
     
     const home: NavHomeProps =
     {
@@ -16,10 +17,11 @@
 
     const items: NavItem[] =
     [
+        {component: NavLink, props: {label: "page.download.title", route: "/download"}},
         {component: NavLink, props: {label: "page.docs.title", route: "/docs"}}
     ];
 
-    const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: OptionsIcon, items:
+    const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: GearFill, items:
     [
         {component: LanguageSelect, props: {label: "options.language.name"}},
         {component: ThemeSwitch, props: {label: "options.theme.name"}}

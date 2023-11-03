@@ -1,0 +1,43 @@
+.latest-release
+{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, max-content);
+    gap: 10px;
+    justify-items: center;
+    margin-top: var(--main-margin);
+    margin-bottom: var(--main-margin);
+    padding-bottom: calc(2 * var(--main-margin));
+    border-bottom: 2px solid var(--col-main-primary);
+
+    h1
+    {
+        font-size: 48px;
+    }
+    
+    .download-latest-button
+    {
+        color: var(--col-nav-primary);
+        background-color: var(--col-nav-background);
+        border: 1px solid var(--col-nav-border);
+        text-decoration: none;
+        font-size: larger;
+        border-radius: 10px;
+        padding: 20px;
+        width: fit-content;
+        display: grid;
+        grid-template-columns: max-content max-content;
+        grid-template-rows: auto;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .download-latest-details
+    {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: max-content max-content;
+        justify-items: center;
+        font-size: smaller;
+    }
+}

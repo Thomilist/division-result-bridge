@@ -1,6 +1,7 @@
 <script lang="ts">
     import { t } from "svelte-intl-precompile";
     import { clickOutside } from "svelte-use-click-outside";
+	import type { NavDropdownProps } from "./types";
 
     export let props: NavDropdownProps;
 

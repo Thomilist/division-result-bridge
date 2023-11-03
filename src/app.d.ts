@@ -7,8 +7,6 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 	}
-
-	type Theme = 'system' | 'light' | 'dark' | 'oled';
 }
 
 export {};

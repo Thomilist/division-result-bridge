@@ -8,19 +8,48 @@ $themes:
         main:
         (
             "background": white,
-            "text": black,
+            "primary": black,
+            "secondary": rgb(63, 63, 63),
             "link": rgb(0, 0, 238)
         ),
         nav:
         (
             "background": blue,
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": none
         ),
         footer:
         (
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": none
+        ),
+        code:
+        (
+            "main": rgb(31, 31, 31),
+            "background": rgb(241, 241, 241),
+            "comment": rgb(66, 107, 74),
+            "keyword": #c500b5,
+            "function": rgb(0, 139, 7),
+            "class": #009e7e,
+            "type": #63007c,
+            "literal": #63007c,
+            "variable": #001bb6,
+            "variable_language": #63007c,
+            "variable_constant": #63007c,
+            "string": #ff0000,
+            "number": #007175,
+            "regex": #646695,
+            "escape": #ff5e00,
+            "tag": #63007c,
+            "header": #000080,
+            "preprocessor": #63007c,
+            "prompt": #2b2b2b,
+            "builtin": rgb(0, 60, 255),
+            "css": #b67c00,
+            "addition": #9bff97,
+            "deletion": rgb(255, 152, 152)
         )
     ),
     dark:
@@ -28,19 +57,48 @@ $themes:
         main:
         (
             "background": rgb(49, 51, 56),
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "link": rgb(0, 168, 252)
         ),
         nav:
         (
             "background": darkblue,
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": none
         ),
         footer:
         (
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": none
+        ),
+        code:
+        (
+            "main": #DCDCDC,
+            "background": #1E1E1E,
+            "comment": #6A9955,
+            "keyword": #C586C0,
+            "function": #DCDCAA,
+            "class": #4EC9B0,
+            "type": #569CD6,
+            "literal": #569CD6,
+            "variable": #9CDCFE,
+            "variable_language": #569CD6,
+            "variable_constant": #569CD6,
+            "string": #CE9178,
+            "number": #B5CEA8,
+            "regex": #646695,
+            "escape": #D7BA7D,
+            "tag": #569CD6,
+            "header": #000080,
+            "preprocessor": #569CD6,
+            "prompt": #cccccc,
+            "builtin": #4FC1FF,
+            "css": #D7BA7D,
+            "addition": #144212,
+            "deletion": #600
         )
     ),
     oled:
@@ -48,19 +106,48 @@ $themes:
         main:
         (
             "background": black,
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "link": rgb(0, 168, 252)
         ),
         nav:
         (
             "background": black,
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": white
         ),
         footer:
         (
-            "text": white,
+            "primary": white,
+            "secondary": rgb(196, 196, 196),
             "border": white
+        ),
+        code:
+        (
+            "main": #DCDCDC,
+            "background": black,
+            "comment": #6A9955,
+            "keyword": #C586C0,
+            "function": #DCDCAA,
+            "class": #4EC9B0,
+            "type": #569CD6,
+            "literal": #569CD6,
+            "variable": #9CDCFE,
+            "variable_language": #569CD6,
+            "variable_constant": #569CD6,
+            "string": #CE9178,
+            "number": #B5CEA8,
+            "regex": #646695,
+            "escape": #D7BA7D,
+            "tag": #569CD6,
+            "header": #000080,
+            "preprocessor": #569CD6,
+            "prompt": #cccccc,
+            "builtin": #4FC1FF,
+            "css": #D7BA7D,
+            "addition": #144212,
+            "deletion": #600
         )
     )
 );
@@ -68,25 +155,24 @@ $themes:
 @each $key, $value in $themes
 {
     $themes: map-deep-set($themes, "#{$key}" "nav" "highlight", color.scale(map-deep-get($value, "nav", "background"), $lightness: 40%));
-    $themes: map-deep-set($themes, "#{$key}" "footer" "background", color.scale(map-deep-get($value, "main", "background"), $lightness: -60%));
+    $themes: map-deep-set($themes, "#{$key}" "footer" "background", color.scale(map-deep-get($value, "main", "background"), $lightness: -70%));
 }
 
 @mixin create-theme($name, $theme)
 {
-    :global(.themed.#{$name})
-    {
-        --col-main-background: #{map-deep-get($themes, "#{$theme}", "main", "background")};
-        --col-main-text: #{map-deep-get($themes, "#{$theme}", "main", "text")};
-        --col-main-link: #{map-deep-get($themes, "#{$theme}", "main", "link")};
-        
-        --col-nav-background: #{map-deep-get($themes, "#{$theme}", "nav", "background")};
-        --col-nav-text: #{map-deep-get($themes, "#{$theme}", "nav", "text")};
-        --col-nav-highlight: #{map-deep-get($themes, "#{$theme}", "nav", "highlight")};
-        --col-nav-border: #{map-deep-get($themes, "#{$theme}", "nav", "border")};
+    $scopes: map-deep-get($themes, "#{$theme}");
 
-        --col-footer-background: #{map-deep-get($themes, "#{$theme}", "footer", "background")};
-        --col-footer-text: #{map-deep-get($themes, "#{$theme}", "footer", "text")};
-        --col-footer-border: #{map-deep-get($themes, "#{$theme}", "footer", "border")};
+    @each $scope_name, $props in $scopes
+    {
+        $scope: map-deep-get($themes, "#{$theme}", "#{$scope_name}");
+
+        @each $prop, $value in $scope
+        {
+            :global(.themed.#{$name})
+            {
+                --col-#{$scope_name}-#{$prop}: #{$value};
+            }
+        }
     }
 }
 

@@ -1,7 +1,7 @@
 @use "_resets";
 
 .nav-bar {
-    color: var(--col-nav-text);
+    color: var(--col-nav-primary);
     background-color: var(--col-nav-background);
     border-bottom: 1px solid var(--col-nav-border);
 }
@@ -15,7 +15,7 @@
     justify-items: start;
 
     li {
-        color: var(--col-nav-text);
+        color: var(--col-nav-primary);
     }
 
     :global(a) {

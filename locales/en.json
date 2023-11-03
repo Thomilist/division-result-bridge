@@ -88,6 +88,44 @@
                 }
             }
         },
+        "download":
+        {
+            "title": "Download",
+            "empty":
+            {
+                "title": "Something Went Grong",
+                "message": "Releases could not be fetched. However, if there are any, they will be available at <a href=\"https://github.com/Thomilist/division-result-bridge/releases\" target=\"_blank\">the Releases page on GitHub</a>."
+            },
+            "latest":
+            {
+                "header": "Ready to leave your printer at home?",
+                "button": "Download Latest Version",
+                "details":
+                {
+                    "version": "Version {version} &middot; {platform} &middot; {arch}",
+                    "file": "{format} &middot; {size}"
+                }
+            },
+            "releases":
+            {
+                "title": "All Releases",
+                "loading": "Loading data...",
+                "notes": "Release Notes",
+                "files":
+                {
+                    "empty": "No files attached to this release.",
+                    "labels":
+                    {
+                        "name": "File",
+                        "platform": "Platform",
+                        "arch": "CPU Arch",
+                        "format": "Format",
+                        "size": "Size"
+                    }
+                },
+                "github": "View on GitHub"
+            }
+        },
         "docs":
         {
             "title": "Documentation"
@@ -117,7 +155,7 @@
         "about":
         {
             "title": "About",
-            "icon-credit": "Icons by <a href=\"https://icons8.com/\" target=\"_blank\">Icons8</a> and <a href=\"https://www.iconbolt.com/\" target=\"_blank\">Icon Bolt</a>."
+            "icon-credit": "Icons by <a href=\"https://icons.getbootstrap.com/\" target=\"_blank\">Bootstrap Icons</a>."
         }
     }
 }

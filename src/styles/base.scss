@@ -10,31 +10,43 @@
     height: 100vh;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: min-content 1fr auto;
-    grid-template-areas: "nav-area" "main-area" "footer-area";
+    grid-template-rows: max-content auto;
+    grid-template-areas: "nav-area" "scroll-area";
+    overflow: auto;
 
-    :global(nav)
+    .sticky-nav
     {
         grid-area: nav-area;
+        position: sticky;
+        top: 0;
     }
 
-    :global(main)
+    .scrollable-area
     {
-        grid-area: main-area;
-        margin-top: var(--main-margin);
-        margin-bottom: var(--main-margin);
-    }
+        grid-area: scroll-area;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: 1fr auto;
+        grid-template-areas: "main-area" "footer-area";
 
-    :global(footer)
-    {
-        grid-area: footer-area;
+        :global(main)
+        {
+            grid-area: main-area;
+            margin-top: var(--main-margin);
+            margin-bottom: var(--main-margin);
+        }
+
+        :global(footer)
+        {
+            grid-area: footer-area;
+        }
     }
 }
 
 :global(.themed)
 {
     background-color: var(--col-main-background);
-    color: var(--col-main-text);
+    color: var(--col-main-primary);
 
     :global(body)
     {

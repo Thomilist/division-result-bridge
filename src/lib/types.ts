@@ -1,9 +1,13 @@
-type NavPropsBase =
+import type { DateTime } from "luxon";
+
+export type Theme = "system" | "light" | "dark" | "oled";
+
+export type NavPropsBase =
 {
     label: string
 };
 
-type NavHomeProps = NavPropsBase &
+export type NavHomeProps = NavPropsBase &
 {
     route: string,
     icon?:
@@ -13,12 +17,12 @@ type NavHomeProps = NavPropsBase &
     }
 };
 
-type NavLinkProps = NavPropsBase &
+export type NavLinkProps = NavPropsBase &
 {
     route: string
 };
 
-type NavDropdownProps = NavPropsBase &
+export type NavDropdownProps = NavPropsBase &
 {
     align: "left" | "right",
     expand: "click" | "hover",
@@ -26,10 +30,10 @@ type NavDropdownProps = NavPropsBase &
     items: NavItem[]
 };
 
-type LanguageSelectProps = NavPropsBase & {};
-type ThemeSwitchProps = NavPropsBase & {};
+export type LanguageSelectProps = NavPropsBase & {};
+export type ThemeSwitchProps = NavPropsBase & {};
 
-type NavItem =
+export type NavItem =
 {
     component: any,
     props: NavPropsBase
@@ -38,3 +42,87 @@ type NavItem =
         | LanguageSelectProps
         | ThemeSwitchProps
 };
+
+export type Release =
+{
+    tag: string,
+    draft: boolean,
+    prerelease: boolean,
+    link: string,
+    published_at: DateTime,
+    text: string,
+    assets: Asset[]
+};
+
+export type Asset =
+{
+    name: string,
+    download_link: string,
+    download_count: number,
+    size: number
+};
+
+export type ReleaseMeta =
+{
+    version:
+    {
+        full: string,
+        major: number,
+        minor: number,
+        patch: number
+    },
+    assets: AssetMeta[]
+};
+
+export type AssetMeta =
+{
+    platform: string,
+    arch: string,
+    format: string,
+    size:
+    {
+        bytes: number,
+        pretty: string
+    }
+};
+
+export interface ReleaseJson
+{
+    tag_name: string,
+    draft: boolean,
+    prerelease: boolean,
+    html_url: string,
+    published_at: string,
+    body: string,
+    assets: AssetsJson[]
+};
+
+export function isReleaseJson(obj: any): obj is ReleaseJson
+{
+    return true
+        && "tag_name" in obj
+        && "draft" in obj
+        && "prerelease" in obj
+        && "html_url" in obj
+        && "published_at" in obj
+        && "body" in obj
+        && "assets" in obj
+        && Array.isArray(obj.assets);
+}
+
+export interface AssetsJson
+{
+    name: string,
+    browser_download_url: string,
+    download_count: number,
+    size: number
+};
+
+export function isAssetsJson(obj: any): obj is AssetsJson
+{
+    return true
+        && "name" in obj
+        && "browser_download_url" in obj
+        && "download_count" in obj
+        && "size" in obj;
+}
