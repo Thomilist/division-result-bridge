@@ -14,9 +14,15 @@
 
 <div class="release">
     <div class="release-header">
-        <h2 class="release-tag">
+        <h2 class="release-name">
             {$t("project.name")} {meta.version.full}
         </h2>
+
+        {#if release.prerelease}
+            <span class="release-pre">
+                {$t("page.download.releases.prerelease")}
+            </span>
+        {/if}
     
         <span class="release-date">
             {release.published_at.setLocale($locale).toLocaleString({...DateTime.DATETIME_FULL, timeZoneName: undefined})}

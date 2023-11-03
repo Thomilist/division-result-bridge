@@ -110,6 +110,7 @@
             {
                 "title": "Alle Udgivelser",
                 "loading": "Indlæser data...",
+                "prerelease": "Tidlig udgivelse",
                 "notes": "Bemærkninger",
                 "files":
                 {

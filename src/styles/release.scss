@@ -17,20 +17,29 @@
     {
         grid-area: header;
         display: grid;
-        grid-template-columns: auto max-content;
+        grid-template-columns: max-content max-content auto;
         grid-template-rows: auto;
-        grid-template-areas: "tag date";
+        grid-template-areas: "name pre date";
         align-items: center;
+        gap: 20px;
 
-        .release-tag
+        .release-name
         {
-            grid-area: tag;
+            grid-area: name;
             margin: 0;
+        }
+
+        .release-pre
+        {
+            grid-area: pre;
+            color: var(--col-main-warning);
+            text-transform: lowercase;
         }
 
         .release-date
         {
             grid-area: date;
+            justify-self: end;
             color: var(--col-main-secondary);
         }
     }

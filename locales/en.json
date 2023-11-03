@@ -110,6 +110,7 @@
             {
                 "title": "All Releases",
                 "loading": "Loading data...",
+                "prerelease": "Pre-release",
                 "notes": "Release Notes",
                 "files":
                 {
