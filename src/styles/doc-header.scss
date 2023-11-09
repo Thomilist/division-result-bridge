@@ -1,0 +1,15 @@
+.doc-header
+{
+    scroll-margin-top: var(--doc-nav-margin-top);
+
+    &.doc-header-main
+    {
+        font-size: 50px;
+    }
+}
+
+h2.doc-header
+{
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--col-main-secondary);
+}

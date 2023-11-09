@@ -1,20 +1,17 @@
 <script lang="ts">
     import { t } from "svelte-intl-precompile";
     import type { PageData } from "./$types";
+	import { title } from "$lib/stores";
     
     export let data: PageData;
     const license = data.license;
+
+    $title = `${$t("page.license.title")} - ${$t("project.name")}`;
 </script>
 
 <style lang="scss">
     @import "$styles/license.scss";
 </style>
-
-<svelte:head>
-    <title>
-        {$t("page.license.title")} - {$t("project.name")}
-    </title>
-</svelte:head>
 
 <div class="narrow-content">
     {#if license}

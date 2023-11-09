@@ -1,0 +1,27 @@
+@use "_resets";
+
+ol
+{
+    @include resets.list;
+
+    font-size: medium;
+    line-height: calc(1em + 2 * var(--doc-nav-padding));
+
+    :global(a)
+    {
+        @include resets.anchor;
+
+        padding: var(--doc-nav-padding) 0;
+
+        &:hover
+        {
+            text-decoration: underline;
+        }
+    }
+
+    :global(ol ol)
+    {
+        margin-left: var(--nav-padding);
+        font-size: small;
+    }
+}

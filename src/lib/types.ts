@@ -1,6 +1,10 @@
 import type { DateTime } from "luxon";
 
+// Theme
+
 export type Theme = "system" | "light" | "dark" | "oled";
+
+// Navigation
 
 export type NavPropsBase =
 {
@@ -19,7 +23,8 @@ export type NavHomeProps = NavPropsBase &
 
 export type NavLinkProps = NavPropsBase &
 {
-    route: string
+    route: string,
+    skip_translation?: boolean
 };
 
 export type NavDropdownProps = NavPropsBase &
@@ -42,6 +47,15 @@ export type NavItem =
         | LanguageSelectProps
         | ThemeSwitchProps
 };
+
+export type NavBarProps =
+{
+    home: NavHomeProps,
+    items: NavItem[],
+    options: NavDropdownProps
+};
+
+// Releases
 
 export type Release =
 {
@@ -126,3 +140,68 @@ export function isAssetsJson(obj: any): obj is AssetsJson
         && "download_count" in obj
         && "size" in obj;
 }
+
+// Documentation
+
+export type DocPageSpec =
+{
+    title: string,
+    component: any
+};
+
+export type DocPage =
+{
+    component: any,
+    props: DocPageProps
+};
+
+export type DocPageProps =
+{
+    title: string,
+    collection: string,
+    previous?: string,
+    next?: string
+};
+
+export type DocCollectionSpec =
+{
+    title: string,
+    connected: boolean,
+    pages: DocPageSpec[]
+};
+
+export type DocCollection =
+{
+    title: string,
+    connected: boolean,
+    pages: Map<string, DocPage>
+};
+
+export type DocPath =
+{
+    collection: string,
+    page: string
+};
+
+export type HeaderHierarchy =
+{
+    node: Node,
+    children: HeaderHierarchy[]
+};
+
+export type DocPageNavListProps =
+{
+    headers: HeaderHierarchy[]
+}
+
+export type DocHeaderProps =
+{
+    depth: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+    specifiers: string[],
+    docpage: DocPageProps
+};
+
+export type DocFooterProps =
+{
+    collection: DocCollection | undefined
+};

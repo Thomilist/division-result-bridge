@@ -1,0 +1,15 @@
+.doc-page-nav
+{
+    nav
+    {
+        h1
+        {
+            font-size: medium;
+        }
+    }
+
+    :global(.doc-page-nav-highlighted)
+    {
+        font-weight: bold;
+    }
+}

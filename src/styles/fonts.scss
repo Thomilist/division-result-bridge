@@ -1,17 +1,23 @@
+:root
+{
+    --font-main: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    --font-mono: Consolas, monospace;
+}
+
 :global(*)
 {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: var(--font-main);
 }
 
 :global(h1, h2, h3, h4, h5, h6)
 {
-    font-family: Consolas, monospace;
+    font-family: var(--font-mono);
     text-transform: lowercase;
 }
 
 :global(pre > code)
 {
-    font-family: Consolas, monospace;
+    font-family: var(--font-mono);
 
     :global(*)
     {

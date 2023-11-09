@@ -129,7 +129,69 @@
         },
         "docs":
         {
-            "title": "Dokumentation"
+            "title": "Dokumentation",
+            "nav":
+            {
+                "on-this-page": "På denne side",
+                "previous": "Forrige",
+                "next": "Næste"
+            },
+            "collection":
+            {
+                "undefined":
+                {
+                    "title": "Fejl",
+                    "page":
+                    {
+                        "undefined":
+                        {
+                            "title": "Side findes ikke",
+                            "message": "Der er vist ikke noget her, men du er velkommen til at kigge på en af siderne i menuen til venstre."
+                        }
+                    }
+                },
+                "preface":
+                {
+                    "title": "Forord",
+                    "page":
+                    {
+                        "introduction":
+                        {
+                            "title": "Introduktion"
+                        },
+                        "features":
+                        {
+                            "title": "Funktioner"
+                        }
+                    }
+                },
+                "getting-started":
+                {
+                    "title": "Kom i gang",
+                    "page":
+                    {
+                        "prerequisites":
+                        {
+                            "title": "Forudsætninger"
+                        },
+                        "installation":
+                        {
+                            "title": "Installation",
+                            "section":
+                            {
+                                "fresh-install":
+                                {
+                                    "title": "Frisk installation"
+                                },
+                                "update":
+                                {
+                                    "title": "Opdatering"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
         "privacy":
         {

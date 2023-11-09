@@ -4,6 +4,13 @@ import en from '$locales/en';
 import { default_locale, localeFromStore } from '$lib/localeHandler';
 import { language } from '$lib/stores';
 import { get } from 'svelte/store';
+import type { NavBarProps, NavDropdownProps, NavHomeProps, NavItem } from '$lib/types';
+import Logo from '$lib/icons/Logo.svelte';
+import NavLink from '$lib/NavLink.svelte';
+import LanguageSelect from '$lib/LanguageSelect.svelte';
+import ThemeSwitch from '$lib/ThemeSwitch.svelte';
+import { GearFill } from 'svelte-bootstrap-icons';
+import type { LayoutLoad } from './$types';
 
 export const prerender = true;
 
@@ -14,3 +21,34 @@ init({
     initialLocale: localeFromStore(get(language)),
     fallbackLocale: default_locale
 });
+
+const home: NavHomeProps =
+{
+    label: "project.name",
+    route: "/",
+    icon: {component: Logo, size: 16}
+};
+
+const items: NavItem[] =
+[
+    {component: NavLink, props: {label: "page.download.title", route: "/download"}},
+    {component: NavLink, props: {label: "page.docs.title", route: "/docs/preface/introduction"}}
+];
+
+const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: GearFill, items:
+[
+    {component: LanguageSelect, props: {label: "options.language.name"}},
+    {component: ThemeSwitch, props: {label: "options.theme.name"}}
+]};
+
+export const load: LayoutLoad = () =>
+{
+    return {
+        nav:
+        {
+            home: home,
+            items: items,
+            options: options
+        }
+    };
+};

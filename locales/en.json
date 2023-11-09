@@ -129,7 +129,69 @@
         },
         "docs":
         {
-            "title": "Documentation"
+            "title": "Documentation",
+            "nav":
+            {
+                "on-this-page": "On this page",
+                "previous": "Previous",
+                "next": "Next"
+            },
+            "collection":
+            {
+                "undefined":
+                {
+                    "title": "Error",
+                    "page":
+                    {
+                        "undefined":
+                        {
+                            "title": "Page not found",
+                            "message": "Looks like there's nothing here. Feel free to check out one of the pages from the menu on the left instead."
+                        }
+                    }
+                },
+                "preface":
+                {
+                    "title": "Preface",
+                    "page":
+                    {
+                        "introduction":
+                        {
+                            "title": "Introduction"
+                        },
+                        "features":
+                        {
+                            "title": "Features"
+                        }
+                    }
+                },
+                "getting-started":
+                {
+                    "title": "Getting started",
+                    "page":
+                    {
+                        "prerequisites":
+                        {
+                            "title": "Prerequisites"
+                        },
+                        "installation":
+                        {
+                            "title": "Installation",
+                            "section":
+                            {
+                                "fresh-install":
+                                {
+                                    "title": "Fresh install"
+                                },
+                                "update":
+                                {
+                                    "title": "Update"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
         "privacy":
         {

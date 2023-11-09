@@ -1,12 +1,9 @@
 <script lang="ts">
+	import { title } from '$lib/stores';
     import { t } from 'svelte-intl-precompile';
-</script>
 
-<svelte:head>
-    <title>
-        {$t("page.about.title")} - {$t("project.name")}
-    </title>
-</svelte:head>
+    $title = `${$t("page.about.title")} - ${$t("project.name")}`;
+</script>
 
 <div class="narrow-content">
     <h1>

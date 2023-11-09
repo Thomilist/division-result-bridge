@@ -1,0 +1,48 @@
+@use "_resets";
+
+.doc-nav
+{
+    nav
+    {
+        h1
+        {
+            color: var(--col-main-secondary);
+            text-transform: uppercase;
+            font-family: var(--font-mono);
+            font-size: larger;
+        }
+
+        ul, ol
+        {
+            @include resets.list;
+
+            font-size: larger;
+            line-height: calc(1em + 2 * var(--doc-nav-padding));
+
+            li
+            {
+                :global(a)
+                {
+                    @include resets.anchor;
+
+                    padding: var(--doc-nav-padding) 0;
+
+                    &:hover
+                    {
+                        text-decoration: underline;
+                    }
+                }
+
+                &.active-docpage
+                {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        .doc-nav-collection + .doc-nav-collection
+        {
+            margin-top: var(--nav-padding);
+        }
+    }
+}

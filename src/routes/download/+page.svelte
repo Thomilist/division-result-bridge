@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { releases } from "$lib/stores";
+    import { releases, title } from "$lib/stores";
     import { t } from "svelte-intl-precompile";
 	import { releaseMeta } from "$lib/releaseMeta";
 	import LatestRelease from "$lib/LatestRelease.svelte";
@@ -10,17 +10,13 @@
     const latest_release_meta = latest_release ? releaseMeta(latest_release) : undefined;
     const all_releases = $releases.filter(rel => !rel.draft);
     const all_releases_meta = all_releases.map(rel => releaseMeta(rel));
+
+    $title = `${$t("page.download.title")} - ${$t("project.name")}`;
 </script>
 
 <style lang="scss">
     @import "$styles/download.scss";
 </style>
-
-<svelte:head>
-    <title>
-        {$t("page.download.title")} - {$t("project.name")}
-    </title>
-</svelte:head>
 
 <div class="narrow-content">
     {#if has_releases}

@@ -1,0 +1,48 @@
+@use "_resets";
+
+.doc-footer
+{
+    border-top: 1px solid var(--col-main-secondary);
+    padding-top: var(--doc-nav-padding);
+
+    display: grid;
+    grid-template-areas: "previous next";
+
+    .doc-footer-previous
+    {
+        grid-area: previous;
+        justify-self: start;
+        justify-items: start;
+
+        display: grid;
+        grid-template-areas: "label" "link";
+    }
+
+    .doc-footer-next
+    {
+        grid-area: next;
+        justify-self: end;
+        justify-items: end;
+
+        display: grid;
+        grid-template-areas: "label" "link";
+    }
+
+    .doc-footer-label
+    {
+        color: var(--col-main-secondary);
+        text-transform: uppercase;
+        font-family: var(--font-mono);
+        font-size: small;
+    }
+
+    :global(a)
+    {
+        @include resets.anchor;
+
+        &:hover
+        {
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,8 +1,11 @@
 <script lang="ts">
-	import { theme } from "$lib/stores";
+	import { theme, title } from "$lib/stores";
 	import NavBar from "$lib/NavBar.svelte";
 	import { browser } from "$app/environment";
 	import Footer from "$lib/Footer.svelte";
+	import type { LayoutData } from "./$types";
+
+	export let data: LayoutData;
 
 	$: if (browser) document.documentElement.className = `themed ${$theme}`;
 </script>
@@ -14,9 +17,15 @@
 	@import "$styles/hljs.scss";
 </style>
 
+<svelte:head>
+    <title>
+        {$title}
+    </title>
+</svelte:head>
+
 <div id="app">
 	<div class="sticky-nav">
-		<NavBar/>
+		<NavBar props={data.nav}/>
 	</div>
 
 	<div class="scrollable-area">
