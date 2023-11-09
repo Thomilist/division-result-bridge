@@ -24,7 +24,8 @@ export type NavHomeProps = NavPropsBase &
 export type NavLinkProps = NavPropsBase &
 {
     route: string,
-    skip_translation?: boolean
+    skip_translation?: boolean,
+    exclude_base?: boolean
 };
 
 export type NavDropdownProps = NavPropsBase &

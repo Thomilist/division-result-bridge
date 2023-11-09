@@ -32,7 +32,7 @@
 	@import "$styles/doc-footer.scss";
 </style>
 
-{#if props.collection?.connected && (previous.title || next.title)}
+{#if props.collection?.connected && (previous?.title || next?.title)}
 	<div class="doc-footer">
 		{#if previous.title}
 			<div class="doc-footer-previous">

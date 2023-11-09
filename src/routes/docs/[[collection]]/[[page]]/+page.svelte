@@ -30,6 +30,6 @@
     <DocHeader props={{depth: 0, specifiers: ["title"], docpage: header_props}}/>
 
     <p>
-        {$t(tpage(header_props, ".message"))}
+        {$t(tpage(header_props, ["message"]))}
     </p>
 {/if}

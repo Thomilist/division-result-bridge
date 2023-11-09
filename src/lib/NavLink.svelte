@@ -6,4 +6,6 @@
     export let props: NavLinkProps;
 </script>
 
-<a href="{base}{props.route}">{props.skip_translation ? props.label : $t(props.label)}</a>
+<a href="{props.exclude_base ? "" : base}{props.route}">
+    {props.skip_translation ? props.label : $t(props.label)}
+</a>

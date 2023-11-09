@@ -13,7 +13,13 @@
     {#each props.headers as header}
         <li>
             {#if (header.node instanceof Element && header.node.id.length > 0)}
-                <NavLink props={{label: `${header.node.textContent}`, skip_translation: true, route: `#${header.node.id}`}}/>
+                <NavLink props={
+                {
+                    label: `${header.node.textContent}`,
+                    route: `#${header.node.id}`,
+                    exclude_base: true,
+                    skip_translation: true
+                }}/>
             {:else}
                 {header.node.textContent}
             {/if}
