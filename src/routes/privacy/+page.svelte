@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resources } from "$lib/resources";
 	import { title } from "$lib/stores";
     import { t } from "svelte-intl-precompile";
 
@@ -23,7 +24,7 @@
     </h2>
     
     <p>
-        {@html $t("page.privacy.website.content")}
+        {@html $t("page.privacy.website.content", {values: {web_storage_api_link: resources.external.mozilla.projects.mdn.routes.web_storage_api}})}
     </p>
     
     <h2>
@@ -31,7 +32,7 @@
     </h2>
     
     <p>
-        {@html $t("page.privacy.application.settings")}
+        {@html $t("page.privacy.application.settings", {values: {qsettings_link: resources.external.qt.projects.qt6.routes.qsettings}})}
     </p>
     
     <p>

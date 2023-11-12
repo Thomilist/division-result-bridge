@@ -4,6 +4,7 @@
 	import { releaseMeta } from "$lib/releaseMeta";
 	import LatestRelease from "$lib/LatestRelease.svelte";
 	import Release from "$lib/Release.svelte";
+	import { resources } from "$lib/resources";
 
     const has_releases = $releases.some(rel => !rel.draft);
     const latest_release = $releases.find(rel => !rel.draft && !rel.prerelease);
@@ -39,7 +40,7 @@
         </h1>
 
         <p>
-            {@html $t("page.download.empty.message")}
+            {@html $t("page.download.empty.message", {values: {releases_link: resources.external.thomilist.projects.division_result_bridge.routes.releases}})}
         </p>
     {/if}
 </div>

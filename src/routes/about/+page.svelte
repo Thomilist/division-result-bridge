@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resources } from '$lib/resources';
 	import { title } from '$lib/stores';
     import { t } from 'svelte-intl-precompile';
 
@@ -11,6 +12,10 @@
     </h1>
     
     <p>
-        {@html $t("page.about.icon-credit")}
+        {@html $t("page.about.icon-credit", {values: 
+        {
+            icons_name: resources.external.bootstrap.projects.icons.name,
+            icons_link: resources.external.bootstrap.projects.icons.routes.website
+        }})}
     </p>
 </div>

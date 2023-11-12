@@ -2,6 +2,7 @@
     import { t } from "svelte-intl-precompile";
     import type { PageData } from "./$types";
 	import { title } from "$lib/stores";
+	import { resources } from "$lib/resources";
     
     export let data: PageData;
     const license = data.license;
@@ -66,7 +67,7 @@
         </h1>
 
         <p>
-            {$t("page.license.fallback")}
+            {$t("page.license.fallback", {values: {license_link: resources.external.thomilist.projects.division_result_bridge.routes.license}})}
         </p>
     {/if}
 </div>

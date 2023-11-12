@@ -7,7 +7,8 @@
     },
     "project":
     {
-        "name": "Division Result Bridge"
+        "name": "Division Result Bridge",
+        "author": "Thomas Emil Jensen"
     },
     "footer":
     {
@@ -74,7 +75,7 @@
                 "compatibility":
                 {
                     "title": "Simple Requirements",
-                    "content": "If your division results are provided by <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, then you can use Division Result Bridge. Additional functionality, such as only uploading when results change or importing metadata during setup, is available depending on your configuration."
+                    "content": "If your division results are provided by <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, then you can use Division Result Bridge. Additional functionality, such as only uploading when results change or importing metadata during setup, is available depending on your configuration."
                 },
                 "setup":
                 {
@@ -94,7 +95,7 @@
             "empty":
             {
                 "title": "Something Went Grong",
-                "message": "Releases could not be fetched. However, if there are any, they will be available at <a href=\"https://github.com/Thomilist/division-result-bridge/releases\" target=\"_blank\">the Releases page on GitHub</a>."
+                "message": "Releases could not be fetched. However, if there are any, they will be available at <a href=\"{releases_link}\" target=\"_blank\">the Releases page on GitHub</a>."
             },
             "latest":
             {
@@ -157,7 +158,14 @@
                     {
                         "introduction":
                         {
-                            "title": "Introduction"
+                            "title": "Introduction",
+                            "section":
+                            {
+                                "main":
+                                {
+                                    
+                                }
+                            }
                         },
                         "features":
                         {
@@ -201,24 +209,24 @@
             "website":
             {
                 "title": "Website",
-                "content": "This website only stores basic user preferences. These are settings for language and theme, which can be changed from the menu in the top right. The data is stored by your browser on your device using the <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API\" target=\"_blank\">Web Storage API</a> - no cookies required. It is not cleared automatically, but browsers usually provide the option to clear the \"browser cache\", \"locally stored data\" or something along those lines."
+                "content": "This website only stores basic user preferences. These are settings for language and theme, which can be changed from the menu in the top right. The data is stored by your browser on your device using the <a href=\"{web_storage_api_link}\" target=\"_blank\">Web Storage API</a> - no cookies required. It is not cleared automatically, but browsers usually provide the option to clear the \"browser cache\", \"locally stored data\" or something along those lines."
             },
             "application":
             {
                 "title": "Application",
-                "settings": "All data displayed in Division Result Bridge is saved to disk when the application is closed to be loaded again on next startup. As detailed on <a href=\"https://doc.qt.io/qt-6/qsettings.html#details\" target=\"_blank\">Qt's documentation for QSettings</a>, the save mechanism varies across platforms, but on Windows, the registry is used. Additionally, a subset this data can be exported to a JSON file at the request of the user.",
-                "results": "Of course, the division results do include some personal information of the participants as collected for the competition, e.g. name, club and class. However, this is not <i>sensitive</i> information, and it is in line with expectations at orienteering events. Division Result Bridge does not actually interact with the results and participants themselves: it fetches complete HTML files from <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, strips styling, adds a little bit of markup for display on the web, and passes them on to the server."
+                "settings": "All data displayed in Division Result Bridge is saved to disk when the application is closed to be loaded again on next startup. As detailed on <a href=\"{qsettings_link}\" target=\"_blank\">Qt's documentation for QSettings</a>, the save mechanism varies across platforms, but on Windows, the registry is used. Additionally, a subset this data can be exported to a JSON file at the request of the user.",
+                "results": "Of course, the division results do include some personal information of the participants as collected for the competition, e.g. name, club and class. However, this is not <i>sensitive</i> information, and it is in line with expectations at orienteering events. Division Result Bridge does not actually interact with the results and participants themselves: it fetches complete HTML files from <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, strips styling, adds a little bit of markup for display on the web, and passes them on to the server."
             }
         },
         "license":
         {
             "title": "License",
-            "fallback": "<a href=\"https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE\" target=\"_blank\">Click here to view the license</a>."
+            "fallback": "<a href=\"{license_link}\" target=\"_blank\">Click here to view the license</a>."
         },
         "about":
         {
             "title": "About",
-            "icon-credit": "Icons by <a href=\"https://icons.getbootstrap.com/\" target=\"_blank\">Bootstrap Icons</a>."
+            "icon-credit": "Icons by <a href=\"{icons_link}\" target=\"_blank\">{icons_name}</a>."
         }
     }
 }

@@ -1,3 +1,4 @@
+import { docs } from "$lib/docs/docs";
 import Installation from "$lib/docs/getting-started/Installation.svelte";
 import Prerequisites from "$lib/docs/getting-started/Prerequisites.svelte";
 import Introduction from "$lib/docs/preface/Introduction.svelte";
@@ -7,27 +8,27 @@ import type { LayoutLoad } from "./$types";
 const page_specs: DocCollectionSpec[] =
 [
     {
-        title: "preface",
+        title: docs.collections.preface.name,
         connected: true,
         pages:
         [
             {
-                title: "introduction",
+                title: docs.collections.preface.pages.introduction.name,
                 component: Introduction
             }
         ]
     },
     {
-        title: "getting-started",
+        title: docs.collections.getting_started.name,
         connected: true,
         pages:
         [
             {
-                title: "prerequisites",
+                title: docs.collections.getting_started.pages.prerequisites.name,
                 component: Prerequisites
             },
             {
-                title: "installation",
+                title: docs.collections.getting_started.pages.installation.name,
                 component: Installation
             }
         ]

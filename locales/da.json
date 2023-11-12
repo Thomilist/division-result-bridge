@@ -7,7 +7,8 @@
     },
     "project":
     {
-        "name": "Division Result Bridge"
+        "name": "Division Result Bridge",
+        "author": "Thomas Emil Jensen"
     },
     "footer":
     {
@@ -74,7 +75,7 @@
                 "compatibility":
                 {
                     "title": "Simple Krav",
-                    "content": "Hvis dine divisionsresultater beregnes med <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, så kan du bruge Division Result Bridge. Ekstra funktionalitet, såsom kun at uploade ved ændringer i resultaterne eller import at metadata under opsætning, er tilgængelige afhængig af din opsætning."
+                    "content": "Hvis dine divisionsresultater beregnes med <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, så kan du bruge Division Result Bridge. Ekstra funktionalitet, såsom kun at uploade ved ændringer i resultaterne eller import at metadata under opsætning, er tilgængelige afhængig af din opsætning."
                 },
                 "setup":
                 {
@@ -94,7 +95,7 @@
             "empty":
             {
                 "title": "Noget Gik Galt",
-                "message": "Udgivelserne kunne ikke nås. Hvis de findes, vil de dog være tilgængelige på <a href=\"https://github.com/Thomilist/division-result-bridge/releases\" target=\"_blank\">Releases-siden på GitHub</a>."
+                "message": "Udgivelserne kunne ikke nås. Hvis de findes, vil de dog være tilgængelige på <a href=\"{releases_link}\" target=\"_blank\">Releases-siden på GitHub</a>."
             },
             "latest":
             {
@@ -157,7 +158,14 @@
                     {
                         "introduction":
                         {
-                            "title": "Introduktion"
+                            "title": "Introduktion",
+                            "section":
+                            {
+                                "main":
+                                {
+                                    
+                                }
+                            }
                         },
                         "features":
                         {
@@ -201,24 +209,24 @@
             "website":
             {
                 "title": "Hjemmesiden",
-                "content": "Hjemmesiden gemmer kun simple brugerpræferencer, nemlig indstillingerne for sprog og tema, som kan tilgås via menuen i øverste, højre hjørne. Dataet gemmes af din browser på din enhed ved hjælp af den moderne <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API\" target=\"_blank\">Web Storage API</a> fremfor at bruge \"cookies\". Den ryddes ikke automatisk, men browsere giver typisk mulighed for at rydde \"browserdata\", \"lokal data\" eller tilsvarende."
+                "content": "Hjemmesiden gemmer kun simple brugerpræferencer, nemlig indstillingerne for sprog og tema, som kan tilgås via menuen i øverste, højre hjørne. Dataet gemmes af din browser på din enhed ved hjælp af den moderne <a href=\"{web_storage_api_link}\" target=\"_blank\">Web Storage API</a> fremfor at bruge \"cookies\". Den ryddes ikke automatisk, men browsere giver typisk mulighed for at rydde \"browserdata\", \"lokal data\" eller tilsvarende."
             },
             "application":
             {
                 "title": "Programmet",
-                "settings": "Al data, som vises i Division Result Bridge, gemmes på computeren, når programmet lukkes. Det indlæses så igen, næste gang programmet starter. Som det beskrives på <a href=\"https://doc.qt.io/qt-6/qsettings.html#details\" target=\"_blank\">Qts dokumentation for QSettings</a>, afhænger lagringsmetoden af platformen - på Windows benyttes registreringsdatabasen. Et subset af dette data kan i øvrigt eksporteres til en JSON-fil, såfremt brugeren ønsker det.",
-                "results": "Selve divisionsresultaterne indeholder naturligvis noget personlig information om deltagerne, som indsamles i forbindelse med konkurrencen, herunder navn, klub og klasse. Disse karakteriseres dog ikke som <i>følsom</i> information, og indsamlingen af disse er i øvrigt ganske typisk for et orienteringsstævne. Division Result Bridge håndterer i øvrigt ikke de enkelte resultater og deltagere: Programmet henter hele HTML-filer fra <a href=\"https://github.com/AndersKlinting/divisionsmatchberegning\" target=\"_blank\">Divisionsmatchberegning</a>, fjerner stildata, tilføjer en smule formattering til visning på hjemmesiden, og giver dem videre til serveren."
+                "settings": "Al data, som vises i Division Result Bridge, gemmes på computeren, når programmet lukkes. Det indlæses så igen, næste gang programmet starter. Som det beskrives på <a href=\"{qsettings_link}\" target=\"_blank\">Qts dokumentation for QSettings</a>, afhænger lagringsmetoden af platformen - på Windows benyttes registreringsdatabasen. Et subset af dette data kan i øvrigt eksporteres til en JSON-fil, såfremt brugeren ønsker det.",
+                "results": "Selve divisionsresultaterne indeholder naturligvis noget personlig information om deltagerne, som indsamles i forbindelse med konkurrencen, herunder navn, klub og klasse. Disse karakteriseres dog ikke som <i>følsom</i> information, og indsamlingen af disse er i øvrigt ganske typisk for et orienteringsstævne. Division Result Bridge håndterer i øvrigt ikke de enkelte resultater og deltagere: Programmet henter hele HTML-filer fra <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, fjerner stildata, tilføjer en smule formattering til visning på hjemmesiden, og giver dem videre til serveren."
             }
         },
         "license":
         {
             "title": "Licens",
-            "fallback": "<a href=\"https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE\" target=\"_blank\">Klik her for at se licenset</a>."
+            "fallback": "<a href=\"{license_link}\" target=\"_blank\">Klik her for at se licenset</a>."
         },
         "about":
         {
             "title": "Om",
-            "icon-credit": "Ikoner fra <a href=\"https://icons.getbootstrap.com/\" target=\"_blank\">Bootstrap Icons</a>."
+            "icon-credit": "Ikoner fra <a href=\"{icons_link}\" target=\"_blank\">{icons_name}</a>."
         }
     }
 }

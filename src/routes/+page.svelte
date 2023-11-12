@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resources } from '$lib/resources';
     import { t } from 'svelte-intl-precompile';
 
     const highlights =
@@ -38,7 +39,11 @@
                 </h2>
     
                 <p>
-                    {@html ($t(`page.home.highlights.${highlight}.content`))}
+                    {@html ($t(`page.home.highlights.${highlight}.content`, {values:
+                    {
+                        divi_name: resources.external.andersklinting.projects.divisionsmatchberegning.name,
+                        divi_link: resources.external.andersklinting.projects.divisionsmatchberegning.routes.repo
+                    }}))}
                 </p>
             </div>
         {/each}

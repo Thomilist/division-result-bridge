@@ -2,6 +2,7 @@
     import { t } from "svelte-intl-precompile";
 	import Logo from "./icons/Logo.svelte";
 	import NavLink from "./NavLink.svelte";
+	import { resources } from "./resources";
 </script>
 
 <style lang="scss">
@@ -15,13 +16,13 @@
         </div>
 
         <div class="links">
-            <NavLink props={{label: "page.privacy.title", route: "/privacy"}}/>
-            <NavLink props={{label: "page.license.title", route: "/license"}}/>
-            <NavLink props={{label: "page.about.title", route: "/about"}}/>
+            <NavLink props={{label: resources.internal.privacy.label, route: resources.internal.privacy.route}}/>
+            <NavLink props={{label: resources.internal.license.label, route: resources.internal.license.route}}/>
+            <NavLink props={{label: resources.internal.about.label, route: resources.internal.about.route}}/>
         </div>
 
         <div class="copyright">
-            &copy; Thomas Emil Jensen
+            &copy; {$t("project.author")}
         </div>
 
         <div class="open-source">
