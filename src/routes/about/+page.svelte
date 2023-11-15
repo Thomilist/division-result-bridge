@@ -14,8 +14,8 @@
     <p>
         {@html $t("page.about.icon-credit", {values: 
         {
-            icons_name: resources.external.bootstrap.projects.icons.name,
-            icons_link: resources.external.bootstrap.projects.icons.routes.website
+            icons_name: resources.external.bootstrap.project.icons.name,
+            icons_link: resources.external.bootstrap.project.icons.route.website
         }})}
     </p>
 </div>

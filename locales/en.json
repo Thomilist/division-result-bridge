@@ -163,7 +163,20 @@
                             {
                                 "main":
                                 {
-                                    
+                                    "welcome": "Welcome to the {bridge_name} documentation! The pages here serve as a usage guide for the program aimed at division match organisers. If you'd like to give it a try, I suggest reading the <a href=\"{getting_started_link}\">getting started series</a> in order. This will take you all the way from initial installation to execution on the day of the event."
+                                },
+                                "what":
+                                {
+                                    "title": "What does it do?",
+                                    "description": "{bridge_name} is a desktop application intended to fascilitate live, online presentation of orienteering division results. To do so, it exchanges data on two fronts. The first is the result source. In essence, this involves drawing division results out of <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>. The second front is with the presentation server, which is an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>. It is then the task of {bridge_name} to <i>bridge</i> the gap between the two fronts (hence the name), ensuring the right results are packaged correctly and are sent to the right destination."
+                                },
+                                "motivation":
+                                {
+                                    "title": "Motivation",
+                                    "live-results": "Any competition would be meaningless without results, and having access to the results early is usually preferable. Orienteering is no exception. For conventional events, where runners compete individually, live publication of results can easily be achieved with the online service <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>. However, the service does not lend itself well to all types of events.",
+                                    "division-matches": "In Denmark, entire clubs regularly compete against each other in divisions. Results are determined by a points-scoring system, with runners scoring points on behalf of their clubs based on their individual results. Typically, the points are calculated with the program <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, but options for live publication of results online are rather limited.",
+                                    "problem": "While <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a> can output division results in presentable HTML format, it takes some effort to make these accessible over the web - and particularly to keep them up to date as new results roll in. Network conditions at orienteering events further complicate the matter, as connection to the wider internet is often established over mobile data. This often implies the use of <a href=\"{cgnat_link}\" target=\"_blank\">{cgnat_name}</a>, rendering servers behind it invisible to the wider internet.",
+                                    "solution": "One solution is to send the HTML files to a server on a visible address, which can then be accessed to view the results. However, setting this up demands additional effort and knowledge from the organiser. The intention of {bridge_name} and <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> is to lower the barrier to entry enough that providing live, online division results becomes a small and easy task."
                                 }
                             }
                         },

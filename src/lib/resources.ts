@@ -15,7 +15,31 @@ export const resources =
         docs:
         {
             label: "page.docs.title",
-            route: "/docs/preface/introduction"
+            route: "/docs/preface/introduction",
+            collection:
+            {
+                preface:
+                {
+                    page:
+                    {
+                        route:
+                        {
+                            introduction: "/docs/getting-started/introduction"
+                        }
+                    }
+                },
+                getting_started:
+                {
+                    page:
+                    {
+                        route:
+                        {
+                            prerequisites: "/docs/getting-started/prerequisites",
+                            installation: "/docs/getting-started/installation"
+                        }
+                    }
+                }
+            }
         },
         privacy:
         {
@@ -39,12 +63,12 @@ export const resources =
         {
             name: "Anders Klinting",
             handle: "AndersKlinting",
-            projects:
+            project:
             {
                 divisionsmatchberegning:
                 {
                     name: "Divisionsmatchberegning",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/AndersKlinting/divisionsmatchberegning",
                         download: "https://www.orientering.dk/divisionsmatch/"
@@ -56,12 +80,12 @@ export const resources =
         {
             name: "Bootstrap",
             handle: "twbs",
-            projects:
+            project:
             {
                 icons:
                 {
                     name: "Bootstrap Icons",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/twbs/icons",
                         website: "https://icons.getbootstrap.com/"
@@ -73,12 +97,12 @@ export const resources =
         {
             name: "LiveResults",
             handle: "liveresults",
-            projects:
+            project:
             {
                 liveresults:
                 {
                     name: "LiveResults",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/liveresults/documentation",
                         website: "https://liveresultat.orientering.se/index.php?lang=en"
@@ -89,16 +113,16 @@ export const resources =
         mozilla:
         {
             name: "Mozilla",
-            routes:
+            route:
             {
                 website: "https://www.mozilla.org/"
             },
-            projects:
+            project:
             {
                 mdn:
                 {
                     name: "MDN Web Docs",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/mdn",
                         website: "https://developer.mozilla.org/",
@@ -111,12 +135,12 @@ export const resources =
         {
             name: "Melin Software",
             handle: "melinsoftware",
-            projects:
+            project:
             {
                 meos:
                 {
                     name: "MeOS",
-                    routes:
+                    route:
                     {
                         home: "https://www.melin.nu/meos/en/",
                         repo: "https://github.com/melinsoftware/meos"
@@ -127,16 +151,16 @@ export const resources =
         qt:
         {
             name: "Qt Group",
-            routes:
+            route:
             {
                 website: "https://www.qt.io/"
             },
-            projects:
+            project:
             {
                 qt6:
                 {
                     name: "Qt 6",
-                    routes:
+                    route:
                     {
                         website: "https://www.qt.io/product/qt6",
                         docs: "https://doc.qt.io/qt-6/",
@@ -149,12 +173,12 @@ export const resources =
         {
             name: "Thomas Emil Jensen",
             handle: "Thomilist",
-            projects:
+            project:
             {
                 division_result_bridge:
                 {
                     name: "Division Result Bridge",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/Thomilist/division-result-bridge",
                         license: "https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE",
@@ -164,10 +188,22 @@ export const resources =
                 division_result_server:
                 {
                     name: "Division Result Server",
-                    routes:
+                    route:
                     {
                         repo: "https://github.com/Thomilist/division-result-server"
                     }
+                }
+            }
+        },
+        wikipedia:
+        {
+            name: "Wikipedia",
+            page:
+            {
+                cgnat:
+                {
+                    name: "CGNAT",
+                    route: "https://en.wikipedia.org/wiki/Carrier-grade_NAT"
                 }
             }
         }

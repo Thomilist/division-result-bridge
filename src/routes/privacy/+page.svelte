@@ -24,7 +24,7 @@
     </h2>
     
     <p>
-        {@html $t("page.privacy.website.content", {values: {web_storage_api_link: resources.external.mozilla.projects.mdn.routes.web_storage_api}})}
+        {@html $t("page.privacy.website.content", {values: {web_storage_api_link: resources.external.mozilla.project.mdn.route.web_storage_api}})}
     </p>
     
     <h2>
@@ -32,7 +32,7 @@
     </h2>
     
     <p>
-        {@html $t("page.privacy.application.settings", {values: {qsettings_link: resources.external.qt.projects.qt6.routes.qsettings}})}
+        {@html $t("page.privacy.application.settings", {values: {qsettings_link: resources.external.qt.project.qt6.route.qsettings}})}
     </p>
     
     <p>

@@ -67,7 +67,7 @@
         </h1>
 
         <p>
-            {$t("page.license.fallback", {values: {license_link: resources.external.thomilist.projects.division_result_bridge.routes.license}})}
+            {$t("page.license.fallback", {values: {license_link: resources.external.thomilist.project.division_result_bridge.route.license}})}
         </p>
     {/if}
 </div>

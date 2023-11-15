@@ -2,13 +2,13 @@
 	import type { DocHeaderProps } from "$lib/types";
 	import { t } from "svelte-intl-precompile";
 	import { tcol, tpage } from "./docs";
-	import { title } from "$lib/stores";
+	import { docpath, title } from "$lib/stores";
 
     export let props: DocHeaderProps;
 
     const is_main = (props.depth === 0);
 
-    if (is_main)
+    $: if (is_main && $docpath)
     {
         $title = `${$t(tpage(props.docpage, props.specifiers))} - ${$t("project.name")}`;
     }

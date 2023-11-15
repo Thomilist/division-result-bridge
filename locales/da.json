@@ -163,7 +163,20 @@
                             {
                                 "main":
                                 {
-                                    
+                                    "welcome": "Velkommen til dokumentationen til {bridge_name}! Indholdet her fungerer som en brugsanvisning for divisionsmatcharrangører. Hvis du vil prøve programmet, giver det bedst mening at starte med at læse <a href=\"{getting_started_link}\">kom i gang serien</a> i rækkefølge. Så vil du komme igennem hele processen fra installation til udførsel på stævnedagen."
+                                },
+                                "what":
+                                {
+                                    "title": "Hvad gør det?",
+                                    "description": "{bridge_name} er et program designet til at fascilitere live, online formidling af divisionsresultater. For at opnå dette, udveklser progrmamet data på to fronter. Den første er resultatkilden. Helt grundlæggende indebærer det, at resultaterne trækkes ud af <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>. Den anden front er serveren, hvor resultaterne vises. Serveren er et eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>. {bridge_name} har så til formål at forbinde de to fronter, så de rigtige resultater pakkes korrekt ind og sendes til den rigtige destination."
+                                },
+                                "motivation":
+                                {
+                                    "title": "Motivation",
+                                    "live-results": "Ved afholdelse af konkurrencer er det naturligvis interessant at se resultaterne - og gerne så hurtigt, som muligt. Orienteringsløb er ingen undtagelse. Til stævner, hvor der konkurreres individuelt, kan resultater let formidles live med onlinetjenesten <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>. Der findes dog også konkurrencer, som denne tjeneste ikke egner sig til.",
+                                    "division-matches": "I Danmark konkurreres der fx klubvis i divisioner, hvor løberne scorer point på vegne af deres klub ud fra deres individuelle resultat. Beregningen af pointene sker typisk ved brug af <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, men mulighederne for live præsentation på internettet er begrænsede.",
+                                    "problem": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a> kan godt producere divisionsresultater i et præsentabelt HTML-format, men det kræver en ekstra indsats at gøre den tilgængelige via internettet - særligt, hvis resultaterne løbende skal ajourføres. Brugen af mobildata til at få internetforbindelse på stævnepladsen, som det ofte er tilfældet, komplicerer sagen yderligere. Typisk medfører det nemlig brugen af <a href=\"{cgnat_link}\" target=\"_blank\">{cgnat_name}</a>, så en server bag et sådant netværk ikke er synlig på internettet.",
+                                    "solution": "En mulig løsning er at sende HTML-filerne til en server på en synlig addresse, så resultater i stedet kan vises derfra. Det stiller dog større krav til arrangørens indsats og viden. Meningen med {bridge_name} og <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> er således at lette adgangen til denne løsning og dermed gøre live, online divisionsresultater til en triviel opgave."
                                 }
                             }
                         },

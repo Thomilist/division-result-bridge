@@ -40,7 +40,7 @@
         </h1>
 
         <p>
-            {@html $t("page.download.empty.message", {values: {releases_link: resources.external.thomilist.projects.division_result_bridge.routes.releases}})}
+            {@html $t("page.download.empty.message", {values: {releases_link: resources.external.thomilist.project.division_result_bridge.route.releases}})}
         </p>
     {/if}
 </div>

@@ -154,19 +154,11 @@
                 // Enter page from below
                 if (entry.isIntersecting)
                 {
-                    console.log({
-                        action: "Scroll down, enter from below",
-                        element: entry.target
-                    });
                     // Do nothing
                 }
                 // Leave page at the top
                 else
                 {
-                    console.log({
-                        action: "Scroll down, leave at top",
-                        element: entry.target
-                    });
                     addHighlightableClass(entry.target);
                 }
             }
@@ -176,19 +168,11 @@
                 // Enter page from above
                 if (entry.isIntersecting)
                 {
-                    console.log({
-                        action: "Scroll up, enter from above",
-                        element: entry.target
-                    });
                     removeHighlightableClass(entry.target);
                 }
                 // Leave page at the bottom
                 else
                 {
-                    console.log({
-                        action: "Scroll up, leave at bottom",
-                        element: entry.target
-                    });
                     // Do nothing
                 }
             }
@@ -198,18 +182,12 @@
                 // Enter page from below
                 if (entry.isIntersecting)
                 {
-                    console.log({
-                        action: "Resize, enter from below",
-                        element: entry.target
-                    });
+                    // Do nothing
                 }
                 // Leave page at the bottom
                 else
                 {
-                    console.log({
-                        action: "Resize, leave at bottom",
-                        element: entry.target
-                    });
+                    // Do nothing
                 }
             }
 

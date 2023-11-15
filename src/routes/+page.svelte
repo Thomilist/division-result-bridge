@@ -41,8 +41,8 @@
                 <p>
                     {@html ($t(`page.home.highlights.${highlight}.content`, {values:
                     {
-                        divi_name: resources.external.andersklinting.projects.divisionsmatchberegning.name,
-                        divi_link: resources.external.andersklinting.projects.divisionsmatchberegning.routes.repo
+                        divi_name: resources.external.andersklinting.project.divisionsmatchberegning.name,
+                        divi_link: resources.external.andersklinting.project.divisionsmatchberegning.route.repo
                     }}))}
                 </p>
             </div>

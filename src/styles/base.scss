@@ -51,6 +51,13 @@
     background-color: var(--col-main-background);
     color: var(--col-main-primary);
 
+    :global(*)
+    {
+        transition-property: color, background-color, border-color;
+        transition-duration: 0.25s;
+        transition-timing-function: ease;
+    }
+
     :global(body)
     {
         margin: 0;
