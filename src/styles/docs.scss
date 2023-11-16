@@ -11,7 +11,8 @@
         "nav content page-nav"
         "nav footer page-nav";
     align-items: start;
-    gap: 100px;
+    column-gap: 100px;
+    row-gap: 50px;
 
     :global(h1)
     {

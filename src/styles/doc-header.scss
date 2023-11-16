@@ -10,12 +10,34 @@
 
 h2.doc-header
 {
-    margin-top: 50px;
+    --size: 32px;
     padding-bottom: 5px;
     border-bottom: 1px solid var(--col-main-secondary);
 }
 
-:is(h3, h4, h5, h6).doc-header
+h3.doc-header
 {
-    margin-top: 40px;
+    --size: 24px;
+}
+
+h4.doc-header
+{
+    --size: 20px;
+}
+
+h5.doc-header
+{
+    --size: 16px;
+}
+
+h6.doc-header
+{
+    --size: 14px;
+}
+
+:is(h2, h3, h4, h5, h6).doc-header
+{
+    font-size: var(--size);
+    margin-top: calc(1.5 * var(--size));
+    margin-bottom: 0;
 }
