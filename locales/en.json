@@ -8,7 +8,11 @@
     "project":
     {
         "name": "Division Result Bridge",
-        "author": "Thomas Emil Jensen"
+        "author": "Thomas Emil Jensen",
+        "logo":
+        {
+            "alt": "A round icon with two colours: White in the top left and orange in the bottom right. It resembles an orienteering flag."
+        }
     },
     "footer":
     {
@@ -179,10 +183,6 @@
                                     "solution": "One solution is to send the HTML files to a server on a visible address, which can then be accessed to view the results. However, setting this up demands additional effort and knowledge from the organiser. The intention of {bridge_name} and <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> is to lower the barrier to entry enough that providing live, online division results becomes a small and easy task."
                                 }
                             }
-                        },
-                        "features":
-                        {
-                            "title": "Features"
                         }
                     }
                 },
@@ -193,7 +193,42 @@
                     {
                         "prerequisites":
                         {
-                            "title": "Prerequisites"
+                            "title": "Prerequisites",
+                            "section":
+                            {
+                                "main":
+                                {
+                                    "intro": "So you're interested in providing live, online division results and want to give {bridge_name} a try? Excellent! However, before we dive in, let's have a look at the requirements to ensure that it makes sense to begin at all, and let's also establish some terminology, which will be used throughout the <i>getting started</i> series."
+                                },
+                                "requirements":
+                                {
+                                    "title": "Requirements",
+                                    "section":
+                                    {
+                                        "system":
+                                        {
+                                            "title": "System",
+                                            "intro": "The requirements for the computer on which {bridge_name} itself runs are as follows:",
+                                            "req0": "{win}",
+                                            "req1": "{storage} of storage",
+                                            "req2": "Internet connection",
+                                            "req3": "{cpu_arch} processor architecture",
+                                            "other_systems": "At the moment, releases on the download page only target {win} computers with {cpu_arch} processors, as this is the most common case. It is primarily tested on {win10}, but it should work just fine on other modern {win} versions as well. For other operating systems and processor architectures, there are still a few possibilities: Either run the program through an emulation layer or, since the source code is freely available, compile it for the native architecture and operating system of your computer."
+                                        },
+                                        "surrounding-setup":
+                                        {
+                                            "title": "Surrounding Setup",
+                                            "intro": "In this context, the surrounding setup refers to the software solutions in use alongside {bridge_name}. At the very least, two pieces of software are required:",
+                                            "req0": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>",
+                                            "req1": "<a href=\"{server_link}\" target=\"_blank\">{server_name}</a>",
+                                            "optional": "Beyond that, you're free to choose whatever you feel most comfortable with. However, some non-essential features are not available in all configurations, requiring one or more of the following:",
+                                            "opt0": "<a href=\"{meos_link}\" target=\"_blank\">{meos_name}</a> version {meos_minimum_version} or newer",
+                                            "opt1": "Results regularly written to a file in {result_format} format",
+                                            "optional-details": "These optional requirements will be described in greater detail when the associated features are introduced."
+                                        }
+                                    }
+                                }
+                            }
                         },
                         "installation":
                         {

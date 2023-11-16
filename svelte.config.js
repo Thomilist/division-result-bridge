@@ -18,6 +18,10 @@ const config = {
 		paths: {
 			base: process.argv.includes('dev') ? '' : '/division-result-bridge'
 		}
+	},
+
+	vitePlugin: {
+		inspector: true
 	}
 };
 

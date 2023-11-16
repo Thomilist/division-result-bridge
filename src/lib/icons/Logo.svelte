@@ -1,5 +1,6 @@
 <script lang="ts">
     import * as logo from "$lib/assets/favicon.png";
+	import { t } from "svelte-intl-precompile";
 
     export let size: number;
 </script>
@@ -8,5 +9,5 @@
     src={logo.default}
     height={size}
     width={size}
-    alt=""
+    alt={$t("project.logo.alt")}
 />

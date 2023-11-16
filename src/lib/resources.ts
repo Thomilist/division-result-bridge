@@ -93,6 +93,18 @@ export const resources =
                 }
             }
         },
+        iof:
+        {
+            name: "International Orienteering Federation",
+            short_name: "IOF",
+            project:
+            {
+                iof_xml_3:
+                {
+                    name: "IOF XML 3.0"
+                }
+            }
+        },
         liveresults:
         {
             name: "LiveResults",
@@ -106,6 +118,42 @@ export const resources =
                     {
                         repo: "https://github.com/liveresults/documentation",
                         website: "https://liveresultat.orientering.se/index.php?lang=en"
+                    }
+                }
+            }
+        },
+        microsoft:
+        {
+            name: "Microsoft",
+            project:
+            {
+                windows:
+                {
+                    name: "Windows"
+                },
+                windows10:
+                {
+                    name: "Windows 10"
+                }
+            }
+        },
+        melinsoftware:
+        {
+            name: "Melin Software",
+            handle: "melinsoftware",
+            project:
+            {
+                meos:
+                {
+                    name: "MeOS",
+                    route:
+                    {
+                        website: "https://www.melin.nu/meos/en/",
+                        repo: "https://github.com/melinsoftware/meos"
+                    },
+                    version:
+                    {
+                        infoserver: "3.5"
                     }
                 }
             }
@@ -127,23 +175,6 @@ export const resources =
                         repo: "https://github.com/mdn",
                         website: "https://developer.mozilla.org/",
                         web_storage_api: "https://developer.mozilla.org/docs/Web/API/Web_Storage_API"
-                    }
-                }
-            }
-        },
-        melinsoftware:
-        {
-            name: "Melin Software",
-            handle: "melinsoftware",
-            project:
-            {
-                meos:
-                {
-                    name: "MeOS",
-                    route:
-                    {
-                        home: "https://www.melin.nu/meos/en/",
-                        repo: "https://github.com/melinsoftware/meos"
                     }
                 }
             }
@@ -206,6 +237,17 @@ export const resources =
                     route: "https://en.wikipedia.org/wiki/Carrier-grade_NAT"
                 }
             }
+        }
+    },
+    misc:
+    {
+        cpu_arch:
+        {
+            x86_64: "x86-64"
+        },
+        requirements:
+        {
+            storage: "~100 MB"
         }
     }
 }

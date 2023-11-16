@@ -27,7 +27,11 @@ const home: NavHomeProps =
 {
     label: resources.internal.home.label,
     route: resources.internal.home.route,
-    icon: {component: Logo, size: 16}
+    icon:
+    {
+        component: Logo,
+        size: 16
+    }
 };
 
 const pages: NavItem[] =
@@ -36,11 +40,18 @@ const pages: NavItem[] =
     {component: NavLink, props: {label: resources.internal.docs.label, route: resources.internal.docs.route}}
 ];
 
-const options: NavDropdownProps = {label: "options.name", align: "right", expand: "click", icon: GearFill, items:
-[
-    {component: LanguageSelect, props: {label: "options.language.name"}},
-    {component: ThemeSwitch, props: {label: "options.theme.name"}}
-]};
+const options: NavDropdownProps = 
+{
+    label: "options.name",
+    align: "right",
+    expand: "click",
+    icon: GearFill,
+    items:
+    [
+        {component: LanguageSelect, props: {label: "options.language.name"}},
+        {component: ThemeSwitch, props: {label: "options.theme.name"}}
+    ]
+};
 
 export const load: LayoutLoad = () =>
 {

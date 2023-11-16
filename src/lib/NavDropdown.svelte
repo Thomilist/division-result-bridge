@@ -8,7 +8,7 @@
     let open: boolean = false;
     $: open_class = open ? "is-open" : "";
 
-    const has_icon: boolean = props.icon;
+    const has_icon: boolean = props.icon !== undefined;
     const has_icon_class = has_icon ? "has-icon" : "";
 
     function toggleDropdown()
@@ -41,7 +41,7 @@
 <div use:clickOutside={onClickOutside} class="nav-dropdown expand-on-{props.expand}">
     <button class="nav-hoverable {has_icon_class}" on:click={toggleDropdown}>
         {#if has_icon}
-            <svelte:component this={props.icon}/>
+            <svelte:component this={props.icon} role="presentation"/>
         {/if}
 
         {$t(`${props.label}`)}

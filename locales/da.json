@@ -8,7 +8,11 @@
     "project":
     {
         "name": "Division Result Bridge",
-        "author": "Thomas Emil Jensen"
+        "author": "Thomas Emil Jensen",
+        "logo":
+        {
+            "alt": "Et rundt ikon med to farver: Hvidt øverst til venstre og rødt nederst til højre. Det forestiller en postskærm til orienteringsløb."
+        }
     },
     "footer":
     {
@@ -179,10 +183,6 @@
                                     "solution": "En mulig løsning er at sende HTML-filerne til en server på en synlig addresse, så resultater i stedet kan vises derfra. Det stiller dog større krav til arrangørens indsats og viden. Meningen med {bridge_name} og <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> er således at lette adgangen til denne løsning og dermed gøre live, online divisionsresultater til en triviel opgave."
                                 }
                             }
-                        },
-                        "features":
-                        {
-                            "title": "Funktioner"
                         }
                     }
                 },
@@ -193,7 +193,42 @@
                     {
                         "prerequisites":
                         {
-                            "title": "Forudsætninger"
+                            "title": "Forudsætninger",
+                            "section":
+                            {
+                                "main":
+                                {
+                                    "intro": "Så du tænker på at udbyde live, online divisionsresultater, og du vil gerne give {bridge_name} et forsøg? Fantastisk! Først skal vi dog lige have fastlagt nogle krav, så du kan beslutte, om det overhovedet giver mening at starte."
+                                },
+                                "requirements":
+                                {
+                                    "title": "Krav",
+                                    "section":
+                                    {
+                                        "system":
+                                        {
+                                            "title": "System",
+                                            "intro": "Kravene til selve computeren, hvorpå {bridge_name} kører, er følgende:",
+                                            "req0": "{win}",
+                                            "req1": "{storage} lagerplads",
+                                            "req2": "Internetforbindelse",
+                                            "req3": "{cpu_arch} processorarkitektur",
+                                            "other_systems": "I øjeblikket understøtter udgivelserne på downloadsiden kun {win}-computere med {cpu_arch}-processorer, da denne konfiguration er mest almindelig. Programmet testes primært på {win10}, men det bør også virke fint på andre moderne {win}-udgivelser. Skulle din computer have en anden konfiguration, kan der dog stadig være muligheder: Programmet kan køres via emulering, eller det kan kompileres til din computers processorarkitektur og operativsystem, da koden er frit tilgængelig."
+                                        },
+                                        "surrounding-setup":
+                                        {
+                                            "title": "Øvrig Opstilling",
+                                            "intro": "Den øvrige opstilling beskriver i denne sammenhæng de softwareløsninger udover {bridge_name}, som benyttes til stævnet. Som absolut minimum kræves to stykker software:",
+                                            "req0": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>",
+                                            "req1": "<a href=\"{server_link}\" target=\"_blank\">{server_name}</a>",
+                                            "optional": "Resten af opstillingen er helt op til dig. Dog er nogle få ikke-essentielle funktioner ikke tilgængelige med alle konfigurationer, da de kræver en eller flere af følgende:",
+                                            "opt0": "<a href=\"{meos_link}\" target=\"_blank\">{meos_name}</a> version {meos_minimum_version} eller nyere",
+                                            "opt1": "Løbende eksport af resultater til en fil i {result_format}-format",
+                                            "optional-details": "Disse ekstra krav vil blive beskrevet yderligere, når de pågældende funktioner introduceres."
+                                        }
+                                    }
+                                }
+                            }
                         },
                         "installation":
                         {
