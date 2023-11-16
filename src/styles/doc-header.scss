@@ -14,3 +14,8 @@ h2.doc-header
     padding-bottom: 5px;
     border-bottom: 1px solid var(--col-main-secondary);
 }
+
+:is(h3, h4, h5, h6).doc-header
+{
+    margin-top: 40px;
+}

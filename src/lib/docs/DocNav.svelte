@@ -15,9 +15,9 @@
     <nav>
         {#each collections as collection}
             <div class="doc-nav-collection">
-                <h1 class="doc-collection-label">
+                <h2 class="doc-collection-label">
                     {$t(`page.docs.collection.${collection.title}.title`)}
-                </h1>
+                </h2>
         
                 <svelte:element this={collection.connected ? "ol" : "ul"}>
                     {#each collection.pages as page}

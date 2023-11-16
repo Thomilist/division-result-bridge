@@ -21,7 +21,7 @@
 
     function findHeaders(): NodeList
     {
-        return document.querySelectorAll(".doc-content-container h1, h2, h3, h4, h5, h6");
+        return document.querySelectorAll(".doc-content-container :is(h1, h2, h3, h4, h5, h6)");
     }
 
     function headerDepth(header: Node): number
@@ -255,9 +255,9 @@
 
 <div class="doc-page-nav">
     <nav>
-        <h1 class="doc-collection-label">
+        <h2 class="doc-collection-label">
             {$t("page.docs.nav.on-this-page")}
-        </h1>
+        </h2>
 
         <DocPageNavList props={{headers: header_hierarchy}}/>
     </nav>

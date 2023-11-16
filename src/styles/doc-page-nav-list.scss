@@ -4,7 +4,7 @@ ol
 {
     @include resets.list;
 
-    font-size: medium;
+    font-size: 16px;
     line-height: calc(1em + 2 * var(--doc-nav-padding));
 
     :global(a)
@@ -22,6 +22,6 @@ ol
     :global(ol ol)
     {
         margin-left: var(--nav-padding);
-        font-size: small;
+        font-size: 14px;
     }
 }

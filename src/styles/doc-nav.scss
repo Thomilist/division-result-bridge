@@ -4,14 +4,6 @@
 {
     nav
     {
-        h1
-        {
-            color: var(--col-main-secondary);
-            text-transform: uppercase;
-            font-family: var(--font-mono);
-            font-size: larger;
-        }
-
         ul, ol
         {
             @include resets.list;
