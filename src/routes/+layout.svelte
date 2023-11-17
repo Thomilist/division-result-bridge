@@ -3,11 +3,42 @@
 	import NavBar from "$lib/NavBar.svelte";
 	import { browser } from "$app/environment";
 	import Footer from "$lib/Footer.svelte";
-	import type { LayoutData } from "./$types";
+	import type { LayoutData, Snapshot } from "./$types";
+	import { afterNavigate } from "$app/navigation";
+	import { onMount, tick } from "svelte";
 
 	export let data: LayoutData;
 
 	$: if (browser) document.documentElement.className = `themed ${$theme}`;
+
+	// Scroll to top after navigating and (attempt to) keep scroll state when going back
+	// https://github.com/sveltejs/kit/pull/8723#issuecomment-1423522635
+	let container: HTMLElement;
+
+    afterNavigate(() =>
+    {
+        container.scrollTo(0, 0);
+    });
+
+    export const snapshot: Snapshot<number> =
+    {
+        capture: () => container.scrollTop,
+        restore: async (y) =>
+		{
+			await tick();
+			container.scrollTo(0, y)
+		}
+    };
+
+	onMount(() =>
+	{
+		const app_element: HTMLElement | null = document.querySelector("#app");
+		
+		if (app_element)
+		{
+			container = app_element;
+		}
+	});
 </script>
 
 <style lang="scss">
