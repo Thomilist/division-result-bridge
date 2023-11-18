@@ -198,7 +198,7 @@
                             {
                                 "main":
                                 {
-                                    "intro": "So you're interested in providing live, online division results and want to give {bridge_name} a try? Excellent! However, before we dive in, let's have a look at the requirements to ensure that it makes sense to begin at all, and let's also establish some terminology, which will be used throughout the <i>getting started</i> series."
+                                    "intro": "So you're interested in providing live, online division results and want to give {bridge_name} a try? Excellent! However, before we dive in, let's have a look at the requirements to ensure that it makes sense to begin at all."
                                 },
                                 "requirements":
                                 {
