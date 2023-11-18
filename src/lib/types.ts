@@ -206,3 +206,11 @@ export type DocFooterProps =
 {
     collection: DocCollection | undefined
 };
+
+export type DocElementProps =
+{
+    element?: string,
+    docpage: DocPageProps,
+    specifiers: string[],
+    values?: any
+}

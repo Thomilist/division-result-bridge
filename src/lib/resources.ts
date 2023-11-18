@@ -202,17 +202,10 @@ export const resources =
         },
         semver:
         {
-            handle: "semver",
-            project:
-            {
-                semver:
-                {
-                    route:
+            route:
                     {
                         website: "https://semver.org/",
                         repo: "https://github.com/semver/semver"
-                    }
-                }
             }
         },
         thomilist:

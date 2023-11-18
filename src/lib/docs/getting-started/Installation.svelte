@@ -1,55 +1,73 @@
 <script lang="ts">
 	import type { DocPageProps } from "$lib/types";
-	import { t } from "svelte-intl-precompile";
 	import DocHeader from "../DocHeader.svelte";
-	import { tpage } from "../docs";
 	import { resources } from "$lib/resources";
 	import { base } from "$app/paths";
+	import DocElement from "../DocElement.svelte";
 
     export let props: DocPageProps;
+
+	const program = resources.external.thomilist.project.division_result_bridge;
 </script>
 
-<p>
-	{@html $t(tpage(props, ["intro"]), {values:
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["intro"],
+	values:
 	{
-		bridge_name: resources.external.thomilist.project.division_result_bridge.name
-	}})}
-</p>
+		bridge_name: program.name
+	}
+}}/>
 
 <DocHeader props={{depth: 2, specifiers: ["section", "fresh-install", "title"], docpage: props}}/>
 
-<p>
-	{@html $t(tpage(props, ["section", "fresh-install", "download"]), {values:
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["section", "fresh-install", "download"],
+	values:
 	{
 		download_page_link: `${base}${resources.internal.download.route}`
-	}})}
-</p>
+	}
+}}/>
 
-<p>
-	{@html $t(tpage(props, ["section", "fresh-install", "extract"]), {values:
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["section", "fresh-install", "extract"],
+	values:
 	{
-		bridge_name: resources.external.thomilist.project.division_result_bridge.name,
-		bridge_exe_name: resources.external.thomilist.project.division_result_bridge.exe_name
-	}})}
-</p>
+		bridge_name: program.name,
+		bridge_exe_name: program.exe_name
+	}
+}}/>
 
 <DocHeader props={{depth: 2, specifiers: ["section", "update", "title"], docpage: props}}/>
 
-<p>
-	{@html $t(tpage(props, ["section", "update", "main"]))}
-</p>
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["section", "update", "main"]
+}}/>
 
-<p>
-	{@html $t(tpage(props, ["section", "update", "settings"]), {values:
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["section", "update", "settings"],
+	values:
 	{
 		win: resources.external.microsoft.project.windows.name
-	}})}
-</p>
+	}
+}}/>
 
-<p>
-	{@html $t(tpage(props, ["section", "update", "semver"]), {values:
+<DocElement props={
+{
+	docpage: props,
+	specifiers: ["section", "update", "semver"],
+	values:
 	{
-		bridge_name: resources.external.thomilist.project.division_result_bridge.name,
-		semver_link: resources.external.semver.project.semver.route.website
-	}})}
-</p>
+		bridbridge_name: program.name,
+		semver_link: resources.external.semver.route.website
+	}
+}}/>
