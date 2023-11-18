@@ -14,6 +14,7 @@ namespace divi
             Helpers::loggerCompetitionCreationWizard(),
             settings,
             this))
+        , compatibility_page(&creation_settings, this)
         , response_page(logger, this)
     {
         setModal(true);
@@ -102,21 +103,6 @@ namespace divi
             initiateRequest();
         }
 
-        return;
-    }
-    
-    void CompetitionCreationWizard::updateCompatibilitySelection(QAbstractButton* a_button)
-    {
-        if (compatibility_button_values.contains(a_button))
-        {
-            creation_settings.setResultSource(compatibility_button_values[a_button]);
-        }
-        else
-        {
-            creation_settings.setResultSource(ResultSource::_Undefined);
-        }
-
-        updateCompatibilityDescription();
         return;
     }
     
@@ -214,52 +200,6 @@ namespace divi
     {
         compatibility_page.setTitle("Compatibility " % pageNumber(Page::Compatibility));
         compatibility_page.setSubTitle("Select a result source according to your surrounding setup");
-
-        compatibility_label.setWordWrap(true);
-        compatibility_label.setText(
-            QString()
-            % "Results can be fetched in three different ways. "
-            % "Choose the method that best fits your setup. "
-            % "You can always change this later with no data loss. ");
-
-        meos_divi_button.setText(Helpers::meosName() % " + " % Helpers::diviNameLong());
-        divi_button.setText(Helpers::diviNameLong());
-        xml_divi_button.setText("IOF XML 3.0 file + " % Helpers::diviNameLong());
-
-        for (const auto& button_value :
-        {
-            std::pair{&meos_divi_button, ResultSource::MeosDivi},
-            std::pair{&divi_button, ResultSource::Divi},
-            std::pair{&xml_divi_button, ResultSource::XmlDivi}
-        })
-        {
-            compatibility_button_values.insert(button_value);
-        }
-
-        compatibility_button_group.addButton(&meos_divi_button);
-        compatibility_button_group.addButton(&divi_button);
-        compatibility_button_group.addButton(&xml_divi_button);
-
-        compatibility_description.setWordWrap(true);
-        compatibility_description.setTextFormat(Qt::RichText);
-
-        int layout_row = 0;
-
-        compatibility_page_layout.addWidget(&compatibility_label, layout_row++, 0);
-
-        compatibility_page_layout.setRowMinimumHeight(layout_row++, 10);
-
-        compatibility_page_layout.addWidget(&meos_divi_button, layout_row++, 0);
-        compatibility_page_layout.addWidget(&divi_button, layout_row++, 0);
-        compatibility_page_layout.addWidget(&xml_divi_button, layout_row++, 0);
-
-        compatibility_page_layout.setRowMinimumHeight(layout_row++, 10);
-
-        compatibility_page_layout.addWidget(&compatibility_description, layout_row++, 0);
-
-        compatibility_page.setLayout(&compatibility_page_layout);
-
-        connect(&compatibility_button_group, &QButtonGroup::buttonClicked, this, &CompetitionCreationWizard::updateCompatibilitySelection);
 
         setPage(Page::Compatibility, &compatibility_page);
         return;
@@ -467,17 +407,7 @@ namespace divi
         creation_settings.getCompetition().setPassword("");
         
         // Compatibility
-        for (auto& [button, source] : compatibility_button_values)
-        {
-            if (creation_settings.getResultSource() == source)
-            {
-                button->setChecked(true);
-                updateCompatibilitySelection(button);
-                break;
-            }
-        }
-
-        updateCompatibilityDescription();
+        compatibility_page.populate();
 
         // Password
         password_input.setText(creation_settings.getCompetition().getPassword());
@@ -494,64 +424,6 @@ namespace divi
     const QString CompetitionCreationWizard::pageNumber(Page a_page)
     {
         return QString() % "(" % QString::number(a_page + 1) % "/" % QString::number(Page::_Count) % ")";
-    }
-    
-    void CompetitionCreationWizard::updateCompatibilityDescription()
-    {
-        switch (creation_settings.getResultSource())
-        {
-            case ResultSource::MeosDivi:
-            {
-                compatibility_description.setText(
-                    QString()
-                    % "<i>"
-                    % "Metadata can be fetched directly from "
-                    % Helpers::meosName()
-                    % ", and results are uploaded on a timer, "
-                    % "but only when they have changed. "
-                    % Helpers::diviNameLong()
-                    % " is run automatically from the command line."
-                    % "</i>");
-                break;
-            }
-            case ResultSource::Divi:
-            {
-                compatibility_description.setText(
-                    QString()
-                    % "<i>"
-                    % "Results are fetched on a timer directly from "
-                    % Helpers::diviNameLong()
-                    % " through its information server. "
-                    % "One instance per division must be kept open. "
-                    % "This is independent of the underlying timing setup and has great performance, "
-                    % "but it does not check for changes before uploading."
-                    % "</i>");
-                break;
-            }
-            case ResultSource::XmlDivi:
-            {
-                compatibility_description.setText(
-                    QString()
-                    % "<i>"
-                    % "Results are loaded from an IOF XML 3.0 file whenever it changes, "
-                    % "independent of its source. "
-                    % Helpers::diviNameLong()
-                    % " is run automatically from the command line."
-                    % "</i>");
-                break;
-            }
-            default:
-            {
-                compatibility_description.setText(
-                    QString()
-                    % "<i>"
-                    % "Choose an option to see more details."
-                    % "</i>");
-                break;
-            }
-        }
-
-        return;
     }
     
     void CompetitionCreationWizard::initiateRequest()

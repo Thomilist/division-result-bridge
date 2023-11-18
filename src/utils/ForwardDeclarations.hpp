@@ -5,6 +5,7 @@ namespace divi
 {
     class AboutDialog;
     class AlteredWizardPage;
+    class CompatibilityWizardPage;
     class Competition;
     class CompetitionCreationWizard;
     class ConfigValidator;

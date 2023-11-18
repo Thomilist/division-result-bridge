@@ -36,6 +36,7 @@
 #include "../utils/ForwardDeclarations.hpp"
 
 #include "AlteredWizardPage.hpp"
+#include "CompatibilityWizardPage.hpp"
 #include "../Competition.hpp"
 #include "../utils/Helpers.hpp"
 #include "../logging/Loggable.hpp"
@@ -79,7 +80,6 @@ namespace divi
         
         private slots:
             void receiveSignalAnchor(const QString& a_signal_anchor);
-            void updateCompatibilitySelection(QAbstractButton* a_button);
             void pageChanged(int a_page_id);
             void copySummary();
         
@@ -96,7 +96,6 @@ namespace divi
 
             void populate();
             const QString pageNumber(Page a_page);
-            void updateCompatibilityDescription();
             void initiateRequest();
 
             Settings* settings;
@@ -111,7 +110,7 @@ namespace divi
             QLabel introduction_label;
 
             // Compatibility page
-            QWizardPage compatibility_page;
+            CompatibilityWizardPage compatibility_page;
             QGridLayout compatibility_page_layout;
             QLabel compatibility_label;
             QButtonGroup compatibility_button_group;
