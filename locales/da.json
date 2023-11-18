@@ -11,7 +11,7 @@
         "author": "Thomas Emil Jensen",
         "logo":
         {
-            "alt": "Et rundt ikon med to farver: Hvidt øverst til venstre og rødt nederst til højre. Det forestiller en postskærm til orienteringsløb."
+            "alt": "Projektets logo. Et rundt ikon med to farver: Hvidt øverst til venstre og rødt nederst til højre. Det forestiller en postskærm til orienteringsløb."
         }
     },
     "footer":
@@ -233,15 +233,21 @@
                         "installation":
                         {
                             "title": "Installation",
+                            "intro": "Installation og opdatering af {bridge_name} er lidt primitivt, men ret nemt.",
                             "section":
                             {
                                 "fresh-install":
                                 {
-                                    "title": "Frisk installation"
+                                    "title": "Frisk installation",
+                                    "download": "Hent den seneste udgivelse fra <a href=\"{download_page_link}\">downloadsiden</a>, da det er den version, dokumentationen passer til. Du skulle gerne få et enkelt ZIP-arkiv.",
+                                    "extract": "Udpak ZIP-arkivet til en valgfri placering. Selve placeringen er ikke så vigtig; selv et USB-drev kan anvendes, og du kan altid flytte den igen senere. Udpakning resulterer i én mappe, som indeholder {bridge_name} og en samling nødvendige filer. Mappen indeholder blandt andet <i>{bridge_exe_name}</i>, som kan åbnes for at starte programmet. Det var det! Installationen er gennemført."
                                 },
                                 "update":
                                 {
-                                    "title": "Opdatering"
+                                    "title": "Opdatering",
+                                    "main": "Der er ikke nogen bestemt opdateringsproces. Følg i stedet installationsprocessen ovenfor, men med den nye version i stedet for. Det er valgfrit, om du beholder den gamle version, men da de tilhørende, nødvendige filer kan være ændret, bør du undgå at blande forskellige installationer. Hold dem derfor i forskellige mapper.",
+                                    "settings": "Program- og konkurrenceindstillinger opbevares ikke i installationsmappen. De bliver i stedet gemt centralt på computeren (fx i registreringsdatabasen på {win}). Forskellige versioner af programmet vil altså bruge de samme indstillinger.",
+                                    "semver": "{bridge_name} bruger <a href=\"{semver_link}\" target=\"_blank\">semantiske versionsnumre</a> til at skelne mellem forskellige udgivelser. En ny <i>major</i>-version angiver derfor, at en udgivelse ikke er (helt) kompatibel med den forrige. Årsagen vil blive beskrevet under udgivelsens bemærkninger sammen med en overgangsstrategi."
                                 }
                             }
                         }

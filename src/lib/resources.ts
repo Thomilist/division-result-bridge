@@ -200,6 +200,21 @@ export const resources =
                 }
             }
         },
+        semver:
+        {
+            handle: "semver",
+            project:
+            {
+                semver:
+                {
+                    route:
+                    {
+                        website: "https://semver.org/",
+                        repo: "https://github.com/semver/semver"
+                    }
+                }
+            }
+        },
         thomilist:
         {
             name: "Thomas Emil Jensen",
@@ -209,6 +224,7 @@ export const resources =
                 division_result_bridge:
                 {
                     name: "Division Result Bridge",
+                    exe_name: "division-result-bridge.exe",
                     route:
                     {
                         repo: "https://github.com/Thomilist/division-result-bridge",
