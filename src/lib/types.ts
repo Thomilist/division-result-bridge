@@ -199,7 +199,8 @@ export type DocHeaderProps =
 {
     depth: 0 | 1 | 2 | 3 | 4 | 5 | 6,
     specifiers: string[],
-    docpage: DocPageProps
+    docpage: DocPageProps,
+    values?: any
 };
 
 export type DocFooterProps =
