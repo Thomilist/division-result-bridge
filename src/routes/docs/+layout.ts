@@ -1,4 +1,5 @@
 import { docs } from "$lib/docs/docs";
+import CreateCompetition from "$lib/docs/getting-started/CreateCompetition.svelte";
 import Installation from "$lib/docs/getting-started/Installation.svelte";
 import Prerequisites from "$lib/docs/getting-started/Prerequisites.svelte";
 import Introduction from "$lib/docs/preface/Introduction.svelte";
@@ -30,6 +31,10 @@ const page_specs: DocCollectionSpec[] =
             {
                 title: docs.collections.getting_started.pages.installation.name,
                 component: Installation
+            },
+            {
+                title: docs.collections.getting_started.pages.create_competition.name,
+                component: CreateCompetition
             }
         ]
     }

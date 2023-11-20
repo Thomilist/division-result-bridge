@@ -79,7 +79,7 @@
                 "compatibility":
                 {
                     "title": "Simple Requirements",
-                    "content": "If your division results are provided by <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, then you can use Division Result Bridge. Additional functionality, such as only uploading when results change or importing metadata during setup, is available depending on your configuration."
+                    "content": "If your division results are provided by <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, then you can use Division Result Bridge. Additional functionality, such as only updating results upon change or importing metadata during setup, is available depending on your configuration."
                 },
                 "setup":
                 {
@@ -240,7 +240,7 @@
                                 {
                                     "title": "Fresh install",
                                     "download": "Head to the <a href=\"{download_page_link}\">download page</a> and grab the latest release, as this is the version the documentation pertains to. The download consists of a single ZIP archive.",
-                                    "extract": "Extract the ZIP archive to a location of your choice. The exact location is irrelevant; even a USB flash drive will do, and you can always move it later. The extraction should yield a single folder, which contains {bridge_name} and its dependencies. Within the folder, you will find <i>{bridge_exe_name}</i> - opening it will start the program. And that's it! Installation is complete."
+                                    "extract": "Extract the ZIP archive to a location of your choice. The exact location is irrelevant; even a USB flash drive will do, and you can always move it later. The extraction should yield a single folder, which contains {bridge_name} and its dependencies. Within the folder, you will find <span class=\"named\">{bridge_exe_name}</span> - opening it will start the program. And that's it! Installation is complete."
                                 },
                                 "update":
                                 {
@@ -248,6 +248,84 @@
                                     "main": "There is no specific update workflow. Instead, simply follow the process outlined above for a fresh installation, this time downloading the <i>new</i> latest version. Whether or not you keep the old version around is up to you, but since some of the dependencies may have changed, you should avoid mixing different installations - keep them in separate folders.",
                                     "settings": "Program and competition settings are not stored in the installation folder. Instead, they are automatically saved to a standard location on the computer (e.g. the registry on {win}). This means different versions of the program will use the same settings.",
                                     "semver": "{bridge_name} uses <a href=\"{semver_link}\" target=\"_blank\">semantic versioning</a> to differentiate releases. A new major version implies breaking changes, and these will be described in the release notes along with a migration strategy."
+                                }
+                            }
+                        },
+                        "create-competition":
+                        {
+                            "title": "Create competition",
+                            "launch": "Open {bridge_name}. You should see a window looking something like this:",
+                            "initial-interface-alt": "The interface of {bridge_name} at first launch.",
+                            "section":
+                            {
+                                "page1":
+                                {
+                                    "open-wizard": "Open the <span class=\"named\">{comp_menu}</span> menu in the top left corner, and select <span class=\"named\">{create_new}</span>. The competition creation wizard should open:",
+                                    "alt": "Competition creation wizard, page 1: A brief message to introduce the process.",
+                                    "next": "This page is just for introduction, so go ahead and press <span class=\"named\">{next}</span>."
+                                },
+                                "page2":
+                                {
+                                    "title": "Compatibility",
+                                    "intro": "The first choice you will make involves the result source. This is where the optional requirements and non-essential features mentioned earlier enter the picture.",
+                                    "alt": "Competition creation wizard, page 2: A choice between the three different result source options.",
+                                    "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on your setup, but the differences in functionality are not major. Don't stress too much over your decision; you can always change it later, and your users likely won't notice anyways.",
+                                    "section":
+                                    {
+                                        "meos-divi":
+                                        {
+                                            "title": "{meos_divi_title}",
+                                            "what": "If you use {meos_name} to manage results at your event, you can choose this option. This allows you to import metadata like competition name, organiser and date directly from {meos_name}, and although result updates are run on a timer, it let's {bridge_name} check if the results have changed before uploading, saving a bit of bandwidth.",
+                                            "how": "In this mode, {bridge_name} invokes {divi_name} from the command line once per division when updating results, and intermediate files are written to disk. This means it is not necessary to have {divi_name} open, but it also means one or a few seconds of latency are added for each division. {bridge_name} and {divi_name} must also be on the same computer. {meos_name} is accessed through its information server, so while it <i>can</i> be on the same computer as well, it doesn't have to - it can be anywhere reachable on the network."
+                                        },
+                                        "divi":
+                                        {
+                                            "title": "{divi_title}",
+                                            "what": "This mode has the fewest requirements, since it only depends on {divi_name}, which you most likely already need for the division match itself. Result updates are run on a timer, but no difference check is performed. It is, however, fairly quick, often finishing a result update sequence in less than a second.",
+                                            "how": "Communication happens via {divi_name}'s information server. This means one instance of {divi_name} per division must be kept open, but these instances and {bridge_name} do not need to be on the same computer (although they <i>can</i> be), as long as {bridge_name} can reach the instances of {divi_name} over the network."
+                                        },
+                                        "xml-divi":
+                                        {
+                                            "title": "{xml_divi_title}",
+                                            "what": "Besides {divi_name}, this option requires access to an {iof_xml} results file. The name and location of the results file must remain the same while running, but the contents should be kept up to date. {bridge_name} monitors the results file for changes and, when detected, triggers an update. How the {iof_xml} results file is produced is irrelevant.",
+                                            "how": "As with the first mode with {meos_name}, {bridge_name} invokes {divi_name} from the command line once per division when updating results, so the limitations are similar: {bridge_name} and {divi_name} must be on the same computer, and the result update has a bit of latency per division. However, {divi_name} need not be open."
+                                        }
+                                    }
+                                },
+                                "page3":
+                                {
+                                    "title": "Password",
+                                    "intro": "Next, you will choose a password for your competition. Before you choose, note the following:",
+                                    "insecure": "It is insecure",
+                                    "immutable": "It cannot be changed",
+                                    "implication": "In this context, \"insecure\" means that the password is stored in plain text, be it on your computer, in transit over the internet, or on the server. Therefore, assume that anyone could easily gain access to it, and do <i>not</i> reuse a password from another service.",
+                                    "alt": "Competition creation wizard, page 3: A password field filled in with \"{example_password}\" as an example.",
+                                    "purpose": "You will need the password whenever you make changes to the competition on the server, including modifying metadata and updating results. Don't stress about writing it down, however, as the summary page at the end will fascilitate that."
+                                },
+                                "page4":
+                                {
+                                    "title": "Server",
+                                    "intro": "Finally, you need to specify the address of the <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> on which your results will be hosted. This can be a domain name or a raw IP address. The server will need to be online in order to create your competition.",
+                                    "alt": "Competition creation wizard, page 4: A server address field filled in with \"{example_server_address}\" as an example.",
+                                    "default": "The address field may already be filled out with a suggestion. If you're lucky, it points to an active server instance run by myself. Pressing <span class=\"named\">{next}</span> will send a request to the specified server, asking it to create a new competition."
+                                },
+                                "page5":
+                                {
+                                    "title": "Server Response",
+                                    "success": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, you should see a glimpse of a page looking something like this:",
+                                    "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
+                                    "next": "It won't be visible for long, as the next page is triggered immediately upon success.",
+                                    "error": "If, however, the request failed, you will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
+                                    "error-alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
+                                    "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead."
+                                },
+                                "page6":
+                                {
+                                    "title": "Summary",
+                                    "intro": "If you reach this page, you have successfully created your competition. The summary presents key information that you will need in order to use the competition:",
+                                    "alt": "Competition creation wizard, page 6: A summary of the new competition showing the server address, competition ID and password. An option to use it right away is checked.",
+                                    "use-now": "If you leave <span class=\"named\">{use_now}</span> checked, this information will be applied by {bridge_name} automatically as soon as you press <span class=\"named\">{finish}</span>, erasing any data currently held in the main window. Then, you will be able to export your configuration to a file, backing up this key information easily.",
+                                    "use-later": "If you instead uncheck <span class=\"named\">{use_now}</span>, it is up to you to store the information. You can copy the text with the button in the top right corner of the field, and then manually paste it into a text file."
                                 }
                             }
                         }

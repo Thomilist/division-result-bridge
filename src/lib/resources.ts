@@ -203,9 +203,9 @@ export const resources =
         semver:
         {
             route:
-                    {
-                        website: "https://semver.org/",
-                        repo: "https://github.com/semver/semver"
+            {
+                website: "https://semver.org/",
+                repo: "https://github.com/semver/semver"
             }
         },
         thomilist:
@@ -223,6 +223,105 @@ export const resources =
                         repo: "https://github.com/Thomilist/division-result-bridge",
                         license: "https://raw.githubusercontent.com/Thomilist/division-result-bridge/main/LICENSE",
                         releases: "https://github.com/Thomilist/division-result-bridge/releases"
+                    },
+                    interface:
+                    {
+                        example:
+                        {
+                            password: "hunter2",
+                            server_address: "http://localhost:5174/"
+                        },
+                        menu_bar:
+                        {
+                            competition:
+                            {
+                                label: "Competition",
+                                item:
+                                {
+                                    create_new:
+                                    {
+                                        label: "Create new competition"
+                                    },
+                                    import:
+                                    {
+                                        label: "Import"
+                                    },
+                                    export:
+                                    {
+                                        label: "Export"
+                                    },
+                                    validate:
+                                    {
+                                        label: "Validate"
+                                    }
+                                }
+                            },
+                            compatibility:
+                            {
+                                label: "Compatibility"
+                            },
+                            help:
+                            {
+                                label: "Help"
+                            }
+                        },
+                        comp_wizard:
+                        {
+                            button:
+                            {
+                                help:
+                                {
+                                    label: "Help"
+                                },
+                                back:
+                                {
+                                    label: "Back"
+                                },
+                                next:
+                                {
+                                    label: "Next"
+                                },
+                                cancel:
+                                {
+                                    label: "Cancel"
+                                },
+                                finish:
+                                {
+                                    label: "Finish"
+                                },
+                            },
+                            page:
+                            {
+                                introduction:
+                                {
+                                    title: "Introduction"
+                                },
+                                compatibility:
+                                {
+                                    title: "Compatibility",
+                                    meos_divi: "MeOS + Divisionsmatchberegning",
+                                    divi: "Divisionsmatchberegning",
+                                    xml_divi: "IOF XML 3.0 file + Divisionsmatchberegning"
+                                },
+                                password:
+                                {
+                                    title: "Password"
+                                },
+                                server:
+                                {
+                                    title: "Server"
+                                },
+                                response:
+                                {
+                                    title: "Server Response"
+                                },
+                                summary:
+                                {
+                                    title: "Summary",
+                                    use_now: "Use this competition now"
+                                },
+                            }
+                        }
                     }
                 },
                 division_result_server:

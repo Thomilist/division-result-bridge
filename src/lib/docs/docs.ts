@@ -40,6 +40,10 @@ export const docs =
                 prerequisites:
                 {
                     name: "prerequisites"
+                },
+                create_competition:
+                {
+                    name: "create-competition"
                 }
             }
         }

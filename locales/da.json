@@ -79,7 +79,7 @@
                 "compatibility":
                 {
                     "title": "Simple Krav",
-                    "content": "Hvis dine divisionsresultater beregnes med <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, så kan du bruge Division Result Bridge. Ekstra funktionalitet, såsom kun at uploade ved ændringer i resultaterne eller import at metadata under opsætning, er tilgængelige afhængig af din opsætning."
+                    "content": "Hvis dine divisionsresultater beregnes med <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, så kan du bruge Division Result Bridge. Ekstra funktionalitet, såsom kun at opdatere resultater i forbindelse med ændringer eller import at metadata under opsætning, er tilgængelige afhængig af din opsætning."
                 },
                 "setup":
                 {
@@ -240,7 +240,7 @@
                                 {
                                     "title": "Frisk installation",
                                     "download": "Hent den seneste udgivelse fra <a href=\"{download_page_link}\">downloadsiden</a>, da det er den version, dokumentationen passer til. Du skulle gerne få et enkelt ZIP-arkiv.",
-                                    "extract": "Udpak ZIP-arkivet til en valgfri placering. Selve placeringen er ikke så vigtig; selv et USB-drev kan anvendes, og du kan altid flytte den igen senere. Udpakning resulterer i én mappe, som indeholder {bridge_name} og en samling nødvendige filer. Mappen indeholder blandt andet <i>{bridge_exe_name}</i>, som kan åbnes for at starte programmet. Det var det! Installationen er gennemført."
+                                    "extract": "Udpak ZIP-arkivet til en valgfri placering. Selve placeringen er ikke så vigtig; selv et USB-drev kan anvendes, og du kan altid flytte den igen senere. Udpakning resulterer i én mappe, som indeholder {bridge_name} og en samling nødvendige filer. Mappen indeholder blandt andet <span class=\"named\">{bridge_exe_name}</span>, som kan åbnes for at starte programmet. Det var det! Installationen er gennemført."
                                 },
                                 "update":
                                 {
@@ -248,6 +248,84 @@
                                     "main": "Der er ikke nogen bestemt opdateringsproces. Følg i stedet installationsprocessen ovenfor, men med den nye version i stedet for. Det er valgfrit, om du beholder den gamle version, men da de tilhørende, nødvendige filer kan være ændret, bør du undgå at blande forskellige installationer. Hold dem derfor i forskellige mapper.",
                                     "settings": "Program- og konkurrenceindstillinger opbevares ikke i installationsmappen. De bliver i stedet gemt centralt på computeren (fx i registreringsdatabasen på {win}). Forskellige versioner af programmet vil altså bruge de samme indstillinger.",
                                     "semver": "{bridge_name} bruger <a href=\"{semver_link}\" target=\"_blank\">semantiske versionsnumre</a> til at skelne mellem forskellige udgivelser. En ny <i>major</i>-version angiver derfor, at en udgivelse ikke er (helt) kompatibel med den forrige. Årsagen vil blive beskrevet under udgivelsens bemærkninger sammen med en overgangsstrategi."
+                                }
+                            }
+                        },
+                        "create-competition":
+                        {
+                            "title": "Opret konkurrence",
+                            "launch": "Åbn {bridge_name}. Du skulle gerne blive mødt med at vindue, som ser nogenlunde sådan ud:",
+                            "initial-interface-alt": "Brugerfladen efter først opstart af {bridge_name}.",
+                            "section":
+                            {
+                                "page1":
+                                {
+                                    "open-wizard": "Åbn <span class=\"named\">{comp_menu}</span>-menuen i det øverste, venstre hjørne, og vælg <span class=\"named\">{create_new}</span>. En guide til oprettelse af konkurrencer åbnes:",
+                                    "alt": "Konkurrenceoprettelsesguide, side 1: En kort introduktion til oprettelsesprocessen.",
+                                    "next": "Den første side er kun til introduktion, så du kan bare trykke <span class=\"named\">{next}</span>."
+                                },
+                                "page2":
+                                {
+                                    "title": "Kompatibilitet",
+                                    "intro": "Den første beslutning omhandler resultatkilden. Det er her, de ikke-essentielle funktioner kommer i spil.",
+                                    "alt": "Konkurrenceoprettelsesguide, side 2: Et valg mellem tre forskellige resultatkilder.",
+                                    "meaning": "Resultatkilden afgør, hvordan {bridge_name} henter divisionsresultater. Valget afhænger af din opstilling, men forskellene i funktionalitet er ikke afgørende. Du behøver ikke at bekymre dig så meget over valget lige nu, for du kan altid ændre det senere, og deltagerne vil formentlig ikke bemærke nogen forskel alligevel.",
+                                    "section":
+                                    {
+                                        "meos-divi":
+                                        {
+                                            "title": "{meos_divi_title}",
+                                            "what": "Hvis du bruger {meos_name} i beregningen til dit stævne, kan du vælge denne resultatkilde. Det giver dig mulighed for at indlæse metadata direkte fra {meos_name}, heriblandt stævnets navn og dato, samt arrangørklubbens navn. Opdatering af resultater udløses af en timer, men {bridge_name} har her mulighed for at tjekke for ændringer i resultaterne inden eventuel upload.",
+                                            "how": "Med denne indstilling vil {bridge_name} køre {divi_name} fra kommandolinjen én gang pr. division, når resultater skal opdateres, og midlertidige filer oprettes undervejs. Derfor er det ikke nødvendigt at have {divi_name} åben, men det tager dog et par sekunder at generere resultater for hver division. Desuden skal {bridge_name} og {divi_name} køre på den samme computer. Det behøver {meos_name} dog ikke, da det tilgås over netværket via dets informationsserver. {meos_name} <i>må</i> godt køre på den samme computer, men det er altså ikke et krav."
+                                        },
+                                        "divi":
+                                        {
+                                            "title": "{divi_title}",
+                                            "what": "Denne indstilling har færrest krav til opstillingen. Den afhænger nemlig kun af {divi_name}, som du formentlig skal bruge til divisionsmatchen alligevel. Opdatering af resultater styres af en timer, men der tjekkes ikke for ændringer. Til gengæld genereres divisionsresultaterne meget hurtigere end med de andre resultatkilder; opdateringsprocessen tager typisk mindre end et sekund.",
+                                            "how": "Da resultaterne hentes gennem {divi_name}s informationsserver, skal ét eksemplar af {divi_name} pr. division holdes åbent. Dog behøver de ikke at køre på samme computer som {bridge_name}, da de tilgås over netværket."
+                                        },
+                                        "xml-divi":
+                                        {
+                                            "title": "{xml_divi_title}",
+                                            "what": "Foruden {divi_name} kræver den sidste resultatkilde blot adgang til en resultatfil i {iof_xml}-format. Filens navn og placering skal forblive uændret undervejs, mens indholdet løbende opdateres. Så kan {bridge_name} nemlig overvåge filen for ændringer og opdatere resultater, så snart de er klar. Hvad der producerer {iof_xml}-resultaterne er ikke relevant.",
+                                            "how": "Ligesom det er tilfældet ved sampil med {meos_name}, bliver {divi_name} kørt af {bridge_name} fra kommandolinjen én gang pr. division. Begrænsningerne er derfor tilsvarende: {bridge_name} og {divi_name} skal køre på samme computer, og opdatering af resultater tager et par sekunder ekstra for hver division. Til gengæld behøves {divi_name} ikke at være åben."
+                                        }
+                                    }
+                                },
+                                "page3":
+                                {
+                                    "title": "Password",
+                                    "intro": "Næste beslutning omhandler konkurrencens password. Før du vælger, skal du dog være opmærksom på to ting:",
+                                    "insecure": "Det er ikke sikkert",
+                                    "immutable": "Det kan ikke ændres",
+                                    "implication": "I denne sammenhæng betyder \"ikke sikker\", at konkurrencens password håndteres som rå tekst, hvad end det er på din computer, over internettet eller på serveren. Vælg derfor password, som om alle og enhver let kunne få fat i det, og lad være med at genbruge et password fra en anden tjeneste.",
+                                    "alt": "Konkurrenceoprettelsesguide, side 3: Et passwordfelt udfyldt med \"{example_password}\" som eksempel.",
+                                    "purpose": "Konkurrencens password skal bruges, når data på serveren skal ændres, herunder ved opdatering af metadata og upload af resultater. Du behøver dog ikke at bekymre dig om at gemme det lige nu, da opsummeringen til sidst lægger bedre op til det."
+                                },
+                                "page4":
+                                {
+                                    "title": "Server",
+                                    "intro": "Sidste parameter til konkurrenceoprettelsen er adressen af den <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>, som resultaterne skal uploades til. Det kan være et internetdomæne eller en rå IP-adresse. Serveren skal være online for at oprette konkurrencen.",
+                                    "alt": "Konkurrenceoprettelsesguide, side 4: Serverens adressefelt udfyldt med \"{example_server_address}\" som eksempel.",
+                                    "default": "Adressefeltet kan være udfyldt på forhånd. Hvis du er heldig, hører adressen til en aktiv server udbudt af mig selv. Når du trykker <span class=\"named\">{next}</span>, sendes der en anmodning til serveren om at oprette en ny konkurrence."
+                                },
+                                "page5":
+                                {
+                                    "title": "Respons fra serveren",
+                                    "success": "Hvis et eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> var tilgængeligt på den angivede adresse, og anmodningen om at oprette en ny konkurrence blev opfyldt, skulle du gerne få et glimt af en side, der ser nogenlunde sådan ud:",
+                                    "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
+                                    "next": "Der fortsættes dog automatisk til næste side, så snart anmodningen gennemføres, så siden vises kun et kort øjeblik.",
+                                    "error": "Hvis anmodningen slår fejl, vil du dog blive vist en anden besked, og siden vil forblive aktiv. Beskeden vil indeholde nogle forslag til at hjælpe med fejlfindingen:",
+                                    "error-alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
+                                    "troubleshooting": "For at kontrollere, at serveradressen er korrekt, kan du vende tilbage til den forrige side. Ligesom før vil en anmodning sendes til serveren, når der på den side trykkes <span class=\"named\">{next}</span>. Sørg også for at tjekke din internetforbindelse. Hvis du er sikker på, at både adressen og forbindelsen er i orden, og serveren stadig ikke svarer, kan problemet ligge hos serveren selv. Problemet kan muligvis udbedres, hvis du kan kontakte serveradministratoren. Ellers kan du også prøve at køre dit eget eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>."
+                                },
+                                "page6":
+                                {
+                                    "title": "Opsummering",
+                                    "intro": "Hvis du kommer til denne side, har du fået oprettet din konkurrence. Opsummeringen viser de oplysninger, der er nødvendige for at arbejde med konkurrencen:",
+                                    "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrence med det samme er valg til.",
+                                    "use-now": "Hvis du lader <span class=\"named\">{use_now}</span> være valgt til, vil oplysningerne her blive anvendt af {bridge_name} automatisk, når du trykker <span class=\"named\">{finish}</span>. Det vil også nulstille eksisterende data i hovedvinduet. Herefter kan du let lave en backup af konfigurationen ved at eksportere den til en fil.",
+                                    "use-later": "Hvis du i stedet fravælger <span class=\"named\">{use_now}</span>, skal du selv sørge for at gemme oplysningerne. Du kan kopiere teksten med knappen i feltets øverste, højre hjørne, og så manuelt indsætte det i en tekstfil."
                                 }
                             }
                         }
