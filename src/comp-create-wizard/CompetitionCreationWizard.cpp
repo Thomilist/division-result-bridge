@@ -89,7 +89,7 @@ namespace divi
                     % "<li>&bull; Ensure that the address specified on the previous page is correct</li>"
                     % "<li>&bull; Check your internet connection</li>"
                     % "<li>&bull; Verify that the server is online</li>"
-                    % "<li>&bull; <a href=\"" % request_again_anchor % "\">Send the request again</a></li>"
+                    % "<li>&bull; <a href=\"" % request_again_anchor % "\" style=\"color: blue;\">Send the request again</a></li>"
                 % "</ul>");
         }
         

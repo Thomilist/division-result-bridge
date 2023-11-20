@@ -458,6 +458,7 @@ namespace divi
         clearCompetitionAndDivision();
         settings.getCompetition() = a_new_settings.getCompetition();
         settings.setWebserverAddress(a_new_settings.getWebserverAddress());
+        settings.setResultSource(a_new_settings.getResultSource());
         populate();
         
         return;
