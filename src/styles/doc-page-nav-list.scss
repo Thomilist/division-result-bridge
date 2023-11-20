@@ -24,4 +24,10 @@ ol
         margin-left: var(--nav-padding);
         font-size: 14px;
     }
+
+    :global(li)
+    {
+        line-height: 1em;
+        padding: 5px 0;
+    }
 }

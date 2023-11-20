@@ -30,6 +30,11 @@
         margin-bottom: 10px;
     }
 
+    :global(.named)
+    {
+        font-style: italic;
+    }
+
     .doc-nav-container
     {
         grid-area: nav;
