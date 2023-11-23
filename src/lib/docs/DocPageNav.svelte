@@ -6,6 +6,7 @@
 	import { locale, t } from "svelte-intl-precompile";
 
     let index = 0;
+    const observer_margin = 200;
 
     const header_depths = new Map(Object.entries
     ({
@@ -70,7 +71,7 @@
         const options =
         {
             root: null,
-            rootMargin: "-200px 0px 0px 0px",
+            rootMargin: `-${observer_margin}px 0px 0px 0px`,
             threshold: 1
         };
 
@@ -119,18 +120,17 @@
             entries.forEach((entry) =>
             {
                 header_positions.set(entry.target.id, entry.boundingClientRect.y);
+                removeHighlightableClass(entry.target);
             });
 
             for (const entry of entries)
             {
-                if (!entry.isIntersecting)
-                {
-                    addHighlightableClass(entry.target);
-                }
-                else
+                if (entry.isIntersecting || (entry.boundingClientRect.y > observer_margin))
                 {
                     break;
                 }
+
+                addHighlightableClass(entry.target);
             }
 
             setHighlightedPageNavlink();
