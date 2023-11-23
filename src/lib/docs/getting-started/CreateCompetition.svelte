@@ -236,10 +236,12 @@
 
 <DocHeader props={{depth: 2, specifiers: ["section", "page5", "title"], docpage: props}}/>
 
+<DocHeader props={{depth: 3, specifiers: ["section", "page5", "section", "success", "title"], docpage: props}}/>
+
 <DocElement props={
 {
     docpage: props,
-    specifiers: ["section", "page5", "success"],
+    specifiers: ["section", "page5", "section", "success", "intro"],
     values:
     {
         server_link: resources.external.thomilist.project.division_result_server.route.repo,
@@ -250,19 +252,21 @@
 <Image props={
 {
     src: page5.default,
-    alt: $t(tpage(props, ["section", "page5", "alt"]))
+    alt: $t(tpage(props, ["section", "page5", "section", "success", "alt"]))
 }}/>
 
 <DocElement props={
 {
     docpage: props,
-    specifiers: ["section", "page5", "next"]
+    specifiers: ["section", "page5", "section", "success", "next"]
 }}/>
+
+<DocHeader props={{depth: 3, specifiers: ["section", "page5", "section", "error", "title"], docpage: props}}/>
 
 <DocElement props={
 {
     docpage: props,
-    specifiers: ["section", "page5", "error"],
+    specifiers: ["section", "page5", "section", "error", "intro"],
     values:
     {
         response_title: program.interface.comp_wizard.page.response.title
@@ -272,13 +276,13 @@
 <Image props={
 {
     src: page5_error.default,
-    alt: $t(tpage(props, ["section", "page5", "error-alt"]))
+    alt: $t(tpage(props, ["section", "page5", "section", "error", "alt"]))
 }}/>
 
 <DocElement props={
 {
     docpage: props,
-    specifiers: ["section", "page5", "troubleshooting"],
+    specifiers: ["section", "page5", "section", "error", "troubleshooting"],
     values:
     {
         next: program.interface.comp_wizard.button.next.label,

@@ -312,12 +312,23 @@
                                 "page5":
                                 {
                                     "title": "Respons fra serveren",
-                                    "success": "Hvis et eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> var tilgængeligt på den angivede adresse, og anmodningen om at oprette en ny konkurrence blev opfyldt, skulle du gerne få et glimt af en side, der ser nogenlunde sådan ud:",
-                                    "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
-                                    "next": "Der fortsættes dog automatisk til næste side, så snart anmodningen gennemføres, så siden vises kun et kort øjeblik.",
-                                    "error": "Hvis anmodningen slår fejl, vil du dog blive vist en anden besked, og siden vil forblive aktiv. Beskeden vil indeholde nogle forslag til at hjælpe med fejlfindingen:",
-                                    "error-alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
-                                    "troubleshooting": "For at kontrollere, at serveradressen er korrekt, kan du vende tilbage til den forrige side. Ligesom før vil en anmodning sendes til serveren, når der på den side trykkes <span class=\"named\">{next}</span>. Sørg også for at tjekke din internetforbindelse. Hvis du er sikker på, at både adressen og forbindelsen er i orden, og serveren stadig ikke svarer, kan problemet ligge hos serveren selv. Problemet kan muligvis udbedres, hvis du kan kontakte serveradministratoren. Ellers kan du også prøve at køre dit eget eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>."
+                                    "section":
+                                    {
+                                        "success":
+                                        {
+                                            "title": "Succesfuld anmodning",
+                                            "intro": "Hvis et eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> var tilgængeligt på den angivede adresse, og anmodningen om at oprette en ny konkurrence blev opfyldt, skulle du gerne få et glimt af en side, der ser nogenlunde sådan ud:",
+                                            "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
+                                            "next": "Der fortsættes dog automatisk til næste side, så snart anmodningen gennemføres, så siden vises kun et kort øjeblik."
+                                        },
+                                        "error":
+                                        {
+                                            "title": "Mislykket anmodning",
+                                            "intro": "Hvis anmodningen slår fejl, vil du dog blive vist en anden besked, og siden vil forblive aktiv. Beskeden vil indeholde nogle forslag til at hjælpe med fejlfindingen:",
+                                            "alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
+                                            "troubleshooting": "For at kontrollere, at serveradressen er korrekt, kan du vende tilbage til den forrige side. Ligesom før vil en anmodning sendes til serveren, når der på den side trykkes <span class=\"named\">{next}</span>. Sørg også for at tjekke din internetforbindelse. Hvis du er sikker på, at både adressen og forbindelsen er i orden, og serveren stadig ikke svarer, kan problemet ligge hos serveren selv. Problemet kan muligvis udbedres, hvis du kan kontakte serveradministratoren. Ellers kan du også prøve at køre dit eget eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>."
+                                        }
+                                    }
                                 },
                                 "page6":
                                 {

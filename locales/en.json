@@ -312,12 +312,23 @@
                                 "page5":
                                 {
                                     "title": "Server Response",
-                                    "success": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, you should see a glimpse of a page looking something like this:",
-                                    "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
-                                    "next": "It won't be visible for long, as the next page is triggered immediately upon success.",
-                                    "error": "If, however, the request failed, you will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
-                                    "error-alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
-                                    "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead."
+                                    "section":
+                                    {
+                                        "success":
+                                        {
+                                            "title": "Successful request",
+                                            "intro": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, you should see a glimpse of a page looking something like this:",
+                                            "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
+                                            "next": "It won't be visible for long, as the next page is triggered immediately upon success."
+                                        },
+                                        "error":
+                                        {
+                                            "title": "Failed request",
+                                            "intro": "If, however, the request failed, you will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
+                                            "alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
+                                            "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead."
+                                        }
+                                    }
                                 },
                                 "page6":
                                 {
