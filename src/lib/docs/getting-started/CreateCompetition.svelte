@@ -1,12 +1,12 @@
 <script lang="ts">
-    import * as first_launch from "$lib/assets/interface/first-launch.png";
-    import * as page1 from "$lib/assets/interface/comp-wizard/page1.png";
-    import * as page2 from "$lib/assets/interface/comp-wizard/page2.png";
-    import * as page3 from "$lib/assets/interface/comp-wizard/page3.png";
-    import * as page4 from "$lib/assets/interface/comp-wizard/page4.png";
-    import * as page5 from "$lib/assets/interface/comp-wizard/page5.png";
-    import * as page5_error from "$lib/assets/interface/comp-wizard/page5-error.png";
-    import * as page6 from "$lib/assets/interface/comp-wizard/page6.png";
+    import * as img_first_launch from "$lib/assets/interface/first-launch.png";
+    import * as img_page1 from "$lib/assets/interface/comp-wizard/page1.png";
+    import * as img_page2 from "$lib/assets/interface/comp-wizard/page2.png";
+    import * as img_page3 from "$lib/assets/interface/comp-wizard/page3.png";
+    import * as img_page4 from "$lib/assets/interface/comp-wizard/page4.png";
+    import * as img_page5 from "$lib/assets/interface/comp-wizard/page5.png";
+    import * as img_page5_error from "$lib/assets/interface/comp-wizard/page5-error.png";
+    import * as img_page6 from "$lib/assets/interface/comp-wizard/page6.png";
 	import { resources } from "$lib/resources";
 	import type { DocPageProps } from "$lib/types";
 	import DocElement from "../DocElement.svelte";
@@ -30,7 +30,7 @@
 
 <DocImage props={
 {
-    src: first_launch.default,
+    src: img_first_launch.default,
     docpage: props,
     specifiers: ["image", "initial-interface"],
     values:
@@ -52,7 +52,7 @@
 
 <DocImage props={
 {
-    src: page1.default,
+    src: img_page1.default,
     docpage: props,
     specifiers: ["section", "page1", "image", "wizard"]
 }}/>
@@ -77,7 +77,7 @@
 
 <DocImage props={
 {
-    src: page2.default,
+    src: img_page2.default,
     docpage: props,
     specifiers: ["section", "page2", "image", "wizard"]
 }}/>
@@ -197,7 +197,7 @@
 
 <DocImage props={
 {
-    src: page3.default,
+    src: img_page3.default,
     docpage: props,
     specifiers: ["section", "page3", "image", "wizard"],
     values:
@@ -227,7 +227,7 @@
 
 <DocImage props={
 {
-    src: page4.default,
+    src: img_page4.default,
     docpage: props,
     specifiers: ["section", "page4", "image", "wizard"],
     values:
@@ -263,7 +263,7 @@
 
 <DocImage props={
 {
-    src: page5.default,
+    src: img_page5.default,
     docpage: props,
     specifiers: ["section", "page5", "section", "success", "image", "wizard"]
 }}/>
@@ -288,7 +288,7 @@
 
 <DocImage props={
 {
-    src: page5_error.default,
+    src: img_page5_error.default,
     docpage: props,
     specifiers: ["section", "page5", "section", "error", "image", "wizard"]
 }}/>
@@ -315,7 +315,7 @@
 
 <DocImage props={
 {
-    src: page6.default,
+    src: img_page6.default,
     docpage: props,
     specifiers: ["section", "page6", "image", "wizard"]
 }}/>
