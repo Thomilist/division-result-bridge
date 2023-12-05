@@ -9,7 +9,7 @@ import Logo from '$lib/icons/Logo.svelte';
 import NavLink from '$lib/NavLink.svelte';
 import LanguageSelect from '$lib/LanguageSelect.svelte';
 import ThemeSwitch from '$lib/ThemeSwitch.svelte';
-import { GearFill } from 'svelte-bootstrap-icons';
+import GearFill from 'svelte-bootstrap-icons/lib/GearFill.svelte';
 import type { LayoutLoad } from './$types';
 import { resources } from '$lib/resources';
 
