@@ -230,5 +230,10 @@ export type DocImageProps =
     src: string,
     docpage: DocPageProps,
     specifiers: string[],
-    values?: any
+    values?:
+    {
+        common?: any,
+        alt?: any,
+        caption?: any
+    }
 };

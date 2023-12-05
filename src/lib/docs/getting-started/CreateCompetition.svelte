@@ -11,7 +11,7 @@
 	import type { DocPageProps } from "$lib/types";
 	import DocElement from "../DocElement.svelte";
 	import DocHeader from "../DocHeader.svelte";
-	import DocImage from "$lib/DocImage.svelte";
+	import DocImage from "$lib/docs/DocImage.svelte";
 
     export let props: DocPageProps;
 
@@ -35,7 +35,10 @@
     specifiers: ["image", "initial-interface"],
     values:
     {
-        bridge_name: program.name
+        common:
+        {
+            bridge_name: program.name
+        }
     }
 }}/>
 
@@ -202,7 +205,10 @@
     specifiers: ["section", "page3", "image", "wizard"],
     values:
     {
-        example_password: program.interface.example.password
+        alt:
+        {
+            example_password: program.interface.example.password
+        }
     }
 }}/>
 
@@ -232,7 +238,10 @@
     specifiers: ["section", "page4", "image", "wizard"],
     values:
     {
-        example_server_address: program.interface.example.server_address
+        alt:
+        {
+            example_server_address: program.interface.example.server_address
+        }
     }
 }}/>
 
