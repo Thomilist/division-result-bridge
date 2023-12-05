@@ -273,7 +273,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Competition creation wizard, page 1: A brief message to introduce the process.",
+                                            "alt": "Competition creation wizard, page 1: A brief message to introduce the process.",
                                             "caption": "Competition creation wizard, page 1: Introduction."
                                         }
                                     }
@@ -325,7 +325,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Competition creation wizard, page 3: A password field filled in with \"{example_password}\" as an example.",
+                                            "alt": "Competition creation wizard, page 3: A password field filled in with \"{example_password}\" as an example.",
                                             "caption": "Competition creation wizard, page 3: Password."
                                         }
                                     }
@@ -339,7 +339,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Competition creation wizard, page 4: A server address field filled in with \"{example_server_address}\" as an example.",
+                                            "alt": "Competition creation wizard, page 4: A server address field filled in with \"{example_server_address}\" as an example.",
                                             "caption": "Competition creation wizard, page 4: Server."
                                         }
                                     }
@@ -358,7 +358,7 @@
                                             {
                                                 "wizard":
                                                 {
-                                            "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
+                                                    "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
                                                     "caption": "Competition creation wizard, page 5: Server response after successful request."
                                                 }
                                             }
@@ -372,7 +372,7 @@
                                             {
                                                 "wizard":
                                                 {
-                                            "alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
+                                                    "alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
                                                     "caption": "Competition creation wizard, page 5: Server response after failed request."
                                                 }
                                             }

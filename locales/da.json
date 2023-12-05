@@ -273,7 +273,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Konkurrenceoprettelsesguide, side 1: En kort introduktion til oprettelsesprocessen.",
+                                            "alt": "Konkurrenceoprettelsesguide, side 1: En kort introduktion til oprettelsesprocessen.",
                                             "caption": "Konkurrenceoprettelsesguide, side 1: Introduktion."
                                         }
                                     }
@@ -325,7 +325,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Konkurrenceoprettelsesguide, side 3: Et passwordfelt udfyldt med \"{example_password}\" som eksempel.",
+                                            "alt": "Konkurrenceoprettelsesguide, side 3: Et passwordfelt udfyldt med \"{example_password}\" som eksempel.",
                                             "caption": "Konkurrenceoprettelsesguide, side 3: Password."
                                         }
                                     }
@@ -339,7 +339,7 @@
                                     {
                                         "wizard":
                                         {
-                                    "alt": "Konkurrenceoprettelsesguide, side 4: Serverens adressefelt udfyldt med \"{example_server_address}\" som eksempel.",
+                                            "alt": "Konkurrenceoprettelsesguide, side 4: Serverens adressefelt udfyldt med \"{example_server_address}\" som eksempel.",
                                             "caption": "Konkurrenceoprettelsesguide, side 4: Server."
                                         }
                                     }
@@ -358,7 +358,7 @@
                                             {
                                                 "wizard":
                                                 {
-                                            "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
+                                                    "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
                                                     "caption": "Konkurrenceoprettelsesguide, side 5: Serverrespons efter succesfuld anmodning."
                                                 }
                                             }
@@ -372,7 +372,7 @@
                                             {
                                                 "wizard":
                                                 {
-                                            "alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
+                                                    "alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
                                                     "caption": "Konkurrenceoprettelsesguide, side 5: Serverrespons efter mislykket anmodning."
                                                 }
                                             }
@@ -392,6 +392,8 @@
                                             "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrence med det samme er valg til.",
                                             "caption": "Konkurrenceoprettelsesguide, side 6: Opsummering."
                                         }
+                                    }
+                                }
                             }
                         }
                     }
