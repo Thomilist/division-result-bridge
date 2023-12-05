@@ -1,4 +1,8 @@
-import type { DocPageProps } from "$lib/types";
+import type { DocCollectionSpec, DocPageProps } from "$lib/types";
+import CreateCompetition from "./getting-started/CreateCompetition.svelte";
+import Installation from "./getting-started/Installation.svelte";
+import Prerequisites from "./getting-started/Prerequisites.svelte";
+import Introduction from "./preface/Introduction.svelte";
 
 // Translation key for a doc collection
 export function tcol(props: DocPageProps, suffix?: string[]): string
@@ -13,39 +17,36 @@ export function tpage(props: DocPageProps, suffix?: string[]): string
 }
 
 // Doc collections and pages
-export const docs =
-{
-    collections:
+export const docs: DocCollectionSpec[] =
+[
     {
-        preface:
-        {
-            name: "preface",
-            pages:
+        title: "preface",
+        connected: true,
+        pages:
+        [
             {
-                introduction:
-                {
-                    name: "introduction"
-                }
+                title: "introduction",
+                component: Introduction
             }
-        },
-        getting_started:
-        {
-            name: "getting-started",
-            pages:
+        ]
+    },
+    {
+        title: "getting-started",
+        connected: true,
+        pages:
+        [
             {
-                installation:
-                {
-                    name: "installation"
-                },
-                prerequisites:
-                {
-                    name: "prerequisites"
-                },
-                create_competition:
-                {
-                    name: "create-competition"
-                }
+                title: "prerequisites",
+                component: Prerequisites
+            },
+            {
+                title: "installation",
+                component: Installation
+            },
+            {
+                title: "create-competition",
+                component: CreateCompetition
             }
-        }
+        ]
     }
-};
+];

@@ -1,48 +1,10 @@
 import { docs } from "$lib/docs/docs";
-import CreateCompetition from "$lib/docs/getting-started/CreateCompetition.svelte";
-import Installation from "$lib/docs/getting-started/Installation.svelte";
-import Prerequisites from "$lib/docs/getting-started/Prerequisites.svelte";
-import Introduction from "$lib/docs/preface/Introduction.svelte";
 import type { DocCollection, DocCollectionSpec, DocPage, DocPageProps, DocPageSpec } from "$lib/types";
 import type { LayoutLoad } from "./$types";
 
-const page_specs: DocCollectionSpec[] =
-[
-    {
-        title: docs.collections.preface.name,
-        connected: true,
-        pages:
-        [
-            {
-                title: docs.collections.preface.pages.introduction.name,
-                component: Introduction
-            }
-        ]
-    },
-    {
-        title: docs.collections.getting_started.name,
-        connected: true,
-        pages:
-        [
-            {
-                title: docs.collections.getting_started.pages.prerequisites.name,
-                component: Prerequisites
-            },
-            {
-                title: docs.collections.getting_started.pages.installation.name,
-                component: Installation
-            },
-            {
-                title: docs.collections.getting_started.pages.create_competition.name,
-                component: CreateCompetition
-            }
-        ]
-    }
-];
-
 export const load: LayoutLoad = () =>
 {
-    const doc_entries = page_specs.map((page): [string, DocCollection] =>
+    const doc_entries = docs.map((page): [string, DocCollection] =>
     {
         return [page.title, createCollection(page)];
     });
