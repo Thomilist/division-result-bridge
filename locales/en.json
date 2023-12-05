@@ -255,21 +255,42 @@
                         {
                             "title": "Create competition",
                             "launch": "Open {bridge_name}. You should see a window looking something like this:",
-                            "initial-interface-alt": "The interface of {bridge_name} at first launch.",
+                            "image":
+                            {
+                                "initial-interface":
+                                {
+                                    "alt": "The interface of {bridge_name} at first launch.",
+                                    "caption": "The interface of {bridge_name} at first launch."
+                                }
+                            },
                             "section":
                             {
                                 "page1":
                                 {
                                     "open-wizard": "Open the <span class=\"named\">{comp_menu}</span> menu in the top left corner, and select <span class=\"named\">{create_new}</span>. The competition creation wizard should open:",
+                                    "next": "This page is just for introduction, so go ahead and press <span class=\"named\">{next}</span>.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Competition creation wizard, page 1: A brief message to introduce the process.",
-                                    "next": "This page is just for introduction, so go ahead and press <span class=\"named\">{next}</span>."
+                                            "caption": "Competition creation wizard, page 1: Introduction."
+                                        }
+                                    }
                                 },
                                 "page2":
                                 {
                                     "title": "Compatibility",
                                     "intro": "The first choice you will make involves the result source. This is where the optional requirements and non-essential features mentioned earlier enter the picture.",
-                                    "alt": "Competition creation wizard, page 2: A choice between the three different result source options.",
                                     "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on your setup, but the differences in functionality are not major. Don't stress too much over your decision; you can always change it later, and your users likely won't notice anyways.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
+                                            "alt": "Competition creation wizard, page 2: A choice between the three different result source options.",
+                                            "caption": "Competition creation wizard, page 2: Compatibility and result source."
+                                        }
+                                    },
                                     "section":
                                     {
                                         "meos-divi":
@@ -299,15 +320,29 @@
                                     "insecure": "It is insecure",
                                     "immutable": "It cannot be changed",
                                     "implication": "In this context, \"insecure\" means that the password is stored in plain text, be it on your computer, in transit over the internet, or on the server. Therefore, assume that anyone could easily gain access to it, and do <i>not</i> reuse a password from another service.",
+                                    "purpose": "You will need the password whenever you make changes to the competition on the server, including modifying metadata and updating results. Don't stress about writing it down, however, as the summary page at the end will fascilitate that.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Competition creation wizard, page 3: A password field filled in with \"{example_password}\" as an example.",
-                                    "purpose": "You will need the password whenever you make changes to the competition on the server, including modifying metadata and updating results. Don't stress about writing it down, however, as the summary page at the end will fascilitate that."
+                                            "caption": "Competition creation wizard, page 3: Password."
+                                        }
+                                    }
                                 },
                                 "page4":
                                 {
                                     "title": "Server",
                                     "intro": "Finally, you need to specify the address of the <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> on which your results will be hosted. This can be a domain name or a raw IP address. The server will need to be online in order to create your competition.",
+                                    "default": "The address field may already be filled out with a suggestion. If you're lucky, it points to an active server instance run by myself. Pressing <span class=\"named\">{next}</span> will send a request to the specified server, asking it to create a new competition.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Competition creation wizard, page 4: A server address field filled in with \"{example_server_address}\" as an example.",
-                                    "default": "The address field may already be filled out with a suggestion. If you're lucky, it points to an active server instance run by myself. Pressing <span class=\"named\">{next}</span> will send a request to the specified server, asking it to create a new competition."
+                                            "caption": "Competition creation wizard, page 4: Server."
+                                        }
+                                    }
                                 },
                                 "page5":
                                 {
@@ -318,15 +353,29 @@
                                         {
                                             "title": "Successful request",
                                             "intro": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, you should see a glimpse of a page looking something like this:",
+                                            "next": "It won't be visible for long, as the next page is triggered immediately upon success.",
+                                            "image":
+                                            {
+                                                "wizard":
+                                                {
                                             "alt": "Competition creation wizard, page 5: Log output from communication with the server after a successful request.",
-                                            "next": "It won't be visible for long, as the next page is triggered immediately upon success."
+                                                    "caption": "Competition creation wizard, page 5: Server response after successful request."
+                                                }
+                                            }
                                         },
                                         "error":
                                         {
                                             "title": "Failed request",
                                             "intro": "If, however, the request failed, you will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
+                                            "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead.",
+                                            "image":
+                                            {
+                                                "wizard":
+                                                {
                                             "alt": "Competition creation wizard, page 5, error: Log output from communication with the server. The request was not successful, so some troubleshooting steps are suggested.",
-                                            "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead."
+                                                    "caption": "Competition creation wizard, page 5: Server response after failed request."
+                                                }
+                                            }
                                         }
                                     }
                                 },
@@ -334,9 +383,16 @@
                                 {
                                     "title": "Summary",
                                     "intro": "If you reach this page, you have successfully created your competition. The summary presents key information that you will need in order to use the competition:",
-                                    "alt": "Competition creation wizard, page 6: A summary of the new competition showing the server address, competition ID and password. An option to use it right away is checked.",
                                     "use-now": "If you leave <span class=\"named\">{use_now}</span> checked, this information will be applied by {bridge_name} automatically as soon as you press <span class=\"named\">{finish}</span>, erasing any data currently held in the main window. Then, you will be able to export your configuration to a file, backing up this key information easily.",
-                                    "use-later": "If you instead uncheck <span class=\"named\">{use_now}</span>, it is up to you to store the information. You can copy the text with the button in the top right corner of the field, and then manually paste it into a text file."
+                                    "use-later": "If you instead uncheck <span class=\"named\">{use_now}</span>, it is up to you to store the information. You can copy the text with the button in the top right corner of the field, and then manually paste it into a text file.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
+                                            "alt": "Competition creation wizard, page 6: A summary of the new competition showing the server address, competition ID and password. An option to use it right away is checked.",
+                                            "caption": "Competition creation wizard, page 6: Summary."
+                                        }
+                                    }
                                 }
                             }
                         }

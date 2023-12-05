@@ -224,3 +224,11 @@ export type ImageProps =
     alt: string,
     caption?: string
 };
+
+export type DocImageProps =
+{
+    src: string,
+    docpage: DocPageProps,
+    specifiers: string[],
+    values?: any
+};

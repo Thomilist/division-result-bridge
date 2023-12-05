@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { t } from "svelte-intl-precompile";
 	import type { ImageProps } from "./types";
 
     export let props: ImageProps;
@@ -14,7 +13,7 @@
 
     {#if props.caption}
         <figcaption>
-            {$t(props.caption)}
+            {props.caption}
         </figcaption>
     {/if}
 </figure>

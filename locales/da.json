@@ -255,21 +255,42 @@
                         {
                             "title": "Opret konkurrence",
                             "launch": "Åbn {bridge_name}. Du skulle gerne blive mødt med at vindue, som ser nogenlunde sådan ud:",
-                            "initial-interface-alt": "Brugerfladen efter først opstart af {bridge_name}.",
+                            "image":
+                            {
+                                "initial-interface":
+                                {
+                                    "alt": "Brugerfladen efter først opstart af {bridge_name}.",
+                                    "caption": "Brugerfladen efter først opstart af {bridge_name}."
+                                }
+                            },
                             "section":
                             {
                                 "page1":
                                 {
                                     "open-wizard": "Åbn <span class=\"named\">{comp_menu}</span>-menuen i det øverste, venstre hjørne, og vælg <span class=\"named\">{create_new}</span>. En guide til oprettelse af konkurrencer åbnes:",
+                                    "next": "Den første side er kun til introduktion, så du kan bare trykke <span class=\"named\">{next}</span>.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Konkurrenceoprettelsesguide, side 1: En kort introduktion til oprettelsesprocessen.",
-                                    "next": "Den første side er kun til introduktion, så du kan bare trykke <span class=\"named\">{next}</span>."
+                                            "caption": "Konkurrenceoprettelsesguide, side 1: Introduktion."
+                                        }
+                                    }
                                 },
                                 "page2":
                                 {
                                     "title": "Kompatibilitet",
                                     "intro": "Den første beslutning omhandler resultatkilden. Det er her, de ikke-essentielle funktioner kommer i spil.",
-                                    "alt": "Konkurrenceoprettelsesguide, side 2: Et valg mellem tre forskellige resultatkilder.",
                                     "meaning": "Resultatkilden afgør, hvordan {bridge_name} henter divisionsresultater. Valget afhænger af din opstilling, men forskellene i funktionalitet er ikke afgørende. Du behøver ikke at bekymre dig så meget over valget lige nu, for du kan altid ændre det senere, og deltagerne vil formentlig ikke bemærke nogen forskel alligevel.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
+                                            "alt": "Konkurrenceoprettelsesguide, side 2: Et valg mellem tre forskellige resultatkilder.",
+                                            "caption": "Konkurrenceoprettelsesguide, side 2: Kompatibilitet og resultatkilde."
+                                        }
+                                    },
                                     "section":
                                     {
                                         "meos-divi":
@@ -299,15 +320,29 @@
                                     "insecure": "Det er ikke sikkert",
                                     "immutable": "Det kan ikke ændres",
                                     "implication": "I denne sammenhæng betyder \"ikke sikker\", at konkurrencens password håndteres som rå tekst, hvad end det er på din computer, over internettet eller på serveren. Vælg derfor password, som om alle og enhver let kunne få fat i det, og lad være med at genbruge et password fra en anden tjeneste.",
+                                    "purpose": "Konkurrencens password skal bruges, når data på serveren skal ændres, herunder ved opdatering af metadata og upload af resultater. Du behøver dog ikke at bekymre dig om at gemme det lige nu, da opsummeringen til sidst lægger bedre op til det.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Konkurrenceoprettelsesguide, side 3: Et passwordfelt udfyldt med \"{example_password}\" som eksempel.",
-                                    "purpose": "Konkurrencens password skal bruges, når data på serveren skal ændres, herunder ved opdatering af metadata og upload af resultater. Du behøver dog ikke at bekymre dig om at gemme det lige nu, da opsummeringen til sidst lægger bedre op til det."
+                                            "caption": "Konkurrenceoprettelsesguide, side 3: Password."
+                                        }
+                                    }
                                 },
                                 "page4":
                                 {
                                     "title": "Server",
                                     "intro": "Sidste parameter til konkurrenceoprettelsen er adressen af den <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>, som resultaterne skal uploades til. Det kan være et internetdomæne eller en rå IP-adresse. Serveren skal være online for at oprette konkurrencen.",
+                                    "default": "Adressefeltet kan være udfyldt på forhånd. Hvis du er heldig, hører adressen til en aktiv server udbudt af mig selv. Når du trykker <span class=\"named\">{next}</span>, sendes der en anmodning til serveren om at oprette en ny konkurrence.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
                                     "alt": "Konkurrenceoprettelsesguide, side 4: Serverens adressefelt udfyldt med \"{example_server_address}\" som eksempel.",
-                                    "default": "Adressefeltet kan være udfyldt på forhånd. Hvis du er heldig, hører adressen til en aktiv server udbudt af mig selv. Når du trykker <span class=\"named\">{next}</span>, sendes der en anmodning til serveren om at oprette en ny konkurrence."
+                                            "caption": "Konkurrenceoprettelsesguide, side 4: Server."
+                                        }
+                                    }
                                 },
                                 "page5":
                                 {
@@ -318,15 +353,29 @@
                                         {
                                             "title": "Succesfuld anmodning",
                                             "intro": "Hvis et eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> var tilgængeligt på den angivede adresse, og anmodningen om at oprette en ny konkurrence blev opfyldt, skulle du gerne få et glimt af en side, der ser nogenlunde sådan ud:",
+                                            "next": "Der fortsættes dog automatisk til næste side, så snart anmodningen gennemføres, så siden vises kun et kort øjeblik.",
+                                            "image":
+                                            {
+                                                "wizard":
+                                                {
                                             "alt": "Konkurrenceoprettelsesguide, side 5: Logbeskeder fra kommunikation med serveren efter en succesfuld anmodning.",
-                                            "next": "Der fortsættes dog automatisk til næste side, så snart anmodningen gennemføres, så siden vises kun et kort øjeblik."
+                                                    "caption": "Konkurrenceoprettelsesguide, side 5: Serverrespons efter succesfuld anmodning."
+                                                }
+                                            }
                                         },
                                         "error":
                                         {
                                             "title": "Mislykket anmodning",
                                             "intro": "Hvis anmodningen slår fejl, vil du dog blive vist en anden besked, og siden vil forblive aktiv. Beskeden vil indeholde nogle forslag til at hjælpe med fejlfindingen:",
+                                            "troubleshooting": "For at kontrollere, at serveradressen er korrekt, kan du vende tilbage til den forrige side. Ligesom før vil en anmodning sendes til serveren, når der på den side trykkes <span class=\"named\">{next}</span>. Sørg også for at tjekke din internetforbindelse. Hvis du er sikker på, at både adressen og forbindelsen er i orden, og serveren stadig ikke svarer, kan problemet ligge hos serveren selv. Problemet kan muligvis udbedres, hvis du kan kontakte serveradministratoren. Ellers kan du også prøve at køre dit eget eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>.",
+                                            "image":
+                                            {
+                                                "wizard":
+                                                {
                                             "alt": "Konkurrenceoprettelsesguide, side 5, fejl: Logbeskeder efter kommunikation med serveren efter en fejlslået anmodning. Der vises blandt andet forslag til fejlfinding.",
-                                            "troubleshooting": "For at kontrollere, at serveradressen er korrekt, kan du vende tilbage til den forrige side. Ligesom før vil en anmodning sendes til serveren, når der på den side trykkes <span class=\"named\">{next}</span>. Sørg også for at tjekke din internetforbindelse. Hvis du er sikker på, at både adressen og forbindelsen er i orden, og serveren stadig ikke svarer, kan problemet ligge hos serveren selv. Problemet kan muligvis udbedres, hvis du kan kontakte serveradministratoren. Ellers kan du også prøve at køre dit eget eksemplar af <a href=\"{server_link}\" target=\"_blank\">{server_name}</a>."
+                                                    "caption": "Konkurrenceoprettelsesguide, side 5: Serverrespons efter mislykket anmodning."
+                                                }
+                                            }
                                         }
                                     }
                                 },
@@ -334,10 +383,15 @@
                                 {
                                     "title": "Opsummering",
                                     "intro": "Hvis du kommer til denne side, har du fået oprettet din konkurrence. Opsummeringen viser de oplysninger, der er nødvendige for at arbejde med konkurrencen:",
-                                    "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrence med det samme er valg til.",
                                     "use-now": "Hvis du lader <span class=\"named\">{use_now}</span> være valgt til, vil oplysningerne her blive anvendt af {bridge_name} automatisk, når du trykker <span class=\"named\">{finish}</span>. Det vil også nulstille eksisterende data i hovedvinduet. Herefter kan du let lave en backup af konfigurationen ved at eksportere den til en fil.",
-                                    "use-later": "Hvis du i stedet fravælger <span class=\"named\">{use_now}</span>, skal du selv sørge for at gemme oplysningerne. Du kan kopiere teksten med knappen i feltets øverste, højre hjørne, og så manuelt indsætte det i en tekstfil."
-                                }
+                                    "use-later": "Hvis du i stedet fravælger <span class=\"named\">{use_now}</span>, skal du selv sørge for at gemme oplysningerne. Du kan kopiere teksten med knappen i feltets øverste, højre hjørne, og så manuelt indsætte det i en tekstfil.",
+                                    "image":
+                                    {
+                                        "wizard":
+                                        {
+                                            "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrence med det samme er valg til.",
+                                            "caption": "Konkurrenceoprettelsesguide, side 6: Opsummering."
+                                        }
                             }
                         }
                     }

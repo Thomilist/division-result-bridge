@@ -10,10 +10,9 @@
     import * as page6 from "$lib/assets/interface/comp-wizard/page6.png";
 	import { resources } from "$lib/resources";
 	import type { DocPageProps } from "$lib/types";
-	import { tpage } from "../docs";
-	import { t } from "svelte-intl-precompile";
 	import DocElement from "../DocElement.svelte";
 	import DocHeader from "../DocHeader.svelte";
+	import DocImage from "$lib/DocImage.svelte";
 
     export let props: DocPageProps;
 
@@ -30,13 +29,15 @@
     }
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: first_launch.default,
-    alt: $t(tpage(props, ["initial-interface-alt"]), {values:
-	{
-		bridge_name: program.name
-	}})
+    docpage: props,
+    specifiers: ["image", "initial-interface"],
+    values:
+    {
+        bridge_name: program.name
+    }
 }}/>
 
 <DocElement props={
@@ -50,10 +51,11 @@
     }
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page1.default,
-    alt: $t(tpage(props, ["section", "page1", "alt"]))
+    docpage: props,
+    specifiers: ["section", "page1", "image", "wizard"]
 }}/>
 
 <DocElement props={
@@ -74,10 +76,11 @@
     specifiers: ["section", "page2", "intro"]
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page2.default,
-    alt: $t(tpage(props, ["section", "page2", "alt"]))
+    docpage: props,
+    specifiers: ["section", "page2", "image", "wizard"]
 }}/>
 
 <DocElement props={
@@ -193,10 +196,15 @@
     specifiers: ["section", "page3", "implication"]
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page3.default,
-    alt: $t(tpage(props, ["section", "page3", "alt"]), {values: {example_password: program.interface.example.password}})
+    docpage: props,
+    specifiers: ["section", "page3", "image", "wizard"],
+    values:
+    {
+        example_password: program.interface.example.password
+    }
 }}/>
 
 <DocElement props={
@@ -218,10 +226,15 @@
     }
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page4.default,
-    alt: $t(tpage(props, ["section", "page4", "alt"]), {values: {example_server_address: program.interface.example.server_address}})
+    docpage: props,
+    specifiers: ["section", "page4", "image", "wizard"],
+    values:
+    {
+        example_server_address: program.interface.example.server_address
+    }
 }}/>
 
 <DocElement props={
@@ -249,10 +262,11 @@
     }
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page5.default,
-    alt: $t(tpage(props, ["section", "page5", "section", "success", "alt"]))
+    docpage: props,
+    specifiers: ["section", "page5", "section", "success", "image", "wizard"]
 }}/>
 
 <DocElement props={
@@ -273,10 +287,11 @@
     }
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page5_error.default,
-    alt: $t(tpage(props, ["section", "page5", "section", "error", "alt"]))
+    docpage: props,
+    specifiers: ["section", "page5", "section", "error", "image", "wizard"]
 }}/>
 
 <DocElement props={
@@ -299,10 +314,11 @@
     specifiers: ["section", "page6", "intro"]
 }}/>
 
-<Image props={
+<DocImage props={
 {
     src: page6.default,
-    alt: $t(tpage(props, ["section", "page6", "alt"]))
+    docpage: props,
+    specifiers: ["section", "page6", "image", "wizard"]
 }}/>
 
 <DocElement props={
