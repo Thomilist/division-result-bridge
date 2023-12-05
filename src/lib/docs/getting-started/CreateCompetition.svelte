@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Image from "$lib/Image.svelte";
     import * as first_launch from "$lib/assets/interface/first-launch.png";
     import * as page1 from "$lib/assets/interface/comp-wizard/page1.png";
     import * as page2 from "$lib/assets/interface/comp-wizard/page2.png";
