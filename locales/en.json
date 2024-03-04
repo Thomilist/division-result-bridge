@@ -68,6 +68,11 @@
             "name": "English"
         }
     },
+    "ui":
+    {
+        "tip": "Tip",
+        "warning": "Warning"
+    },
     "page":
     {
         "home":

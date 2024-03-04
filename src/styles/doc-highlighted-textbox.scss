@@ -1,0 +1,8 @@
+.doc-highlighted-textbox
+{
+    --padding: 16px;
+    
+    border: 1px solid var(--col-main-secondary);
+    border-radius: var(--padding);
+    padding: var(--padding);
+}
