@@ -13,7 +13,7 @@
 
     {#if props.caption}
         <figcaption>
-            {props.caption}
+            {@html props.caption}
         </figcaption>
     {/if}
 </figure>

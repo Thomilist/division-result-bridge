@@ -389,8 +389,84 @@
                                     {
                                         "wizard":
                                         {
-                                            "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrence med det samme er valg til.",
+                                            "alt": "Konkurrenceoprettelsesguide, side 6: Opsummeringen af den nye konkurrence med serveradressen, samt konkurrencens ID og password. Muligheden for at benytte konkurrencen med det samme er valg til.",
                                             "caption": "Konkurrenceoprettelsesguide, side 6: Opsummering."
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "configuration":
+                        {
+                            "title": "Konfiguration",
+                            "intro": "Inden vi begynder på opsætningen af selve konkurrencen, skal vi foretage lidt grundlæggende opsætning af selve {bridge_name}. De konkrete trin afhænger af resultatkilden, som oprindeligt blev valgt tidligt i konkurrenceoprettelsen. Hvis den ikke er indstillet korrekt, kan den altid ændres uden tab af konfigurationsdata: Find menuen <span class=\"named\">{compatibility}</span>, og vælg en passende indstilling under <span class=\"named\">{result_source}</span>.",
+                            "working-directory": "Uafhængigt af resultatkilden skal der dog altid vælges en arbejdsmappe. I panelet <span class=\"named\">{update_results}</span> findes feltet <span class=\"named\">{working_directory}</span>, som angiver placeringen af arbejdsmappen, hvortil {bridge_name} skriver logfiler og en række midlertidige filer. Placeringen kan ændres ved at trykke på <span class=\"named boxed\">{path_button}</span> knappen. Enhver mappe kan benyttes, så længe den ikke er skrivebeskyttet, men det kan dog være rart med en placering sammen med de øvrige stævnefiler. Uanset placeringen er det essentielt, at arbejdsmappen ikke benyttes til andre formål - eksisterende filer i mappen kan blive overskrevet.",
+                            "image":
+                            {
+                                "result-source":
+                                {
+                                    "alt": "Den primære brugerflade med menuen <span class=\"named\">{compatibility}</span> åben, og med de forskellige indstillinger under <span class=\"named\">{result_source}</span> vist.",
+                                    "caption": "Indstillinger for <span class=\"named\">{result_source}</span> under menuen <span class=\"named\">{compatibility}</span>."
+                                },
+                                "working-directory":
+                                {
+                                    "alt": "Den primære brugerflade med feltet <span class=\"named\">{working_directory}</span> i panelet <span class=\"named\">{update_results}</span> fremhævet.",
+                                    "caption": "Feltet <span class=\"named\">{working_directory}</span> i panelet <span class=\"named\">{update_results}</span>."
+                                }
+                            },
+                            "section":
+                            {
+                                "meos-divi":
+                                {
+                                    "title": "{meos_divi_name}",
+                                    "intro": "Når resultatkilden <span class=\"named\">{meos_divi_name}</span> er valgt, vises panelet <span class=\"named\">{result_source}</span> med to felter.",
+                                    "divi-exe-path": "Det første felt angiver placeringen af <span class=\"named\">{divi}</span>s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
+                                    "meos-server-address": "Det andet felt angiver netværksadressen, hvorpå <a href=\"{meos_info_server_link}\" target=\"_blank\">{meos_name}' informationsserver</a> findes. Informationsserveren startes ved at åbne konkurrencen i {meos_name}, vælge fanen <span class=\"named\">Autofunktioner</span>, og dernæst funktionen <span class=\"named\">Informationsserver</span>. Adressen, som {bridge_name} foreslår som udgangspunkt, passer til standardindstillingen i {meos_name}, når begge programmer kører på samme computer.",
+                                    "meos-server-test": "Når informationsserveren kører, kan forbindelsen testes med knappen <span class=\"named\">{test_button}</span>. Resultatet af testen fremgår så af loggen.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "Den primære brugerflade, når resultatkilden <span class=\"named\">{meos_divi_name}</span> er i brug. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{result_source}</span> når resultatkilden <span class=\"named\">{meos_divi_name}</span> benyttes."
+                                        },
+                                        "meos-services-tab":
+                                        {
+                                            "alt": "{meos_name}' <span class=\"named\">Informationsserver</span> under fanen <span class=\"named\">Autofunktioner</span>.",
+                                            "caption": "{meos_name}' <span class=\"named\">Informationsserver</span> under fanen <span class=\"named\">Autofunktioner</span>."
+                                        },
+                                        "meos-server-test-response":
+                                        {
+                                            "alt": "Eksempel på logbeskeder efter en succesfuld test af forbindelsen til {meos_name}' informationsserver.",
+                                            "caption": "Eksempel på logbeskeder efter en succesfuld test af forbindelsen til {meos_name}' informationsserver."
+                                        }
+                                    }
+                                },
+                                "divi":
+                                {
+                                    "title": "{divi_name}",
+                                    "intro": "Når resultatkilden <span class=\"named\">{divi_name}</span> er valgt, er panelet <span class=\"named\">{result_source}</span> ikke længere synligt. Du kan uden bekymring fortsætte til guidens næste side.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "Den primære brugerflade med resultatkilden <span class=\"named\">{divi_name}</span> valgt. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{result_source}</span> skjules, når resultatkilden <span class=\"named\">{divi_name}</span> benyttes."
+                                        }
+                                    }
+                                },
+                                "xml-divi":
+                                {
+                                    "title": "{xml_divi_name}",
+                                    "intro": "Når resultatkilden <span class=\"named\">{xml_divi_name}</span> er valgt, vises panelet <span class=\"named\">{result_source}</span> med to felter.",
+                                    "divi-exe-path": "Det første felt angiver placeringen af <span class=\"named\">{divi}</span>s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
+                                    "xml-file-path": "Det andet felt angiver placeringen af resultatfilen i {iof_xml}-format, som dit beregningsprogram forventes at skrive resultater til med jævne mellemrum. {bridge_name} opdaterer så onlineresultaterne, når denne fil ændres. Vælg placeringen ved at åbne fildialogen med <span class=\"named boxed\">{path_button}</span> knappen og udpege {iof_xml}-resultatfilen.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "Den primære brugerflade med resultatkilden <span class=\"named\">{xml_divi_name}</span>. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{result_source}</span>, når resultatkilden <span class=\"named\">{xml_divi_name}</span> benyttes."
                                         }
                                     }
                                 }

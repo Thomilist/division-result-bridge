@@ -68,6 +68,7 @@ export const resources =
                 divisionsmatchberegning:
                 {
                     name: "Divisionsmatchberegning",
+                    exe_name: "Divisionsmatch.exe",
                     route:
                     {
                         repo: "https://github.com/AndersKlinting/divisionsmatchberegning",
@@ -149,7 +150,8 @@ export const resources =
                     route:
                     {
                         website: "https://www.melin.nu/meos/en/",
-                        repo: "https://github.com/melinsoftware/meos"
+                        repo: "https://github.com/melinsoftware/meos",
+                        info_server: "https://www.melin.nu/meos/en/show.php?base=4200&id=4242"
                     },
                     version:
                     {
@@ -258,7 +260,29 @@ export const resources =
                             },
                             compatibility:
                             {
-                                label: "Compatibility"
+                                label: "Compatibility",
+                                item:
+                                {
+                                    result_source:
+                                    {
+                                        label: "Result Source",
+                                        item:
+                                        {
+                                            meos_divi:
+                                            {
+                                                label: "MeOS + Divisionsmatchberegning"
+                                            },
+                                            divi:
+                                            {
+                                                label: "Divisionsmatchberegning"
+                                            },
+                                            xml_divi:
+                                            {
+                                                label: "IOF XML file + Divisionsmatchberegning"
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             help:
                             {
@@ -320,6 +344,66 @@ export const resources =
                                     title: "Summary",
                                     use_now: "Use this competition now"
                                 },
+                            }
+                        },
+                        main:
+                        {
+                            pane:
+                            {
+                                competition:
+                                {
+                                    header: "Competition"
+                                },
+                                divisions:
+                                {
+                                    header: "Divisions"
+                                },
+                                online:
+                                {
+                                    header: "Online"
+                                },
+                                result_source:
+                                {
+                                    header: "Result Source",
+                                    item:
+                                    {
+                                        divi_exe_path:
+                                        {
+                                            labels:
+                                            {
+                                                field: "Path to Divisionsmatch.exe",
+                                                path_button: "..."
+                                            }
+                                        },
+                                        meos_server_address:
+                                        {
+                                            labels:
+                                            {
+                                                field: "MeOS information server address",
+                                                test_button: "Test"
+                                            }
+                                        }
+                                    }
+                                },
+                                update_results:
+                                {
+                                    header: "Update Results",
+                                    item:
+                                    {
+                                        working_directory:
+                                        {
+                                            labels:
+                                            {
+                                                field: "Working Directory",
+                                                path_button: "..."
+                                            }
+                                        }
+                                    }
+                                },
+                                log:
+                                {
+                                    header: "Log"
+                                }
                             }
                         }
                     }

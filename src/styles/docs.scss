@@ -32,7 +32,13 @@
 
     :global(.named)
     {
-        font-style: italic;
+        font-weight: bold;
+    }
+
+    :global(.boxed)
+    {
+        border: 1px solid var(--col-main-primary);
+        padding: 0 3px;
     }
 
     .doc-nav-container

@@ -395,6 +395,82 @@
                                     }
                                 }
                             }
+                        },
+                        "configuration":
+                        {
+                            "title": "Configuration",
+                            "intro": "Before we work on the details specific to your competition, we will do some basic configuration of {bridge_name} itself. The exact steps vary depending which result source is selected. You first chose the result source early in the competition creation process. If you have since changed your mind, head to the <span class=\"named\">{compatibility}</span> menu, and then choose a different option under <span class=\"named\">{result_source}</span>. You can always change it again later without losing any configuration data.",
+                            "working-directory": "Common for all result sources, however, is the need for a working directory. Head to the <span class=\"named\">{update_results}</span> pane, where you will find a field labeled <span class=\"named\">{working_directory}</span>. This field contains the path to a directory to which {bridge_name} will write logs and a variety of temporary files. Feel free to change it with the <span class=\"named boxed\">{path_button}</span> button. Any writable location will do, though it can be nice to keep it close to other event files. No matter the chosen directory, make sure it isn't used for anything else - existing files in the working directory may be overwritten.",
+                            "image":
+                            {
+                                "result-source":
+                                {
+                                    "alt": "The main program interface with the <span class=\"named\">{compatibility}</span> menu open, showing the different options under <span class=\"named\">{result_source}</span>.",
+                                    "caption": "<span class=\"named\">{result_source}</span> options under the <span class=\"named\">{compatibility}</span> menu."
+                                },
+                                "working-directory":
+                                {
+                                    "alt": "The main program interface with the <span class=\"named\">{working_directory}</span> field in the <span class=\"named\">{update_results}</span> pane highlighted.",
+                                    "caption": "The <span class=\"named\">{working_directory}</span> field in the <span class=\"named\">{update_results}</span> pane."
+                                }
+                            },
+                            "section":
+                            {
+                                "meos-divi":
+                                {
+                                    "title": "{meos_divi_name}",
+                                    "intro": "When the result source is set to <span class=\"named\">{meos_divi_name}</span>, the <span class=\"named\">{result_source}</span> pane appears with two fields.",
+                                    "divi-exe-path": "The first field specifies the path to the <span class=\"named\">{divi}</span> executable, which {bridge_name} needs in order to run it from the command line. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
+                                    "meos-server-address": "The second field holds the address on which <a href=\"{meos_info_server_link}\" target=\"_blank\">{meos_name}' information server</a> will be accessed. To start the information server, open your competition in {meos_name}, navigate to the <span class=\"named\">Services</span> tab, and select <span class=\"named\">Information Server</span>. The default address suggested by {bridge_name} corresponds to the default information server settings in {meos_name} when both are running on the same computer.",
+                                    "meos-server-test": "Once the information server is started, you can verify the connection with the <span class=\"named\">{test_button}</span> button. The result should show up in the log.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "The main program interface using the <span class=\"named\">{meos_divi_name}</span> result source. The <span class=\"named\">{result_source}</span> pane highlighted.",
+                                            "caption": "The <span class=\"named\">{result_source}</span> pane when using the <span class=\"named\">{meos_divi_name}</span> option."
+                                        },
+                                        "meos-services-tab":
+                                        {
+                                            "alt": "The <span class=\"named\">Information Server</span> feature in {meos_name}' <span class=\"named\">Services</span> tab.",
+                                            "caption": "The <span class=\"named\">Information Server</span> feature in {meos_name}' <span class=\"named\">Services</span> tab."
+                                        },
+                                        "meos-server-test-response":
+                                        {
+                                            "alt": "Example log output after the connection to {meos_name}' information server has been verified successfully.",
+                                            "caption": "Example log output after the connection to {meos_name}' information server has been verified successfully."
+                                        }
+                                    }
+                                },
+                                "divi":
+                                {
+                                    "title": "{divi_name}",
+                                    "intro": "When the result source is set to <span class=\"named\">{divi_name}</span>, the <span class=\"named\">{result_source}</span> pane is hidden. You can safely move on to the next page of the guide.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "The main program interface using the <span class=\"named\">{divi_name}</span> result source. The <span class=\"named\">{result_source}</span> pane highlighted.",
+                                            "caption": "The <span class=\"named\">{result_source}</span> pane is absent when using the <span class=\"named\">{divi_name}</span> option."
+                                        }
+                                    }
+                                },
+                                "xml-divi":
+                                {
+                                    "title": "{xml_divi_name}",
+                                    "intro": "When the result source is set to <span class=\"named\">{xml_divi_name}</span>, the <span class=\"named\">{result_source}</span> pane appears with two fields.",
+                                    "divi-exe-path": "The first field specifies the path to the <span class=\"named\">{divi}</span> executable, which {bridge_name} needs in order to run it from the command line. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
+                                    "xml-file-path": "The second field holds the path to the {iof_xml} result file, to which your timing software of choice is expected to write new results at regular intervals. {bridge_name} will update the online results whenever it detects a change to this file. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to the {iof_xml} result file in the file dialog.",
+                                    "image":
+                                    {
+                                        "comp-created":
+                                        {
+                                            "alt": "The main program interface using the <span class=\"named\">{xml_divi_name}</span> result source. The <span class=\"named\">{result_source}</span> pane highlighted.",
+                                            "caption": "The <span class=\"named\">{result_source}</span> pane when using the <span class=\"named\">{xml_divi_name}</span> option."
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
