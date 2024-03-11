@@ -55,6 +55,10 @@ export const resources =
         {
             label: "page.about.title",
             route: "/about"
+        },
+        source:
+        {
+            label: "page.source.title"
         }
     },
     external:

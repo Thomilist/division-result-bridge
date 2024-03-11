@@ -23,9 +23,9 @@ footer
         {
             grid-area: links;
 
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            grid-template-rows: auto;
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
             justify-items: start;
             align-items: center;
 

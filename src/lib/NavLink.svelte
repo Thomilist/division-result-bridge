@@ -10,6 +10,7 @@
 
 <a
     href="{props.exclude_base ? "" : base}{props.route}"
+    target={props.target}
     on:click={props.click_callback}>
     
     {props.skip_translation ? props.label : $t(props.label)}

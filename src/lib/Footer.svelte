@@ -35,6 +35,12 @@
                 label: resources.internal.about.label,
                 route: resources.internal.about.route
             }}/>
+            <NavLink props=
+            {{
+                label: resources.internal.source.label,
+                route: resources.external.thomilist.project.division_result_bridge.route.repo,
+                target: "_blank"
+            }}/>
         </div>
 
         <div class="copyright">

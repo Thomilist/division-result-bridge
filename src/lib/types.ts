@@ -24,6 +24,7 @@ export type NavHomeProps = NavPropsBase &
 export type NavLinkProps = NavPropsBase &
 {
     route: string,
+    target?: "_self" | "_blank" | "_parent" | "_top" | "_unfencedTop",
     skip_translation?: boolean,
     exclude_base?: boolean,
     click_callback?: (...args: any) => void
