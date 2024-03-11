@@ -6,6 +6,11 @@
     export let props: NavLinkProps;
 </script>
 
-<a href="{props.exclude_base ? "" : base}{props.route}" on:click={props.click_callback}>
+
+
+<a
+    href="{props.exclude_base ? "" : base}{props.route}"
+    on:click={props.click_callback}>
+    
     {props.skip_translation ? props.label : $t(props.label)}
 </a>

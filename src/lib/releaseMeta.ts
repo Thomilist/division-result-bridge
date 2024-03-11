@@ -1,5 +1,5 @@
 import byteSize from "byte-size";
-import type { Release, ReleaseMeta } from "./types";
+import type { AssetMeta, Release, ReleaseMeta } from "./types";
 
 const platform_names =
 {
@@ -13,8 +13,9 @@ const platform_name_map = new Map(Object.entries(platform_names));
 export function releaseMeta(release: Release): ReleaseMeta
 {
     const version_digits = release.tag.split(".");
+    const assets: AssetMeta[] = [];
 
-    let assets = release.assets.map((asset) =>
+    release.assets.forEach((asset) =>
     {
         const file_extention_index = asset.name.lastIndexOf(".");
         const file_extention = asset.name.substring(file_extention_index + 1).toUpperCase();
@@ -25,24 +26,25 @@ export function releaseMeta(release: Release): ReleaseMeta
 
         if (!platform_raw)
         {
-            return undefined;
+            return;
         }
 
         const platform = platform_name_map.get(platform_raw);
 
         if (!platform)
         {
-            return undefined;
+            return;
         }
 
         const arch = name_parts.at(-1);
 
         if (!arch)
         {
-            return undefined;
+            return;
         }
 
-        return {
+        assets.push
+        ({
             platform: platform,
             arch: arch,
             format: file_extention,
@@ -51,7 +53,7 @@ export function releaseMeta(release: Release): ReleaseMeta
                 bytes: asset.size,
                 pretty: byteSize(asset.size, {units: "iec"}).toString()
             }
-        }
+        });
     });
 
     return {
@@ -63,5 +65,5 @@ export function releaseMeta(release: Release): ReleaseMeta
             patch: parseInt(version_digits[2])
         },
         assets: assets
-    }
+    };
 }

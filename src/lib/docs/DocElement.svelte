@@ -6,6 +6,8 @@
     export let props: DocElementProps;
 </script>
 
+
+
 <svelte:element this={props.element ? props.element : "p"}>
 	{@html $t(tpage(props.docpage, props.specifiers), {values: props.values})}
 </svelte:element>

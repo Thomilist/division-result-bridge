@@ -5,9 +5,13 @@
 	import { resources } from "./resources";
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/footer.scss";
 </style>
+
+
 
 <footer class="limited-width-container">
     <div class="limited-width-content footer-content narrow-content">
@@ -16,9 +20,21 @@
         </div>
 
         <div class="links">
-            <NavLink props={{label: resources.internal.privacy.label, route: resources.internal.privacy.route}}/>
-            <NavLink props={{label: resources.internal.license.label, route: resources.internal.license.route}}/>
-            <NavLink props={{label: resources.internal.about.label, route: resources.internal.about.route}}/>
+            <NavLink props=
+            {{
+                label: resources.internal.privacy.label,
+                route: resources.internal.privacy.route
+            }}/>
+            <NavLink props=
+            {{
+                label: resources.internal.license.label,
+                route: resources.internal.license.route
+            }}/>
+            <NavLink props=
+            {{
+                label: resources.internal.about.label,
+                route: resources.internal.about.route
+            }}/>
         </div>
 
         <div class="copyright">

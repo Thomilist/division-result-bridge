@@ -28,9 +28,13 @@
 	}
 </script>
 
+
+
 <style lang="scss">
 	@import "$styles/doc-footer.scss";
 </style>
+
+
 
 {#if props.collection?.connected && (previous?.title || next?.title)}
 	<div class="doc-footer">
@@ -40,7 +44,11 @@
 					{$t("page.docs.nav.previous")}
 				</span>
 
-				<NavLink props={{label: tpage(previous, ["title"]), route: `/docs/${previous.collection}/${previous.title}`}}/>
+				<NavLink props=
+				{{
+					label: tpage(previous, ["title"]),
+					route: `/docs/${previous.collection}/${previous.title}`
+				}}/>
 			</div>
 		{/if}
 
@@ -50,7 +58,11 @@
 					{$t("page.docs.nav.next")}
 				</span>
 
-				<NavLink props={{label: tpage(next, ["title"]), route: `/docs/${next.collection}/${next.title}`}}/>
+				<NavLink props=
+				{{
+					label: tpage(next, ["title"]),
+					route: `/docs/${next.collection}/${next.title}`
+				}}/>
 			</div>
 		{/if}
 	</div>

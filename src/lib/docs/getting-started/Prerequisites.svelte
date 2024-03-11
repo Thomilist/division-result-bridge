@@ -50,8 +50,8 @@
 		}}/>
 
 		<ul>
-			<DocElement props={
-			{
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "system", "req0"],
@@ -60,8 +60,9 @@
 					win: resources.external.microsoft.project.windows.name
 				}
 			}}/>
-			<DocElement props={
-			{
+
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "system", "req1"],
@@ -70,14 +71,16 @@
 					storage: resources.misc.requirements.storage
 				}
 			}}/>
-			<DocElement props={
-			{
+
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "system", "req2"]
 			}}/>
-			<DocElement props={
-			{
+
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "system", "req3"],
@@ -120,8 +123,8 @@
 		}}/>
 
 		<ul>
-			<DocElement props={
-			{
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "surrounding-setup", "req0"],
@@ -131,8 +134,9 @@
 					divi_name: resources.external.andersklinting.project.divisionsmatchberegning.name
 				}
 			}}/>
-			<DocElement props={
-			{
+
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "surrounding-setup", "req1"],
@@ -155,8 +159,8 @@
 		}}/>
 
 		<ul>
-			<DocElement props={
-			{
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "surrounding-setup", "opt0"],
@@ -167,8 +171,9 @@
 					meos_minimum_version: resources.external.melinsoftware.project.meos.version.infoserver
 				}
 			}}/>
-			<DocElement props={
-			{
+
+			<DocElement props=
+			{{
 				element: "li",
 				docpage: props,
 				specifiers: ["section", "requirements", "section", "surrounding-setup", "opt1"],

@@ -18,7 +18,8 @@ export const prerender = true;
 addMessages("da", da);
 addMessages("en", en);
 
-init({
+init
+({
     initialLocale: localeFromStore(get(language)),
     fallbackLocale: default_locale
 });
@@ -36,8 +37,22 @@ const home: NavHomeProps =
 
 const pages: NavItem[] =
 [
-    {component: NavLink, props: {label: resources.internal.download.label, route: resources.internal.download.route}},
-    {component: NavLink, props: {label: resources.internal.docs.label, route: resources.internal.docs.route}}
+    {
+        component: NavLink,
+        props:
+        {
+            label: resources.internal.download.label,
+            route: resources.internal.download.route
+        }
+    },
+    {
+        component: NavLink,
+        props:
+        {
+            label: resources.internal.docs.label,
+            route: resources.internal.docs.route
+        }
+    }
 ];
 
 const options: NavDropdownProps = 
@@ -48,8 +63,14 @@ const options: NavDropdownProps =
     icon: GearFill,
     items:
     [
-        {component: LanguageSelect, props: {label: "options.language.name"}},
-        {component: ThemeSwitch, props: {label: "options.theme.name"}}
+        {
+            component: LanguageSelect,
+            props: { label: "options.language.name" }
+        },
+        {
+            component: ThemeSwitch,
+            props: { label: "options.theme.name" }
+        }
     ]
 };
 

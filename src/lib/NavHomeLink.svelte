@@ -5,15 +5,25 @@
 	export let props: NavHomeProps;
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/nav-home-link.scss";
 </style>
 
-<a href={base}{props.route} class="nav-hoverable">
+
+
+<a
+    href={base}{props.route}
+    class="nav-hoverable">
+    
     <div class="home-link">
         {#if props.icon}
             <div class="icon">
-                <svelte:component this={props.icon.component} size={props.icon.size}/>
+                <svelte:component
+                    this={props.icon.component}
+                    size={props.icon.size}
+                />
             </div>
         {/if}
         

@@ -10,8 +10,10 @@
     const caption_values = Object.assign({}, props.values?.common, props.values?.caption);
 </script>
 
-<Image props={
-{
+
+
+<Image props=
+{{
     src: props.src,
     alt: $t(tpage(props.docpage, [...props.specifiers, "alt"]), {values: alt_values}),
     caption: $t(tpage(props.docpage, [...props.specifiers, "caption"]), {values: caption_values})

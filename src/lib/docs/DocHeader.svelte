@@ -14,9 +14,13 @@
     }
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/doc-header.scss";
 </style>
+
+
 
 {#if is_main}
     <span class="doc-collection-label">
@@ -24,6 +28,12 @@
     </span>    
 {/if}
 
-<svelte:element this={`h${is_main ? 1 : props.depth}`} class="doc-header {is_main ? "doc-header-main": ""}" id="{props.specifiers.join("_")}">
+
+
+<svelte:element
+    this={`h${is_main ? 1 : props.depth}`}
+    class="doc-header {is_main ? "doc-header-main": ""}"
+    id="{props.specifiers.join("_")}">
+    
     {$t(tpage(props.docpage, props.specifiers), {values: props.values})}
 </svelte:element>

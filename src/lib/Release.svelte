@@ -8,9 +8,13 @@
     export let meta: ReleaseMeta;
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/release.scss";
 </style>
+
+
 
 <div class="release">
     <div class="release-header">
@@ -93,7 +97,11 @@
         </div>
     </details>
 
-    <a href={release.link} target="_blank" class="release-link">
+    <a
+        href={release.link}
+        target="_blank"
+        class="release-link">
+        
         {$t("page.download.releases.github")}
     </a>
 </div>

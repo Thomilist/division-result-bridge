@@ -10,9 +10,13 @@
     ];
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/home.scss";
 </style>
+
+
 
 <svelte:head>
     <title>
@@ -39,11 +43,14 @@
                 </h2>
     
                 <p>
-                    {@html ($t(`page.home.highlights.${highlight}.content`, {values:
                     {
-                        divi_name: resources.external.andersklinting.project.divisionsmatchberegning.name,
-                        divi_link: resources.external.andersklinting.project.divisionsmatchberegning.route.repo
-                    }}))}
+                        @html
+                        $t(`page.home.highlights.${highlight}.content`, { values:
+                        {
+                            divi_name: resources.external.andersklinting.project.divisionsmatchberegning.name,
+                            divi_link: resources.external.andersklinting.project.divisionsmatchberegning.route.repo
+                        }})
+                    }
                 </p>
             </div>
         {/each}

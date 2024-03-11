@@ -227,14 +227,14 @@
     }}/>
 
     <ul>
-        <DocElement props={
-        {
+        <DocElement props=
+        {{
             element: "li",
             docpage: props,
             specifiers: ["section", "page3", "insecure"]
         }}/>
-        <DocElement props={
-        {
+        <DocElement props=
+        {{
             element: "li",
             docpage: props,
             specifiers: ["section", "page3", "immutable"]

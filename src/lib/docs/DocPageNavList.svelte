@@ -6,16 +6,20 @@
     export let props: DocPageNavListProps;
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/doc-page-nav-list.scss";
 </style>
+
+
 
 <ol>
     {#each props.headers as header}
         <li>
             {#if (header.node instanceof Element && header.node.id.length > 0)}
-                <NavLink props={
-                {
+                <NavLink props=
+                {{
                     label: `${header.node.textContent}`,
                     route: `#${header.node.id}`,
                     exclude_base: true,

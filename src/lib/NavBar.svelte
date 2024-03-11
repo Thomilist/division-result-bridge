@@ -6,9 +6,13 @@
     export let props: NavBarProps;
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/nav-bar.scss";
 </style>
+
+
 
 <nav class="nav-bar limited-width-container">
     <div class="nav-menu limited-width-content">
@@ -18,7 +22,10 @@
             <ul>
                 {#each props.items as item}
                     <li class="nav-hoverable">
-                        <svelte:component this={item.component} props={item.props}/>
+                        <svelte:component
+                            this={item.component}
+                            props={item.props}
+                        />
                     </li>
                 {/each}
             </ul>

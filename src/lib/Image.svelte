@@ -4,9 +4,13 @@
     export let props: ImageProps;
 </script>
 
+
+
 <style lang="scss">
     @import "$styles/image.scss";
 </style>
+
+
 
 <figure>
     <img src={props.src} alt={props.alt}/>
