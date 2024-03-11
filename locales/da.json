@@ -71,7 +71,7 @@
     "ui":
     {
         "tip": "Tip",
-        "warning": "Advarsel"
+        "warning": "Forsigtig"
     },
     "page":
     {
@@ -182,9 +182,9 @@
                                 "motivation":
                                 {
                                     "title": "Motivation",
-                                    "live-results": "Ved afholdelse af konkurrencer er det naturligvis interessant at se resultaterne - og gerne så hurtigt, som muligt. Orienteringsløb er ingen undtagelse. Til stævner, hvor der konkurreres individuelt, kan resultater let formidles live med onlinetjenesten <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>. Der findes dog også konkurrencer, som denne tjeneste ikke egner sig til.",
+                                    "live-results": "Ved afholdelse af konkurrencer er det naturligvis interessant at se resultaterne &mdash; og gerne så hurtigt, som muligt. Orienteringsløb er ingen undtagelse. Til stævner, hvor der konkurreres individuelt, kan resultater let formidles live med onlinetjenesten <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>. Der findes dog også konkurrencer, som denne tjeneste ikke egner sig til.",
                                     "division-matches": "I Danmark konkurreres der fx klubvis i divisioner, hvor løberne scorer point på vegne af deres klub ud fra deres individuelle resultat. Beregningen af pointene sker typisk ved brug af <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, men mulighederne for live præsentation på internettet er begrænsede.",
-                                    "problem": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a> kan godt producere divisionsresultater i et præsentabelt HTML-format, men det kræver en ekstra indsats at gøre den tilgængelige via internettet - særligt, hvis resultaterne løbende skal ajourføres. Brugen af mobildata til at få internetforbindelse på stævnepladsen, som det ofte er tilfældet, komplicerer sagen yderligere. Typisk medfører det nemlig brugen af <a href=\"{cgnat_link}\" target=\"_blank\">{cgnat_name}</a>, så en server bag et sådant netværk ikke er synlig på internettet.",
+                                    "problem": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a> kan godt producere divisionsresultater i et præsentabelt HTML-format, men det kræver en ekstra indsats at gøre den tilgængelige via internettet &mdash; særligt, hvis resultaterne løbende skal ajourføres. Brugen af mobildata til at få internetforbindelse på stævnepladsen, som det ofte er tilfældet, komplicerer sagen yderligere. Typisk medfører det nemlig brugen af <a href=\"{cgnat_link}\" target=\"_blank\">{cgnat_name}</a>, så en server bag et sådant netværk ikke er synlig på internettet.",
                                     "solution": "En mulig løsning er at sende HTML-filerne til en server på en synlig addresse, så resultater i stedet kan vises derfra. Det stiller dog større krav til arrangørens indsats og viden. Meningen med {bridge_name} og <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> er således at lette adgangen til denne løsning og dermed gøre live, online divisionsresultater til en triviel opgave."
                                 }
                             }
@@ -405,17 +405,17 @@
                         {
                             "title": "Konfiguration",
                             "intro": "Inden vi begynder på opsætningen af selve konkurrencen, skal vi foretage lidt grundlæggende opsætning af selve {bridge_name}. De konkrete trin afhænger af resultatkilden, som oprindeligt blev valgt tidligt i konkurrenceoprettelsen. Hvis den ikke er indstillet korrekt, kan den altid ændres uden tab af konfigurationsdata: Find menuen <span class=\"named\">{compatibility}</span>, og vælg en passende indstilling under <span class=\"named\">{result_source}</span>.",
-                            "working-directory": "Uafhængigt af resultatkilden skal der dog altid vælges en arbejdsmappe. I panelet <span class=\"named\">{update_results}</span> findes feltet <span class=\"named\">{working_directory}</span>, som angiver placeringen af arbejdsmappen, hvortil {bridge_name} skriver logfiler og en række midlertidige filer. Placeringen kan ændres ved at trykke på <span class=\"named boxed\">{path_button}</span> knappen. Enhver mappe kan benyttes, så længe den ikke er skrivebeskyttet, men det kan dog være rart med en placering sammen med de øvrige stævnefiler. Uanset placeringen er det essentielt, at arbejdsmappen ikke benyttes til andre formål - eksisterende filer i mappen kan blive overskrevet.",
+                            "working-directory": "Uafhængigt af resultatkilden skal der dog altid vælges en arbejdsmappe. I panelet <span class=\"named\">{update_results}</span> findes feltet <span class=\"named\">{working_directory}</span>, som angiver placeringen af arbejdsmappen, hvortil {bridge_name} skriver logfiler og en række midlertidige filer. Placeringen kan ændres ved at trykke på <span class=\"named boxed\">{path_button}</span> knappen. Enhver mappe kan benyttes, så længe den ikke er skrivebeskyttet, men det kan dog være rart med en placering sammen med de øvrige stævnefiler. Uanset placeringen er det essentielt, at arbejdsmappen ikke benyttes til andre formål &mdash; eksisterende filer i mappen kan blive overskrevet.",
                             "image":
                             {
                                 "result-source":
                                 {
-                                    "alt": "Den primære brugerflade med menuen <span class=\"named\">{compatibility}</span> åben, og med de forskellige indstillinger under <span class=\"named\">{result_source}</span> vist.",
+                                    "alt": "Hovedvinduet med menuen <span class=\"named\">{compatibility}</span> åben, og med de forskellige indstillinger under <span class=\"named\">{result_source}</span> vist.",
                                     "caption": "Indstillinger for <span class=\"named\">{result_source}</span> under menuen <span class=\"named\">{compatibility}</span>."
                                 },
                                 "working-directory":
                                 {
-                                    "alt": "Den primære brugerflade med feltet <span class=\"named\">{working_directory}</span> i panelet <span class=\"named\">{update_results}</span> fremhævet.",
+                                    "alt": "Hovedvinduet med feltet <span class=\"named\">{working_directory}</span> i panelet <span class=\"named\">{update_results}</span> fremhævet.",
                                     "caption": "Feltet <span class=\"named\">{working_directory}</span> i panelet <span class=\"named\">{update_results}</span>."
                                 }
                             },
@@ -425,14 +425,14 @@
                                 {
                                     "title": "{meos_divi_name}",
                                     "intro": "Når resultatkilden <span class=\"named\">{meos_divi_name}</span> er valgt, vises panelet <span class=\"named\">{result_source}</span> med to felter.",
-                                    "divi-exe-path": "Det første felt angiver placeringen af <span class=\"named\">{divi}</span>s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
+                                    "divi-exe-path": "Det første felt angiver placeringen af {divi}s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
                                     "meos-server-address": "Det andet felt angiver netværksadressen, hvorpå <a href=\"{meos_info_server_link}\" target=\"_blank\">{meos_name}' informationsserver</a> findes. Informationsserveren startes ved at åbne konkurrencen i {meos_name}, vælge fanen <span class=\"named\">Autofunktioner</span>, og dernæst funktionen <span class=\"named\">Informationsserver</span>. Adressen, som {bridge_name} foreslår som udgangspunkt, passer til standardindstillingen i {meos_name}, når begge programmer kører på samme computer.",
                                     "meos-server-test": "Når informationsserveren kører, kan forbindelsen testes med knappen <span class=\"named\">{test_button}</span>. Resultatet af testen fremgår så af loggen.",
                                     "image":
                                     {
                                         "comp-created":
                                         {
-                                            "alt": "Den primære brugerflade, når resultatkilden <span class=\"named\">{meos_divi_name}</span> er i brug. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "alt": "Hovedvinduet, når resultatkilden <span class=\"named\">{meos_divi_name}</span> er i brug. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
                                             "caption": "Panelet <span class=\"named\">{result_source}</span> når resultatkilden <span class=\"named\">{meos_divi_name}</span> benyttes."
                                         },
                                         "meos-services-tab":
@@ -455,7 +455,7 @@
                                     {
                                         "comp-created":
                                         {
-                                            "alt": "Den primære brugerflade med resultatkilden <span class=\"named\">{divi_name}</span> valgt. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "alt": "Hovedvinduet med resultatkilden <span class=\"named\">{divi_name}</span> valgt. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
                                             "caption": "Panelet <span class=\"named\">{result_source}</span> skjules, når resultatkilden <span class=\"named\">{divi_name}</span> benyttes."
                                         }
                                     }
@@ -464,14 +464,160 @@
                                 {
                                     "title": "{xml_divi_name}",
                                     "intro": "Når resultatkilden <span class=\"named\">{xml_divi_name}</span> er valgt, vises panelet <span class=\"named\">{result_source}</span> med to felter.",
-                                    "divi-exe-path": "Det første felt angiver placeringen af <span class=\"named\">{divi}</span>s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
+                                    "divi-exe-path": "Det første felt angiver placeringen af {divi}s programfil, som {bridge_name} skal kende for at kunne køre programmet fra kommandolinjen. Tryk på <span class=\"named boxed\">{path_button}</span> knappen og navigér til <span class=\"named\">{divi_exe}</span> i fildialogen for at vælge placeringen.",
                                     "xml-file-path": "Det andet felt angiver placeringen af resultatfilen i {iof_xml}-format, som dit beregningsprogram forventes at skrive resultater til med jævne mellemrum. {bridge_name} opdaterer så onlineresultaterne, når denne fil ændres. Vælg placeringen ved at åbne fildialogen med <span class=\"named boxed\">{path_button}</span> knappen og udpege {iof_xml}-resultatfilen.",
                                     "image":
                                     {
                                         "comp-created":
                                         {
-                                            "alt": "Den primære brugerflade med resultatkilden <span class=\"named\">{xml_divi_name}</span>. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
+                                            "alt": "Hovedvinduet med resultatkilden <span class=\"named\">{xml_divi_name}</span>. Panelet <span class=\"named\">{result_source}</span> er fremhævet.",
                                             "caption": "Panelet <span class=\"named\">{result_source}</span>, når resultatkilden <span class=\"named\">{xml_divi_name}</span> benyttes."
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "competition-details":
+                        {
+                            "title": "Konkurrencedetaljer",
+                            "intro": "Hvis du har fulgt vejledningen i den tiltænkte rækkefølge, skulle hovedvinduet gerne se nogenlunde sådan ud (på billedet er resultatkilden sat til <span class=\"named\">{meos_divi_name}</span>, men det er ikke vigtigt lige nu):",
+                            "empty-fields": "Vi er kommet langt, men der er stadig nogle tomme felter tilbage. Faktisk har vi slet ikke rørt panelerne <span class=\"named\">{competition}</span>, <span class=\"named\">{divisions}</span> eller <span class=\"named\">{online}</span> endnu! Det må vi hellere lave om på, så lade os starte med panelet <span class=\"named\">{competition}</span>.",
+                            "image":
+                            {
+                                "result-source-configured":
+                                {
+                                    "alt": "Hovedvinduet efter indledende konfiguration er gennemført.",
+                                    "caption": "Hovedvinduet efter indledende konfiguration."
+                                }
+                            },
+                            "section":
+                            {
+                                "competition":
+                                {
+                                    "title": "Konkurrence",
+                                    "intro": "Der er ret mange felter i panelet <span class=\"named\">{competition}</span>. Nogle af dem har med den virkelige begivenhed at gøre, mens andre beskæftiger sig med resultatserveren.",
+                                    "credentials": "De første to felter hedder <span class=\"named\">{comp_id}</span> og <span class=\"named\">{password}</span>. Deres værdier blev valgt, da vi oprettede konkurrencen; vi valgte selv et password, og serveren tildelte vores konkurrence et ID. Værdierne for en given konkurrence kan ikke ændres, men vi kan arbejde med forskellige konkurrencer ved at angive et andet ID og password. I øjeblikket vil vi dog gerne fortsætte arbejdet med denne konkurrence, så vi lader disse felter være.",
+                                    "metadata": "De næste fire felter beskriver den virkelige konkurrence. <span class=\"named\">{name}</span> er konkurrencens navn, mens <span class=\"named\">{organiser}</span> er arrangørens navn. Feltet <span class=\"named\">{date}</span> angiver konkurrencens dato i det viste format. Eksempelvis skal den 24. september 2023 skrives som 2023-09-24. Derudover vælges tidszonen, som den virkelige konkurrence foregår i, med feltet <span class=\"named\">{timezone}</span>. {bridge_name} foreslår automatisk en tidszone baseret på indstillinger fra operativsystemet, programmet kører under. Værdierne i felterne <span class=\"named\">{name}</span>, <span class=\"named\">{organiser}</span> og <span class=\"named\">{date}</span> vises til brugerne på resultatsiden.",
+                                    "datetime-purpose": "Resultatserveren benytter konkurrences dato og tidszone på dens forside. Her vises alle konkurrencer i kronologisk rækkefølge, og eventuelle konkurrencer på dags dato fremhæves på en særlig liste øverst på siden.",
+                                    "metadata-meos": "Hvis du bruger resultatkilden <span class=\"named\">{meos_divi_name}</span>, og {meos_name}' informationsserver er online, kan du udnytte en lille genvej: Under <i>menuen</i> <span class=\"named\">{competition_menu}</span> vælges <span class=\"named\">{import_metadata}</span>.",
+                                    "metadata-meos-success": "{bridge_name} vil så hente værdier for konkurrencens navn, dato og arrangør direkte fra {meos_name} og udfylde de pågældende felter.",
+                                    "visibility": "Der er én indstilling mere i panelet <span class=\"named\">{competition}</span>: <span class=\"named\">{visibility}</span>. Den styrer konkurrencens synlighed på resultatsiden. Indstillingen har tre forskellige muligheder:",
+                                    "visibility-private": "Konkurrencen vises ikke på hjemmesiden. Denne indstilling er valgt som udgangspunkt.",
+                                    "visibility-hidden": "Konkurrencen kan ses på hjemmesiden via et direkte link, men den bliver ikke vist på forsiden.",
+                                    "visibility-public": "Konkurrencen kan ses på hjemmesiden, og den vises på forsiden.",
+                                    "visibility-change": "Lad os ændre synligheden til <span class=\"named\">{visibility_hidden}</span>. Så kan vi nemlig selv se konkurrencen, mens vi sætter den op, mens andre folk næppe falder over vores ufærdige arbejde. Husk dog, at ændringer foretaget i {bridge_name} skal uploades til serveren, før de træder i kraft.",
+                                    "image":
+                                    {
+                                        "competition":
+                                        {
+                                            "alt": "Hovedvinduet efter indledende konfiguration er gennemført. Panelet <span class=\"named\">{competition}</span> er fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{competition}</span> efter indledende konfiguration er gennemført."
+                                        },
+                                        "import-metadata":
+                                        {
+                                            "alt": "Hovedvinduet med menuen <span class=\"named\">{competition_menu}</span> åben. Valgmuligheden <span class=\"named\">{import_metadata}</span> er fremhævet.",
+                                            "caption": "<span class=\"named\">{import_metadata}</span> under menuen <span class=\"named\">{competition_menu}</span>."
+                                        },
+                                        "import-metadata-response":
+                                        {
+                                            "alt": "Eksempel på logbeskeder efter succesfuld import af konkurrencens navn, dato og arrangør fra {meos_name}.",
+                                            "caption": "Eksempel på logbeskeder efter succesfuld import af konkurrencens navn, dato og arrangør fra {meos_name}."
+                                        }
+                                    }
+                                },
+                                "divisions":
+                                {
+                                    "title": "Divisioner",
+                                    "intro": "Det er endelig blevet tid til at konfigurere vores divisioner. I panelet <span class=\"named\">{divisions}</span> findes divisionstabellen &mdash; og bare rolig; det har ikke noget med folkematematik at gøre. Langs bunden af tabellen er der tre knapper: <span class=\"named\">{new_button}</span>, <span class=\"named\">{edit_button}</span> og <span class=\"named\">{delete_button}</span>. Tryk på <span class=\"named\">{new_button}</span> for at åbne divisionseditoren.",
+                                    "new-divi-divi-file": "Når resultatkilden er indstillet til enten <span class=\"named\">{meos_divi_name}</span> eller <span class=\"named\">{xml_divi_name}</span>, har divisionseditoren felterne <span class=\"named\">{divi_id}</span>, <span class=\"named\">{name}</span> og <span class=\"named\">{divi_config_path}</span>.",
+                                    "new-divi-info-server": "Indstilles resultatkilden derimod til <span class=\"named\">{divi_name}</span>, erstattes feltet <span class=\"named\">{divi_config_path}</span> med <span class=\"named\">{info_server_address}</span>.",
+                                    "divi-editor-field-divi-id": "I modsætning til <span class=\"named\">{comp_id}</span> kan vi selv bestemme <span class=\"named\">{divi_id}</span>. I konkurrencer med flere divisioner benyttes <span class=\"named\">{divi_id}</span> til at afgøre rækkefølgen af de radioknapper, som på resultatsiden styrer, hvilken divisions resultater vises. Divisionerne sorteres med laveste ID først, og et <span class=\"named\">{divi_id}</span> kan kun benyttes til én division i samme konkurrence. I konkurrencer med kun en enkelt division er <span class=\"named\">{divi_id}</span> irrelevant.",
+                                    "divi-editor-field-name": "Feltet <span class=\"named\">{name}</span> bestemmer navnet, som vises på divisionens radioknap på resultatsiden. Der er ikke konkrete krav hertil, men det er en fordel at vælge et kort og præcist navn, for eksempel \"2. division\".",
+                                    "divi-editor-field-divi-file": "I feltet <span class=\"named\">{divi_config_path}</span> angives placeringen af divisionens konfigurationsfil, når relevante resultatkilder er i brug. Der benyttes naturligvis en unik konfigurationsfil for hver division.",
+                                    "divi-file-warning": "Tekniske begrænsninger gør, at resultatserveren <i>kun</i> er kompatibel med bestemte layoutindstillinger i konfigurationsfilen. I {divi} findes disse indstillinger gennem menuen <span class=\"named\">{print}</span> (som, på trods af navnet, ikke kun omhandler udskrifter), og dernæst <span class=\"named\">{setup}</span>. Her skal <span class=\"named\">{html_css}</span> være fravalgt, og <span class=\"named\">{layout}</span> skal indstilles til <span class=\"named\">{blue}</span>. Det anbefales kraftigt, at konfigurationsfiler, som anvendes af {bridge_name}, reserveres <i>udelukkende</i> til {bridge_name}, og at der laves separate kopier til øvrige formål, såsom udskrift.",
+                                    "divi-editor-field-info-server": "Som tidligere nævnt vises feltet <span class=\"named\">{info_server_address}</span>, når resultatkilden sættes til <span class=\"named\">{divi_name}</span>. Dette er netværksadressen til {divi}s informationsserver. I konkurrencer med flere divisioner vil hver division være knyttet til et unikt eksemplar af {divi} med sin egen informationsserver åben på en unik adresse &mdash; typisk opnået ved at vælge forskellige netværksporte, hvis flere eksemplarer af {divi} kører på den samme computer. {divi}s informationsserver kan tilgås gennem menuen <span class=\"named\">{info}</span>, og dernæst <span class=\"named\">{info_server}</span>.",
+                                    "new-divi-save": "Når de tre felter af udfyldt, kan divisionen gemmes og divisionseditoren lukkes ved at trykke på <span class=\"named\">{save_button}</span>. Hvis flere divisioner skal defineres, kan der igen trykkes på <span class=\"named\">{new_button}</span>, og processen gentages. Desuden kan eksisterende divisioner vælges i divisionstabellen og henholdsvis redigeres eller slettes med knapperne <span class=\"named\">{edit_button}</span> eller <span class=\"named\">{delete_button}</span>.",
+                                    "image":
+                                    {
+                                        "divisions":
+                                        {
+                                            "alt": "Hovedvinduet efter konkurrencedetaljerne er blevet indtastet. Panelet <span class=\"named\">{divisions}</span> er fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{divisions}</span> efter konkurrencedetaljerne er blevet indtastet."
+                                        },
+                                        "new-divi-divi-file":
+                                        {
+                                            "alt": "Divisionseditoren med resultatkilden <span class=\"named\">{meos_divi_name}</span> eller <span class=\"named\">{xml_divi_name}</span>.",
+                                            "caption": "Divisionseditoren med resultatkilden <span class=\"named\">{meos_divi_name}</span> eller <span class=\"named\">{xml_divi_name}</span>."
+                                        },
+                                        "new-divi-info-server":
+                                        {
+                                            "alt": "Divisionseditoren med resultatkilden <span class=\"named\">{divi_name}</span>.",
+                                            "caption": "Divisionseditoren med resultatkilden <span class=\"named\">{divi_name}</span>."
+                                        },
+                                        "divi-print-setup":
+                                        {
+                                            "alt": "Printopsætningen i {divi} med de vigtige indstillinger fremhævet.",
+                                            "caption": "De vigtige layoutindstillinger i {divi}."
+                                        },
+                                        "divi-info-server":
+                                        {
+                                            "alt": "Informationsserveren i {divi}.",
+                                            "caption": "Informationsserveren i {divi}."
+                                        }
+                                    }
+                                },
+                                "liveresults":
+                                {
+                                    "title": "{liveresults_name}",
+                                    "intro": "Selvom divisionsmatcher primært handler om konkurrencer mellem klubber, indeholder de også individuelle resultater i de enkelte klasser. Der findes allerede tjenester til at udgive live, individuelle resultater online, såsom <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>.",
+                                    "add-link": "Divisionsresultatsiden kan vise et link til en side på {liveresults_name}. I panelet <span class=\"named\">{online}</span> findes feltet <span class=\"named\">{liveresults_id}</span>. Når værdien her er 0, har den ingen effekt. Vi kan dog angive konkurrences ID fra {liveresults_name}, og så vil der på resultatsiden blive vist en tydelig, orange knap, som fører til konkurrencen på {liveresults_name}. Linket i feltets navn opdateres i øvrigt også, så hvis vi klikker på det, kan vi hurtigt kontrollere, at ID'et er korrekt.",
+                                    "image":
+                                    {
+                                        "liveresults-field-highlighted":
+                                        {
+                                            "alt": "Panelet <span class=\"named\">{online}</span> med feltet \"<span class=\"named\">{liveresults_id}</span>\" fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{online}</span> med det {liveresults_name}-relevante felt fremhævet."
+                                        }
+                                    }
+                                },
+                                "validate-configuration":
+                                {
+                                    "title": "Kontrollér konfiguration",
+                                    "intro": "På nuværende tidspunkt <i>bør</i> konfigurationen af vores konkurrence være færdig. Visse åbenlyse fejl eller mangler kan dog udpeges med et valideringsværktøj, som er indbygget i {bridge_name}. Det kan for eksempel udpege tomme felter og kontrollere, at filstier er gyldige. Værktøjet er dog ikke perfekt: Det kan blandt andet ikke kontrollere mening, stavning eller status af netværksresourcer.",
+                                    "validate-manually": "Valideringsværktøjet kan startes manuelt ved at vælge <span class=\"named\">{validate}</span> under menuen <span class=\"named\">{competition}</span>.",
+                                    "validate-response": "Kontrollens resultat skrives i loggen, og der produceres en advarsel for hvert potentielle problem. Advarslerne inkluderer deres begrundelser, og disse kan fungere som en slags vejledning: Er noget angivet ukorrekt (eller slet ikke), eller kan advarslen trygt ignoreres? Sidstnævnte kan for eksempel være tilfældet, hvis en værdi udelades med vilje, eller hvis kontrollen har produceret et falsk positivt resultat. Og igen: At værktøjet ikke finder nogen fejl er ikke ensbetydende med, at konfigurationen er fejlfri. Valideringsværktøjet bør blot anses som et supplement til en manuel inspektion.",
+                                    "validate-at-startup": "Foruden manuel aktivering køres valideringsværktøjet også ved opstart af {bridge_name}.",
+                                    "image":
+                                    {
+                                        "validate-highlighted":
+                                        {
+                                            "alt": "Hovedvinduet med menuen <span class=\"named\">{competition}</span> åben. Muligheden <span class=\"named\">{validate}</span>, som kører valideringsværktøjet, er fremhævet.",
+                                            "caption": "Valideringsværktøjet under menuen <span class=\"named\">{competition}</span>."
+                                        },
+                                        "validate-response":
+                                        {
+                                            "alt": "Eksempel på logbeskeder efter 0 problemer blev fundet ved kontrol af konfigurationen.",
+                                            "caption": "Eksempel på logbeskeder efter 0 problemer blev fundet ved kontrol af konfigurationen."
+                                        }
+                                    }
+                                },
+                                "upload-your-changes":
+                                {
+                                    "title": "Upload ændringer",
+                                    "intro": "Da indstillingen <span class=\"named\">{visibility}</span> blev introduceret, nævnte jeg også kort, at ændringer skal uploades til serveren, før de træder i kraft. Nu har vi jo netop foretaget en masse ændringer, så er det ikke på tide, at vi prøver at uploade dem? Vi kigger igen på panelet <span class=\"named\">{online}</span>, men denne gang fokuserer vi på nogle af knapperne.",
+                                    "update-metadata": "Først gælder det knappen <span class=\"named\">{update_metadata}</span>. Et tryk på denne knap pakker hele beskrivelsen af konkurrencen og dens division ind, uploader den til {division_result_server} på den adresse, vi har angivet, og opdaterer konkurrencens metadata &mdash; såfremt ID og password stemmer.",
+                                    "view-in-browser": "At se konkurrencens metadata udprintet i loggen er naturligvis ikke nær så spændende som at se konkurrencens resultatside. Heldigvis kan vi hurtigt rette op på netop det med knappen <span class=\"named\">{view_in_browser}</span>.",
+                                    "image":
+                                    {
+                                        "online-buttons-highlighted":
+                                        {
+                                            "alt": "Hovedvinduet efter fuldendt konfiguration af konkurrencen. Fire knapper i panelet <span class=\"named\">{online}</span> er fremhævet.",
+                                            "caption": "Knapperne i panelet <span class=\"named\">{online}</span>."
+                                        },
+                                        "update-metadata-response":
+                                        {
+                                            "alt": "Eksempel på logbeskeder efter metadata for konkurrencen og dens divisioner er blevet uploadet til den angivne {division_result_server}.",
+                                            "caption": "Eksempel på logbeskeder efter metadata for konkurrencen og dens divisioner er blevet uploadet til den angivne {division_result_server}."
                                         }
                                     }
                                 }
@@ -494,7 +640,7 @@
             "application":
             {
                 "title": "Programmet",
-                "settings": "Al data, som vises i Division Result Bridge, gemmes på computeren, når programmet lukkes. Det indlæses så igen, næste gang programmet starter. Som det beskrives på <a href=\"{qsettings_link}\" target=\"_blank\">Qts dokumentation for QSettings</a>, afhænger lagringsmetoden af platformen - på Windows benyttes registreringsdatabasen. Et subset af dette data kan i øvrigt eksporteres til en JSON-fil, såfremt brugeren ønsker det.",
+                "settings": "Al data, som vises i Division Result Bridge, gemmes på computeren, når programmet lukkes. Det indlæses så igen, næste gang programmet starter. Som det beskrives på <a href=\"{qsettings_link}\" target=\"_blank\">Qts dokumentation for QSettings</a>, afhænger lagringsmetoden af platformen &mdash; på Windows benyttes registreringsdatabasen. Et subset af dette data kan i øvrigt eksporteres til en JSON-fil, såfremt brugeren ønsker det.",
                 "results": "Selve divisionsresultaterne indeholder naturligvis noget personlig information om deltagerne, som indsamles i forbindelse med konkurrencen, herunder navn, klub og klasse. Disse karakteriseres dog ikke som <i>følsom</i> information, og indsamlingen af disse er i øvrigt ganske typisk for et orienteringsstævne. Division Result Bridge håndterer i øvrigt ikke de enkelte resultater og deltagere: Programmet henter hele HTML-filer fra <a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>, fjerner stildata, tilføjer en smule formattering til visning på hjemmesiden, og giver dem videre til serveren."
             }
         },
@@ -507,6 +653,10 @@
         {
             "title": "Om",
             "icon-credit": "Ikoner fra <a href=\"{icons_link}\" target=\"_blank\">{icons_name}</a>."
+        },
+        "source":
+        {
+            "title": "Kilde"
         }
     }
 }

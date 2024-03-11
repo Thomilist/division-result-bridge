@@ -61,8 +61,8 @@
     {
         update_results: program.interface.main.pane.update_results.header,
         bridge_name: program.name,
-        working_directory: program.interface.main.pane.update_results.item.working_directory.labels.field,
-        path_button: program.interface.main.pane.update_results.item.working_directory.labels.path_button,
+        working_directory: program.interface.main.pane.update_results.item.working_directory.label.field,
+        path_button: program.interface.main.pane.update_results.item.working_directory.label.path_button,
     }
 }}/>
 
@@ -75,7 +75,7 @@
     {
         common:
         {
-            working_directory: program.interface.main.pane.update_results.item.working_directory.labels.field,
+            working_directory: program.interface.main.pane.update_results.item.working_directory.label.field,
             update_results: program.interface.main.pane.update_results.header
         }
     }
@@ -128,7 +128,7 @@
         {
             divi: resources.external.andersklinting.project.divisionsmatchberegning.name,
             bridge_name: program.name,
-            path_button: program.interface.main.pane.result_source.item.divi_exe_path.labels.path_button,
+            path_button: program.interface.main.pane.result_source.item.divi_exe_path.label.path_button,
             divi_exe: resources.external.andersklinting.project.divisionsmatchberegning.exe_name
         }
     }}/>
@@ -165,7 +165,7 @@
         specifiers: ["section", "meos-divi", "meos-server-test"],
         values:
         {
-            test_button: program.interface.main.pane.result_source.item.meos_server_address.labels.test_button
+            test_button: program.interface.main.pane.result_source.item.meos_server_address.label.test_button
         }
     }}/>
 
@@ -269,7 +269,7 @@
         {
             divi: resources.external.andersklinting.project.divisionsmatchberegning.name,
             bridge_name: program.name,
-            path_button: program.interface.main.pane.result_source.item.divi_exe_path.labels.path_button,
+            path_button: program.interface.main.pane.result_source.item.divi_exe_path.label.path_button,
             divi_exe: resources.external.andersklinting.project.divisionsmatchberegning.exe_name
         }
     }}/>
@@ -282,6 +282,6 @@
         {
             iof_xml: resources.external.iof.project.iof_xml_3.name,
             bridge_name: program.name,
-            path_button: program.interface.main.pane.result_source.item.divi_exe_path.labels.path_button
+            path_button: program.interface.main.pane.result_source.item.divi_exe_path.label.path_button
         }
     }}/>

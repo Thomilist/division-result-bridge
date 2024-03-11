@@ -77,6 +77,63 @@ export const resources =
                     {
                         repo: "https://github.com/AndersKlinting/divisionsmatchberegning",
                         download: "https://www.orientering.dk/divisionsmatch/"
+                    },
+                    interface:
+                    {
+                        menu_bar:
+                        {
+                            race:
+                            {
+                                label: "Løb"
+                            },
+                            print:
+                            {
+                                label: "Print",
+                                item:
+                                {
+                                    setup:
+                                    {
+                                        label: "Setup..."
+                                    }
+                                }
+                            },
+                            info:
+                            {
+                                label: "Information",
+                                item:
+                                {
+                                    info_server:
+                                    {
+                                        label: "Information Server"
+                                    }
+                                }
+                            }
+                        },
+                        print_setup:
+                        {
+                            item:
+                            {
+                                html_css:
+                                {
+                                    label: "Html CSS"
+                                },
+                                layout:
+                                {
+                                    label: "Layout",
+                                    item:
+                                    {
+                                        standard:
+                                        {
+                                            label: "Standard"
+                                        },
+                                        blue:
+                                        {
+                                            label: "Blå overskrifter"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -112,13 +169,13 @@ export const resources =
         },
         liveresults:
         {
-            name: "LiveResults",
+            name: "Liveresults",
             handle: "liveresults",
             project:
             {
                 liveresults:
                 {
-                    name: "LiveResults",
+                    name: "Liveresults",
                     route:
                     {
                         repo: "https://github.com/liveresults/documentation",
@@ -235,7 +292,7 @@ export const resources =
                         example:
                         {
                             password: "hunter2",
-                            server_address: "http://localhost:5174/"
+                            server_address: "https://divi.thomilist.net/"
                         },
                         menu_bar:
                         {
@@ -259,6 +316,10 @@ export const resources =
                                     validate:
                                     {
                                         label: "Validate"
+                                    },
+                                    import_metadata:
+                                    {
+                                        label: "Import metadata from MeOS"
                                     }
                                 }
                             },
@@ -350,21 +411,220 @@ export const resources =
                                 },
                             }
                         },
+                        divi_editor:
+                        {
+                            title:
+                            {
+                                new: "Create New Division",
+                                edit: "Edit Division"
+                            },
+                            item:
+                            {
+                                divi_id:
+                                {
+                                    label:
+                                    {
+                                        field: "Division ID"
+                                    }
+                                },
+                                name:
+                                {
+                                    label:
+                                    {
+                                        field: "Name"
+                                    }
+                                },
+                                divi_config_path:
+                                {
+                                    label:
+                                    {
+                                        field: "Path to division config file (.divi)"
+                                    }
+                                },
+                                info_server_address:
+                                {
+                                    label:
+                                    {
+                                        field: "Information server address"
+                                    }
+                                }
+                            },
+                            button:
+                            {
+                                save:
+                                {
+                                    label: "Save"
+                                },
+                                discard:
+                                {
+                                    label: "Discard"
+                                }
+                            }
+                        },
                         main:
                         {
                             pane:
                             {
                                 competition:
                                 {
-                                    header: "Competition"
+                                    header: "Competition",
+                                    item:
+                                    {
+                                        comp_id:
+                                        {
+                                            label:
+                                            {
+                                                field: "Competition ID"
+                                            }
+                                        },
+                                        password:
+                                        {
+                                            label:
+                                            {
+                                                field: "Password"
+                                            }
+                                        },
+                                        name:
+                                        {
+                                            label:
+                                            {
+                                                field: "Name"
+                                            }
+                                        },
+                                        organiser:
+                                        {
+                                            label:
+                                            {
+                                                field: "Organiser"
+                                            }
+                                        },
+                                        date:
+                                        {
+                                            label:
+                                            {
+                                                field: "Date (YYYY-MM-DD)"
+                                            }
+                                        },
+                                        timezone:
+                                        {
+                                            label:
+                                            {
+                                                field: "Time zone"
+                                            }
+                                        },
+                                        visibility:
+                                        {
+                                            label:
+                                            {
+                                                field: "Visibility",
+                                                private: "PRIVATE",
+                                                hidden: "HIDDEN",
+                                                public: "PUBLIC"
+                                            }
+                                        }
+                                    }
                                 },
                                 divisions:
                                 {
-                                    header: "Divisions"
+                                    header: "Divisions",
+                                    item:
+                                    {
+                                        id:
+                                        {
+                                            label:
+                                            {
+                                                column: "ID"
+                                            }
+                                        },
+                                        name:
+                                        {
+                                            label:
+                                            {
+                                                column: "Name"
+                                            }
+                                        },
+                                        config_path:
+                                        {
+                                            label:
+                                            {
+                                                column: "Config Path"
+                                            }
+                                        },
+                                        server_address:
+                                        {
+                                            label:
+                                            {
+                                                column: "Info Server Address"
+                                            }
+                                        },
+                                        new:
+                                        {
+                                            label:
+                                            {
+                                                button: "New"
+                                            }
+                                        },
+                                        edit:
+                                        {
+                                            label:
+                                            {
+                                                button: "Edit"
+                                            }
+                                        },
+                                        delete:
+                                        {
+                                            label:
+                                            {
+                                                button: "Delete"
+                                            }
+                                        }
+                                    }
                                 },
                                 online:
                                 {
-                                    header: "Online"
+                                    header: "Online",
+                                    item:
+                                    {
+                                        server_address:
+                                        {
+                                            label:
+                                            {
+                                                field: "Division Result Server address",
+                                                button: "Test"
+                                            }
+                                        },
+                                        manage_on_server:
+                                        {
+                                            label:
+                                            {
+                                                group: "Manage competition on server",
+                                                button:
+                                                {
+                                                    delete_results: "Delete Results",
+                                                    update_metadata: "Update Metadata"
+                                                }
+                                            }
+                                        },
+                                        inspect_on_server:
+                                        {
+                                            label:
+                                            {
+                                                group: "Inspect competition on server",
+                                                button:
+                                                {
+                                                    view_in_browser: "View In Browser",
+                                                    fetch_analytics: "Fetch Analytics"
+                                                }
+                                            }
+                                        },
+                                        liveresults:
+                                        {
+                                            label:
+                                            {
+                                                field: "Competition ID for liveresultat.orientering.se (optional)"
+                                            }
+                                        }
+                                    }
                                 },
                                 result_source:
                                 {
@@ -373,7 +633,7 @@ export const resources =
                                     {
                                         divi_exe_path:
                                         {
-                                            labels:
+                                            label:
                                             {
                                                 field: "Path to Divisionsmatch.exe",
                                                 path_button: "..."
@@ -381,7 +641,7 @@ export const resources =
                                         },
                                         meos_server_address:
                                         {
-                                            labels:
+                                            label:
                                             {
                                                 field: "MeOS information server address",
                                                 test_button: "Test"
@@ -396,7 +656,7 @@ export const resources =
                                     {
                                         working_directory:
                                         {
-                                            labels:
+                                            label:
                                             {
                                                 field: "Working Directory",
                                                 path_button: "..."

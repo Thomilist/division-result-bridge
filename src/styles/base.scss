@@ -94,3 +94,15 @@
 {
     white-space: nowrap;
 }
+
+:global(.basic-table)
+{
+    border-collapse: collapse;
+    margin: auto;
+
+    :global(td)
+    {
+        border: 1px solid var(--col-main-secondary);
+        padding: 5px;
+    }
+}

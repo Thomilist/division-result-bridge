@@ -1,4 +1,5 @@
 import type { DocCollectionSpec, DocPageProps } from "$lib/types";
+import CompetitionDetails from "./getting-started/CompetitionDetails.svelte";
 import Configuration from "./getting-started/Configuration.svelte";
 import CreateCompetition from "./getting-started/CreateCompetition.svelte";
 import Installation from "./getting-started/Installation.svelte";
@@ -51,6 +52,10 @@ export const docs: DocCollectionSpec[] =
             {
                 title: "configuration",
                 component: Configuration
+            },
+            {
+                title: "competition-details",
+                component: CompetitionDetails
             }
         ]
     }
