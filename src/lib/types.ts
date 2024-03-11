@@ -25,7 +25,8 @@ export type NavLinkProps = NavPropsBase &
 {
     route: string,
     skip_translation?: boolean,
-    exclude_base?: boolean
+    exclude_base?: boolean,
+    click_callback?: (...args: any) => void
 };
 
 export type NavDropdownProps = NavPropsBase &

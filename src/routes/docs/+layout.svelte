@@ -2,7 +2,7 @@
 	import DocFooter from "$lib/docs/DocFooter.svelte";
     import DocNav from "$lib/docs/DocNav.svelte";
 	import DocPageNav from "$lib/docs/DocPageNav.svelte";
-	import { docpath } from "$lib/stores";
+	import { doc_path } from "$lib/stores";
     import type { LayoutData } from "./$types";
 
     export let data: LayoutData;
@@ -23,7 +23,7 @@
     </div>
 
     <div class="doc-footer-container">
-        <DocFooter props={{collection: data.docs.get($docpath.collection)}}/>
+        <DocFooter props={{collection: data.docs.get($doc_path.collection)}}/>
     </div>
     
     <div class="doc-page-nav-container">

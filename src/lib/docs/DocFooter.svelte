@@ -1,6 +1,6 @@
 <script lang="ts">
 	import NavLink from "$lib/NavLink.svelte";
-	import { docpath } from "$lib/stores";
+	import { doc_path } from "$lib/stores";
 	import type { DocFooterProps, DocPageProps } from "$lib/types";
 	import { t } from "svelte-intl-precompile";
 	import { tpage } from "./docs";
@@ -10,10 +10,10 @@
 	let previous: DocPageProps;
 	let next: DocPageProps;
 
-	$: if (props.collection?.pages.has($docpath.page))
+	$: if (props.collection?.pages.has($doc_path.page))
 	{
 		const page_names = Array.from(props.collection.pages.keys());
-		const current_index = page_names.indexOf($docpath.page);
+		const current_index = page_names.indexOf($doc_path.page);
 
 		previous =
 		{

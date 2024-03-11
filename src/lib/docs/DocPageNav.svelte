@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { docpath } from "$lib/stores";
+	import { doc_nav_clicked, doc_path } from "$lib/stores";
 	import type { HeaderHierarchy } from "$lib/types";
 	import { onMount, tick } from "svelte";
 	import DocPageNavList from "./DocPageNavList.svelte";
 	import { locale, t } from "svelte-intl-precompile";
+	import { page } from "$app/stores";
 
     let index = 0;
     const observer_margin = 200;
@@ -60,9 +61,11 @@
     }
 
     let updatePageNav = () => {};
-    $: $docpath, updatePageNav();
+    $: $doc_path, updatePageNav();
     $: $locale, updatePageNav();
-
+    $: $page.url.hash, updatePageNav();
+    $: $doc_nav_clicked, updatePageNav();
+    
     let observer: IntersectionObserver;
     let page_nav_links = new Map<string, Element>();
 
@@ -119,13 +122,13 @@
         {
             entries.forEach((entry) =>
             {
-                header_positions.set(entry.target.id, entry.boundingClientRect.y);
+                header_positions.set(entry.target.id, entry.target.getBoundingClientRect().y);
                 removeHighlightableClass(entry.target);
             });
 
-            for (const entry of entries)
+            for (const [i, entry] of entries.entries())
             {
-                if (entry.isIntersecting || (entry.boundingClientRect.y > observer_margin))
+                if (i > 0 && (entry.isIntersecting || (entry.target.getBoundingClientRect().y > (observer_margin))))
                 {
                     break;
                 }

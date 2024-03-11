@@ -7,5 +7,6 @@ export const language = persisted("language", "system");
 
 export const releases = writable<Release[]>([]);
 
-export const docpath = writable<DocPath>({collection: "", page: ""});
+export const doc_path = writable<DocPath>({collection: "", page: ""});
 export const title = writable<string>("");
+export const doc_nav_clicked = writable<boolean>(false);
