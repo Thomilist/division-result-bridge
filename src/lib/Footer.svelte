@@ -39,6 +39,7 @@
             {{
                 label: resources.internal.source.label,
                 route: resources.external.thomilist.project.division_result_bridge.route.repo,
+                exclude_base: true,
                 target: "_blank"
             }}/>
         </div>
