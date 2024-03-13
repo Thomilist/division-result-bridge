@@ -128,7 +128,7 @@
 
             for (const [i, entry] of entries.entries())
             {
-                if (i > 0 && (entry.isIntersecting || (entry.target.getBoundingClientRect().y > (observer_margin))))
+                if (i > 0 && (entry.target.getBoundingClientRect().y > observer_margin))
                 {
                     break;
                 }
