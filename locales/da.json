@@ -622,6 +622,150 @@
                                     }
                                 }
                             }
+                        },
+                        "publish-results":
+                        {
+                            "title": "Udgiv resultater",
+                            "intro": "Opsætningen er færdig, og vi er nu klar til at uploade resultater. Eller... <i>næsten</i> klar. Vi er selvfølgelig fornuftige nok til at forberede vores opstilling <i>før</i> konkurrencen finder sted, men det betyder, at vi endnu ikke har resultater. Hvis vi vil teste hele resultatudgivelsesprocessen (og det vil vi gerne), har vi altså brug for nogle falske resultater.",
+                            "section":
+                            {
+                                "fake-results":
+                                {
+                                    "title": "Lav falske resultater",
+                                    "intro": "Afhængig af opstillingen kan der være flere måder, hvorpå falske resultater til test kan produceres &mdash; nogle dog mere bekvemme end andre. Uanset metoden skal de dog holdes helt separat fra de virkelige resultater ved hjælp af backups, kopier, gendannelsespunkter eller hvad opstillingen ellers tilbyder.",
+                                    "section":
+                                    {
+                                        "manual":
+                                        {
+                                            "title": "Manuel tilgang",
+                                            "intro": "Resultater er ikke magi, så uanset opstilling bør de kunne konstrueres manuelt. Ved at oprette deltagere og tildele dem start- og måltider opnår vi detaljeret kontrol over de falske resultater. Det kan typisk udføres i selve beregningsprogrammet, men det kan hurtigt blive omstændigt. Selvfølgelig kan man også skrive resultaterfiler i {iof_xml}-format fra bunden, men det mindsker ikke ligefrem besværet.",
+                                            "scaling": "Den manuelle tilgang rækker altså ikke til meget mere end små, simple tests. En mere automatisk tilgang er derfor nødvendig, hvis vi vil teste mere grundigt."
+                                        },
+                                        "automatic":
+                                        {
+                                            "title": "Automatisk tilgang",
+                                            "intro": "Visse beregningsprogrammer inkluderer funktioner specifikt til generering af falske resultater med henblik på test. Afhængig af vores resultatkilde kan vi måske udnytte den slags muligheder her.",
+                                            "section":
+                                            {
+                                                "meos-divi":
+                                                {
+                                                    "title": "{meos_divi_name}",
+                                                    "intro": "Med resultatkilden <span class=\"named\">{meos_divi_name}</span> kan vi gøre brug af en af {meos}' indbyggede autofunktioner: <span class=\"named\">Stemplingstest</span>.",
+                                                    "prepare": "Inden vi starter, skal vores opstilling dog være klar, og da det gælder divisionsmatcher, skal vi være lidt strikse:",
+                                                    "prep0": "En eller flere baner skal være defineret i {meos}. Det kan være lettest at importere de rigtige baner, men det er ikke et krav.",
+                                                    "prep1": "Klasser svarende til de rigtige divisionsklasser skal være defineret i {meos}.",
+                                                    "prep2": "Deltagere fra de klubber, som deltager i de pågældende divisionsmatcher, skal være defineret i {meos}. Det kan være lettest at importere de rigtige tilmeldinger, men falske navne kan også benyttes, så længe klubberne er defineret korrekt.",
+                                                    "find-punching-test": "Åbn en <i>kopi</i> af konkurrencen i {meos}. Find fanen <span class=\"named\">Autofunktioner</span> og vælg <span class=\"named\">Stemplingstest</span>.",
+                                                    "run-punching-test": "Autofunktionen har nogle parametre, der kan justeres, men det bør ikke være nødvendigt til vores formål. Når autofunktionen startes, vil deltagere få tildelt resultater med jævne mellemrum. Det er nok en god idé at sætte funktionen på pause, indtil vi er klar til at uploade divisionsresultater, så vi ikke løber tør for nye resultater.",
+                                                    "image":
+                                                    {
+                                                        "meos-services-tab":
+                                                        {
+                                                            "alt": "Funktionen <span class=\"named\">Stemplingstest</span> i fanen <span class=\"named\">Autofunktioner</span> i {meos}.",
+                                                            "caption": "Funktionen <span class=\"named\">Stemplingstest</span> i fanen <span class=\"named\">Autofunktioner</span> i {meos}."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "prepare-publishing-pipeline":
+                                {
+                                    "title": "Forbered udgivelsesprocessen",
+                                    "intro": "Hele resultatudgivelsesprocessen skal være tilgængelig, for at vi kan uploade resultater. I betragtning af vores hidtidige indsats bør det ikke være et problem. Her er en hurtigt tjekliste:",
+                                    "check0": "{bridge_name} er konfigureret",
+                                    "check1": "Den valgte {division_result_server} er online",
+                                    "check2": "Vores resultatkilde er tilgængelig",
+                                    "more-detail": "Vi har allerede være omkring disse punkter tidligere i vejledningen, men specielt i forhold til resultatkilderne kan lidt flere detaljer være nyttige.",
+                                    "section":
+                                    {
+                                        "meos-divi":
+                                        {
+                                            "title": "{meos_divi_name}",
+                                            "intro": "Som resultatkildens navn antyder, skal både {meos} og {divi} være tilgængelige.",
+                                            "meos": "Med hensyn til {meos} skal {bridge_name} kun have adgang til informationsserveren, så den skal naturligvis være online. Som tidligere nævnt er det ikke afgørende, hvilken computer {meos} kører på, så længe informationsserveren kan tilgås over netværket.",
+                                            "divi": "Til gengæld <i>skal</i> {divi} være installeret på den samme computer som {bridge_name}. Programmet <i>behøver</i> dog ikke at være åbent, men det må godt, hvis {divi} også skal bruges til andre formål (såsom print af resultater) &mdash; konfigurationsfilerne skal blot holdes adskilt."
+                                        },
+                                        "divi":
+                                        {
+                                            "title": "{divi_name}",
+                                            "intro": "Denne resultatkilde afhænger kun <i>direkte</i> af {divi}, men {divi} afhænger naturligvis af et andet program til at forsyne det med \"rå\" resultater. For hver division i konkurrencen skal ét eksemplar af {divi} køre, og hvert eksemplar skal have sin informationsserver åben på en unik netværksadresse. {bridge_name} og eksemplarene af {divi} kan alle køre på den samme computer, på hver sin computer, eller en mellemting &mdash; så længe netværkskonfigurationen tillader det."
+                                        },
+                                        "xml-divi":
+                                        {
+                                            "title": "{xml_divi_name}",
+                                            "intro": "Med denne resultatkilde afhænger {bridge_name} af {divi} og resultatfilen i {iof_xml}-format.",
+                                            "iof-xml": "{iof_xml}-resultatfilen skal være tilgængelig på filsystemet, så {bridge_name} kan læse den. Det har ingen betydning, hvordan filen produceres, men {bridge_name} forventer, at den løbende overskrives med nye resultater.",
+                                            "divi": "{divi} <i>skal</i> også være installeret på den samme computer som {bridge_name}. Programmet <i>behøver</i> dog ikke at være åbent, men det må godt, hvis {divi} også skal bruges til andre formål (såsom print af resultater) &mdash; konfigurationsfilerne skal blot holdes adskilt."
+                                        }
+                                    }
+                                },
+                                "upload-results":
+                                {
+                                    "title": "Upload resultater",
+                                    "intro": "Endelig vender vi tilbage til panelet <span class=\"named\">{update_results}</span>. Vi har tidligere defineret et <span class=\"named\">{working_directory}</span>, så der er ikke meget tilbage at konfigurere her. Der er faktisk kun feltet <span class=\"named\">{update_interval}</span> &mdash; og endda kun, hvis vi ikke bruger resultatkilden <span class=\"named\">{xml_divi_name}</span>. Indtil videre ignorerer vi dog opdateringsintervallet, for de starter med at fokusere på en enkelt upload.",
+                                    "image":
+                                    {
+                                        "update-results-highlighted":
+                                        {
+                                            "alt": "Hovedvinduet med panelet <span class=\"named\">{update_results}</span> fremhævet.",
+                                            "caption": "Panelet <span class=\"named\">{update_results}</span>."
+                                        }
+                                    },
+                                    "section":
+                                    {
+                                        "run-once":
+                                        {
+                                            "title": "Kør én gang",
+                                            "intro": "Ved et tryk på knappen <span class=\"named\">{run_once}</span> påbegyndes en enkelt kørsel af resultatudgivelsesprocessen. {bridge_name} indlæser friske resultater fra resultatkilden, pakker dem ind sammen med konkurrencens og divisionernes metadata, og sender det hele til den angivne {division_result_server}. Serveren anvender først eventuelle ændringer i metadataet, hvorefter resultaterne for hver division opdateres. En resultatopdatering er derfor også en implicit metadataopdatering.",
+                                            "logs": "De konkrete trin i processen afhænger af resultatkilden, men resultatet af hvert trin skrives i loggen. Opdaterede resultater kan ses på resultatsiden i browseren nogle et kort øjeblik efter en vellykket opdatering.",
+                                            "image":
+                                            {
+                                                "update-results-log":
+                                                {
+                                                    "alt": "Eksempel på logbeskeder efter vellykket indlæsning og upload af resultater med resultatkilden <span class=\"named\">{meos_divi_name}</span>.",
+                                                    "caption": "Eksempel på logbeskeder efter vellykket indlæsning og upload af resultater med resultatkilden <span class=\"named\">{meos_divi_name}</span>."
+                                                }
+                                            }
+                                        },
+                                        "run-continuously":
+                                        {
+                                            "title": "Kør gentagne gange",
+                                            "intro": "Det er udmærket at kunne køre resultatudgivelsesprocessen én gang, men for at kunne kalde resultaterne <i>live</i>, kræves der gentagne udgivelser i løbet af konkurrencen.",
+                                            "start-stop": "Til dette formål benyttes knapperne <span class=\"named\">{start}</span> og <span class=\"named\">{stop}</span>. Ved et tryk på <span class=\"named\">{start}</span>-knappen udgives friske resultater med det samme, og processen gentages med jævne mellemrum indtil vi trykker på <span class=\"named\">{stop}</span>-knappen. Gentagelsernes præcise timing afhænger af resultatkilden. Det er desuden værd at bemærke, at <span class=\"named\">{stop}</span>-knappen <i>ikke</i> afbryder en igangværende proces, men blot undlader at starte nye.",
+                                            "section":
+                                            {
+                                                "update-interval":
+                                                {
+                                                    "title": "Opdateringsinterval",
+                                                    "intro": "Som tidligere nævnt medfører brug af resultatkilden <span class=\"named\">{xml_divi}</span>, at gentagelser af resultatudgivelsesprocessen ikke styres af en timer, men derimod startes automatisk, når <span class=\"named\">{iof_xml}</span>-resultatfilen ændres. I så fald giver det altså ikke mening at angive et opdateringsinterval &mdash; i hvert fald ikke indenfor {bridge_name}.",
+                                                    "when-it-applies": "For resultatkilderne <span class=\"named\">{meos_divi_name}</span> og <span class=\"named\">{divi_name}</span> er historien dog en anden: Her angiver værdien i feltet <span class=\"named\">{update_interval}</span>, hvor ofte {bridge_name} skal hente resultater fra resultatkilden. Værdien på 60 sekunder, der er indstillet som udgangspunkt, er formentlig udmærket, men afhængig af vores opstilling, kan vi have gavn af at justere den.",
+                                                    "reasons-to-decrease0": "Hovedårsagen til at reducere opdateringsintervallet et ganske enkel: friskere resultater. Da resultaterne aktivt skal hentes, vil der nødvendigvis tilføjes en vis forsinkelse til resultatudgivelsesprocessen. I bedste fald hentes der resultater, så snart de er tilgængelige, og forsinkelsen er minimal. I værste fald hentes der resultater, lige før de er klar, og så skal hele opdateringsintervallet afventes, før disse resultater udgives. Over længere tid vil den gennemsnitlige forsinkelse være omtrent halvdelen af opdateringsintervallet, hvilket helt simpelt betyder, at et kortere opdateringsinterval giver mindre forsinkelser og dermed friskere resultater.",
+                                                    "reasons-to-increase0": "Desværre kan vi ikke bare sætte opdateringsintervallet til 0, da vi også skal tage hensyn til en række begrænsninger. Før det første tager selve resultatudgivelsesprocessen tid (selvom det er væsentlig mindre betydning med resultatkilden <span class=\"named\">{divi_name}</span>). Det giver ikke mening at vælge et interval, som er kortere end denne tid, da nye udgivelser ikke sættes i gang, så længe en tidligere udgivelse stadig er undervejs.",
+                                                    "reasons-to-increase1": "Derudover har vi jo heller ikke ubegrænsede ressourcer. For eksempel kan der på en fjern stævneplads, hvor der forbindes til internettet via et mobilt netværk, være begrænset netværkskapacitet, som hyppige resultatuploads ville kræve en stor andel af. Denne bekymring er dog mindre relevant med resultatkilden <span class=\"named\">{meos_divi_name}</span>, da der i så fald tjekkes for ændringer inden eventuelle uploads.",
+                                                    "reasons-to-increase2": "For opstillinger med lav ydeevne kan det også blive et problem at håndtere diverse dataflows, såsom aflæsning, tilmelding og resultateksport, hurtigt nok. Den slags opgaver skal types udføres synkront for at undgå datakorruption, så hvis vores opstilling er fordelt over et netværk, og netværket er langsomt eller upålideligt, kan være opgave være forbundet med en mærkbar forsinkelse. I den kontekst kan for mange og for hyppige opgaver medføre et sløvt system, som til tider hakker, fryser eller lignende."
+                                                }
+                                            }
+                                        },
+                                        "delete-results":
+                                        {
+                                            "title": "Slet resultater",
+                                            "intro": "Gamle resultater overskrives automatisk, når vi uploader nye resultater til serveren, så det er sjældent nødvendigt at slette resultater manuelt. Det kan dog være nyttigt i visse tilfælde &mdash; for eksempel hvis vi har testet med falske resultater, da disse bør fjernes inden resultatsiden deles med et link i instruktionen eller tilsvarende.",
+                                            "delete-button": "Det er ganske simpelt at slette resultater: I <span class=\"named\">{online}</span>-panelet finder vi knappen <span class=\"named\">{delete_button}</span>. Et tryk herpå vil, efter bekræftelse, anmode serveren om at slette konkurrencens resultater.",
+                                            "blank-results": "I stedet for at slette resultaterne, kan vi også uploade blanke resultater. Ved at uploade resultater fra den <i>rigtige</i> konkurrence inden start, kan resultatserveren vise en mere meningsfuld side med overblik over de deltagende klubber, samt stillingen i de pågældende divisioner.",
+                                            "image":
+                                            {
+                                                "delete-button":
+                                                {
+                                                    "alt": "Panelet <span class=\"named\">{online}</span> med knappen <span class=\"named\">{delete_button}</span> fremhævet.",
+                                                    "caption": "Panelet <span class=\"named\">{online}</span> med knappen <span class=\"named\">{delete_button}</span> fremhævet."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

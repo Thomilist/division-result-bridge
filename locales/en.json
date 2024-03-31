@@ -622,6 +622,150 @@
                                     }
                                 }
                             }
+                        },
+                        "publish-results":
+                        {
+                            "title": "Publish results",
+                            "intro": "Configuration is complete, and we are now ready to upload results. Well, <i>almost</i> ready. Unless the event has already started, we have no results yet &mdash; and we are of course sensible enough to prepare our setup <i>before</i> event day. So, if we want to test the entire result publishing pipeline (and we do), we will need some fake results.",
+                            "section":
+                            {
+                                "fake-results":
+                                {
+                                    "title": "Creating fake results",
+                                    "intro": "Depending on the particular setup, there may be multiple ways to produce fake results for testing &mdash; some more convenient than others. Common for all of them, however, is that they should be kept separate from the real deal, be it via backups, duplicates, restore points, forks or whatever mechanism the setup provides.",
+                                    "section":
+                                    {
+                                        "manual":
+                                        {
+                                            "title": "Manual approach",
+                                            "intro": "Results are not magic, so regardless of setup, they can usually be constructed \"by hand\". Participants can be created, and their start and finish times can be assigned, providing fine-grained control over the mocked results. Timing programs often make this easy, if a bit tedious. Of course, it is also possible to craft results in {iof_xml} format from scratch, though this is likely even more tedious.",
+                                            "scaling": "Creating and assigning results to a handful of participants to run a basic test is feasible, but for larger scales, a more automatic approach is desirable."
+                                        },
+                                        "automatic":
+                                        {
+                                            "title": "Automatic approach",
+                                            "intro": "Some timing programs feature built-in result mocking capabilities, fascilitating easy production of fake results for more comprehensive testing. Depending on our result source, we may be able to take advantage of this.",
+                                            "section":
+                                            {
+                                                "meos-divi":
+                                                {
+                                                    "title": "{meos_divi_name}",
+                                                    "intro": "When using the <span class=\"named\">{meos_divi_name}</span> result source, we can take advantage of one of {meos}' built-in services: <span class=\"named\">Punching Test</span>.",
+                                                    "prepare": "First, we need to ensure that our setup is ready. Since we are dealing with division matches, we need to be fairly strict here:",
+                                                    "prep0": "One or more courses must be defined in {meos}. Importing the <i>real</i> courses may be easiest, though it is not required.",
+                                                    "prep1": "Classes corresponding to the real division match classes must be defined in {meos}.",
+                                                    "prep2": "Participants representing clubs from the relevant divisions must be defined in {meos}. Importing real signups may be easiest, though fake names can be used as long as the clubs are defined correctly.",
+                                                    "find-punching-test": "In a <i>copy</i> of our {meos} competition, navigate to the <span class=\"named\">Services</span> tab and choose <span class=\"named\">Punching Test</span>.",
+                                                    "run-punching-test": "The service has a few parameters, but the defaults should be sufficient for our needs. Once we start the service, a steady stream of fake results will be produced. We should probably pause it until we are ready to upload division results, as we would quickly run out of new results otherwise.",
+                                                    "image":
+                                                    {
+                                                        "meos-services-tab":
+                                                        {
+                                                            "alt": "The <span class=\"named\">Punching Test</span> feature in {meos}' <span class=\"named\">Services</span> tab.",
+                                                            "caption": "The <span class=\"named\">Punching Test</span> feature in {meos}' <span class=\"named\">Services</span> tab."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "prepare-publishing-pipeline":
+                                {
+                                    "title": "Prepare publishing pipeline",
+                                    "intro": "To upload results, the entire result publishing pipeline must be available. Given our prior efforts, this should be not be an issue. Here is a quick checklist:",
+                                    "check0": "{bridge_name} is configured",
+                                    "check1": "The {division_result_server} is online",
+                                    "check2": "Our result source is available",
+                                    "more-detail": "We have already covered these topics earlier in the guide, but particularly for the result sources, a slightly more detailed summary may be useful.",
+                                    "section":
+                                    {
+                                        "meos-divi":
+                                        {
+                                            "title": "{meos_divi_name}",
+                                            "intro": "As the name of this result source suggests, both {meos} and {divi} need to be available.",
+                                            "meos": "From {meos}, {bridge_name} only needs access to the information server, so we need to ensure that the information server is online. As previously mentioned, it does not matter which computer {meos} is running on, as long as the information server can be reached over the network.",
+                                            "divi": "Meanwhile, {divi} needs to be installed on the same computer as {bridge_name}. It does not <i>need</i> to be running, though it <i>can</i> be if other purposes (such as printing) require it &mdash; just keep the configuration files separate."
+                                        },
+                                        "divi":
+                                        {
+                                            "title": "{divi_name}",
+                                            "intro": "This result source only <i>directly</i> depends on {divi}, though {divi} of course depends on another program to feed it \"raw\" results. For every division, one instance of {divi} must be running, and each instance must have its information server open on a unique network address. {bridge_name} and the {divi} instances can all running on the same computer, can each run on their own computer, or anything in between &mdash; as long as our network configuration allows it."
+                                        },
+                                        "xml-divi":
+                                        {
+                                            "title": "{xml_divi_name}",
+                                            "intro": "For this result source, {bridge_name} is concerned with {divi} and the {iof_xml} results file.",
+                                            "iof-xml": "The {iof_xml} results file needs to be available on the file system for {bridge_name} to read. The origin of the file is irrelevant, but {bridge_name} expects this file to be overwritten with new results regularly.",
+                                            "divi": "{divi} must also be installed on the same computer as {bridge_name}. It does not <i>need</i> to be running, though it <i>can</i> be if other purposes (such as printing) require it &mdash; just keep the configuration files separate."
+                                        }
+                                    }
+                                },
+                                "upload-results":
+                                {
+                                    "title": "Upload results",
+                                    "intro": "We finally return to the <span class=\"named\">{update_results}</span> pane. We have previous defined the <span class=\"named\">{working_directory}</span>, so there is not much left to configure here. In fact, only the field <span class=\"named\">{update_interval}</span> remains &mdash; and with the <span class=\"named\">{xml_divi_name}</span> result source, that field is hidden. For now, we will ignore the update interval and focus on just a single upload.",
+                                    "image":
+                                    {
+                                        "update-results-highlighted":
+                                        {
+                                            "alt": "The main program interface with the <span class=\"named\">{update_results}</span> pane highlighted.",
+                                            "caption": "The <span class=\"named\">{update_results}</span> pane."
+                                        }
+                                    },
+                                    "section":
+                                    {
+                                        "run-once":
+                                        {
+                                            "title": "Run once",
+                                            "intro": "Pressing the <span class=\"named\">{run_once}</span> button triggers one run of the result publishing pipeline. {bridge_name} reads fresh results from the result source, bundles them up alongside the competition and division metadata, and sends it all to the {division_result_server}. The server first applies any changes to the metadata, and then updates the results for each division. This means that every result update is also an implicit metadata update.",
+                                            "logs": "The exact stages of the pipeline depend on the result source, but the result of each stage is printed to the log. If successful, the updated results can be viewed on the result page in the browser after a short moment.",
+                                            "image":
+                                            {
+                                                "update-results-log":
+                                                {
+                                                    "alt": "Example log output after successfully fetching and uploading results when using the <span class=\"named\">{meos_divi_name}</span> result source.",
+                                                    "caption": "Example log output after successfully fetching and uploading results when using the <span class=\"named\">{meos_divi_name}</span> result source."
+                                                }
+                                            }
+                                        },
+                                        "run-continuously":
+                                        {
+                                            "title": "Run continuously",
+                                            "intro": "Running the result publishing pipeline once is all well and good, but to offer anything resembling <i>live</i> results, we need to publish continously throughout the competition.",
+                                            "start-stop": "For this, we use the <span class=\"named\">{start}</span> and <span class=\"named\">{stop}</span> buttons. Pressing the <span class=\"named\">{start}</span> button publishes fresh result immediately, and then continues to publish results indefinitely &mdash; or at least until we press the <span class=\"named\">{stop}</span> button. The exact timing of the continous publication runs depends on the result source. Additionally, note that pressing the <span class=\"named\">{stop}</span> button in the middle of a publishing run does <i>not</i> cancel that run, but merely avoids starting new runs.",
+                                            "section":
+                                            {
+                                                "update-interval":
+                                                {
+                                                    "title": "Update interval",
+                                                    "intro": "As mentioned earlier, using the <span class=\"named\">{xml_divi}</span> result source causes the result publishing pipeline to be triggered automatically whenever the <span class=\"named\">{iof_xml}</span> result file changes while running continuously. As such, the concept of an \"update interval\" does not apply &mdash; at least not within the confines of {bridge_name}.",
+                                                    "when-it-applies": "For the <span class=\"named\">{meos_divi_name}</span> and <span class=\"named\">{divi_name}</span> result sources, however, the value of the field <span class=\"named\">{update_interval}</span> determines how frequently {bridge_name} should poll the result source for new results. The default value of 60 seconds is likely okay, but depending on our setup, we may wish to adjust it.",
+                                                    "reasons-to-decrease0": "The primary reason to decrease the update interval is quite simple: freshness of results. With a polling strategy, some amount of latency is added to the result publishing pipeline. In the best case, we happen to poll for results as soon as they are made available, incurring minimal delay. In the worst case, we poll just <i>before</i> new results come in, meaning they will have to wait out the entire duration of the update interval before being published. Over time, this added latency averages out to about half the update interval, so naturally, reducing the update interval also reduces the latency, thus providing fresher results.",
+                                                    "reasons-to-increase0": "Unfortunately, we cannot simply push the update interval down to 0, as there are a few limiting factors at play. For a start, the result publishing pipeline takes time to run (though this is much less of a factor with the <span class=\"named\">{divi_name}</span> result source). An update interval shorter than this time is pointless, as new runs will not be started before an ongoing run is finished.",
+                                                    "reasons-to-increase1": "Additionally, we do not have unlimited resources. Frequently updating results may consume a significant chunk of the available bandwidth when using e.g. a mobile network in a remote location, as is not uncommon at orienteering events. This is less relevant with the <span class=\"named\">{meos_divi_name}</span> result source, since it checks for changes before committing to an upload.",
+                                                    "reasons-to-increase2": "Furthermore, low-end setups may struggle to keep up with all the data flows of card readouts, signups, result exports and so on. These tasks usually have to be handled synchronously to avoid data corruption, so if our setup is spread across a network, and the network is slow or unreliable, each task may be accompanied by a sizeable amount of latency. In such an environment, running too many tasks too frequently can significantly reduce the responsiveness of the system, leading to stutters, freezes and similar issues."
+                                                }
+                                            }
+                                        },
+                                        "delete-results":
+                                        {
+                                            "title": "Delete results",
+                                            "intro": "When we upload new results, the old results on the server are overwritten, so manually deleting results is usually not required. Still, we may wish to do so anyways. If we uploaded dummy results to test our setup, it would be a good idea to delete them before e.g. sharing the link to our results page in the bulletin.",
+                                            "delete-button": "Manually deleting our results is simple: Looking at the <span class=\"named\">{online}</span> pane, we find the aptly-named <span class=\"named\">{delete_button}</span> button. Upon pressing the button, we are prompted for confirmation, and, if confirmed, the results on the server will be deleted.",
+                                            "blank-results": "Rather than deleting the results, another option is to upload blank results instead. Uploading results from the <i>real</i> competition before it begins allows the result server to display a more meaningful page with an overview of the participating clubs as well as the current standings.",
+                                            "image":
+                                            {
+                                                "delete-button":
+                                                {
+                                                    "alt": "The <span class=\"named\">{online}</span> pane with the <span class=\"named\">{delete_button}</span> button highlighted.",
+                                                    "caption": "The <span class=\"named\">{online}</span> pane with the <span class=\"named\">{delete_button}</span> button highlighted."
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }

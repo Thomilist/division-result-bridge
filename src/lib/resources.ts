@@ -661,6 +661,34 @@ export const resources =
                                                 field: "Working Directory",
                                                 path_button: "..."
                                             }
+                                        },
+                                        update_interval:
+                                        {
+                                            label:
+                                            {
+                                                field: "Update interval (seconds)"
+                                            }
+                                        },
+                                        start:
+                                        {
+                                            label:
+                                            {
+                                                button: "Start"
+                                            }
+                                        },
+                                        stop:
+                                        {
+                                            label:
+                                            {
+                                                button: "Stop"
+                                            }
+                                        },
+                                        run_once:
+                                        {
+                                            label:
+                                            {
+                                                button: "Run Once"
+                                            }
                                         }
                                     }
                                 },

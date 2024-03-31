@@ -4,6 +4,7 @@ import Configuration from "./getting-started/Configuration.svelte";
 import CreateCompetition from "./getting-started/CreateCompetition.svelte";
 import Installation from "./getting-started/Installation.svelte";
 import Prerequisites from "./getting-started/Prerequisites.svelte";
+import PublishResults from "./getting-started/PublishResults.svelte";
 import Introduction from "./preface/Introduction.svelte";
 
 // Translation key for a doc collection
@@ -56,6 +57,10 @@ export const docs: DocCollectionSpec[] =
             {
                 title: "competition-details",
                 component: CompetitionDetails
+            },
+            {
+                title: "publish-results",
+                component: PublishResults
             }
         ]
     }
