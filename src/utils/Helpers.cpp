@@ -160,7 +160,7 @@ namespace divi
     
     const QString Helpers::defaultWebServerAddress()
     {
-        return SERVER_ADDRESS;
+        return "https://divi.thomilist.net/";
     }
     
     const QString Helpers::addressEndingWithSlash(const QString& a_url)
