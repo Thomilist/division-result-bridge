@@ -215,6 +215,10 @@ namespace divi
             }
         }
 
+        log(MessageType::Success, "Internal / Watch Results File", 0, "Changes Detected",
+            QString()
+            % "Result update initiated");
+
         updateResultsIfAvailable(false);
         return;
     }
