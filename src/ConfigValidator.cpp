@@ -219,55 +219,64 @@ namespace divi
         QString config;
         QString address;
 
-        // Collect usage information
-        for (const auto& division : settings->getDivisions())
+        // Collect usage information...
+        if (const auto& divisions = settings->getDivisions(); divisions.size() > 0)
         {
-            id = division.getID();
-            name = division.getName();
-            config = division.getConfigPath();
-            address = division.getInfoServerAddress();
+            for (const auto& division : divisions)
+            {
+                id = division.getID();
+                name = division.getName();
+                config = division.getConfigPath();
+                address = division.getInfoServerAddress();
 
-            if (id_uses.contains(id))
-            {
-                ++id_uses.at(id);
-            }
-            else
-            {
-                id_uses.insert({id, 1});
-            }
+                if (id_uses.contains(id))
+                {
+                    ++id_uses.at(id);
+                }
+                else
+                {
+                    id_uses.insert({id, 1});
+                }
 
-            if (name_uses.contains(name))
-            {
-                name_uses.at(name).insert(id);
-            }
-            else
-            {
-                name_uses.insert({name, {id}});
-            }
+                if (name_uses.contains(name))
+                {
+                    name_uses.at(name).insert(id);
+                }
+                else
+                {
+                    name_uses.insert({name, {id}});
+                }
 
-            if (config_uses.contains(config))
-            {
-                config_uses.at(config).insert(id);
-            }
-            else
-            {
-                config_uses.insert({config, {id}});
-            }
+                if (config_uses.contains(config))
+                {
+                    config_uses.at(config).insert(id);
+                }
+                else
+                {
+                    config_uses.insert({config, {id}});
+                }
 
-            if (address_uses.contains(address))
-            {
-                address_uses.at(address).insert(id);
+                if (address_uses.contains(address))
+                {
+                    address_uses.at(address).insert(id);
+                }
+                else
+                {
+                    address_uses.insert({address, {id}});
+                }
             }
-            else
-            {
-                address_uses.insert({address, {id}});
-            }
-        }
         
-        issues += validateDivisionIDs(id_uses);
-        issues += validateDivisionNames(name_uses);
-        issues += validateDivisionConfigs(config_uses);
-        issues += validateDivisionAddresses(address_uses);
+            issues += validateDivisionIDs(id_uses);
+            issues += validateDivisionNames(name_uses);
+            issues += validateDivisionConfigs(config_uses);
+            issues += validateDivisionAddresses(address_uses);
+        }
+        // ... or note a lack of divisions
+        else
+        {
+            warn("Divisions", "No divisions defined");
+            ++issues;
+        }
 
         return issues;
     }
