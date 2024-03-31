@@ -14,11 +14,7 @@
 <DocElement props=
 {{
 	docpage: props,
-	specifiers: ["section", "main", "intro"],
-	values:
-	{
-		bridge_name: program.name
-	}
+	specifiers: ["section", "main", "intro"]
 }}/>
 
 

@@ -203,7 +203,7 @@
                             {
                                 "main":
                                 {
-                                    "intro": "So you're interested in providing live, online division results and want to give {bridge_name} a try? Excellent! However, before we dive in, let's have a look at the requirements to ensure that it makes sense to begin at all."
+                                    "intro": "Before we dive in, let's have a look at the requirements to ensure that it makes sense to begin at all."
                                 },
                                 "requirements":
                                 {
@@ -218,15 +218,15 @@
                                             "req1": "{storage} of storage",
                                             "req2": "Internet connection",
                                             "req3": "{cpu_arch} processor architecture",
-                                            "other_systems": "At the moment, releases on the download page only target {win} computers with {cpu_arch} processors, as this is the most common case. It is primarily tested on {win10}, but it should work just fine on other modern {win} versions as well. For other operating systems and processor architectures, there are still a few possibilities: Either run the program through an emulation layer, or, since the source code is freely available, compile it for the native architecture and operating system of your computer."
+                                            "other_systems": "At the moment, releases on the download page only target {win} computers with {cpu_arch} processors, as this is the most common case. It is primarily tested on {win10}, but it should work just fine on other modern {win} versions as well. For other operating systems and processor architectures, there are still a few possibilities: The program can be run through an emulation layer, or, since the source code is freely available, it can be compiled for the native architectures and operating systems of other computers."
                                         },
                                         "surrounding-setup":
                                         {
-                                            "title": "Surrounding Setup",
+                                            "title": "Surrounding setup",
                                             "intro": "In this context, the surrounding setup refers to the software solutions in use alongside {bridge_name}. At the very least, two pieces of software are required:",
                                             "req0": "<a href=\"{divi_link}\" target=\"_blank\">{divi_name}</a>",
                                             "req1": "<a href=\"{server_link}\" target=\"_blank\">{server_name}</a>",
-                                            "optional": "Beyond that, you're free to choose whatever you feel most comfortable with. However, some non-essential features are not available in all configurations, requiring one or more of the following:",
+                                            "optional": "Beyond that, we are free to choose whatever we feel most comfortable with. However, some non-essential features are not available in all configurations, requiring one or more of the following:",
                                             "opt0": "<a href=\"{meos_link}\" target=\"_blank\">{meos_name}</a> version {meos_minimum_version} or newer",
                                             "opt1": "Results regularly written to a file in {result_format} format",
                                             "optional-details": "These optional requirements will be described in greater detail when the associated features are introduced."
@@ -244,13 +244,13 @@
                                 "fresh-install":
                                 {
                                     "title": "Fresh install",
-                                    "download": "Head to the <a href=\"{download_page_link}\">download page</a> and grab the latest release, as this is the version the documentation pertains to. The download consists of a single ZIP archive.",
-                                    "extract": "Extract the ZIP archive to a location of your choice. The exact location is irrelevant; even a USB flash drive will do, and you can always move it later. The extraction should yield a single folder, which contains {bridge_name} and its dependencies. Within the folder, you will find <span class=\"named\">{bridge_exe_name}</span> &mdash; opening it will start the program. And that's it! Installation is complete."
+                                    "download": "We head to the <a href=\"{download_page_link}\">download page</a> and grab the latest release, as this is the version the documentation pertains to. The download consists of a single ZIP archive.",
+                                    "extract": "We then extract the ZIP archive to a location of our choice. The exact location is irrelevant; even a USB flash drive will do, and we can always move it later. The extraction should yield a single folder, which contains {bridge_name} and its dependencies. Within the folder, we find <span class=\"named\">{bridge_exe_name}</span> &mdash; opening it will start the program. And that's it! Installation is complete."
                                 },
                                 "update":
                                 {
                                     "title": "Update",
-                                    "main": "There is no specific update workflow. Instead, simply follow the process outlined above for a fresh installation, this time downloading the <i>new</i> latest version. Whether or not you keep the old version around is up to you, but since some of the dependencies may have changed, you should avoid mixing different installations &mdash; keep them in separate folders.",
+                                    "main": "There is no specific update workflow. Instead, we simply follow the process outlined above for a fresh installation, this time downloading the <i>new</i> latest version. We are free to keep the old version around, but since some of the dependencies may have changed, different installations should not be mixed &mdash; they should be kept in separate folders.",
                                     "settings": "Program and competition settings are not stored in the installation folder. Instead, they are automatically saved to a standard location on the computer (e.g. the registry on {win}). This means different versions of the program will use the same settings.",
                                     "semver": "{bridge_name} uses <a href=\"{semver_link}\" target=\"_blank\">semantic versioning</a> to differentiate releases. A new major version implies breaking changes, and these will be described in the release notes along with a migration strategy."
                                 }
@@ -259,7 +259,7 @@
                         "create-competition":
                         {
                             "title": "Create competition",
-                            "launch": "Open {bridge_name}. You should see a window looking something like this:",
+                            "launch": "We begin by opening {bridge_name}. We should see a window looking something like this:",
                             "image":
                             {
                                 "initial-interface":
@@ -272,8 +272,8 @@
                             {
                                 "page1":
                                 {
-                                    "open-wizard": "Open the <span class=\"named\">{comp_menu}</span> menu in the top left corner, and select <span class=\"named\">{create_new}</span>. The competition creation wizard should open:",
-                                    "next": "This page is just for introduction, so go ahead and press <span class=\"named\">{next}</span>.",
+                                    "open-wizard": "We then open the <span class=\"named\">{comp_menu}</span> menu in the top left corner, and select <span class=\"named\">{create_new}</span>. The competition creation wizard should open:",
+                                    "next": "This page is just for introduction, so let's go ahead and press <span class=\"named\">{next}</span>.",
                                     "image":
                                     {
                                         "wizard":
@@ -286,8 +286,8 @@
                                 "page2":
                                 {
                                     "title": "Compatibility",
-                                    "intro": "The first choice you will make involves the result source. This is where the optional requirements and non-essential features mentioned earlier enter the picture.",
-                                    "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on your setup, but the differences in functionality are not major. Don't stress too much over your decision; you can always change it later, and your users likely won't notice anyways.",
+                                    "intro": "The first choice we make involves the result source. This is where the optional requirements and non-essential features mentioned earlier enter the picture.",
+                                    "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on our setup, but the differences in functionality are not major. We shouldn't stress too much over this decision; we can always change it later, and your our likely won't notice anyways.",
                                     "image":
                                     {
                                         "wizard":
@@ -301,13 +301,13 @@
                                         "meos-divi":
                                         {
                                             "title": "{meos_divi_title}",
-                                            "what": "If you use {meos_name} to manage results at your event, you can choose this option. This allows you to import metadata like competition name, organiser and date directly from {meos_name}, and although result updates are run on a timer, it let's {bridge_name} check if the results have changed before uploading, saving a bit of bandwidth.",
+                                            "what": "If we use {meos_name} to manage results at our event, we can choose this option. This allows us to import metadata like competition name, organiser and date directly from {meos_name}, and although result updates are run on a timer, it let's {bridge_name} check if the results have changed before uploading, saving a bit of bandwidth.",
                                             "how": "In this mode, {bridge_name} invokes {divi_name} from the command line once per division when updating results, and intermediate files are written to disk. This means it is not necessary to have {divi_name} open, but it also means one or a few seconds of latency are added for each division. {bridge_name} and {divi_name} must also be on the same computer. {meos_name} is accessed through its information server, so while it <i>can</i> be on the same computer as well, it doesn't have to &mdash; it can be anywhere reachable on the network."
                                         },
                                         "divi":
                                         {
                                             "title": "{divi_title}",
-                                            "what": "This mode has the fewest requirements, since it only depends on {divi_name}, which you most likely already need for the division match itself. Result updates are run on a timer, but no difference check is performed. It is, however, fairly quick, often finishing a result update sequence in less than a second.",
+                                            "what": "This mode has the fewest requirements, since it only depends on {divi_name}, which we most likely already need for the division match itself. Result updates are run on a timer, but no difference check is performed. It is, however, fairly quick, often finishing a result update sequence in less than a second.",
                                             "how": "Communication happens via {divi_name}'s information server. This means one instance of {divi_name} per division must be kept open, but these instances and {bridge_name} do not need to be on the same computer (although they <i>can</i> be), as long as {bridge_name} can reach the instances of {divi_name} over the network."
                                         },
                                         "xml-divi":
@@ -321,11 +321,11 @@
                                 "page3":
                                 {
                                     "title": "Password",
-                                    "intro": "Next, you will choose a password for your competition. Before you choose, note the following:",
-                                    "insecure": "It is insecure",
-                                    "immutable": "It cannot be changed",
-                                    "implication": "In this context, \"insecure\" means that the password is stored in plain text, be it on your computer, in transit over the internet, or on the server. Therefore, assume that anyone could easily gain access to it, and do <i>not</i> reuse a password from another service.",
-                                    "purpose": "You will need the password whenever you make changes to the competition on the server, including modifying metadata and updating results. Don't stress about writing it down, however, as the summary page at the end will fascilitate that.",
+                                    "intro": "Next, we will choose a password for our competition. Before we choose, we must consider the following:",
+                                    "insecure": "The password is insecure",
+                                    "immutable": "The password cannot be changed",
+                                    "implication": "In this context, \"insecure\" means that the password is stored in plain text, be it on our computer, in transit over the internet, or on the server. Therefore, we should assume that anyone could easily gain access to it, and we should <i>not</i> reuse a password from another service.",
+                                    "purpose": "We will need the password whenever we make changes to the competition on the server, including modifying metadata and updating results. No need to stress about writing it down, however, as the summary page at the end will fascilitate that.",
                                     "image":
                                     {
                                         "wizard":
@@ -338,8 +338,8 @@
                                 "page4":
                                 {
                                     "title": "Server",
-                                    "intro": "Finally, you need to specify the address of the <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> on which your results will be hosted. This can be a domain name or a raw IP address. The server will need to be online in order to create your competition.",
-                                    "default": "The address field may already be filled out with a suggestion. If you're lucky, it points to an active server instance run by myself. Pressing <span class=\"named\">{next}</span> will send a request to the specified server, asking it to create a new competition.",
+                                    "intro": "Finally, we need to specify the address of the <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> on which our results will be hosted. This can be a domain name or a raw IP address. The server will need to be online in order to create our competition.",
+                                    "default": "The address field may already be filled out with a suggestion. If we are lucky, it points to an active server instance run by myself. Pressing <span class=\"named\">{next}</span> will send a request to the specified server, asking it to create a new competition.",
                                     "image":
                                     {
                                         "wizard":
@@ -357,7 +357,7 @@
                                         "success":
                                         {
                                             "title": "Successful request",
-                                            "intro": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, you should see a glimpse of a page looking something like this:",
+                                            "intro": "If an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> was indeed available on the specified address, and the request to create a new competition was successful, we should see a glimpse of a page looking something like this:",
                                             "next": "It won't be visible for long, as the next page is triggered immediately upon success.",
                                             "image":
                                             {
@@ -371,8 +371,8 @@
                                         "error":
                                         {
                                             "title": "Failed request",
-                                            "intro": "If, however, the request failed, you will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
-                                            "troubleshooting": "You can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Be sure to also check your internet connection. If you are certain that the address is correct and your connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, you may be able to contact the server administrator to remedy the situation. Alternatively, you can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> yourself and use that instead.",
+                                            "intro": "If, however, the request failed, we will be met with a different message, and the {response_title} page will remain active, suggesting a few troubleshooting steps:",
+                                            "troubleshooting": "We can go back to the previous page to ensure the address is correct. As before, pressing <span class=\"named\">{next}</span> on that page sends a request to the server. Of course, we should also check our internet connection. If we are certain that the address is correct and our connection is good, but the server still doesn't respond, the problem may reside with the server itself. In this case, we may be able to contact the server administrator to remedy the situation. Alternatively, we can host an instance of <a href=\"{server_link}\" target=\"_blank\">{server_name}</a> ourselves and use that instead.",
                                             "image":
                                             {
                                                 "wizard":
@@ -387,9 +387,9 @@
                                 "page6":
                                 {
                                     "title": "Summary",
-                                    "intro": "If you reach this page, you have successfully created your competition. The summary presents key information that you will need in order to use the competition:",
-                                    "use-now": "If you leave <span class=\"named\">{use_now}</span> checked, this information will be applied by {bridge_name} automatically as soon as you press <span class=\"named\">{finish}</span>, erasing any data currently held in the main window. Then, you will be able to export your configuration to a file, backing up this key information easily.",
-                                    "use-later": "If you instead uncheck <span class=\"named\">{use_now}</span>, it is up to you to store the information. You can copy the text with the button in the top right corner of the field, and then manually paste it into a text file.",
+                                    "intro": "If we reach this page, we have successfully created our competition. The summary presents key information that we will need in order to use the competition:",
+                                    "use-now": "If we leave <span class=\"named\">{use_now}</span> checked, this information will be applied by {bridge_name} automatically as soon as we press <span class=\"named\">{finish}</span>, erasing any data currently held in the main window. Then, we will be able to export our configuration to a file, backing up this key information easily.",
+                                    "use-later": "If we instead uncheck <span class=\"named\">{use_now}</span>, it is up to us to store the information. We can copy the text with the button in the top right corner of the field, and then manually paste it into a text file.",
                                     "image":
                                     {
                                         "wizard":
@@ -404,8 +404,8 @@
                         "configuration":
                         {
                             "title": "Configuration",
-                            "intro": "Before we work on the details specific to your competition, we will do some basic configuration of {bridge_name} itself. The exact steps vary depending which result source is selected. You first chose the result source early in the competition creation process. If you have since changed your mind, head to the <span class=\"named\">{compatibility}</span> menu, and then choose a different option under <span class=\"named\">{result_source}</span>. You can always change it again later without losing any configuration data.",
-                            "working-directory": "Common for all result sources, however, is the need for a working directory. Head to the <span class=\"named\">{update_results}</span> pane, where you will find a field labeled <span class=\"named\">{working_directory}</span>. This field contains the path to a directory to which {bridge_name} will write logs and a variety of temporary files. Feel free to change it with the <span class=\"named boxed\">{path_button}</span> button. Any writable location will do, though it can be nice to keep it close to other event files. No matter the chosen directory, make sure it isn't used for anything else &mdash; existing files in the working directory may be overwritten.",
+                            "intro": "Before we work on the details specific to our competition, we will do some basic configuration of {bridge_name} itself. The exact steps vary depending which result source is selected. We first chose the result source early in the competition creation process. If we have since changed our minds, we can head to the <span class=\"named\">{compatibility}</span> menu, and then choose a different option under <span class=\"named\">{result_source}</span>. We can always change it again later without losing any configuration data.",
+                            "working-directory": "Common for all result sources, however, is the need for a working directory. Let's head to the <span class=\"named\">{update_results}</span> pane, where we will find a field labeled <span class=\"named\">{working_directory}</span>. This field contains the path to a directory to which {bridge_name} will write logs and a variety of temporary files. We can change it with the <span class=\"named boxed\">{path_button}</span> button. Any writable location will do, though it can be nice to keep it close to other event files. No matter the chosen directory, we must ensure it isn't used for anything else &mdash; existing files in the working directory may be overwritten.",
                             "image":
                             {
                                 "result-source":
@@ -425,9 +425,9 @@
                                 {
                                     "title": "{meos_divi_name}",
                                     "intro": "When the result source is set to <span class=\"named\">{meos_divi_name}</span>, the <span class=\"named\">{result_source}</span> pane appears with two fields.",
-                                    "divi-exe-path": "The first field specifies the path to the {divi} executable, which {bridge_name} needs in order to run it from the command line. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
-                                    "meos-server-address": "The second field holds the address on which <a href=\"{meos_info_server_link}\" target=\"_blank\">{meos_name}' information server</a> will be accessed. To start the information server, open your competition in {meos_name}, navigate to the <span class=\"named\">Services</span> tab, and select <span class=\"named\">Information Server</span>. The default address suggested by {bridge_name} corresponds to the default information server settings in {meos_name} when both are running on the same computer.",
-                                    "meos-server-test": "Once the information server is started, you can verify the connection with the <span class=\"named\">{test_button}</span> button. The result should show up in the log.",
+                                    "divi-exe-path": "The first field specifies the path to the {divi} executable, which {bridge_name} needs in order to run it from the command line. We can set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
+                                    "meos-server-address": "The second field holds the address on which <a href=\"{meos_info_server_link}\" target=\"_blank\">{meos_name}' information server</a> will be accessed. To start the information server, we open our competition in {meos_name}, navigate to the <span class=\"named\">Services</span> tab, and select <span class=\"named\">Information Server</span>. The default address suggested by {bridge_name} corresponds to the default information server settings in {meos_name} when both are running on the same computer.",
+                                    "meos-server-test": "Once the information server is started, we can verify the connection with the <span class=\"named\">{test_button}</span> button. The result should show up in the log.",
                                     "image":
                                     {
                                         "comp-created":
@@ -450,7 +450,7 @@
                                 "divi":
                                 {
                                     "title": "{divi_name}",
-                                    "intro": "When the result source is set to <span class=\"named\">{divi_name}</span>, the <span class=\"named\">{result_source}</span> pane is hidden. You can safely move on to the next page of the guide.",
+                                    "intro": "When the result source is set to <span class=\"named\">{divi_name}</span>, the <span class=\"named\">{result_source}</span> pane is hidden. We can safely move on to the next page of this guide.",
                                     "image":
                                     {
                                         "comp-created":
@@ -464,8 +464,8 @@
                                 {
                                     "title": "{xml_divi_name}",
                                     "intro": "When the result source is set to <span class=\"named\">{xml_divi_name}</span>, the <span class=\"named\">{result_source}</span> pane appears with two fields.",
-                                    "divi-exe-path": "The first field specifies the path to the {divi} executable, which {bridge_name} needs in order to run it from the command line. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
-                                    "xml-file-path": "The second field holds the path to the {iof_xml} result file, to which your timing software of choice is expected to write new results at regular intervals. {bridge_name} will update the online results whenever it detects a change to this file. Set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to the {iof_xml} result file in the file dialog.",
+                                    "divi-exe-path": "The first field specifies the path to the {divi} executable, which {bridge_name} needs in order to run it from the command line. We can set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to <span class=\"named\">{divi_exe}</span> in the file dialog.",
+                                    "xml-file-path": "The second field holds the path to the {iof_xml} result file, to which our timing software of choice is expected to write new results at regular intervals. {bridge_name} will update the online results whenever it detects a change to this file. We can set the path by pressing the <span class=\"named boxed\">{path_button}</span> button, then navigating to the {iof_xml} result file in the file dialog.",
                                     "image":
                                     {
                                         "comp-created":
@@ -480,7 +480,7 @@
                         "competition-details":
                         {
                             "title": "Competition details",
-                            "intro": "If you have followed the guide in order, the main interface should look something like this (the <span class=\"named\">{meos_divi_name}</span> result source is used on the image, but that is not important right now):",
+                            "intro": "If we have followed the guide in order, the main interface should look something like this (the <span class=\"named\">{meos_divi_name}</span> result source is used on the image, but that is not important right now):",
                             "empty-fields": "We have made good progress, but there are still some empty fields left. In fact, we haven't even touched the <span class=\"named\">{competition}</span>, <span class=\"named\">{divisions}</span> or <span class=\"named\">{online}</span> panes at all! Let's change that, starting with the <span class=\"named\">{competition}</span> pane.",
                             "image":
                             {
@@ -499,7 +499,7 @@
                                     "credentials": "The first two fields are labeled <span class=\"named\">{comp_id}</span> and <span class=\"named\">{password}</span>. The values of these credentials were determined when we created the competition; the password chosen by us, and the competition ID assigned by the server. The credentials for a given competition cannot be changed, though changing the values in these fields allows us to work with a different competition. We only have one competition in play, however, so we will leave the credentials untouched.",
                                     "metadata": "The next four fields describe the real-world competition. <span class=\"named\">{name}</span> is the name of the competition, while <span class=\"named\">{organiser}</span> is the name of the organiser. The <span class=\"named\">{date}</span> field denotes the date of the competition in the indicated format. As an example, the 24th of September 2023 becomes 2023-09-24. Finally, <span class=\"named\">{timezone}</span> is the time zone at the real-world location where the competition takes place. {bridge_name} will suggest a time zone based on the configuration of the operating system on which it is running. The values of <span class=\"named\">{name}</span>, <span class=\"named\">{organiser}</span> and <span class=\"named\">{date}</span> are shown to users on the result website.",
                                     "datetime-purpose": "The result server uses the date and time zone on its front page. Here, all competitions are listed in cronological order, and any competitions scheduled for the current date will be highlighted in an additional list at the top of the page.",
-                                    "metadata-meos": "If you are using the <span class=\"named\">{meos_divi_name}</span> result source, and {meos_name}' information server is online, there is a little shortcut available: Head up to the <span class=\"named\">{competition_menu}</span> <i>menu</i> and select <span class=\"named\">{import_metadata}</span>.",
+                                    "metadata-meos": "If we are using the <span class=\"named\">{meos_divi_name}</span> result source, and {meos_name}' information server is online, there is a little shortcut available: Head up to the <span class=\"named\">{competition_menu}</span> <i>menu</i> and select <span class=\"named\">{import_metadata}</span>.",
                                     "metadata-meos-success": "For each of competition name, date and organiser fields filled out in {meos_name}, the corresponding field in {bridge_name} will be filled out.",
                                     "visibility": "There is one more setting in the <span class=\"named\">{competition}</span> pane: <span class=\"named\">{visibility}</span>. This setting determines if and how the competition can be found on the result server website. Three options are available:",
                                     "visibility-private": "The competition cannot be accessed via the website. This is the default option.",
@@ -528,15 +528,15 @@
                                 "divisions":
                                 {
                                     "title": "Divisions",
-                                    "intro": "It is finally time to configure our divisions. In the <span class=\"named\">{divisions}</span> pane, we find the division table &mdash; and don't worry; I'm not trying to teach you elementary school maths here. There are three buttons along the bottom of the table: <span class=\"named\">{new_button}</span>, <span class=\"named\">{edit_button}</span> and <span class=\"named\">{delete_button}</span>. Press the <span class=\"named\">{new_button}</span> button to open the division editor.",
+                                    "intro": "It is finally time to configure our divisions. In the <span class=\"named\">{divisions}</span> pane, we find the division table &mdash; and don't worry; this isn't an elementary school maths lesson. There are three buttons along the bottom of the table: <span class=\"named\">{new_button}</span>, <span class=\"named\">{edit_button}</span> and <span class=\"named\">{delete_button}</span>. Press the <span class=\"named\">{new_button}</span> button to open the division editor.",
                                     "new-divi-divi-file": "When using the <span class=\"named\">{meos_divi_name}</span> or <span class=\"named\">{xml_divi_name}</span> result sources, the division editor has the fields <span class=\"named\">{divi_id}</span>, <span class=\"named\">{name}</span> and <span class=\"named\">{divi_config_path}</span>.",
                                     "new-divi-info-server": "Whenever using the <span class=\"named\">{divi_name}</span> result source, however, the <span class=\"named\">{divi_config_path}</span> field is replaced with the <span class=\"named\">{info_server_address}</span> field.",
-                                    "divi-editor-field-divi-id": "Unlike the <span class=\"named\">{comp_id}</span>, the choice of <span class=\"named\">{divi_id}</span> is yours to make. For competitions with multiple divisions, the <span class=\"named\">{divi_id}</span> determines the sorting order of the radio buttons used to select divisions on the result website. Divisions are sorted in ascending order, and all <span class=\"named\">{divi_id}</span>s within the same competition must be unique. For competitions with only a single division, the <span class=\"named\">{divi_id}</span> is irrelevant.",
-                                    "divi-editor-field-name": "The <span class=\"named\">{name}</span> field holds the label for the division, which is attached to its division selection radio button on the result website. Anything goes, but try to keep it concise to aid viewing on narrow displays, e.g. \"2nd division\".",
-                                    "divi-editor-field-divi-file": "The <span class=\"named\">{divi_config_path}</span> field is where the path to the division configuration file exported from {divi} is provided, if applicable.The configuration file is of course unique for each division.",
+                                    "divi-editor-field-divi-id": "Unlike the <span class=\"named\">{comp_id}</span>, the choice of <span class=\"named\">{divi_id}</span> is ours to make. For competitions with multiple divisions, the <span class=\"named\">{divi_id}</span> determines the sorting order of the radio buttons used to select divisions on the result website. Divisions are sorted in ascending order, and all <span class=\"named\">{divi_id}</span>s within the same competition must be unique. For competitions with only a single division, the <span class=\"named\">{divi_id}</span> is irrelevant.",
+                                    "divi-editor-field-name": "The <span class=\"named\">{name}</span> field holds the label for the division, which is attached to its division selection radio button on the result website. Anything goes, but we should try to keep it concise to aid viewing on narrow displays, e.g. \"2nd division\".",
+                                    "divi-editor-field-divi-file": "The <span class=\"named\">{divi_config_path}</span> field is where the path to the division configuration file exported from {divi} is provided, if applicable. The configuration file is of course unique for each division.",
                                     "divi-file-warning": "Due to implementation details, the result server is <i>only</i> compatible with certain layout settings in the division configuration file. In {divi}, these settings are found through the <span class=\"named\">{print}</span> menu (which, despite the name, applies to more than just printing), and then <span class=\"named\">{setup}</span>. Specifically, the <span class=\"named\">{html_css}</span> setting must be unchecked, and the <span class=\"named\">{layout}</span> must be set to <span class=\"named\">{blue}</span>. It is strongly recommended that any division configuration files pointed to in {bridge_name} are reserved <i>exclusively</i> for {bridge_name}, and that separate copies are made for other purposes, such as printing.",
                                     "divi-editor-field-info-server": "As mentioned, when the <span class=\"named\">{divi_name}</span> result source is in use, the division editor presents the <span class=\"named\">{info_server_address}</span> field. This is the network address of the information server opened in {divi}. For competitions with multiple divisions, each division will be associated with a unique instance of {divi}, each with its information server open on a unique network address &mdash; usually accomplished by using different ports if multiple instances of {divi} are running on the same computer. In {divi}, the information server dialog can be accessed through the <span class=\"named\">{info}</span> menu, and then <span class=\"named\">{info_server}</span>.",
-                                    "new-divi-save": "Once the three fields are filled out, press the <span class=\"named\">{save_button}</span> button to save the division and close the division editor. If the competition has multiple divisions, press the <span class=\"named\">{new_button}</span> button again and repeat the process to add another division. Additionally, existing divisions can be edited or deleted by selecting them from the division table and using the <span class=\"named\">{edit_button}</span> and <span class=\"named\">{delete_button}</span> buttons, respectively.",
+                                    "new-divi-save": "Once the three fields are filled out, we can press the <span class=\"named\">{save_button}</span> button to save the division and close the division editor. If the competition has multiple divisions, we press the <span class=\"named\">{new_button}</span> button again and repeat the process to add another division. Additionally, existing divisions can be edited or deleted by selecting them from the division table and using the <span class=\"named\">{edit_button}</span> and <span class=\"named\">{delete_button}</span> buttons, respectively.",
                                     "image":
                                     {
                                         "divisions":
@@ -570,7 +570,7 @@
                                 {
                                     "title": "{liveresults_name}",
                                     "intro": "While division matches are primarily about competitions between whole clubs, they do also contain individual results within the various classes. Services to publish live, individual results online already exist, e.g. <a href=\"{liveresults_link}\" target=\"_blank\">{liveresults_name}</a>.",
-                                    "add-link": "For convenience, a link to the corresponding {liveresults_name} page can be shown on the division result page. In the <span class=\"named\">{online}</span> pane, the field <span class=\"named\">{liveresults_id}</span> can be found. When set to 0, it does nothing. However, as the name would suggest, we can enter the competition ID of your {liveresults_name} competition here. Doing so will add a prominent, orange button linking to the {liveresults_name} page. It will also update the link in the label, so if we click it, we can easily verify that the ID is correct.",
+                                    "add-link": "For convenience, a link to the corresponding {liveresults_name} page can be shown on the division result page. In the <span class=\"named\">{online}</span> pane, the field <span class=\"named\">{liveresults_id}</span> can be found. When set to 0, it does nothing. However, as the name would suggest, we can enter the competition ID of our {liveresults_name} competition here. Doing so will add a prominent, orange button linking to the {liveresults_name} page. It will also update the link in the label, so if we click it, we can easily verify that the ID is correct.",
                                     "image":
                                     {
                                         "liveresults-field-highlighted":
@@ -585,7 +585,7 @@
                                     "title": "Validate configuration",
                                     "intro": "At this point, our competition is fully configured &mdash; or at least it <i>should</i> be. To help us run a quick sanity check, {bridge_name} includes a basic configuration validation tool. This can remind us to fill out empty fields, and it can check the validity of file system paths. However, the tool is by no means perfect: It does not validate semantics, spelling or the status of network resources, to name just a few limitations.",
                                     "validate-manually": "To run the validation tool manually, head to the <span class=\"named\">{competition}</span> menu, then select the <span class=\"named\">{validate}</span> option.",
-                                    "validate-response": "The result of the validation is printed to the log, and every failed check yields a warning. Be sure to read them, as the warnings include their reasons in order to guide decision making: Is something specified incorrectly (or not at all), or is the warning safe to ignore? The latter case can arise when something is intentionally omitted or, in some cases, due to false positives. And, to reiterate, the tool finding 0 issues does <i>not</i> mean that the configuration is flawless, so we should merely consider the validation tool a supplement to the good old manual inspection.",
+                                    "validate-response": "The result of the validation is printed to the log, and every failed check yields a warning. We should be sure to read them, as the warnings include their reasons in order to guide decision making: Is something specified incorrectly (or not at all), or is the warning safe to ignore? The latter case can arise when something is intentionally omitted or, in some cases, due to false positives. And, to reiterate, the tool finding 0 issues does <i>not</i> mean that the configuration is flawless, so we should merely consider the validation tool a supplement to the good old manual inspection.",
                                     "validate-at-startup": "In addition to manual runs, the validation tool also runs automatically whenever {bridge_name} is started.",
                                     "image":
                                     {
@@ -639,7 +639,7 @@
                                         {
                                             "title": "Manual approach",
                                             "intro": "Results are not magic, so regardless of setup, they can usually be constructed \"by hand\". Participants can be created, and their start and finish times can be assigned, providing fine-grained control over the mocked results. Timing programs often make this easy, if a bit tedious. Of course, it is also possible to craft results in {iof_xml} format from scratch, though this is likely even more tedious.",
-                                            "scaling": "Creating and assigning results to a handful of participants to run a basic test is feasible, but for larger scales, a more automatic approach is desirable."
+                                            "scaling": "Creating and assigning results to a handful of participants to run a basic test is feasible, but for larger scale testing, a more automatic approach is desirable."
                                         },
                                         "automatic":
                                         {
@@ -655,7 +655,7 @@
                                                     "prep0": "One or more courses must be defined in {meos}. Importing the <i>real</i> courses may be easiest, though it is not required.",
                                                     "prep1": "Classes corresponding to the real division match classes must be defined in {meos}.",
                                                     "prep2": "Participants representing clubs from the relevant divisions must be defined in {meos}. Importing real signups may be easiest, though fake names can be used as long as the clubs are defined correctly.",
-                                                    "find-punching-test": "In a <i>copy</i> of our {meos} competition, navigate to the <span class=\"named\">Services</span> tab and choose <span class=\"named\">Punching Test</span>.",
+                                                    "find-punching-test": "In a <i>copy</i> of our {meos} competition, we navigate to the <span class=\"named\">Services</span> tab and choose <span class=\"named\">Punching Test</span>.",
                                                     "run-punching-test": "The service has a few parameters, but the defaults should be sufficient for our needs. Once we start the service, a steady stream of fake results will be produced. We should probably pause it until we are ready to upload division results, as we would quickly run out of new results otherwise.",
                                                     "image":
                                                     {
@@ -697,7 +697,7 @@
                                             "title": "{xml_divi_name}",
                                             "intro": "For this result source, {bridge_name} is concerned with {divi} and the {iof_xml} results file.",
                                             "iof-xml": "The {iof_xml} results file needs to be available on the file system for {bridge_name} to read. The origin of the file is irrelevant, but {bridge_name} expects this file to be overwritten with new results regularly.",
-                                            "divi": "{divi} must also be installed on the same computer as {bridge_name}. It does not <i>need</i> to be running, though it <i>can</i> be if other purposes (such as printing) require it &mdash; just keep the configuration files separate."
+                                            "divi": "{divi} must also be installed on the same computer as {bridge_name}. It does not <i>need</i> to be running, though it <i>can</i> be if other purposes (such as printing) require it &mdash; we just need to keep the configuration files separate."
                                         }
                                     }
                                 },
