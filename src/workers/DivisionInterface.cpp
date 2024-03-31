@@ -87,9 +87,11 @@ namespace divi
     // 2 on empty response body
     int DivisionInterface::fetchResultsFromInfoServer(const Division& a_division)
     {
+        const QString address = a_division.getInfoServerAddress();
+        
         cpr::Response response = cpr::Get
         (
-            cpr::Url{QString(a_division.getInfoServerAddress() % resultsHtmlEndpoint()).toStdString()},
+            cpr::Url{QString((address.back() == '/' ? address : address % "/") % resultsHtmlEndpoint()).toStdString()},
             cpr::Header
             {
                 Helpers::userAgentHeaderField(),
