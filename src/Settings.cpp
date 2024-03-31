@@ -9,7 +9,7 @@ namespace divi
         setExternalConfigPath((desktop_locations.isEmpty() ? "" : desktop_locations.front()));
 
         const auto temp_locations = QStandardPaths::standardLocations(QStandardPaths::TempLocation);
-        setWorkingDir((temp_locations.isEmpty() ? "" : temp_locations.front()));
+        setWorkingDir((temp_locations.isEmpty() ? QString() : (temp_locations.front() % "/" % Helpers::projectName())));
 
         setMeosAddress(Helpers::defaultMeosInfoServerAddress());
         setWebserverAddress(Helpers::defaultWebServerAddress());
