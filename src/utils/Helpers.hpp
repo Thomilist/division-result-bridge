@@ -50,6 +50,8 @@ namespace divi
             static const QString gitHubReleaseApiUrl();
             static const QString gitHubIssuesUrl();
             static const QString gitHubLicenseUrl();
+            static const QString gitHubPagesUrl();
+            static const QString gitHubPagesDocsUrl();
 
             // MeOS
             static const QString meosName();

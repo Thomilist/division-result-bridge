@@ -1000,7 +1000,7 @@ namespace divi
         connect(&xml_divi_source_action, &QAction::triggered, this, [this]{ this->selectResultSource(ResultSource::XmlDivi); });
 
         // Help menu
-        connect(&view_help, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubWikiUrl(), QUrl::TolerantMode}); });
+        connect(&view_help, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubPagesDocsUrl(), QUrl::TolerantMode}); });
         connect(&view_about, &QAction::triggered, &about_dialog, &AboutDialog::open);
         connect(&check_for_updates, &QAction::triggered, &update_dialog, &UpdateDialog::manualUpdateCheck);
         connect(&open_github, &QAction::triggered, []{ QDesktopServices::openUrl(QUrl{Helpers::gitHubRepoUrl(), QUrl::TolerantMode}); });

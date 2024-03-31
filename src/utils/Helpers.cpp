@@ -103,6 +103,16 @@ namespace divi
         return gitHubRepoUrl() % "blob/main/LICENSE/";
     }
     
+    const QString Helpers::gitHubPagesUrl()
+    {
+        return "https://" % gitHubUsername() % ".github.io/" % gitHubRepoName() % "/";
+    }
+    
+    const QString Helpers::gitHubPagesDocsUrl()
+    {
+        return gitHubPagesUrl() % "docs/preface/introduction";
+    }
+    
     const QString Helpers::meosName()
     {
         return "MeOS";
