@@ -51,7 +51,7 @@ namespace divi
         , countdown_timer(this)
         , xml_results_debouncer(std::bind_front(&MainWindow::xmlResultFileChanged, this), 1000, this)
     {
-        setWindowIcon(QIcon{":/icon/icon.ico"});
+        setWindowIcon(QIcon{":/icon/icon_v3.ico"});
         setMinimumWidth(1100);
         //setMinimumHeight(810);
         setMouseTracking(true);

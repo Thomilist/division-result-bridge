@@ -14,7 +14,7 @@ namespace divi
         connect(&buttons, &QDialogButtonBox::rejected, this, &QDialog::accept);
 
         setText();
-        icon.setPixmap(QPixmap{":/icon/icon_x1024.png"}.scaledToHeight(128, Qt::SmoothTransformation));
+        icon.setPixmap(QPixmap{":/icon/icon_v3.png"}.scaledToHeight(128, Qt::SmoothTransformation));
         icon.setStyleSheet("border: 1px solid gray");
 
         for (auto& divider : divider_lines)
