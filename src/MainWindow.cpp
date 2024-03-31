@@ -577,9 +577,9 @@ namespace divi
 
         competition_visibility_input.addItems
         ({
-            Helpers::visibility(Visibility::PUBLIC),
+            Helpers::visibility(Visibility::PRIVATE),
             Helpers::visibility(Visibility::HIDDEN),
-            Helpers::visibility(Visibility::PRIVATE)
+            Helpers::visibility(Visibility::PUBLIC)
         });
         
         int row = 0;
