@@ -287,7 +287,7 @@
                                 {
                                     "title": "Compatibility",
                                     "intro": "The first choice we make involves the result source. This is where the optional requirements and non-essential features mentioned earlier enter the picture.",
-                                    "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on our setup, but the differences in functionality are not major. We shouldn't stress too much over this decision; we can always change it later, and your our likely won't notice anyways.",
+                                    "meaning": "The result source determines how {bridge_name} fetches division results. The choice depends on our setup, but the differences in functionality are not major. We shouldn't stress too much over this decision; we can always change it later, and the participants likely won't notice anyways.",
                                     "image":
                                     {
                                         "wizard":
