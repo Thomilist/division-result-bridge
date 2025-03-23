@@ -1138,12 +1138,12 @@ namespace divi
         });
 
         // Inputs, log
-        connect(&save_pretty_log_input, &QCheckBox::stateChanged, this, [this](bool a_state)
+        connect(&save_pretty_log_input, &QCheckBox::checkStateChanged, this, [this](bool a_state)
         {
             this->settings.setPrettyLogging(a_state);
             this->updateInterfaceState();
         });
-        connect(&save_raw_log_input, &QCheckBox::stateChanged, this, [this](bool a_state)
+        connect(&save_raw_log_input, &QCheckBox::checkStateChanged, this, [this](bool a_state)
         {
             this->settings.setRawLogging(a_state);
             this->updateInterfaceState();

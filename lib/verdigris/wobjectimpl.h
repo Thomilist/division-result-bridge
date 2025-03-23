@@ -1032,35 +1032,51 @@ template <typename, typename, typename, typename> struct FunctorCall;
 template <size_t... II, typename... SignalArgs, typename R, typename Function>
 struct FunctorCall<std::index_sequence<II...>, QtPrivate::List<SignalArgs...>, R, Function> {
     static void call(Function f, void **arg) {
-        f((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        // QtPrivate::ApplyReturnValue is gone as of https://github.com/qt/qtbase/commit/f894f04c9d03878116de61c11d4591da67c10378
+        //f((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        QtPrivate::FunctorCallBase::call_internal<R>(arg, [&] {
+            return f((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...);
+        });
     }
 };
 template <size_t... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj>
 struct FunctorCall<std::index_sequence<II...>, QtPrivate::List<SignalArgs...>, R, SlotRet (Obj::*)(SlotArgs...)> {
     static void call(SlotRet (Obj::*f)(SlotArgs...), Obj *o, void **arg)
     {
-        (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        //(o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        QtPrivate::FunctorCallBase::call_internal<R>(arg, [&] {
+            return (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...);
+        });
     }
 };
 template <size_t... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj>
 struct FunctorCall<std::index_sequence<II...>, QtPrivate::List<SignalArgs...>, R, SlotRet (Obj::*)(SlotArgs...) const> {
     static void call(SlotRet (Obj::*f)(SlotArgs...) const, Obj *o, void **arg)
     {
-        (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        //(o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        QtPrivate::FunctorCallBase::call_internal<R>(arg, [&] {
+            return (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...);
+        });
     }
 };
 template <size_t... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj>
 struct FunctorCall<std::index_sequence<II...>, QtPrivate::List<SignalArgs...>, R, SlotRet (Obj::*)(SlotArgs...) noexcept> {
     static void call(SlotRet (Obj::*f)(SlotArgs...) noexcept, Obj *o, void **arg)
     {
-        (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        //(o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        QtPrivate::FunctorCallBase::call_internal<R>(arg, [&] {
+            return (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...);
+        });
     }
 };
 template <size_t... II, typename... SignalArgs, typename R, typename... SlotArgs, typename SlotRet, class Obj>
 struct FunctorCall<std::index_sequence<II...>, QtPrivate::List<SignalArgs...>, R, SlotRet (Obj::*)(SlotArgs...) const noexcept> {
     static void call(SlotRet (Obj::*f)(SlotArgs...) const noexcept, Obj *o, void **arg)
     {
-        (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        //(o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...), QtPrivate::ApplyReturnValue<R>(arg[0]);
+        QtPrivate::FunctorCallBase::call_internal<R>(arg, [&] {
+            return (o->*f)((*reinterpret_cast<typename QtPrivate::RemoveRef<SignalArgs>::Type *>(arg[II+1]))...);
+        });
     }
 };
 #endif
