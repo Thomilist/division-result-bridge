@@ -36,6 +36,12 @@
     </p>
     
     <p>
-        {@html $t("page.privacy.application.results")}
+        {
+            @html
+            $t("page.privacy.application.results", { values: {
+                divi_name: resources.external.andersklinting.project.divisionsmatchberegning.name,
+                divi_link: resources.external.andersklinting.project.divisionsmatchberegning.route.repo
+            }})
+        }
     </p>
 </div>
